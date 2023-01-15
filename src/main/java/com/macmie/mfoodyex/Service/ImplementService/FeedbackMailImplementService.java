@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.FeedbackMail;
+import com.macmie.mfoodyex.POJO.FeedbackMailPOJO;
 import com.macmie.mfoodyex.Repository.FeedbackMailRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.FeedbackMailInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
@@ -30,19 +31,20 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
     private TextUtil textUtil;
 
     @Override
-    public List<FeedbackMail> getListFeedbackMail() {
+    public List<FeedbackMail> getListFeedbackMails() {
         log.info("Fetching all FeedbackMail");
         return feedbackMailRepository.findAll();
     }
 
     @Override
-    public FeedbackMail getFeedbackMail(int ID_FeedbackMail) {
+    public FeedbackMail getFeedbackMailByID(int ID_FeedbackMail) {
         log.info("Fetching FeedbackMail with id: {}", ID_FeedbackMail);
         return feedbackMailRepository.findById(ID_FeedbackMail).orElse(null);
     }
 
     @Override
     public FeedbackMail saveFeedbackMail(FeedbackMail feedbackMail) {
+//        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
         feedbackMail.setEmailUserFeedbackMail(stringUtil.parseEmail(feedbackMail.getEmailUserFeedbackMail()));
         feedbackMail.setNameUserFeedbackMail(stringUtil.parseName(feedbackMail.getNameUserFeedbackMail()));
         feedbackMail.setTitleFeedbackMail(textUtil.parseToLegalText(feedbackMail.getTitleFeedbackMail()));
@@ -52,7 +54,19 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
     }
 
     @Override
-    public void deleteFeedbackMail(int ID_FeedbackMail) {
+    public FeedbackMail updateFeedbackMail(FeedbackMail newFeedbackMail) {
+        FeedbackMail feedbackMailToUpdate = feedbackMailRepository.getById(newFeedbackMail.getIdFeedbackMail());
+        feedbackMailToUpdate.setIdFeedbackMail((newFeedbackMail.getIdFeedbackMail()));
+        feedbackMailToUpdate.setEmailUserFeedbackMail(stringUtil.parseEmail(newFeedbackMail.getEmailUserFeedbackMail()));
+        feedbackMailToUpdate.setNameUserFeedbackMail(stringUtil.parseName(newFeedbackMail.getNameUserFeedbackMail()));
+        feedbackMailToUpdate.setTitleFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getTitleFeedbackMail()));
+        feedbackMailToUpdate.setContentFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getContentFeedbackMail()));
+        log.info("Updating FeedbackMail with email: {}", feedbackMailToUpdate.getEmailUserFeedbackMail());
+        return feedbackMailRepository.save(feedbackMailToUpdate);
+    }
+
+    @Override
+    public void deleteFeedbackMailByID(int ID_FeedbackMail) {
         log.info("Deleting thu_phan_hoi with id: {}", ID_FeedbackMail);
         feedbackMailRepository.deleteById(ID_FeedbackMail);
     }

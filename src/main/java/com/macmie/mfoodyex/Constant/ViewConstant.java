@@ -1,6 +1,18 @@
 package com.macmie.mfoodyex.Constant;
 
 public class ViewConstant {
+    // Feedback Mail
+    public static final String FEEDBACK_MAIL = "/feedback";
+
+    // URL for all APIs
+    public static final String URL_GET_ALL = "/getAll";
+    public static final String URL_GET_BY_ID = "/get/{ID}";
+    public static final String URL_ADD = "/add";
+    public static final String URL_DELETE = "/delete/{ID}";
+    public static final String URL_EDIT = "/edit";
+    /*
+    * Mac Mie end
+    * */
     public static final String NOT_FOUND_VIEW = "/404";
     public static final String BLANK_VIEW = "/blank";
     public static final String ABOUT_VIEW = "/about";
@@ -28,6 +40,7 @@ public class ViewConstant {
     public static final String EDIT_VIEW = "/edit";
     public static final String SAVE_VIEW = "/save";
     public static final String DELETE_VIEW = "/delete";
+    public static final String GET_VIEW = "/get";
 
     public static final String FIND_VIEW = "/find";
     public static final String SEARCH_VIEW = "/search";
