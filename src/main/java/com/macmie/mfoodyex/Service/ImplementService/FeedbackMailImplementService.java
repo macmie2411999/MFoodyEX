@@ -32,13 +32,13 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
 
     @Override
     public List<FeedbackMail> getListFeedbackMails() {
-        log.info("Fetching all FeedbackMail");
+        log.info("Fetching all FeedbackMails: ");
         return feedbackMailRepository.findAll();
     }
 
     @Override
     public FeedbackMail getFeedbackMailByID(int ID_FeedbackMail) {
-        log.info("Fetching FeedbackMail with id: {}", ID_FeedbackMail);
+        log.info("Fetching FeedbackMail with ID: {}", ID_FeedbackMail);
         return feedbackMailRepository.findById(ID_FeedbackMail).orElse(null);
     }
 
@@ -49,7 +49,7 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
         feedbackMail.setNameUserFeedbackMail(stringUtil.parseName(feedbackMail.getNameUserFeedbackMail()));
         feedbackMail.setTitleFeedbackMail(textUtil.parseToLegalText(feedbackMail.getTitleFeedbackMail()));
         feedbackMail.setContentFeedbackMail(textUtil.parseToLegalText(feedbackMail.getContentFeedbackMail()));
-        log.info("Saving FeedbackMail with email: {}", feedbackMail.getEmailUserFeedbackMail());
+        log.info("Saving FeedbackMail with ID: {}", feedbackMail.getIdFeedbackMail());
         return feedbackMailRepository.save(feedbackMail);
     }
 
@@ -61,13 +61,13 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
         feedbackMailToUpdate.setNameUserFeedbackMail(stringUtil.parseName(newFeedbackMail.getNameUserFeedbackMail()));
         feedbackMailToUpdate.setTitleFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getTitleFeedbackMail()));
         feedbackMailToUpdate.setContentFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getContentFeedbackMail()));
-        log.info("Updating FeedbackMail with email: {}", feedbackMailToUpdate.getEmailUserFeedbackMail());
+        log.info("Updating FeedbackMail with ID: {}", feedbackMailToUpdate.getIdFeedbackMail());
         return feedbackMailRepository.save(feedbackMailToUpdate);
     }
 
     @Override
     public void deleteFeedbackMailByID(int ID_FeedbackMail) {
-        log.info("Deleting thu_phan_hoi with id: {}", ID_FeedbackMail);
+        log.info("Deleting FeedbackMail with ID: {}", ID_FeedbackMail);
         feedbackMailRepository.deleteById(ID_FeedbackMail);
     }
 }

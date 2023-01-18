@@ -1,8 +1,9 @@
 package com.macmie.mfoodyex.Constant;
 
 public class ViewConstant {
-    // Feedback Mail
+    // Main URL
     public static final String FEEDBACK_MAIL = "/feedback";
+    public static final String USER = "/user";
 
     // URL for all APIs
     public static final String URL_GET_ALL = "/getAll";
