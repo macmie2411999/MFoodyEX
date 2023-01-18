@@ -53,23 +53,38 @@ public class FeedbackMailController {
 
     // Error
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editFeedbackMail(@RequestBody FeedbackMail feedbackMail, BindingResult errors){
+    public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject, BindingResult errors){
+        // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        System.out.println(feedbackMail);
-        feedbackMailInterfaceService.updateFeedbackMail(feedbackMail);
-        return new ResponseEntity<>(feedbackMail, HttpStatus.CREATED);
+
+        // Convert JsonObject to FeedbackMail object
+        Gson gson = new Gson();
+        FeedbackMail newFeedbackMail = gson.fromJson(feedbackMailJsonObject, FeedbackMail.class);
+        System.out.println("-------- JSon: " + feedbackMailJsonObject);
+        System.out.println("-------- Convert from JSon: " + newFeedbackMail);
+
+        // Save to DB
+        feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
+        return new ResponseEntity<>(newFeedbackMail, HttpStatus.CREATED);
     }
 
-    // Error
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewFeedbackMail(@RequestBody FeedbackMail feedbackMail, BindingResult errors){
+    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject, BindingResult errors){
+        // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        System.out.println(feedbackMail);
-        feedbackMailInterfaceService.saveFeedbackMail(feedbackMail);
-        return new ResponseEntity<>(feedbackMail, HttpStatus.CREATED);
+
+        // Convert JsonObject to FeedbackMail object
+        Gson gson = new Gson();
+        FeedbackMail newFeedbackMail = gson.fromJson(feedbackMailJsonObject, FeedbackMail.class);
+        System.out.println("-------- JSon: " + feedbackMailJsonObject);
+        System.out.println("-------- Convert from JSon: " + newFeedbackMail);
+
+        // Save to DB
+        feedbackMailInterfaceService.saveFeedbackMail(newFeedbackMail);
+        return new ResponseEntity<>(newFeedbackMail, HttpStatus.CREATED);
     }
 }
