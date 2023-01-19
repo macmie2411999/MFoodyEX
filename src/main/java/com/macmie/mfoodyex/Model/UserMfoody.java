@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -45,8 +46,8 @@ public class UserMfoody {
     private String RoleUser;
 
     // Refer to CREDIT_CARD_MFOODY
-    @OneToMany(mappedBy = "User")
-    private List<CreditCardMfoody> ListCreditCards;
+//    @OneToMany(mappedBy = "User", fetch = FetchType.LAZY)
+//    private List<CreditCardMfoody> ListCreditCards;
 
 //    // Refer to ORDER_MFOODY
 //    @OneToMany(mappedBy = "User")

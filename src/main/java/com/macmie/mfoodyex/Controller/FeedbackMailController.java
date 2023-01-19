@@ -51,7 +51,6 @@ public class FeedbackMailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // Error
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject, BindingResult errors){
         // Check Error
@@ -67,7 +66,7 @@ public class FeedbackMailController {
 
         // Save to DB
         feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
-        return new ResponseEntity<>(newFeedbackMail, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(URL_ADD)

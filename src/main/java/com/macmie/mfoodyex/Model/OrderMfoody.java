@@ -28,6 +28,10 @@ public class OrderMfoody {
     private String DateReceiptOrder;
 
     @NonNull
+    @Column(name = "SHIPPING_PRICE_ORDER")
+    private String ShippingPriceOrder;
+
+    @NonNull
     @Column(name = "SHIPPING_METHOD_ORDER")
     private String ShippingMethodOrder;
 
@@ -59,16 +63,18 @@ public class OrderMfoody {
     public OrderMfoody() {
     }
 
-    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull String shippingMethodOrder, @NonNull String totalFullPriceOrder, @NonNull String totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, @NonNull String idUser) {
+    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull String shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull String totalFullPriceOrder, @NonNull String totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, @NonNull String idUser, UserMfoody user) {
         IdOrder = idOrder;
         DateOrder = dateOrder;
         DateReceiptOrder = dateReceiptOrder;
+        ShippingPriceOrder = shippingPriceOrder;
         ShippingMethodOrder = shippingMethodOrder;
         TotalFullPriceOrder = totalFullPriceOrder;
         TotalSalePriceOrder = totalSalePriceOrder;
         PaymentMethodOrder = paymentMethodOrder;
         StatusOrder = statusOrder;
         IdUser = idUser;
+        User = user;
     }
 
     public int getIdOrder() {
@@ -141,5 +147,21 @@ public class OrderMfoody {
 
     public void setIdUser(String idUser) {
         IdUser = idUser;
+    }
+
+    public String getShippingPriceOrder() {
+        return ShippingPriceOrder;
+    }
+
+    public void setShippingPriceOrder(String shippingPriceOrder) {
+        ShippingPriceOrder = shippingPriceOrder;
+    }
+
+    public UserMfoody getUser() {
+        return User;
+    }
+
+    public void setUser(UserMfoody user) {
+        User = user;
     }
 }

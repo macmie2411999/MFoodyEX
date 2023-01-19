@@ -16,7 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class CartMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID_CARD")
+    @Column(name = "ID_CART")
     private int IdCart;
 
     @NonNull
@@ -33,30 +33,29 @@ public class CartMfoody {
 
     @NonNull
     @Column(name = "ID_USER")
-    private String IdUser;
+    private int IdUser;
 
     // Map to User
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
-    private UserMfoody User;
+//    @ManyToOne(fetch = LAZY)
+//    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
+//    private UserMfoody User;
 
     public CartMfoody() {
     }
 
-    public CartMfoody(int idCart, @NonNull String quantityAllProductsInCart, @NonNull String salePriceCart, @NonNull String fullPriceCart, @NonNull String idUser) {
-        IdCart = idCart;
+    public CartMfoody(int idUser, @NonNull String quantityAllProductsInCart, @NonNull String salePriceCart, @NonNull String fullPriceCart) {
+        IdUser = idUser;
         QuantityAllProductsInCart = quantityAllProductsInCart;
         SalePriceCart = salePriceCart;
         FullPriceCart = fullPriceCart;
+    }
+
+    public int getIdUser() {
+        return IdUser;
+    }
+
+    public void setIdUser(int idUser) {
         IdUser = idUser;
-    }
-
-    public int getIdCart() {
-        return IdCart;
-    }
-
-    public void setIdCart(int idCart) {
-        IdCart = idCart;
     }
 
     public String getQuantityAllProductsInCart() {
@@ -81,13 +80,5 @@ public class CartMfoody {
 
     public void setFullPriceCart(String fullPriceCart) {
         FullPriceCart = fullPriceCart;
-    }
-
-    public String getIdUser() {
-        return IdUser;
-    }
-
-    public void setIdUser(String idUser) {
-        IdUser = idUser;
     }
 }

@@ -40,7 +40,7 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
 
     @Override
     public UserMfoody getUserMfoodyByID(int ID_UserMfoody) {
-        log.info("Fetching UserMfoody with ID: {}", ID_UserMfoody);
+        log.info("Fetching UserMfoody with id: {}", ID_UserMfoody);
         return userMfoodyRepository.findById(ID_UserMfoody).orElse(null);
     }
 
@@ -54,26 +54,27 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
         userMfoody.setAddressUser(stringUtil.parseEmail(userMfoody.getAddressUser()));
         userMfoody.setRoleUser(stringUtil.parseEmail(userMfoody.getRoleUser()));
 
-        log.info("Saving UserMfoody with ID: {}", userMfoody.getIdUser());
+        log.info("Saving UserMfoody with id: {}", userMfoody.getIdUser());
         return userMfoodyRepository.save(userMfoody);
     }
 
     @Override
     public UserMfoody updateUserMfoody(UserMfoody newUserMfoody) {
         UserMfoody userMfoodyToUpdate = userMfoodyRepository.getById(newUserMfoody.getIdUser());
-        userMfoodyToUpdate.setIdUser((userMfoodyToUpdate.getIdUser()));
-        userMfoodyToUpdate.setEmailUser((userMfoodyToUpdate.getEmailUser()));
-        userMfoodyToUpdate.setPasswordUser((userMfoodyToUpdate.getPasswordUser()));
-        userMfoodyToUpdate.setNameUser((userMfoodyToUpdate.getNameUser()));
-        userMfoodyToUpdate.setPhoneNumberUser((userMfoodyToUpdate.getPhoneNumberUser()));
-        userMfoodyToUpdate.setRoleUser((userMfoodyToUpdate.getRoleUser()));
-        log.info("Updating UserMfoody with ID: {}", userMfoodyToUpdate.getIdUser());
+        System.out.println("-------- newUserMfoody: " + newUserMfoody);
+        userMfoodyToUpdate.setIdUser((newUserMfoody.getIdUser()));
+        userMfoodyToUpdate.setEmailUser((newUserMfoody.getEmailUser()));
+        userMfoodyToUpdate.setPasswordUser((newUserMfoody.getPasswordUser()));
+        userMfoodyToUpdate.setNameUser((newUserMfoody.getNameUser()));
+        userMfoodyToUpdate.setPhoneNumberUser((newUserMfoody.getPhoneNumberUser()));
+        userMfoodyToUpdate.setRoleUser((newUserMfoody.getRoleUser()));
+        log.info("Updating UserMfoody with id: {}", userMfoodyToUpdate.getIdUser());
         return userMfoodyRepository.save(userMfoodyToUpdate);
     }
 
     @Override
     public void deleteUserMfoodyByID(int ID_UserMfoody) {
-        log.info("Deleting UserMfoody with ID: {}", ID_UserMfoody);
+        log.info("Deleting UserMfoody with id: {}", ID_UserMfoody);
         userMfoodyRepository.deleteById(ID_UserMfoody);
     }
 }

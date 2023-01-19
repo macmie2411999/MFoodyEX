@@ -16,11 +16,11 @@ public class ProductMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_PRODUCT")
-    private int IdFeedbackMail;
+    private int IdProduct;
 
     @NonNull
     @Column(name = "NAME_PRODUCT")
-    private String NameUserFeedbackMail;
+    private String NameProduct;
 
     @NonNull
     @Column(name = "ALBUM_PRODUCT")
@@ -69,9 +69,9 @@ public class ProductMfoody {
     public ProductMfoody() {
     }
 
-    public ProductMfoody(int idFeedbackMail, @NonNull String nameUserFeedbackMail, @NonNull String albumProduct, @NonNull String descriptionProduct, @NonNull String fullPriceProduct, @NonNull String salePriceProduct, @NonNull String weightProduct, @NonNull String importQuantityProduct, @NonNull String importDateProduct, @NonNull String storehouseQuantityProduct, @NonNull String ratingProduct, @NonNull String categoryProduct, @NonNull String brandProduct) {
-        IdFeedbackMail = idFeedbackMail;
-        NameUserFeedbackMail = nameUserFeedbackMail;
+    public ProductMfoody(int idProduct, @NonNull String nameProduct, @NonNull String albumProduct, @NonNull String descriptionProduct, @NonNull String fullPriceProduct, @NonNull String salePriceProduct, @NonNull String weightProduct, @NonNull String importQuantityProduct, @NonNull String importDateProduct, @NonNull String storehouseQuantityProduct, @NonNull String ratingProduct, @NonNull String categoryProduct, @NonNull String brandProduct) {
+        IdProduct = idProduct;
+        NameProduct = nameProduct;
         AlbumProduct = albumProduct;
         DescriptionProduct = descriptionProduct;
         FullPriceProduct = fullPriceProduct;
@@ -85,20 +85,20 @@ public class ProductMfoody {
         BrandProduct = brandProduct;
     }
 
-    public int getIdFeedbackMail() {
-        return IdFeedbackMail;
+    public int getIdProduct() {
+        return IdProduct;
     }
 
-    public void setIdFeedbackMail(int idFeedbackMail) {
-        IdFeedbackMail = idFeedbackMail;
+    public void setIdProduct(int idProduct) {
+        IdProduct = idProduct;
     }
 
-    public String getNameUserFeedbackMail() {
-        return NameUserFeedbackMail;
+    public String getNameProduct() {
+        return NameProduct;
     }
 
-    public void setNameUserFeedbackMail(String nameUserFeedbackMail) {
-        NameUserFeedbackMail = nameUserFeedbackMail;
+    public void setNameProduct(String nameProduct) {
+        NameProduct = nameProduct;
     }
 
     public String getAlbumProduct() {

@@ -41,9 +41,9 @@ public class CreditCardMfoody {
     private String IdUser;
 
     // Map to User
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
-    private UserMfoody User;
+//    @ManyToOne(fetch = LAZY)
+//    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
+//    private UserMfoody User;
 
     public CreditCardMfoody() {
     }

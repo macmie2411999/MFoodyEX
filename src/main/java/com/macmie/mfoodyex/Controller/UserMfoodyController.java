@@ -2,9 +2,7 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.macmie.mfoodyex.Model.FeedbackMail;
 import com.macmie.mfoodyex.Model.UserMfoody;
-import com.macmie.mfoodyex.Service.InterfaceService.FeedbackMailInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +15,8 @@ import java.util.List;
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
 
 @RestController // = @ResponseBody + @Controller
-@RequestMapping(USER)
-public class UserController {
+@RequestMapping(USER_MFOODY)
+public class UserMfoodyController {
     @Autowired
     private UserMfoodyInterfaceService userMfoodyInterfaceService;
 
@@ -48,7 +46,6 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // Error
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyJsonObject, BindingResult errors){
         // Check Error
@@ -64,7 +61,7 @@ public class UserController {
 
         // Save to DB
         userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
-        return new ResponseEntity<>(newUserMfoody, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(URL_ADD)

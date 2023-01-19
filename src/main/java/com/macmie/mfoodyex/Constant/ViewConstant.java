@@ -3,7 +3,12 @@ package com.macmie.mfoodyex.Constant;
 public class ViewConstant {
     // Main URL
     public static final String FEEDBACK_MAIL = "/feedback";
-    public static final String USER = "/user";
+    public static final String USER_MFOODY = "/user";
+    public static final String CREDIT_CARD_MFOODY = "/creditcard";
+    public static final String CART_MFOODY = "/cart";
+    public static final String PRODUCT_MFOODY = "/product";
+    public static final String COMMENT_MFOODY = "/comment";
+    public static final String ORDER_MFOODY = "/order";
 
     // URL for all APIs
     public static final String URL_GET_ALL = "/getAll";
