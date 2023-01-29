@@ -36,9 +36,9 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
     }
 
     @Override
-    public OrderMfoody getOrderMfoodyByID(int ID_OrderMfoody) {
-        log.info("Fetching OrderMfoody with ID: {}", ID_OrderMfoody);
-        return orderMfoodyRepository.findById(ID_OrderMfoody).orElse(null);
+    public OrderMfoody getOrderMfoodyByID(int idOrderMfoody) {
+        log.info("Fetching OrderMfoody with ID: {}", idOrderMfoody);
+        return orderMfoodyRepository.findById(idOrderMfoody).orElse(null);
     }
 
     @Override
@@ -52,24 +52,24 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
 
     @Override
     public OrderMfoody updateOrderMfoody(OrderMfoody newOrderMfoody) {
-        OrderMfoody orderMfoodyToUpdate = orderMfoodyRepository.getById(newOrderMfoody.getIdOrder());
-        orderMfoodyToUpdate.setDateOrder((newOrderMfoody.getDateOrder()));
-        orderMfoodyToUpdate.setDateReceiptOrder((newOrderMfoody.getDateReceiptOrder()));
-        orderMfoodyToUpdate.setShippingMethodOrder((newOrderMfoody.getShippingMethodOrder()));
-        orderMfoodyToUpdate.setShippingPriceOrder((newOrderMfoody.getShippingPriceOrder()));
-        orderMfoodyToUpdate.setTotalFullPriceOrder((newOrderMfoody.getTotalFullPriceOrder()));
-        orderMfoodyToUpdate.setTotalSalePriceOrder((newOrderMfoody.getTotalSalePriceOrder()));
-        orderMfoodyToUpdate.setPaymentMethodOrder((newOrderMfoody.getPaymentMethodOrder()));
-        orderMfoodyToUpdate.setStatusOrder((newOrderMfoody.getStatusOrder()));
-        orderMfoodyToUpdate.setIdUser((newOrderMfoody.getIdUser()));
+//        OrderMfoody orderMfoodyToUpdate = orderMfoodyRepository.getById(newOrderMfoody.getIdOrder());
+//        orderMfoodyToUpdate.setDateOrder((newOrderMfoody.getDateOrder()));
+//        orderMfoodyToUpdate.setDateReceiptOrder((newOrderMfoody.getDateReceiptOrder()));
+//        orderMfoodyToUpdate.setShippingMethodOrder((newOrderMfoody.getShippingMethodOrder()));
+//        orderMfoodyToUpdate.setShippingPriceOrder((newOrderMfoody.getShippingPriceOrder()));
+//        orderMfoodyToUpdate.setTotalFullPriceOrder((newOrderMfoody.getTotalFullPriceOrder()));
+//        orderMfoodyToUpdate.setTotalSalePriceOrder((newOrderMfoody.getTotalSalePriceOrder()));
+//        orderMfoodyToUpdate.setPaymentMethodOrder((newOrderMfoody.getPaymentMethodOrder()));
+//        orderMfoodyToUpdate.setStatusOrder((newOrderMfoody.getStatusOrder()));
+//        orderMfoodyToUpdate.setUser((newOrderMfoody.getUser()));
 
-        log.info("Updating OrderMfoody with ID: {}", orderMfoodyToUpdate.getIdOrder());
-        return orderMfoodyRepository.save(orderMfoodyToUpdate);
+        log.info("Updating OrderMfoody with ID: {}", newOrderMfoody.getIdOrder());
+        return orderMfoodyRepository.save(newOrderMfoody);
     }
 
     @Override
-    public void deleteOrderMfoodyByID(int ID_OrderMfoody) {
-        log.info("Deleting OrderMfoody with ID: {}", ID_OrderMfoody);
-        orderMfoodyRepository.deleteById(ID_OrderMfoody);
+    public void deleteOrderMfoodyByID(int idOrderMfoody) {
+        log.info("Deleting OrderMfoody with ID: {}", idOrderMfoody);
+        orderMfoodyRepository.deleteById(idOrderMfoody);
     }
 }

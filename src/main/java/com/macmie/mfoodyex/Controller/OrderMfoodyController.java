@@ -2,8 +2,12 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.macmie.mfoodyex.Model.CreditCardMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
+import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
+import com.macmie.mfoodyex.POJO.OrderMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.OrderMfoodyInterfaceService;
+import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,24 +24,25 @@ public class OrderMfoodyController {
     @Autowired
     private OrderMfoodyInterfaceService orderMfoodyInterfaceService;
 
+    @Autowired
+    private UserMfoodyInterfaceService userMfoodyInterfaceService;
+
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllOrderMfoodys(){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<OrderMfoody> orderMfoodyList = orderMfoodyInterfaceService.getListOrderMfoodys();
         if(orderMfoodyList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(orderMfoodyList), HttpStatus.OK);
+        return new ResponseEntity<>(orderMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getOrderMfoodyByID(@PathVariable("ID") int ID){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         OrderMfoody OrderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(ID);
         if(OrderMfoody == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(OrderMfoody), HttpStatus.OK);
+        return new ResponseEntity<>(OrderMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)
@@ -47,17 +52,21 @@ public class OrderMfoodyController {
     }
 
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editOrderMfoody(@RequestBody String orderMfoodyJsonObject, BindingResult errors){
+    public ResponseEntity<?> editOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to OrderMfoody object
+        // Convert JsonObject to OrderPOJO object, add new User to OrderMfoody
         Gson gson = new Gson();
-        OrderMfoody newOrderMfoody = gson.fromJson(orderMfoodyJsonObject, OrderMfoody.class);
-        System.out.println("-------- JSon: " + orderMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newOrderMfoody);
+        OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
+        OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
+
+        // Add new User to CreditCard and log
+        newOrderMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser()));
+        System.out.println("-------- JSon: " + orderPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newOrderMfoody.getUser().getIdUser());
 
         // Save to DB
         orderMfoodyInterfaceService.updateOrderMfoody(newOrderMfoody);
@@ -65,17 +74,21 @@ public class OrderMfoodyController {
     }
 
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewOrderMfoody(@RequestBody String orderMfoodyJsonObject, BindingResult errors){
+    public ResponseEntity<?> addNewOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to OrderMfoody object
+        // Convert JsonObject to OrderPOJO object, add new User to OrderMfoody
         Gson gson = new Gson();
-        OrderMfoody newOrderMfoody = gson.fromJson(orderMfoodyJsonObject, OrderMfoody.class);
-        System.out.println("-------- JSon: " + orderMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newOrderMfoody);
+        OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
+        OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
+
+        // Add new User to CreditCard and log
+        newOrderMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser()));
+        System.out.println("-------- JSon: " + orderPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newOrderMfoody.getUser().getIdUser());
 
         // Save to DB
         orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);

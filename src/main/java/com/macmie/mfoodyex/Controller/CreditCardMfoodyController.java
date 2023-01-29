@@ -49,9 +49,8 @@ public class CreditCardMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // Error
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardMPOJOJsonObject, BindingResult errors){
+    public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -59,18 +58,12 @@ public class CreditCardMfoodyController {
 
         // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
         Gson gson = new Gson();
-        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardMPOJOJsonObject, CreditCardMfoodyPOJO.class);
+        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
         CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
-
-        // Check duplicate
-        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.getCreditCardMfoodyByNumberCard(newCreditCardMfoody.getNumberCard());
-        if (existingCard != null) {
-            return new ResponseEntity<>("A card with the same number already exists!", HttpStatus.CONFLICT);
-        }
 
         // Add new User to CreditCard and log
         newCreditCardMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser()));
-        System.out.println("-------- JSon: " + creditCardMPOJOJsonObject);
+        System.out.println("-------- JSon: " + creditCardPOJOJsonObject);
         System.out.println("-------- Convert from JSon: " + newCreditCardMfoody.getIdCard());
 
         // Save to DB
@@ -79,7 +72,7 @@ public class CreditCardMfoodyController {
     }
 
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardMPOJOJsonObject, BindingResult errors){
+    public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -87,7 +80,7 @@ public class CreditCardMfoodyController {
 
         // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
         Gson gson = new Gson();
-        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardMPOJOJsonObject, CreditCardMfoodyPOJO.class);
+        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
         CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
 
         // Check duplicate
@@ -98,7 +91,7 @@ public class CreditCardMfoodyController {
 
         // Add new User to CreditCard and log
         newCreditCardMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser()));
-        System.out.println("-------- JSon: " + creditCardMPOJOJsonObject);
+        System.out.println("-------- JSon: " + creditCardPOJOJsonObject);
         System.out.println("-------- Convert from JSon: " + newCreditCardMfoody.getUser().getIdUser());
 
         // Save CreditCard to DB

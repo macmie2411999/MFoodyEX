@@ -36,9 +36,9 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
     }
 
     @Override
-    public CartMfoody getCartMfoodyByID(int ID_CartMfoody) {
-        log.info("Fetching CartMfoody with ID: {}", ID_CartMfoody);
-        return cartMfoodyRepository.findById(ID_CartMfoody).orElse(null);
+    public CartMfoody getCartMfoodyByID(int idCartMfoody) {
+        log.info("Fetching CartMfoody with ID: {}", idCartMfoody);
+        return cartMfoodyRepository.findById(idCartMfoody).orElse(null);
     }
 
     @Override
@@ -52,20 +52,19 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
 
     @Override
     public CartMfoody updateCartMfoody(CartMfoody newCartMfoody) {
-        CartMfoody cartMfoodyToUpdate = cartMfoodyRepository.getById(newCartMfoody.getIdCart());
-        cartMfoodyToUpdate.setQuantityAllProductsInCart((newCartMfoody.getQuantityAllProductsInCart()));
-        cartMfoodyToUpdate.setSalePriceCart((newCartMfoody.getSalePriceCart()));
-        cartMfoodyToUpdate.setFullPriceCart((newCartMfoody.getFullPriceCart()));
-        cartMfoodyToUpdate.setIdUser((newCartMfoody.getIdUser()));
+//        CartMfoody cartMfoodyToUpdate = cartMfoodyRepository.getById(newCartMfoody.getIdCart());
+//        cartMfoodyToUpdate.setQuantityAllProductsInCart((newCartMfoody.getQuantityAllProductsInCart()));
+//        cartMfoodyToUpdate.setSalePriceCart((newCartMfoody.getSalePriceCart()));
+//        cartMfoodyToUpdate.setFullPriceCart((newCartMfoody.getFullPriceCart()));
+//        cartMfoodyToUpdate.setUser((newCartMfoody.getUser()));
 
-        log.info("Updating CartMfoody with ID: {}", cartMfoodyToUpdate.getIdCart());
-        return cartMfoodyRepository.save(cartMfoodyToUpdate);
+        log.info("Updating CartMfoody with ID: {}", newCartMfoody.getIdCart());
+        return cartMfoodyRepository.save(newCartMfoody);
     }
 
-    // ID_CART = ID_USER
     @Override
-    public void deleteCartMfoodyByID(int ID_CartMfoody) {
-        log.info("Deleting CartMfoody with ID: {}", ID_CartMfoody);
-        cartMfoodyRepository.deleteById(ID_CartMfoody);
+    public void deleteCartMfoodyByID(int idCartMfoody) {
+        log.info("Deleting CartMfoody with ID: {}", idCartMfoody);
+        cartMfoodyRepository.deleteById(idCartMfoody);
     }
 }

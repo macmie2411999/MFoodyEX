@@ -59,12 +59,12 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
     @Override
     public UserMfoody saveUserMfoody(UserMfoody userMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
-        userMfoody.setEmailUser(stringUtil.parseEmail(userMfoody.getEmailUser()));
-        userMfoody.setPasswordUser(stringUtil.parseEmail(userMfoody.getPasswordUser()));
-        userMfoody.setNameUser(stringUtil.parseEmail(userMfoody.getNameUser()));
-        userMfoody.setPhoneNumberUser(stringUtil.parseEmail(userMfoody.getPhoneNumberUser()));
-        userMfoody.setAddressUser(stringUtil.parseEmail(userMfoody.getAddressUser()));
-        userMfoody.setRoleUser(stringUtil.parseEmail(userMfoody.getRoleUser()));
+//        userMfoody.setEmailUser(stringUtil.parseEmail(userMfoody.getEmailUser()));
+//        userMfoody.setPasswordUser(stringUtil.parseEmail(userMfoody.getPasswordUser()));
+//        userMfoody.setNameUser(stringUtil.parseEmail(userMfoody.getNameUser()));
+//        userMfoody.setPhoneNumberUser(stringUtil.parseEmail(userMfoody.getPhoneNumberUser()));
+//        userMfoody.setAddressUser(stringUtil.parseEmail(userMfoody.getAddressUser()));
+//        userMfoody.setRoleUser(stringUtil.parseEmail(userMfoody.getRoleUser()));
 
         log.info("Saving UserMfoody with id: {}", userMfoody.getIdUser());
         return userMfoodyRepository.save(userMfoody);
@@ -72,16 +72,16 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
 
     @Override
     public UserMfoody updateUserMfoody(UserMfoody newUserMfoody) {
-        UserMfoody userMfoodyToUpdate = userMfoodyRepository.getById(newUserMfoody.getIdUser());
-        System.out.println("-------- newUserMfoody: " + newUserMfoody);
-        userMfoodyToUpdate.setIdUser((newUserMfoody.getIdUser()));
-        userMfoodyToUpdate.setEmailUser((newUserMfoody.getEmailUser()));
-        userMfoodyToUpdate.setPasswordUser((newUserMfoody.getPasswordUser()));
-        userMfoodyToUpdate.setNameUser((newUserMfoody.getNameUser()));
-        userMfoodyToUpdate.setPhoneNumberUser((newUserMfoody.getPhoneNumberUser()));
-        userMfoodyToUpdate.setRoleUser((newUserMfoody.getRoleUser()));
-        log.info("Updating UserMfoody with id: {}", userMfoodyToUpdate.getIdUser());
-        return userMfoodyRepository.save(userMfoodyToUpdate);
+//        UserMfoody userMfoodyToUpdate = userMfoodyRepository.getById(newUserMfoody.getIdUser());
+//        System.out.println("-------- newUserMfoody: " + newUserMfoody);
+//        userMfoodyToUpdate.setIdUser((newUserMfoody.getIdUser()));
+//        userMfoodyToUpdate.setEmailUser((newUserMfoody.getEmailUser()));
+//        userMfoodyToUpdate.setPasswordUser((newUserMfoody.getPasswordUser()));
+//        userMfoodyToUpdate.setNameUser((newUserMfoody.getNameUser()));
+//        userMfoodyToUpdate.setPhoneNumberUser((newUserMfoody.getPhoneNumberUser()));
+//        userMfoodyToUpdate.setRoleUser((newUserMfoody.getRoleUser()));
+        log.info("Updating UserMfoody with id: {}", newUserMfoody.getIdUser());
+        return userMfoodyRepository.save(newUserMfoody);
     }
 
     @Override

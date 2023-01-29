@@ -7,11 +7,11 @@ import java.util.List;
 public interface CartMfoodyInterfaceService {
     public List<CartMfoody> getListCartMfoodys();
 
-    public CartMfoody getCartMfoodyByID(int ID_CartMfoody);
+    public CartMfoody getCartMfoodyByID(int idCartMfoody);
 
     public CartMfoody saveCartMfoody(CartMfoody cartMfoody);
 
     public CartMfoody updateCartMfoody(CartMfoody newCartMfoody);
 
-    public void deleteCartMfoodyByID(int ID_CartMfoody);
+    public void deleteCartMfoodyByID(int idCartMfoody);
 }

@@ -36,9 +36,9 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
     }
 
     @Override
-    public CommentMfoody getCommentMfoodyByID(int ID_CommentMfoody) {
-        log.info("Fetching CommentMfoody with ID: {}", ID_CommentMfoody);
-        return commentMfoodyRepository.findById(ID_CommentMfoody).orElse(null);
+    public CommentMfoody getCommentMfoodyByID(int idCommentMfoody) {
+        log.info("Fetching CommentMfoody with ID: {}", idCommentMfoody);
+        return commentMfoodyRepository.findById(idCommentMfoody).orElse(null);
     }
 
     @Override
@@ -52,19 +52,19 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
 
     @Override
     public CommentMfoody updateCommentMfoody(CommentMfoody newCommentMfoody) {
-        CommentMfoody commentMfoodyToUpdate = commentMfoodyRepository.getById(newCommentMfoody.getIdComment());
-        commentMfoodyToUpdate.setRatingComment((newCommentMfoody.getRatingComment()));
-        commentMfoodyToUpdate.setContentComment((newCommentMfoody.getContentComment()));
-        commentMfoodyToUpdate.setUser((newCommentMfoody.getUser()));
-        commentMfoodyToUpdate.setProduct((newCommentMfoody.getProduct()));
+//        CommentMfoody commentMfoodyToUpdate = commentMfoodyRepository.getById(newCommentMfoody.getIdComment());
+//        commentMfoodyToUpdate.setRatingComment((newCommentMfoody.getRatingComment()));
+//        commentMfoodyToUpdate.setContentComment((newCommentMfoody.getContentComment()));
+//        commentMfoodyToUpdate.setUser((newCommentMfoody.getUser()));
+//        commentMfoodyToUpdate.setProduct((newCommentMfoody.getProduct()));
 
-        log.info("Updating UserMfoody with ID: {}", newCommentMfoody.getIdComment());
-        return commentMfoodyRepository.save(commentMfoodyToUpdate);
+        log.info("Updating CommentMfoody with ID: {}", newCommentMfoody.getIdComment());
+        return commentMfoodyRepository.save(newCommentMfoody);
     }
 
     @Override
-    public void deleteCommentMfoodyByID(int ID_CommentMfoody) {
-        log.info("Deleting CommentMfoody with ID: {}", ID_CommentMfoody);
-        commentMfoodyRepository.deleteById(ID_CommentMfoody);
+    public void deleteCommentMfoodyByID(int idCommentMfoody) {
+        log.info("Deleting CommentMfoody with ID: {}", idCommentMfoody);
+        commentMfoodyRepository.deleteById(idCommentMfoody);
     }
 }

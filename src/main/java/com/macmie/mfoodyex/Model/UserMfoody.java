@@ -61,13 +61,13 @@ public class UserMfoody {
 
 //    // Refer to ORDER_MFOODY
 //    @OneToMany(mappedBy = "User")
-//    private List<OrderMfoody> ListOrders;
+//    private List<OrderMfoody> listOrders;
 
     // Refer to CART_MFOODY
-//    @JsonIgnore // a field will be ignored when serializing or deserializing JSON. It is used to prevent infinite recursion when serializing an object with a bidirectional relationship
-//    @OneToMany(mappedBy = "user")
-//    private List<CartMfoody> listCarts;
-//
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<CartMfoody> listCarts;
+
     // Refer to COMMENT_MFOODY
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
@@ -76,7 +76,7 @@ public class UserMfoody {
     public UserMfoody() {
     }
 
-    public UserMfoody(int idUser, @NonNull String emailUser, @NonNull String passwordUser, @NonNull String nameUser, @NonNull String phoneNumberUser, @NonNull String addressUser, @NonNull String roleUser, List<CreditCardMfoody> listCreditCards, List<CommentMfoody> listComments) {
+    public UserMfoody(int idUser, @NonNull String emailUser, @NonNull String passwordUser, @NonNull String nameUser, @NonNull String phoneNumberUser, @NonNull String addressUser, @NonNull String roleUser, List<CreditCardMfoody> listCreditCards, List<CommentMfoody> listComments, List<CartMfoody> listCarts) {
         this.idUser = idUser;
         this.emailUser = emailUser;
         this.passwordUser = passwordUser;
@@ -86,6 +86,7 @@ public class UserMfoody {
         this.roleUser = roleUser;
         this.listComments = listComments;
         this.listCreditCards = listCreditCards;
+        this.listCarts = listCarts;
     }
 
     public int getIdUser() {

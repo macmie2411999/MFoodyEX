@@ -8,11 +8,11 @@ import java.util.List;
 public interface FeedbackMailInterfaceService {
     public List<FeedbackMail> getListFeedbackMails();
 
-    public FeedbackMail getFeedbackMailByID(int ID_FeedbackMail);
+    public FeedbackMail getFeedbackMailByID(int idFeedbackMail);
 
     public FeedbackMail saveFeedbackMail(FeedbackMail feedbackMail);
 
     public FeedbackMail updateFeedbackMail(FeedbackMail newFeedbackMail);
 
-    public void deleteFeedbackMailByID(int ID_FeedbackMail);
+    public void deleteFeedbackMailByID(int idFeedbackMail);
 }

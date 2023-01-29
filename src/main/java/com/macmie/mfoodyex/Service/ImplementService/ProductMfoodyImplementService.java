@@ -36,9 +36,9 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
     }
 
     @Override
-    public ProductMfoody getProductMfoodyByID(int ID_ProductMfoody) {
-        log.info("Fetching ProductMfoody with ID: {}", ID_ProductMfoody);
-        return productMfoodyRepository.findById(ID_ProductMfoody).orElse(null);
+    public ProductMfoody getProductMfoodyByID(int idProductMfoody) {
+        log.info("Fetching ProductMfoody with ID: {}", idProductMfoody);
+        return productMfoodyRepository.findById(idProductMfoody).orElse(null);
     }
 
     @Override
@@ -52,27 +52,27 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
 
     @Override
     public ProductMfoody updateProductMfoody(ProductMfoody newProductMfoody) {
-        ProductMfoody productMfoodyToUpdate = productMfoodyRepository.getById(newProductMfoody.getIdProduct());
-        productMfoodyToUpdate.setNameProduct((newProductMfoody.getNameProduct()));
-        productMfoodyToUpdate.setAlbumProduct((newProductMfoody.getAlbumProduct()));
-        productMfoodyToUpdate.setDescriptionProduct((newProductMfoody.getDescriptionProduct()));
-        productMfoodyToUpdate.setFullPriceProduct((newProductMfoody.getFullPriceProduct()));
-        productMfoodyToUpdate.setSalePriceProduct((newProductMfoody.getSalePriceProduct()));
-        productMfoodyToUpdate.setWeightProduct((newProductMfoody.getWeightProduct()));
-        productMfoodyToUpdate.setImportDateProduct((newProductMfoody.getImportDateProduct()));
-        productMfoodyToUpdate.setImportQuantityProduct((newProductMfoody.getImportQuantityProduct()));
-        productMfoodyToUpdate.setStorehouseQuantityProduct((newProductMfoody.getStorehouseQuantityProduct()));
-        productMfoodyToUpdate.setRatingProduct((newProductMfoody.getRatingProduct()));
-        productMfoodyToUpdate.setCategoryProduct((newProductMfoody.getCategoryProduct()));
-        productMfoodyToUpdate.setBrandProduct((newProductMfoody.getBrandProduct()));
+//        ProductMfoody productMfoodyToUpdate = productMfoodyRepository.getById(newProductMfoody.getIdProduct());
+//        productMfoodyToUpdate.setNameProduct((newProductMfoody.getNameProduct()));
+//        productMfoodyToUpdate.setAlbumProduct((newProductMfoody.getAlbumProduct()));
+//        productMfoodyToUpdate.setDescriptionProduct((newProductMfoody.getDescriptionProduct()));
+//        productMfoodyToUpdate.setFullPriceProduct((newProductMfoody.getFullPriceProduct()));
+//        productMfoodyToUpdate.setSalePriceProduct((newProductMfoody.getSalePriceProduct()));
+//        productMfoodyToUpdate.setWeightProduct((newProductMfoody.getWeightProduct()));
+//        productMfoodyToUpdate.setImportDateProduct((newProductMfoody.getImportDateProduct()));
+//        productMfoodyToUpdate.setImportQuantityProduct((newProductMfoody.getImportQuantityProduct()));
+//        productMfoodyToUpdate.setStorehouseQuantityProduct((newProductMfoody.getStorehouseQuantityProduct()));
+//        productMfoodyToUpdate.setRatingProduct((newProductMfoody.getRatingProduct()));
+//        productMfoodyToUpdate.setCategoryProduct((newProductMfoody.getCategoryProduct()));
+//        productMfoodyToUpdate.setBrandProduct((newProductMfoody.getBrandProduct()));
 
-        log.info("Updating ProductMfoody with ID: {}", productMfoodyToUpdate.getIdProduct());
-        return productMfoodyRepository.save(productMfoodyToUpdate);
+        log.info("Updating ProductMfoody with ID: {}", newProductMfoody.getIdProduct());
+        return productMfoodyRepository.save(newProductMfoody);
     }
 
     @Override
-    public void deleteProductMfoodyByID(int ID_ProductMfoody) {
-        log.info("Deleting ProductMfoody with ID: {}", ID_ProductMfoody);
-        productMfoodyRepository.deleteById(ID_ProductMfoody);
+    public void deleteProductMfoodyByID(int idProductMfoody) {
+        log.info("Deleting ProductMfoody with ID: {}", idProductMfoody);
+        productMfoodyRepository.deleteById(idProductMfoody);
     }
 }

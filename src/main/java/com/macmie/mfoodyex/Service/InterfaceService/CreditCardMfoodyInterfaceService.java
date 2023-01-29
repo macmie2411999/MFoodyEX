@@ -8,7 +8,7 @@ import java.util.List;
 public interface CreditCardMfoodyInterfaceService {
     public List<CreditCardMfoody> getListCreditCardMfoodys();
 
-    public CreditCardMfoody getCreditCardMfoodyByID(int ID_CreditCardMfoody);
+    public CreditCardMfoody getCreditCardMfoodyByID(int idCreditCardMfoody);
 
     public CreditCardMfoody getCreditCardMfoodyByNumberCard(String CardNumber);
 
@@ -16,5 +16,5 @@ public interface CreditCardMfoodyInterfaceService {
 
     public CreditCardMfoody updateCreditCardMfoody(CreditCardMfoody newCreditCardMfoody);
 
-    public void deleteCreditCardMfoodyByID(int ID_CreditCardMfoody);
+    public void deleteCreditCardMfoodyByID(int idCreditCardMfoody);
 }

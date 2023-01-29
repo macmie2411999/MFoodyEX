@@ -7,11 +7,11 @@ import java.util.List;
 public interface CommentMfoodyInterfaceService {
     public List<CommentMfoody> getListCommentMfoodys();
 
-    public CommentMfoody getCommentMfoodyByID(int ID_CommentMfoody);
+    public CommentMfoody getCommentMfoodyByID(int idCommentMfoody);
 
     public CommentMfoody saveCommentMfoody(CommentMfoody commentMfoody);
 
     public CommentMfoody updateCommentMfoody(CommentMfoody newCommentMfoody);
 
-    public void deleteCommentMfoodyByID(int ID_CommentMfoody);
+    public void deleteCommentMfoodyByID(int idCommentMfoody);
 }

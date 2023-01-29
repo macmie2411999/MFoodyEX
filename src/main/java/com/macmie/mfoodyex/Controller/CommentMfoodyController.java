@@ -53,9 +53,8 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // Error
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editCommentMfoody(@RequestBody String commentMPOJOJsonObject, BindingResult errors){
+    public ResponseEntity<?> editCommentMfoody(@RequestBody String commentPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -63,19 +62,13 @@ public class CommentMfoodyController {
 
         // Convert JsonObject to CommentPOJO object, add new User to Comment
         Gson gson = new Gson();
-        CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentMPOJOJsonObject, CommentMfoodyPOJO.class);
+        CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentPOJOJsonObject, CommentMfoodyPOJO.class);
         CommentMfoody newCommentMfoody = newCommentMfoodyPOJO.renderCommentMfoody();
-
-        // Check duplicate
-//        CommentMfoody existingCard = CommentMfoodyInterfaceService.getCommentMfoodyByNumberCard(newCommentMfoody.getNumberCard());
-//        if (existingCard != null) {
-//            return new ResponseEntity<>("A card with the same number already exists!", HttpStatus.CONFLICT);
-//        }
 
         // Add new User and Product to Comment and log
         newCommentMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCommentMfoodyPOJO.getIdUser()));
         newCommentMfoody.setProduct(productMfoodyInterfaceService.getProductMfoodyByID(newCommentMfoodyPOJO.getIdProduct()));
-        System.out.println("-------- JSon: " + commentMPOJOJsonObject);
+        System.out.println("-------- JSon: " + commentPOJOJsonObject);
         System.out.println("-------- Convert from JSon: " + newCommentMfoody.getIdComment());
 
         // Save to DB

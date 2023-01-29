@@ -37,37 +37,37 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
     }
 
     @Override
-    public FeedbackMail getFeedbackMailByID(int ID_FeedbackMail) {
-        log.info("Fetching FeedbackMail with ID: {}", ID_FeedbackMail);
-        return feedbackMailRepository.findById(ID_FeedbackMail).orElse(null);
+    public FeedbackMail getFeedbackMailByID(int idFeedbackMail) {
+        log.info("Fetching FeedbackMail with ID: {}", idFeedbackMail);
+        return feedbackMailRepository.findById(idFeedbackMail).orElse(null);
     }
 
     @Override
     public FeedbackMail saveFeedbackMail(FeedbackMail feedbackMail) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
-        feedbackMail.setEmailUserFeedbackMail(stringUtil.parseEmail(feedbackMail.getEmailUserFeedbackMail()));
-        feedbackMail.setNameUserFeedbackMail(stringUtil.parseName(feedbackMail.getNameUserFeedbackMail()));
-        feedbackMail.setTitleFeedbackMail(textUtil.parseToLegalText(feedbackMail.getTitleFeedbackMail()));
-        feedbackMail.setContentFeedbackMail(textUtil.parseToLegalText(feedbackMail.getContentFeedbackMail()));
+//        feedbackMail.setEmailUserFeedbackMail(stringUtil.parseEmail(feedbackMail.getEmailUserFeedbackMail()));
+//        feedbackMail.setNameUserFeedbackMail(stringUtil.parseName(feedbackMail.getNameUserFeedbackMail()));
+//        feedbackMail.setTitleFeedbackMail(textUtil.parseToLegalText(feedbackMail.getTitleFeedbackMail()));
+//        feedbackMail.setContentFeedbackMail(textUtil.parseToLegalText(feedbackMail.getContentFeedbackMail()));
         log.info("Saving FeedbackMail with ID: {}", feedbackMail.getIdFeedbackMail());
         return feedbackMailRepository.save(feedbackMail);
     }
 
     @Override
     public FeedbackMail updateFeedbackMail(FeedbackMail newFeedbackMail) {
-        FeedbackMail feedbackMailToUpdate = feedbackMailRepository.getById(newFeedbackMail.getIdFeedbackMail());
-        feedbackMailToUpdate.setIdFeedbackMail((newFeedbackMail.getIdFeedbackMail()));
-        feedbackMailToUpdate.setEmailUserFeedbackMail(stringUtil.parseEmail(newFeedbackMail.getEmailUserFeedbackMail()));
-        feedbackMailToUpdate.setNameUserFeedbackMail(stringUtil.parseName(newFeedbackMail.getNameUserFeedbackMail()));
-        feedbackMailToUpdate.setTitleFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getTitleFeedbackMail()));
-        feedbackMailToUpdate.setContentFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getContentFeedbackMail()));
-        log.info("Updating FeedbackMail with ID: {}", feedbackMailToUpdate.getIdFeedbackMail());
-        return feedbackMailRepository.save(feedbackMailToUpdate);
+//        FeedbackMail feedbackMailToUpdate = feedbackMailRepository.getById(newFeedbackMail.getIdFeedbackMail());
+//        feedbackMailToUpdate.setIdFeedbackMail((newFeedbackMail.getIdFeedbackMail()));
+//        feedbackMailToUpdate.setEmailUserFeedbackMail(stringUtil.parseEmail(newFeedbackMail.getEmailUserFeedbackMail()));
+//        feedbackMailToUpdate.setNameUserFeedbackMail(stringUtil.parseName(newFeedbackMail.getNameUserFeedbackMail()));
+//        feedbackMailToUpdate.setTitleFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getTitleFeedbackMail()));
+//        feedbackMailToUpdate.setContentFeedbackMail(textUtil.parseToLegalText(newFeedbackMail.getContentFeedbackMail()));
+        log.info("Updating FeedbackMail with ID: {}", newFeedbackMail.getIdFeedbackMail());
+        return feedbackMailRepository.save(newFeedbackMail);
     }
 
     @Override
-    public void deleteFeedbackMailByID(int ID_FeedbackMail) {
-        log.info("Deleting FeedbackMail with ID: {}", ID_FeedbackMail);
-        feedbackMailRepository.deleteById(ID_FeedbackMail);
+    public void deleteFeedbackMailByID(int idFeedbackMail) {
+        log.info("Deleting FeedbackMail with ID: {}", idFeedbackMail);
+        feedbackMailRepository.deleteById(idFeedbackMail);
     }
 }

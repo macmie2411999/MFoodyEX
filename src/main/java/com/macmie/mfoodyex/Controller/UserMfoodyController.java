@@ -3,10 +3,12 @@ package com.macmie.mfoodyex.Controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
+import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
 public class UserMfoodyController {
     @Autowired
     private UserMfoodyInterfaceService userMfoodyInterfaceService;
+
+    @Autowired
+    private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<List<UserMfoody>> getAllUserMfoodys(){
@@ -47,7 +52,9 @@ public class UserMfoodyController {
 
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteUserMfoodyByID(@PathVariable("ID") int ID){
+        // Delete User and Cart
         userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
+        cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -62,6 +69,27 @@ public class UserMfoodyController {
         Gson gson = new Gson();
         UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
+        System.out.println("-------- JSon: " + userMfoodyPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newUserMfoody.getAddressUser());
+
+        // Save to DB
+        userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(URL_ADD)
+    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, BindingResult errors){
+        // Check Error
+        if(errors.hasErrors()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        // Convert JsonObject to UserMfoody object
+        Gson gson = new Gson();
+        UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
+        UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
+        System.out.println("-------- JSon: " + userMfoodyPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newUserMfoody);
 
         // Check duplicate
         UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoody.getEmailUser());
@@ -70,26 +98,12 @@ public class UserMfoodyController {
             return new ResponseEntity<>("A user with the same email or phone number already exists!", HttpStatus.CONFLICT);
         }
 
-        // Save to DB
-        userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyJsonObject, BindingResult errors){
-        // Check Error
-        if(errors.hasErrors()){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        // Convert JsonObject to UserMfoody object
-        Gson gson = new Gson();
-        UserMfoody newUserMfoody = gson.fromJson(userMfoodyJsonObject, UserMfoody.class);
-        System.out.println("-------- JSon: " + userMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newUserMfoody);
-
-        // Save to DB
+        // Save the User to DB
         userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
+
+        // Create a new Cart
+        cartMfoodyInterfaceService.saveCartMfoody(new CartMfoody(0,0,0,newUserMfoody));
+
         return new ResponseEntity<>(newUserMfoody, HttpStatus.CREATED);
     }
 }

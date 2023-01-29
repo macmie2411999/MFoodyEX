@@ -1,5 +1,6 @@
 package com.macmie.mfoodyex.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -28,33 +29,30 @@ public class CartMfoody {
 
     @NonNull
     @Column(name = "QUANTITY_ALL_PRODUCTS_IN_CART")
-    private String quantityAllProductsInCart;
+    private int quantityAllProductsInCart;
 
     @NonNull
     @Column(name = "SALE_PRICE_CART")
-    private String salePriceCart;
+    private int salePriceCart;
 
     @NonNull
     @Column(name = "FULL_PRICE_CART")
-    private String fullPriceCart;
-
-    @NonNull
-    @Column(name = "ID_USER")
-    private int idUser;
+    private int fullPriceCart;
 
     // Map to User
-//    @ManyToOne
-//    @JoinColumn(name = "ID_USER")
-//    private UserMfoody user;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "ID_USER")
+    private UserMfoody user;
 
     public CartMfoody() {
     }
 
-    public CartMfoody(int idUser, @NonNull String quantityAllProductsInCart, @NonNull String salePriceCart, @NonNull String fullPriceCart) {
-        this.idUser = idUser;
+    public CartMfoody( @NonNull int quantityAllProductsInCart, @NonNull int salePriceCart, @NonNull int fullPriceCart, UserMfoody user) {
         this.quantityAllProductsInCart = quantityAllProductsInCart;
         this.salePriceCart = salePriceCart;
         this.fullPriceCart = fullPriceCart;
+        this.user = user;
     }
 
     public int getIdCart() {
@@ -65,35 +63,35 @@ public class CartMfoody {
         this.idCart = idCart;
     }
 
-    public String getQuantityAllProductsInCart() {
+    public int getQuantityAllProductsInCart() {
         return quantityAllProductsInCart;
     }
 
-    public void setQuantityAllProductsInCart(String quantityAllProductsInCart) {
+    public void setQuantityAllProductsInCart(int quantityAllProductsInCart) {
         this.quantityAllProductsInCart = quantityAllProductsInCart;
     }
 
-    public String getSalePriceCart() {
+    public int getSalePriceCart() {
         return salePriceCart;
     }
 
-    public void setSalePriceCart(String salePriceCart) {
+    public void setSalePriceCart(int salePriceCart) {
         this.salePriceCart = salePriceCart;
     }
 
-    public String getFullPriceCart() {
+    public int getFullPriceCart() {
         return fullPriceCart;
     }
 
-    public void setFullPriceCart(String fullPriceCart) {
+    public void setFullPriceCart(int fullPriceCart) {
         this.fullPriceCart = fullPriceCart;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public UserMfoody getUser() {
+        return user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUser(UserMfoody user) {
+        this.user = user;
     }
 }

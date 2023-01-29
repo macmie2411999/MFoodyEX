@@ -3,7 +3,11 @@ package com.macmie.mfoodyex.Controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.macmie.mfoodyex.Model.CartMfoody;
+import com.macmie.mfoodyex.Model.CommentMfoody;
+import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
+import com.macmie.mfoodyex.POJO.CommentMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
+import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,67 +22,77 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
 @RequestMapping(CART_MFOODY)
 public class CartFoodyController {
     @Autowired
-    private CartMfoodyInterfaceService CartMfoodyInterfaceService;
+    private CartMfoodyInterfaceService cartMfoodyInterfaceService;
+
+    @Autowired
+    private UserMfoodyInterfaceService userMfoodyInterfaceService;
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllCartMfoodys(){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<CartMfoody> CartMfoodyList = CartMfoodyInterfaceService.getListCartMfoodys();
+        List<CartMfoody> CartMfoodyList = cartMfoodyInterfaceService.getListCartMfoodys();
         if(CartMfoodyList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(CartMfoodyList), HttpStatus.OK);
+        return new ResponseEntity<>(CartMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getCartMfoodyByID(@PathVariable("ID") int ID){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        CartMfoody CartMfoody = CartMfoodyInterfaceService.getCartMfoodyByID(ID);
-        if(CartMfoody == null){
+        CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(ID);
+        if(cartMfoody == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(CartMfoody), HttpStatus.OK);
+        System.out.println(cartMfoody.getIdCart());
+        return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteCartMfoodyByID(@PathVariable("ID") int ID){
-        CartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
+        cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editCartMfoody(@RequestBody String CartMfoodyJsonObject, BindingResult errors){
+    public ResponseEntity<?> editCartMfoody(@RequestBody String cartPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CartMfoody object
+        // Convert JsonObject to CommentPOJO object, add new User to Comment
         Gson gson = new Gson();
-        CartMfoody newCartMfoody = gson.fromJson(CartMfoodyJsonObject, CartMfoody.class);
-        System.out.println("-------- JSon: " + CartMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newCartMfoody);
+        CartMfoodyPOJO newCartMfoodyPOJO = gson.fromJson(cartPOJOJsonObject, CartMfoodyPOJO.class);
+        CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
+
+        // Add new User and Product to Comment and log
+        newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCartMfoodyPOJO.getIdUser()));
+        System.out.println("-------- JSon: " + cartPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newCartMfoody.getUser().getIdUser());
 
         // Save to DB
-        CartMfoodyInterfaceService.updateCartMfoody(newCartMfoody);
+        cartMfoodyInterfaceService.updateCartMfoody(newCartMfoody);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewCartMfoody(@RequestBody String CartMfoodyJsonObject, BindingResult errors){
+    public ResponseEntity<?> addNewCartMfoody(@RequestBody String cartPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CartMfoody object
+        // Convert JsonObject to CommentPOJO object, add new User to Comment
         Gson gson = new Gson();
-        CartMfoody newCartMfoody = gson.fromJson(CartMfoodyJsonObject, CartMfoody.class);
-        System.out.println("-------- JSon: " + CartMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newCartMfoody);
+        CartMfoodyPOJO newCartMfoodyPOJO = gson.fromJson(cartPOJOJsonObject, CartMfoodyPOJO.class);
+        CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
+
+        // Add new User and Product to Comment and log
+        newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCartMfoodyPOJO.getIdUser()));
+        System.out.println("-------- JSon: " + cartPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newCartMfoody.getUser().getIdUser());
 
         // Save to DB
-        CartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
+        cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
         return new ResponseEntity<>(newCartMfoody, HttpStatus.CREATED);
     }
 }

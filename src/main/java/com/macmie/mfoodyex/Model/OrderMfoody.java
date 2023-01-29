@@ -1,5 +1,6 @@
 package com.macmie.mfoodyex.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 
 @Entity
-@Table(name= "`USER_MFOODY`")
+@Table(name= "`ORDER_MFOODY`")
 @Data
 @RequiredArgsConstructor
 public class OrderMfoody {
@@ -36,7 +37,7 @@ public class OrderMfoody {
 
     @NonNull
     @Column(name = "SHIPPING_PRICE_ORDER")
-    private String shippingPriceOrder;
+    private int shippingPriceOrder;
 
     @NonNull
     @Column(name = "SHIPPING_METHOD_ORDER")
@@ -44,11 +45,11 @@ public class OrderMfoody {
 
     @NonNull
     @Column(name = "TOTAL_FULL_PRICE_ORDER")
-    private String totalFullPriceOrder;
+    private int totalFullPriceOrder;
 
     @NonNull
     @Column(name = "TOTAL_SALE_PRICE_ORDER")
-    private String totalSalePriceOrder;
+    private int totalSalePriceOrder;
 
     @NonNull
     @Column(name = "PAYMENT_METHOD_ORDER")
@@ -58,19 +59,16 @@ public class OrderMfoody {
     @Column(name = "STATUS_ORDER")
     private String statusOrder;
 
-    @NonNull
-    @Column(name = "ID_USER")
-    private String idUser;
-
     // Map to User
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
-    private UserMfoody User;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "ID_USER")
+    private UserMfoody user;
 
     public OrderMfoody() {
     }
 
-    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull String shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull String totalFullPriceOrder, @NonNull String totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, @NonNull String idUser, UserMfoody user) {
+    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull int shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull int totalFullPriceOrder, @NonNull int totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user) {
         this.idOrder = idOrder;
         this.dateOrder = dateOrder;
         this.dateReceiptOrder = dateReceiptOrder;
@@ -80,8 +78,7 @@ public class OrderMfoody {
         this.totalSalePriceOrder = totalSalePriceOrder;
         this.paymentMethodOrder = paymentMethodOrder;
         this.statusOrder = statusOrder;
-        this.idUser = idUser;
-        User = user;
+        this.user = user;
     }
 
     public int getIdOrder() {
@@ -108,11 +105,11 @@ public class OrderMfoody {
         this.dateReceiptOrder = dateReceiptOrder;
     }
 
-    public String getShippingPriceOrder() {
+    public int getShippingPriceOrder() {
         return shippingPriceOrder;
     }
 
-    public void setShippingPriceOrder(String shippingPriceOrder) {
+    public void setShippingPriceOrder(int shippingPriceOrder) {
         this.shippingPriceOrder = shippingPriceOrder;
     }
 
@@ -124,19 +121,19 @@ public class OrderMfoody {
         this.shippingMethodOrder = shippingMethodOrder;
     }
 
-    public String getTotalFullPriceOrder() {
+    public int getTotalFullPriceOrder() {
         return totalFullPriceOrder;
     }
 
-    public void setTotalFullPriceOrder(String totalFullPriceOrder) {
+    public void setTotalFullPriceOrder(int totalFullPriceOrder) {
         this.totalFullPriceOrder = totalFullPriceOrder;
     }
 
-    public String getTotalSalePriceOrder() {
+    public int getTotalSalePriceOrder() {
         return totalSalePriceOrder;
     }
 
-    public void setTotalSalePriceOrder(String totalSalePriceOrder) {
+    public void setTotalSalePriceOrder(int totalSalePriceOrder) {
         this.totalSalePriceOrder = totalSalePriceOrder;
     }
 
@@ -156,19 +153,11 @@ public class OrderMfoody {
         this.statusOrder = statusOrder;
     }
 
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
     public UserMfoody getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(UserMfoody user) {
-        User = user;
+        this.user = user;
     }
 }
