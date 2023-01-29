@@ -9,6 +9,13 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/* Handle Jackson – Bidirectional Relationships (Loop)
+    @JsonIgnore: ignore Serialization
+    @JsonBackReference: the back part of reference; it'll be omitted from serialization (for ManyToOne - Object)
+    @JsonManagedReference: the forward part of reference, the one that gets serialized normally (for OneToMany - list)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    */
+
 @Entity
 @Table(name= "`CART_MFOODY`")
 @Data
@@ -17,68 +24,76 @@ public class CartMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_CART")
-    private int IdCart;
+    private int idCart;
 
     @NonNull
     @Column(name = "QUANTITY_ALL_PRODUCTS_IN_CART")
-    private String QuantityAllProductsInCart;
+    private String quantityAllProductsInCart;
 
     @NonNull
     @Column(name = "SALE_PRICE_CART")
-    private String SalePriceCart;
+    private String salePriceCart;
 
     @NonNull
     @Column(name = "FULL_PRICE_CART")
-    private String FullPriceCart;
+    private String fullPriceCart;
 
     @NonNull
     @Column(name = "ID_USER")
-    private int IdUser;
+    private int idUser;
 
     // Map to User
-//    @ManyToOne(fetch = LAZY)
-//    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
-//    private UserMfoody User;
+//    @ManyToOne
+//    @JoinColumn(name = "ID_USER")
+//    private UserMfoody user;
 
     public CartMfoody() {
     }
 
     public CartMfoody(int idUser, @NonNull String quantityAllProductsInCart, @NonNull String salePriceCart, @NonNull String fullPriceCart) {
-        IdUser = idUser;
-        QuantityAllProductsInCart = quantityAllProductsInCart;
-        SalePriceCart = salePriceCart;
-        FullPriceCart = fullPriceCart;
+        this.idUser = idUser;
+        this.quantityAllProductsInCart = quantityAllProductsInCart;
+        this.salePriceCart = salePriceCart;
+        this.fullPriceCart = fullPriceCart;
     }
 
-    public int getIdUser() {
-        return IdUser;
+    public int getIdCart() {
+        return idCart;
     }
 
-    public void setIdUser(int idUser) {
-        IdUser = idUser;
+    public void setIdCart(int idCart) {
+        this.idCart = idCart;
     }
 
     public String getQuantityAllProductsInCart() {
-        return QuantityAllProductsInCart;
+        return quantityAllProductsInCart;
     }
 
     public void setQuantityAllProductsInCart(String quantityAllProductsInCart) {
-        QuantityAllProductsInCart = quantityAllProductsInCart;
+        this.quantityAllProductsInCart = quantityAllProductsInCart;
     }
 
     public String getSalePriceCart() {
-        return SalePriceCart;
+        return salePriceCart;
     }
 
     public void setSalePriceCart(String salePriceCart) {
-        SalePriceCart = salePriceCart;
+        this.salePriceCart = salePriceCart;
     }
 
     public String getFullPriceCart() {
-        return FullPriceCart;
+        return fullPriceCart;
     }
 
     public void setFullPriceCart(String fullPriceCart) {
-        FullPriceCart = fullPriceCart;
+        this.fullPriceCart = fullPriceCart;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 }

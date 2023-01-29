@@ -1,60 +1,60 @@
 package com.macmie.mfoodyex.POJO;
 
 public class FeedbackMailPOJO {
-    private int IdFeedbackMail;
-    private String NameUserFeedbackMail;
-    private String EmailUserFeedbackMail;
-    private String TitleFeedbackMail;
-    private String ContentFeedbackMail;
+    private int idFeedbackMail;
+    private String nameUserFeedbackMail;
+    private String emailUserFeedbackMail;
+    private String titleFeedbackMail;
+    private String contentFeedbackMail;
 
     public FeedbackMailPOJO() {
     }
 
     public FeedbackMailPOJO(int idFeedbackMail, String nameUserFeedbackMail, String emailUserFeedbackMail, String titleFeedbackMail, String contentFeedbackMail) {
-        IdFeedbackMail = idFeedbackMail;
-        NameUserFeedbackMail = nameUserFeedbackMail;
-        EmailUserFeedbackMail = emailUserFeedbackMail;
-        TitleFeedbackMail = titleFeedbackMail;
-        ContentFeedbackMail = contentFeedbackMail;
+        this.idFeedbackMail = idFeedbackMail;
+        this.nameUserFeedbackMail = nameUserFeedbackMail;
+        this.emailUserFeedbackMail = emailUserFeedbackMail;
+        this.titleFeedbackMail = titleFeedbackMail;
+        this.contentFeedbackMail = contentFeedbackMail;
     }
 
     public int getIdFeedbackMail() {
-        return IdFeedbackMail;
+        return idFeedbackMail;
     }
 
     public void setIdFeedbackMail(int idFeedbackMail) {
-        IdFeedbackMail = idFeedbackMail;
+        this.idFeedbackMail = idFeedbackMail;
     }
 
     public String getNameUserFeedbackMail() {
-        return NameUserFeedbackMail;
+        return nameUserFeedbackMail;
     }
 
     public void setNameUserFeedbackMail(String nameUserFeedbackMail) {
-        NameUserFeedbackMail = nameUserFeedbackMail;
+        this.nameUserFeedbackMail = nameUserFeedbackMail;
     }
 
     public String getEmailUserFeedbackMail() {
-        return EmailUserFeedbackMail;
+        return emailUserFeedbackMail;
     }
 
     public void setEmailUserFeedbackMail(String emailUserFeedbackMail) {
-        EmailUserFeedbackMail = emailUserFeedbackMail;
+        this.emailUserFeedbackMail = emailUserFeedbackMail;
     }
 
     public String getTitleFeedbackMail() {
-        return TitleFeedbackMail;
+        return titleFeedbackMail;
     }
 
     public void setTitleFeedbackMail(String titleFeedbackMail) {
-        TitleFeedbackMail = titleFeedbackMail;
+        this.titleFeedbackMail = titleFeedbackMail;
     }
 
     public String getContentFeedbackMail() {
-        return ContentFeedbackMail;
+        return contentFeedbackMail;
     }
 
     public void setContentFeedbackMail(String contentFeedbackMail) {
-        ContentFeedbackMail = contentFeedbackMail;
+        this.contentFeedbackMail = contentFeedbackMail;
     }
 }

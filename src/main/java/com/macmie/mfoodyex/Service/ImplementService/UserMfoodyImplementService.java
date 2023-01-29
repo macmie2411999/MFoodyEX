@@ -39,9 +39,21 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
     }
 
     @Override
-    public UserMfoody getUserMfoodyByID(int ID_UserMfoody) {
-        log.info("Fetching UserMfoody with id: {}", ID_UserMfoody);
-        return userMfoodyRepository.findById(ID_UserMfoody).orElse(null);
+    public UserMfoody getUserMfoodyByID(int idUserMfoody) {
+        log.info("Fetching UserMfoody with id: {}", idUserMfoody);
+        return userMfoodyRepository.findById(idUserMfoody).orElse(null);
+    }
+
+    @Override
+    public UserMfoody getUserMfoodyByEmail(String emailUserMfoody) {
+        log.info("Fetching UserMfoody with email: {}", emailUserMfoody);
+        return userMfoodyRepository.findByEmailUser(emailUserMfoody);
+    }
+
+    @Override
+    public UserMfoody getUserMfoodyByPhoneNumber(String phoneNumberUserMfoody) {
+        log.info("Fetching UserMfoody with phone number: {}", phoneNumberUserMfoody);
+        return userMfoodyRepository.findByPhoneNumberUser(phoneNumberUserMfoody);
     }
 
     @Override
@@ -73,8 +85,8 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
     }
 
     @Override
-    public void deleteUserMfoodyByID(int ID_UserMfoody) {
-        log.info("Deleting UserMfoody with id: {}", ID_UserMfoody);
-        userMfoodyRepository.deleteById(ID_UserMfoody);
+    public void deleteUserMfoodyByID(int idUserMfoody) {
+        log.info("Deleting UserMfoody with id: {}", idUserMfoody);
+        userMfoodyRepository.deleteById(idUserMfoody);
     }
 }

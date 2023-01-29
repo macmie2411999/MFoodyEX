@@ -8,11 +8,15 @@ import java.util.List;
 public interface UserMfoodyInterfaceService {
     public List<UserMfoody> getListUserMfoodys();
 
-    public UserMfoody getUserMfoodyByID(int ID_UserMfoody);
+    public UserMfoody getUserMfoodyByID(int idUserMfoody);
+
+    public UserMfoody getUserMfoodyByEmail(String emailUserMfoody);
+
+    public UserMfoody getUserMfoodyByPhoneNumber(String phoneNumberUserMfoody);
 
     public UserMfoody saveUserMfoody(UserMfoody userMfoody);
 
     public UserMfoody updateUserMfoody(UserMfoody newUserMfoody);
 
-    public void deleteUserMfoodyByID(int ID_UserMfoody);
+    public void deleteUserMfoodyByID(int idUserMfoody);
 }

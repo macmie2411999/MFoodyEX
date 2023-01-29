@@ -45,6 +45,12 @@ public class CreditCardMfoodyImplementService implements CreditCardMfoodyInterfa
     }
 
     @Override
+    public CreditCardMfoody getCreditCardMfoodyByNumberCard(String CardNumber) {
+        log.info("Fetching CreditCardMfoody with CardNumber: {}", CardNumber);
+        return creditCardMfoodyRepository.findByNumberCard(CardNumber);
+    }
+
+    @Override
     public CreditCardMfoody saveCreditCardMfoody(CreditCardMfoody creditCardMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        creditCardMfoody.setNameUserCard(stringUtil.parseName(creditCardMfoody.getNameUserCard()));
@@ -56,13 +62,14 @@ public class CreditCardMfoodyImplementService implements CreditCardMfoodyInterfa
     @Override
     public CreditCardMfoody updateCreditCardMfoody(CreditCardMfoody newCreditCardMfoody) {
         CreditCardMfoody creditCardMfoodyToUpdate = creditCardMfoodyRepository.getById(newCreditCardMfoody.getIdCard());
+//        creditCardMfoodyToUpdate.setIdCard((newCreditCardMfoody.getIdCard()));
         creditCardMfoodyToUpdate.setNameUserCard(stringUtil.parseName(newCreditCardMfoody.getNameUserCard()));
         creditCardMfoodyToUpdate.setNumberCard((newCreditCardMfoody.getNumberCard()));
         creditCardMfoodyToUpdate.setExpirationCard((newCreditCardMfoody.getExpirationCard()));
         creditCardMfoodyToUpdate.setSecurityCodeCard((newCreditCardMfoody.getSecurityCodeCard()));
-        creditCardMfoodyToUpdate.setIdUser((newCreditCardMfoody.getIdUser()));
+        creditCardMfoodyToUpdate.setUser((newCreditCardMfoody.getUser()));
 
-        log.info("Updating UserMfoody with ID: {}", creditCardMfoodyToUpdate.getIdUser());
+        log.info("Updating UserMfoody with ID: {}", creditCardMfoodyToUpdate.getUser().getIdUser());
         return creditCardMfoodyRepository.save(creditCardMfoodyToUpdate);
     }
 

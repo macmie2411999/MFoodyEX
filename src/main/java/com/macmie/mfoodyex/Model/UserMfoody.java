@@ -1,132 +1,154 @@
 package com.macmie.mfoodyex.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/* Handle Jackson – Bidirectional Relationships (Loop)
+    @JsonIgnore: ignore Serialization
+    @JsonBackReference: the back part of reference; it'll be omitted from serialization (for ManyToOne - Object)
+    @JsonManagedReference: the forward part of reference, the one that gets serialized normally (for OneToMany - list)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    */
+
 @Entity
-@Table(name= "`USER_MFOODY`")
+@Table(name = "`USER_MFOODY`")
 @Data
 @RequiredArgsConstructor
 public class UserMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_USER")
-    private int IdUser;
+    private int idUser;
 
     @NonNull
     @Column(name = "EMAIL_USER")
-    private String EmailUser;
+    private String emailUser;
 
     @NonNull
     @Column(name = "PASSWORD_USER")
-    private String PasswordUser;
+    private String passwordUser;
 
     @NonNull
     @Column(name = "NAME_USER")
-    private String NameUser;
+    private String nameUser;
 
     @NonNull
     @Column(name = "PHONE_NUMBER_USER")
-    private String PhoneNumberUser;
+    private String phoneNumberUser;
 
     @NonNull
     @Column(name = "ADDRESS_USER")
-    private String AddressUser;
+    private String addressUser;
 
     @NonNull
     @Column(name = "ROLE_USER")
-    private String RoleUser;
+    private String roleUser;
 
     // Refer to CREDIT_CARD_MFOODY
-//    @OneToMany(mappedBy = "User", fetch = FetchType.LAZY)
-//    private List<CreditCardMfoody> ListCreditCards;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<CreditCardMfoody> listCreditCards;
 
 //    // Refer to ORDER_MFOODY
 //    @OneToMany(mappedBy = "User")
 //    private List<OrderMfoody> ListOrders;
 
-//    // Refer to CART_MFOODY
-//    @OneToMany(mappedBy = "User")
-//    private List<CartMfoody> ListCarts;
+    // Refer to CART_MFOODY
+//    @JsonIgnore // a field will be ignored when serializing or deserializing JSON. It is used to prevent infinite recursion when serializing an object with a bidirectional relationship
+//    @OneToMany(mappedBy = "user")
+//    private List<CartMfoody> listCarts;
 //
-//    // Refer to COMMENT_MFOODY
-//    @OneToMany(mappedBy = "User")
-//    private List<CommentMfoody> ListComments;
+    // Refer to COMMENT_MFOODY
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<CommentMfoody> listComments;
 
     public UserMfoody() {
     }
 
-    public UserMfoody(int idUser, @NonNull String emailUser, @NonNull String passwordUser, @NonNull String nameUser, @NonNull String phoneNumberUser, @NonNull String addressUser, @NonNull String roleUser) {
-        IdUser = idUser;
-        EmailUser = emailUser;
-        PasswordUser = passwordUser;
-        NameUser = nameUser;
-        PhoneNumberUser = phoneNumberUser;
-        AddressUser = addressUser;
-        RoleUser = roleUser;
+    public UserMfoody(int idUser, @NonNull String emailUser, @NonNull String passwordUser, @NonNull String nameUser, @NonNull String phoneNumberUser, @NonNull String addressUser, @NonNull String roleUser, List<CreditCardMfoody> listCreditCards, List<CommentMfoody> listComments) {
+        this.idUser = idUser;
+        this.emailUser = emailUser;
+        this.passwordUser = passwordUser;
+        this.nameUser = nameUser;
+        this.phoneNumberUser = phoneNumberUser;
+        this.addressUser = addressUser;
+        this.roleUser = roleUser;
+        this.listComments = listComments;
+        this.listCreditCards = listCreditCards;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getEmailUser() {
-        return EmailUser;
+        return emailUser;
     }
 
     public void setEmailUser(String emailUser) {
-        EmailUser = emailUser;
+        this.emailUser = emailUser;
     }
 
     public String getPasswordUser() {
-        return PasswordUser;
+        return passwordUser;
     }
 
     public void setPasswordUser(String passwordUser) {
-        PasswordUser = passwordUser;
+        this.passwordUser = passwordUser;
     }
 
     public String getNameUser() {
-        return NameUser;
+        return nameUser;
     }
 
     public void setNameUser(String nameUser) {
-        NameUser = nameUser;
+        this.nameUser = nameUser;
     }
 
     public String getPhoneNumberUser() {
-        return PhoneNumberUser;
+        return phoneNumberUser;
     }
 
     public void setPhoneNumberUser(String phoneNumberUser) {
-        PhoneNumberUser = phoneNumberUser;
+        this.phoneNumberUser = phoneNumberUser;
     }
 
     public String getAddressUser() {
-        return AddressUser;
+        return addressUser;
     }
 
     public void setAddressUser(String addressUser) {
-        AddressUser = addressUser;
+        this.addressUser = addressUser;
     }
 
     public String getRoleUser() {
-        return RoleUser;
+        return roleUser;
     }
 
     public void setRoleUser(String roleUser) {
-        RoleUser = roleUser;
+        this.roleUser = roleUser;
+    }
+
+    public List<CreditCardMfoody> getListCreditCards() {
+        return listCreditCards;
+    }
+
+    public void setListCreditCards(List<CreditCardMfoody> listCreditCards) {
+        this.listCreditCards = listCreditCards;
     }
 }

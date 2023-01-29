@@ -7,6 +7,13 @@ import lombok.*;
 import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/* Handle Jackson – Bidirectional Relationships (Loop)
+    @JsonIgnore: ignore Serialization
+    @JsonBackReference: the back part of reference; it'll be omitted from serialization (for ManyToOne - Object)
+    @JsonManagedReference: the forward part of reference, the one that gets serialized normally (for OneToMany - list)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    */
+
 @Entity
 @Table(name= "`FEEDBACK_MAIL`")
 @Data
@@ -15,72 +22,72 @@ public class FeedbackMail {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_FEEDBACK_MAIL")
-    private int IdFeedbackMail;
+    private int idFeedbackMail;
 
     @NonNull
     @Column(name = "NAME_USER_FEEDBACK_MAIL")
-    private String NameUserFeedbackMail;
+    private String nameUserFeedbackMail;
 
     @NonNull
     @Column(name = "EMAIL_USER_FEEDBACK_MAIL")
-    private String EmailUserFeedbackMail;
+    private String emailUserFeedbackMail;
 
     @NonNull
     @Column(name = "TITLE_FEEDBACK_MAIL")
-    private String TitleFeedbackMail;
+    private String titleFeedbackMail;
 
     @NonNull
     @Column(name = "CONTENT_FEEDBACK_MAIL")
-    private String ContentFeedbackMail;
+    private String contentFeedbackMail;
 
     public FeedbackMail() {
     }
 
     public FeedbackMail(int idFeedbackMail, @NonNull String nameUserFeedbackMail, @NonNull String emailUserFeedbackMail, @NonNull String titleFeedbackMail, @NonNull String contentFeedbackMail) {
-        IdFeedbackMail = idFeedbackMail;
-        NameUserFeedbackMail = nameUserFeedbackMail;
-        EmailUserFeedbackMail = emailUserFeedbackMail;
-        TitleFeedbackMail = titleFeedbackMail;
-        ContentFeedbackMail = contentFeedbackMail;
+        this.idFeedbackMail = idFeedbackMail;
+        this.nameUserFeedbackMail = nameUserFeedbackMail;
+        this.emailUserFeedbackMail = emailUserFeedbackMail;
+        this.titleFeedbackMail = titleFeedbackMail;
+        this.contentFeedbackMail = contentFeedbackMail;
     }
 
     public int getIdFeedbackMail() {
-        return IdFeedbackMail;
+        return idFeedbackMail;
     }
 
     public void setIdFeedbackMail(int idFeedbackMail) {
-        IdFeedbackMail = idFeedbackMail;
+        this.idFeedbackMail = idFeedbackMail;
     }
 
     public String getNameUserFeedbackMail() {
-        return NameUserFeedbackMail;
+        return nameUserFeedbackMail;
     }
 
     public void setNameUserFeedbackMail(String nameUserFeedbackMail) {
-        NameUserFeedbackMail = nameUserFeedbackMail;
+        this.nameUserFeedbackMail = nameUserFeedbackMail;
     }
 
     public String getEmailUserFeedbackMail() {
-        return EmailUserFeedbackMail;
+        return emailUserFeedbackMail;
     }
 
     public void setEmailUserFeedbackMail(String emailUserFeedbackMail) {
-        EmailUserFeedbackMail = emailUserFeedbackMail;
+        this.emailUserFeedbackMail = emailUserFeedbackMail;
     }
 
     public String getTitleFeedbackMail() {
-        return TitleFeedbackMail;
+        return titleFeedbackMail;
     }
 
     public void setTitleFeedbackMail(String titleFeedbackMail) {
-        TitleFeedbackMail = titleFeedbackMail;
+        this.titleFeedbackMail = titleFeedbackMail;
     }
 
     public String getContentFeedbackMail() {
-        return ContentFeedbackMail;
+        return contentFeedbackMail;
     }
 
     public void setContentFeedbackMail(String contentFeedbackMail) {
-        ContentFeedbackMail = contentFeedbackMail;
+        this.contentFeedbackMail = contentFeedbackMail;
     }
 }

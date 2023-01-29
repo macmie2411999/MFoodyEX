@@ -1,11 +1,10 @@
 package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
-import com.macmie.mfoodyex.Model.FeedbackMail;
+import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CreditCardMfoodyInterfaceService;
-import com.macmie.mfoodyex.Service.InterfaceService.FeedbackMailInterfaceService;
+import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,24 +21,26 @@ public class CreditCardMfoodyController {
     @Autowired
     private CreditCardMfoodyInterfaceService creditCardMfoodyInterfaceService;
 
+    @Autowired
+    private UserMfoodyInterfaceService userMfoodyInterfaceService;
+
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllCreditCardMfoodys(){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public ResponseEntity<List<CreditCardMfoody>> getAllCreditCardMfoodys(){
         List<CreditCardMfoody> creditCardMfoodyList = creditCardMfoodyInterfaceService.getListCreditCardMfoodys();
         if(creditCardMfoodyList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(creditCardMfoodyList), HttpStatus.OK);
+        return new ResponseEntity<>(creditCardMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<?> getCreditCardMfoodyByID(@PathVariable("ID") int ID){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public ResponseEntity<CreditCardMfoody> getCreditCardMfoodyByID(@PathVariable("ID") int ID){
         CreditCardMfoody creditCardMfoody = creditCardMfoodyInterfaceService.getCreditCardMfoodyByID(ID);
         if(creditCardMfoody == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(creditCardMfoody), HttpStatus.OK);
+        System.out.println(creditCardMfoody.getNameUserCard());
+        return new ResponseEntity<>(creditCardMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)
@@ -50,17 +51,27 @@ public class CreditCardMfoodyController {
 
     // Error
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editFeedbackMail(@RequestBody String creditCardMfoodyJsonObject, BindingResult errors){
+    public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardMPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CreditCardMfoody object
+        // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
         Gson gson = new Gson();
-        CreditCardMfoody newCreditCardMfoody = gson.fromJson(creditCardMfoodyJsonObject, CreditCardMfoody.class);
-        System.out.println("-------- JSon: " + creditCardMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newCreditCardMfoody);
+        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardMPOJOJsonObject, CreditCardMfoodyPOJO.class);
+        CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
+
+        // Check duplicate
+        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.getCreditCardMfoodyByNumberCard(newCreditCardMfoody.getNumberCard());
+        if (existingCard != null) {
+            return new ResponseEntity<>("A card with the same number already exists!", HttpStatus.CONFLICT);
+        }
+
+        // Add new User to CreditCard and log
+        newCreditCardMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser()));
+        System.out.println("-------- JSon: " + creditCardMPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newCreditCardMfoody.getIdCard());
 
         // Save to DB
         creditCardMfoodyInterfaceService.updateCreditCardMfoody(newCreditCardMfoody);
@@ -68,19 +79,29 @@ public class CreditCardMfoodyController {
     }
 
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String creditCardMfoodyJsonObject, BindingResult errors){
+    public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardMPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CreditCardMfoody object
+        // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
         Gson gson = new Gson();
-        CreditCardMfoody newCreditCardMfoody = gson.fromJson(creditCardMfoodyJsonObject, CreditCardMfoody.class);
-        System.out.println("-------- JSon: " + creditCardMfoodyJsonObject);
-        System.out.println("-------- Convert from JSon: " + newCreditCardMfoody);
+        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardMPOJOJsonObject, CreditCardMfoodyPOJO.class);
+        CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
 
-        // Save to DB
+        // Check duplicate
+        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.getCreditCardMfoodyByNumberCard(newCreditCardMfoody.getNumberCard());
+        if (existingCard != null) {
+            return new ResponseEntity<>("A card with the same number already exists!", HttpStatus.CONFLICT);
+        }
+
+        // Add new User to CreditCard and log
+        newCreditCardMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser()));
+        System.out.println("-------- JSon: " + creditCardMPOJOJsonObject);
+        System.out.println("-------- Convert from JSon: " + newCreditCardMfoody.getUser().getIdUser());
+
+        // Save CreditCard to DB
         creditCardMfoodyInterfaceService.saveCreditCardMfoody(newCreditCardMfoody);
         return new ResponseEntity<>(newCreditCardMfoody, HttpStatus.CREATED);
     }

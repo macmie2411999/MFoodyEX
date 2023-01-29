@@ -55,8 +55,8 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
         CommentMfoody commentMfoodyToUpdate = commentMfoodyRepository.getById(newCommentMfoody.getIdComment());
         commentMfoodyToUpdate.setRatingComment((newCommentMfoody.getRatingComment()));
         commentMfoodyToUpdate.setContentComment((newCommentMfoody.getContentComment()));
-        commentMfoodyToUpdate.setIdUser((newCommentMfoody.getIdUser()));
-        commentMfoodyToUpdate.setIdProduct((newCommentMfoody.getIdProduct()));
+        commentMfoodyToUpdate.setUser((newCommentMfoody.getUser()));
+        commentMfoodyToUpdate.setProduct((newCommentMfoody.getProduct()));
 
         log.info("Updating UserMfoody with ID: {}", newCommentMfoody.getIdComment());
         return commentMfoodyRepository.save(commentMfoodyToUpdate);

@@ -10,6 +10,8 @@ public interface CreditCardMfoodyInterfaceService {
 
     public CreditCardMfoody getCreditCardMfoodyByID(int ID_CreditCardMfoody);
 
+    public CreditCardMfoody getCreditCardMfoodyByNumberCard(String CardNumber);
+
     public CreditCardMfoody saveCreditCardMfoody(CreditCardMfoody creditCardMfoody);
 
     public CreditCardMfoody updateCreditCardMfoody(CreditCardMfoody newCreditCardMfoody);

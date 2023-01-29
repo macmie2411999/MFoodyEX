@@ -1,107 +1,111 @@
 package com.macmie.mfoodyex.Model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
+
+/* Handle Jackson – Bidirectional Relationships (Loop)
+    @JsonIgnore: ignore Serialization
+    @JsonBackReference: the back part of reference; it'll be omitted from serialization (for ManyToOne - Object)
+    @JsonManagedReference: the forward part of reference, the one that gets serialized normally (for OneToMany - list)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id": show full)
+    */
 
 @Entity
 @Table(name= "`CREDIT_CARD_MFOODY`")
 @Data
-@RequiredArgsConstructor
 public class CreditCardMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_CARD")
-    private int IdCard;
+    private int idCard;
 
     @NonNull
     @Column(name = "NAME_USER_CARD")
-    private String NameUserCard;
+    private String nameUserCard;
 
     @NonNull
     @Column(name = "NUMBER_CARD")
-    private String NumberCard;
+    private String numberCard;
 
     @NonNull
     @Column(name = "EXPIRATION_CARD")
-    private String ExpirationCard;
+    private String expirationCard;
 
     @NonNull
     @Column(name = "SECURITY_CODE_CARD")
-    private String SecurityCodeCard;
+    private String securityCodeCard;
 
-    // Foreign Key to User
-    @NonNull
-    @Column(name = "ID_USER")
-    private String IdUser;
-
-    // Map to User
-//    @ManyToOne(fetch = LAZY)
-//    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
-//    private UserMfoody User;
+    // Map to UserMfoody
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "ID_USER")
+    private UserMfoody user;
 
     public CreditCardMfoody() {
     }
 
-    public CreditCardMfoody(int idCard, @NonNull String nameUserCard, @NonNull String numberCard, @NonNull String expirationCard, @NonNull String securityCodeCard, @NonNull String idUser) {
-        IdCard = idCard;
-        NameUserCard = nameUserCard;
-        NumberCard = numberCard;
-        ExpirationCard = expirationCard;
-        SecurityCodeCard = securityCodeCard;
-        IdUser = idUser;
+    public CreditCardMfoody(int idCard, @NonNull String nameUserCard, @NonNull String numberCard, @NonNull String expirationCard, @NonNull String securityCodeCard, UserMfoody user) {
+        this.idCard = idCard;
+        this.nameUserCard = nameUserCard;
+        this.numberCard = numberCard;
+        this.expirationCard = expirationCard;
+        this.securityCodeCard = securityCodeCard;
+        this.user = user;
     }
 
     public int getIdCard() {
-        return IdCard;
+        return idCard;
     }
 
     public void setIdCard(int idCard) {
-        IdCard = idCard;
+        this.idCard = idCard;
     }
 
     public String getNameUserCard() {
-        return NameUserCard;
+        return nameUserCard;
     }
 
     public void setNameUserCard(String nameUserCard) {
-        NameUserCard = nameUserCard;
+        this.nameUserCard = nameUserCard;
     }
 
     public String getNumberCard() {
-        return NumberCard;
+        return numberCard;
     }
 
     public void setNumberCard(String numberCard) {
-        NumberCard = numberCard;
+        this.numberCard = numberCard;
     }
 
     public String getExpirationCard() {
-        return ExpirationCard;
+        return expirationCard;
     }
 
     public void setExpirationCard(String expirationCard) {
-        ExpirationCard = expirationCard;
+        this.expirationCard = expirationCard;
     }
 
     public String getSecurityCodeCard() {
-        return SecurityCodeCard;
+        return securityCodeCard;
     }
 
     public void setSecurityCodeCard(String securityCodeCard) {
-        SecurityCodeCard = securityCodeCard;
+        this.securityCodeCard = securityCodeCard;
     }
 
-    public String getIdUser() {
-        return IdUser;
+    public UserMfoody getUser() {
+        return user;
     }
 
-    public void setIdUser(String idUser) {
-        IdUser = idUser;
+    public void setUser(UserMfoody user) {
+        this.user = user;
     }
 }

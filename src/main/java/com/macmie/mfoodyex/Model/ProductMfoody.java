@@ -1,12 +1,22 @@
 package com.macmie.mfoodyex.Model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+/* Handle Jackson – Bidirectional Relationships (Loop)
+    @JsonIgnore: ignore Serialization
+    @JsonBackReference: the back part of reference; it'll be omitted from serialization (for ManyToOne - Object)
+    @JsonManagedReference: the forward part of reference, the one that gets serialized normally (for OneToMany - list)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    */
 
 @Entity
 @Table(name= "`PRODUCT_MFOODY`")
@@ -16,176 +26,182 @@ public class ProductMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_PRODUCT")
-    private int IdProduct;
+    private int idProduct;
 
     @NonNull
     @Column(name = "NAME_PRODUCT")
-    private String NameProduct;
+    private String nameProduct;
 
     @NonNull
     @Column(name = "ALBUM_PRODUCT")
-    private String AlbumProduct;
+    private String albumProduct;
 
     @NonNull
     @Column(name = "DESCRIPTION_PRODUCT")
-    private String DescriptionProduct;
+    private String descriptionProduct;
 
     @NonNull
     @Column(name = "FULL_PRICE_PRODUCT")
-    private String FullPriceProduct;
+    private String fullPriceProduct;
 
     @NonNull
     @Column(name = "SALE_PRICE_PRODUCT")
-    private String SalePriceProduct;
+    private String salePriceProduct;
 
     @NonNull
     @Column(name = "WEIGHT_PRODUCT")
-    private String WeightProduct;
+    private String weightProduct;
 
     @NonNull
     @Column(name = "IMPORT_QUANTITY_PRODUCT")
-    private String ImportQuantityProduct;
+    private String importQuantityProduct;
 
     @NonNull
     @Column(name = "IMPORT_DATE_PRODUCT")
-    private String ImportDateProduct;
+    private String importDateProduct;
 
     @NonNull
     @Column(name = "STOREHOUSE_QUANTITY_PRODUCT")
-    private String StorehouseQuantityProduct;
+    private String storehouseQuantityProduct;
 
     @NonNull
     @Column(name = "RATING_PRODUCT")
-    private String RatingProduct;
+    private String ratingProduct;
 
     @NonNull
     @Column(name = "CATEGORY_PRODUCT")
-    private String CategoryProduct;
+    private String categoryProduct;
 
     @NonNull
     @Column(name = "BRAND_PRODUCT")
-    private String BrandProduct;
+    private String brandProduct;
+
+    // Refer to COMMENT_MFOODY
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product")
+    private List<CommentMfoody> listComments;
 
     public ProductMfoody() {
     }
 
-    public ProductMfoody(int idProduct, @NonNull String nameProduct, @NonNull String albumProduct, @NonNull String descriptionProduct, @NonNull String fullPriceProduct, @NonNull String salePriceProduct, @NonNull String weightProduct, @NonNull String importQuantityProduct, @NonNull String importDateProduct, @NonNull String storehouseQuantityProduct, @NonNull String ratingProduct, @NonNull String categoryProduct, @NonNull String brandProduct) {
-        IdProduct = idProduct;
-        NameProduct = nameProduct;
-        AlbumProduct = albumProduct;
-        DescriptionProduct = descriptionProduct;
-        FullPriceProduct = fullPriceProduct;
-        SalePriceProduct = salePriceProduct;
-        WeightProduct = weightProduct;
-        ImportQuantityProduct = importQuantityProduct;
-        ImportDateProduct = importDateProduct;
-        StorehouseQuantityProduct = storehouseQuantityProduct;
-        RatingProduct = ratingProduct;
-        CategoryProduct = categoryProduct;
-        BrandProduct = brandProduct;
+    public ProductMfoody(int idProduct, @NonNull String nameProduct, @NonNull String albumProduct, @NonNull String descriptionProduct, @NonNull String fullPriceProduct, @NonNull String salePriceProduct, @NonNull String weightProduct, @NonNull String importQuantityProduct, @NonNull String importDateProduct, @NonNull String storehouseQuantityProduct, @NonNull String ratingProduct, @NonNull String categoryProduct, @NonNull String brandProduct, List<CommentMfoody> listComments) {
+        this.idProduct = idProduct;
+        this.nameProduct = nameProduct;
+        this.albumProduct = albumProduct;
+        this.descriptionProduct = descriptionProduct;
+        this.fullPriceProduct = fullPriceProduct;
+        this.salePriceProduct = salePriceProduct;
+        this.weightProduct = weightProduct;
+        this.importQuantityProduct = importQuantityProduct;
+        this.importDateProduct = importDateProduct;
+        this.storehouseQuantityProduct = storehouseQuantityProduct;
+        this.ratingProduct = ratingProduct;
+        this.categoryProduct = categoryProduct;
+        this.brandProduct = brandProduct;
+        this.listComments = listComments;
     }
 
     public int getIdProduct() {
-        return IdProduct;
+        return idProduct;
     }
 
     public void setIdProduct(int idProduct) {
-        IdProduct = idProduct;
+        this.idProduct = idProduct;
     }
 
     public String getNameProduct() {
-        return NameProduct;
+        return nameProduct;
     }
 
     public void setNameProduct(String nameProduct) {
-        NameProduct = nameProduct;
+        this.nameProduct = nameProduct;
     }
 
     public String getAlbumProduct() {
-        return AlbumProduct;
+        return albumProduct;
     }
 
     public void setAlbumProduct(String albumProduct) {
-        AlbumProduct = albumProduct;
+        this.albumProduct = albumProduct;
     }
 
     public String getDescriptionProduct() {
-        return DescriptionProduct;
+        return descriptionProduct;
     }
 
     public void setDescriptionProduct(String descriptionProduct) {
-        DescriptionProduct = descriptionProduct;
+        this.descriptionProduct = descriptionProduct;
     }
 
     public String getFullPriceProduct() {
-        return FullPriceProduct;
+        return fullPriceProduct;
     }
 
     public void setFullPriceProduct(String fullPriceProduct) {
-        FullPriceProduct = fullPriceProduct;
+        this.fullPriceProduct = fullPriceProduct;
     }
 
     public String getSalePriceProduct() {
-        return SalePriceProduct;
+        return salePriceProduct;
     }
 
     public void setSalePriceProduct(String salePriceProduct) {
-        SalePriceProduct = salePriceProduct;
+        this.salePriceProduct = salePriceProduct;
     }
 
     public String getWeightProduct() {
-        return WeightProduct;
+        return weightProduct;
     }
 
     public void setWeightProduct(String weightProduct) {
-        WeightProduct = weightProduct;
+        this.weightProduct = weightProduct;
     }
 
     public String getImportQuantityProduct() {
-        return ImportQuantityProduct;
+        return importQuantityProduct;
     }
 
     public void setImportQuantityProduct(String importQuantityProduct) {
-        ImportQuantityProduct = importQuantityProduct;
+        this.importQuantityProduct = importQuantityProduct;
     }
 
     public String getImportDateProduct() {
-        return ImportDateProduct;
+        return importDateProduct;
     }
 
     public void setImportDateProduct(String importDateProduct) {
-        ImportDateProduct = importDateProduct;
+        this.importDateProduct = importDateProduct;
     }
 
     public String getStorehouseQuantityProduct() {
-        return StorehouseQuantityProduct;
+        return storehouseQuantityProduct;
     }
 
     public void setStorehouseQuantityProduct(String storehouseQuantityProduct) {
-        StorehouseQuantityProduct = storehouseQuantityProduct;
+        this.storehouseQuantityProduct = storehouseQuantityProduct;
     }
 
     public String getRatingProduct() {
-        return RatingProduct;
+        return ratingProduct;
     }
 
     public void setRatingProduct(String ratingProduct) {
-        RatingProduct = ratingProduct;
+        this.ratingProduct = ratingProduct;
     }
 
     public String getCategoryProduct() {
-        return CategoryProduct;
+        return categoryProduct;
     }
 
     public void setCategoryProduct(String categoryProduct) {
-        CategoryProduct = categoryProduct;
+        this.categoryProduct = categoryProduct;
     }
 
     public String getBrandProduct() {
-        return BrandProduct;
+        return brandProduct;
     }
 
     public void setBrandProduct(String brandProduct) {
-        BrandProduct = brandProduct;
+        this.brandProduct = brandProduct;
     }
 }

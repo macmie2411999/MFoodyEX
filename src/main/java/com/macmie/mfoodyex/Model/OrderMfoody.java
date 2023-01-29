@@ -9,6 +9,13 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/* Handle Jackson – Bidirectional Relationships (Loop)
+    @JsonIgnore: ignore Serialization
+    @JsonBackReference: the back part of reference; it'll be omitted from serialization (for ManyToOne - Object)
+    @JsonManagedReference: the forward part of reference, the one that gets serialized normally (for OneToMany - list)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    */
+
 @Entity
 @Table(name= "`USER_MFOODY`")
 @Data
@@ -17,43 +24,43 @@ public class OrderMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_ORDER")
-    private int IdOrder;
+    private int idOrder;
 
     @NonNull
     @Column(name = "DATE_ORDER")
-    private String DateOrder;
+    private String dateOrder;
 
     @NonNull
     @Column(name = "DATE_RECEIPT_ORDER")
-    private String DateReceiptOrder;
+    private String dateReceiptOrder;
 
     @NonNull
     @Column(name = "SHIPPING_PRICE_ORDER")
-    private String ShippingPriceOrder;
+    private String shippingPriceOrder;
 
     @NonNull
     @Column(name = "SHIPPING_METHOD_ORDER")
-    private String ShippingMethodOrder;
+    private String shippingMethodOrder;
 
     @NonNull
     @Column(name = "TOTAL_FULL_PRICE_ORDER")
-    private String TotalFullPriceOrder;
+    private String totalFullPriceOrder;
 
     @NonNull
     @Column(name = "TOTAL_SALE_PRICE_ORDER")
-    private String TotalSalePriceOrder;
+    private String totalSalePriceOrder;
 
     @NonNull
     @Column(name = "PAYMENT_METHOD_ORDER")
-    private String PaymentMethodOrder;
+    private String paymentMethodOrder;
 
     @NonNull
     @Column(name = "STATUS_ORDER")
-    private String StatusOrder;
+    private String statusOrder;
 
     @NonNull
     @Column(name = "ID_USER")
-    private String IdUser;
+    private String idUser;
 
     // Map to User
     @ManyToOne(fetch = LAZY)
@@ -64,97 +71,97 @@ public class OrderMfoody {
     }
 
     public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull String shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull String totalFullPriceOrder, @NonNull String totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, @NonNull String idUser, UserMfoody user) {
-        IdOrder = idOrder;
-        DateOrder = dateOrder;
-        DateReceiptOrder = dateReceiptOrder;
-        ShippingPriceOrder = shippingPriceOrder;
-        ShippingMethodOrder = shippingMethodOrder;
-        TotalFullPriceOrder = totalFullPriceOrder;
-        TotalSalePriceOrder = totalSalePriceOrder;
-        PaymentMethodOrder = paymentMethodOrder;
-        StatusOrder = statusOrder;
-        IdUser = idUser;
+        this.idOrder = idOrder;
+        this.dateOrder = dateOrder;
+        this.dateReceiptOrder = dateReceiptOrder;
+        this.shippingPriceOrder = shippingPriceOrder;
+        this.shippingMethodOrder = shippingMethodOrder;
+        this.totalFullPriceOrder = totalFullPriceOrder;
+        this.totalSalePriceOrder = totalSalePriceOrder;
+        this.paymentMethodOrder = paymentMethodOrder;
+        this.statusOrder = statusOrder;
+        this.idUser = idUser;
         User = user;
     }
 
     public int getIdOrder() {
-        return IdOrder;
+        return idOrder;
     }
 
     public void setIdOrder(int idOrder) {
-        IdOrder = idOrder;
+        this.idOrder = idOrder;
     }
 
     public String getDateOrder() {
-        return DateOrder;
+        return dateOrder;
     }
 
     public void setDateOrder(String dateOrder) {
-        DateOrder = dateOrder;
+        this.dateOrder = dateOrder;
     }
 
     public String getDateReceiptOrder() {
-        return DateReceiptOrder;
+        return dateReceiptOrder;
     }
 
     public void setDateReceiptOrder(String dateReceiptOrder) {
-        DateReceiptOrder = dateReceiptOrder;
-    }
-
-    public String getShippingMethodOrder() {
-        return ShippingMethodOrder;
-    }
-
-    public void setShippingMethodOrder(String shippingMethodOrder) {
-        ShippingMethodOrder = shippingMethodOrder;
-    }
-
-    public String getTotalFullPriceOrder() {
-        return TotalFullPriceOrder;
-    }
-
-    public void setTotalFullPriceOrder(String totalFullPriceOrder) {
-        TotalFullPriceOrder = totalFullPriceOrder;
-    }
-
-    public String getTotalSalePriceOrder() {
-        return TotalSalePriceOrder;
-    }
-
-    public void setTotalSalePriceOrder(String totalSalePriceOrder) {
-        TotalSalePriceOrder = totalSalePriceOrder;
-    }
-
-    public String getPaymentMethodOrder() {
-        return PaymentMethodOrder;
-    }
-
-    public void setPaymentMethodOrder(String paymentMethodOrder) {
-        PaymentMethodOrder = paymentMethodOrder;
-    }
-
-    public String getStatusOrder() {
-        return StatusOrder;
-    }
-
-    public void setStatusOrder(String statusOrder) {
-        StatusOrder = statusOrder;
-    }
-
-    public String getIdUser() {
-        return IdUser;
-    }
-
-    public void setIdUser(String idUser) {
-        IdUser = idUser;
+        this.dateReceiptOrder = dateReceiptOrder;
     }
 
     public String getShippingPriceOrder() {
-        return ShippingPriceOrder;
+        return shippingPriceOrder;
     }
 
     public void setShippingPriceOrder(String shippingPriceOrder) {
-        ShippingPriceOrder = shippingPriceOrder;
+        this.shippingPriceOrder = shippingPriceOrder;
+    }
+
+    public String getShippingMethodOrder() {
+        return shippingMethodOrder;
+    }
+
+    public void setShippingMethodOrder(String shippingMethodOrder) {
+        this.shippingMethodOrder = shippingMethodOrder;
+    }
+
+    public String getTotalFullPriceOrder() {
+        return totalFullPriceOrder;
+    }
+
+    public void setTotalFullPriceOrder(String totalFullPriceOrder) {
+        this.totalFullPriceOrder = totalFullPriceOrder;
+    }
+
+    public String getTotalSalePriceOrder() {
+        return totalSalePriceOrder;
+    }
+
+    public void setTotalSalePriceOrder(String totalSalePriceOrder) {
+        this.totalSalePriceOrder = totalSalePriceOrder;
+    }
+
+    public String getPaymentMethodOrder() {
+        return paymentMethodOrder;
+    }
+
+    public void setPaymentMethodOrder(String paymentMethodOrder) {
+        this.paymentMethodOrder = paymentMethodOrder;
+    }
+
+    public String getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(String statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public UserMfoody getUser() {
