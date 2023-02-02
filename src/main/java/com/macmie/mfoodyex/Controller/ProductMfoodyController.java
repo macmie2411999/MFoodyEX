@@ -22,22 +22,20 @@ public class ProductMfoodyController {
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllProductMfoodys(){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<ProductMfoody> ProductMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
-        if(ProductMfoodyList.isEmpty()){
+        List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
+        if(productMfoodyList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(ProductMfoodyList), HttpStatus.OK);
+        return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getProductMfoodyByID(@PathVariable("ID") int ID){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        ProductMfoody ProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(ID);
-        if(ProductMfoody == null){
+        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(ID);
+        if(productMfoody == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(gson.toJson(ProductMfoody), HttpStatus.OK);
+        return new ResponseEntity<>(productMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)

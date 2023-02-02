@@ -42,11 +42,11 @@ public class ProductMfoody {
 
     @NonNull
     @Column(name = "FULL_PRICE_PRODUCT")
-    private String fullPriceProduct;
+    private float fullPriceProduct;
 
     @NonNull
     @Column(name = "SALE_PRICE_PRODUCT")
-    private String salePriceProduct;
+    private float salePriceProduct;
 
     @NonNull
     @Column(name = "WEIGHT_PRODUCT")
@@ -54,7 +54,7 @@ public class ProductMfoody {
 
     @NonNull
     @Column(name = "IMPORT_QUANTITY_PRODUCT")
-    private String importQuantityProduct;
+    private int importQuantityProduct;
 
     @NonNull
     @Column(name = "IMPORT_DATE_PRODUCT")
@@ -62,11 +62,11 @@ public class ProductMfoody {
 
     @NonNull
     @Column(name = "STOREHOUSE_QUANTITY_PRODUCT")
-    private String storehouseQuantityProduct;
+    private int storehouseQuantityProduct;
 
     @NonNull
     @Column(name = "RATING_PRODUCT")
-    private String ratingProduct;
+    private float ratingProduct;
 
     @NonNull
     @Column(name = "CATEGORY_PRODUCT")
@@ -76,6 +76,16 @@ public class ProductMfoody {
     @Column(name = "BRAND_PRODUCT")
     private String brandProduct;
 
+    // Refer to DETAIL_PRODUCT_CART_MFOODY
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product")
+    private List<DetailProductCartMfoody> listDetailProductCarts;
+
+    // Refer to DETAIL_PRODUCT_ORDER_MFOODY
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product")
+    private List<DetailProductOrderMfoody> listDetailProductOrders;
+
     // Refer to COMMENT_MFOODY
     @JsonManagedReference
     @OneToMany(mappedBy = "product")
@@ -84,7 +94,7 @@ public class ProductMfoody {
     public ProductMfoody() {
     }
 
-    public ProductMfoody(int idProduct, @NonNull String nameProduct, @NonNull String albumProduct, @NonNull String descriptionProduct, @NonNull String fullPriceProduct, @NonNull String salePriceProduct, @NonNull String weightProduct, @NonNull String importQuantityProduct, @NonNull String importDateProduct, @NonNull String storehouseQuantityProduct, @NonNull String ratingProduct, @NonNull String categoryProduct, @NonNull String brandProduct, List<CommentMfoody> listComments) {
+    public ProductMfoody(int idProduct, @NonNull String nameProduct, @NonNull String albumProduct, @NonNull String descriptionProduct, @NonNull float fullPriceProduct, @NonNull float salePriceProduct, @NonNull String weightProduct, @NonNull int importQuantityProduct, @NonNull String importDateProduct, @NonNull int storehouseQuantityProduct, @NonNull float ratingProduct, @NonNull String categoryProduct, @NonNull String brandProduct, List<CommentMfoody> listComments, List<DetailProductOrderMfoody> listDetailProductOrders, List<DetailProductCartMfoody> listDetailProductCarts) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.albumProduct = albumProduct;
@@ -98,6 +108,8 @@ public class ProductMfoody {
         this.ratingProduct = ratingProduct;
         this.categoryProduct = categoryProduct;
         this.brandProduct = brandProduct;
+        this.listDetailProductOrders = listDetailProductOrders;
+        this.listDetailProductCarts = listDetailProductCarts;
         this.listComments = listComments;
     }
 
@@ -133,19 +145,19 @@ public class ProductMfoody {
         this.descriptionProduct = descriptionProduct;
     }
 
-    public String getFullPriceProduct() {
+    public float getFullPriceProduct() {
         return fullPriceProduct;
     }
 
-    public void setFullPriceProduct(String fullPriceProduct) {
+    public void setFullPriceProduct(float fullPriceProduct) {
         this.fullPriceProduct = fullPriceProduct;
     }
 
-    public String getSalePriceProduct() {
+    public float getSalePriceProduct() {
         return salePriceProduct;
     }
 
-    public void setSalePriceProduct(String salePriceProduct) {
+    public void setSalePriceProduct(float salePriceProduct) {
         this.salePriceProduct = salePriceProduct;
     }
 
@@ -157,11 +169,11 @@ public class ProductMfoody {
         this.weightProduct = weightProduct;
     }
 
-    public String getImportQuantityProduct() {
+    public int getImportQuantityProduct() {
         return importQuantityProduct;
     }
 
-    public void setImportQuantityProduct(String importQuantityProduct) {
+    public void setImportQuantityProduct(int importQuantityProduct) {
         this.importQuantityProduct = importQuantityProduct;
     }
 
@@ -173,19 +185,19 @@ public class ProductMfoody {
         this.importDateProduct = importDateProduct;
     }
 
-    public String getStorehouseQuantityProduct() {
+    public int getStorehouseQuantityProduct() {
         return storehouseQuantityProduct;
     }
 
-    public void setStorehouseQuantityProduct(String storehouseQuantityProduct) {
+    public void setStorehouseQuantityProduct(int storehouseQuantityProduct) {
         this.storehouseQuantityProduct = storehouseQuantityProduct;
     }
 
-    public String getRatingProduct() {
+    public float getRatingProduct() {
         return ratingProduct;
     }
 
-    public void setRatingProduct(String ratingProduct) {
+    public void setRatingProduct(float ratingProduct) {
         this.ratingProduct = ratingProduct;
     }
 
@@ -203,5 +215,29 @@ public class ProductMfoody {
 
     public void setBrandProduct(String brandProduct) {
         this.brandProduct = brandProduct;
+    }
+
+    public List<CommentMfoody> getListComments() {
+        return listComments;
+    }
+
+    public void setListComments(List<CommentMfoody> listComments) {
+        this.listComments = listComments;
+    }
+
+    public List<DetailProductCartMfoody> getListDetailProductCarts() {
+        return listDetailProductCarts;
+    }
+
+    public void setListDetailProductCarts(List<DetailProductCartMfoody> listDetailProductCarts) {
+        this.listDetailProductCarts = listDetailProductCarts;
+    }
+
+    public List<DetailProductOrderMfoody> getListDetailProductOrders() {
+        return listDetailProductOrders;
+    }
+
+    public void setListDetailProductOrders(List<DetailProductOrderMfoody> listDetailProductOrders) {
+        this.listDetailProductOrders = listDetailProductOrders;
     }
 }

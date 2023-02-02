@@ -1,11 +1,14 @@
 package com.macmie.mfoodyex.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -37,7 +40,7 @@ public class OrderMfoody {
 
     @NonNull
     @Column(name = "SHIPPING_PRICE_ORDER")
-    private int shippingPriceOrder;
+    private float shippingPriceOrder;
 
     @NonNull
     @Column(name = "SHIPPING_METHOD_ORDER")
@@ -45,11 +48,11 @@ public class OrderMfoody {
 
     @NonNull
     @Column(name = "TOTAL_FULL_PRICE_ORDER")
-    private int totalFullPriceOrder;
+    private float totalFullPriceOrder;
 
     @NonNull
     @Column(name = "TOTAL_SALE_PRICE_ORDER")
-    private int totalSalePriceOrder;
+    private float totalSalePriceOrder;
 
     @NonNull
     @Column(name = "PAYMENT_METHOD_ORDER")
@@ -65,10 +68,15 @@ public class OrderMfoody {
     @JoinColumn(name = "ID_USER")
     private UserMfoody user;
 
+    // Refer to DETAIL_PRODUCT_ORDER_MFOODY
+    @JsonManagedReference
+    @OneToMany(mappedBy = "order")
+    private List<DetailProductOrderMfoody> listDetailProductOrders;
+
     public OrderMfoody() {
     }
 
-    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull int shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull int totalFullPriceOrder, @NonNull int totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user) {
+    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull float shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull float totalFullPriceOrder, @NonNull float totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user, List<DetailProductOrderMfoody> listDetailProductOrders) {
         this.idOrder = idOrder;
         this.dateOrder = dateOrder;
         this.dateReceiptOrder = dateReceiptOrder;
@@ -79,6 +87,7 @@ public class OrderMfoody {
         this.paymentMethodOrder = paymentMethodOrder;
         this.statusOrder = statusOrder;
         this.user = user;
+        this.listDetailProductOrders = listDetailProductOrders;
     }
 
     public int getIdOrder() {
@@ -105,11 +114,11 @@ public class OrderMfoody {
         this.dateReceiptOrder = dateReceiptOrder;
     }
 
-    public int getShippingPriceOrder() {
+    public float getShippingPriceOrder() {
         return shippingPriceOrder;
     }
 
-    public void setShippingPriceOrder(int shippingPriceOrder) {
+    public void setShippingPriceOrder(float shippingPriceOrder) {
         this.shippingPriceOrder = shippingPriceOrder;
     }
 
@@ -121,19 +130,19 @@ public class OrderMfoody {
         this.shippingMethodOrder = shippingMethodOrder;
     }
 
-    public int getTotalFullPriceOrder() {
+    public float getTotalFullPriceOrder() {
         return totalFullPriceOrder;
     }
 
-    public void setTotalFullPriceOrder(int totalFullPriceOrder) {
+    public void setTotalFullPriceOrder(float totalFullPriceOrder) {
         this.totalFullPriceOrder = totalFullPriceOrder;
     }
 
-    public int getTotalSalePriceOrder() {
+    public float getTotalSalePriceOrder() {
         return totalSalePriceOrder;
     }
 
-    public void setTotalSalePriceOrder(int totalSalePriceOrder) {
+    public void setTotalSalePriceOrder(float totalSalePriceOrder) {
         this.totalSalePriceOrder = totalSalePriceOrder;
     }
 
@@ -159,5 +168,13 @@ public class OrderMfoody {
 
     public void setUser(UserMfoody user) {
         this.user = user;
+    }
+
+    public List<DetailProductOrderMfoody> getListDetailProductOrders() {
+        return listDetailProductOrders;
+    }
+
+    public void setListDetailProductOrders(List<DetailProductOrderMfoody> listDetailProductOrders) {
+        this.listDetailProductOrders = listDetailProductOrders;
     }
 }

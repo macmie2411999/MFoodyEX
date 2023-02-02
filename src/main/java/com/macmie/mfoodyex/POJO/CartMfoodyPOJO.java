@@ -6,8 +6,8 @@ import com.macmie.mfoodyex.Model.CommentMfoody;
 public class CartMfoodyPOJO {
     private int idCart;
     private int quantityAllProductsInCart;
-    private int salePriceCart;
-    private int fullPriceCart;
+    private float salePriceCart;
+    private float fullPriceCart;
     private int idUser;
 
     public CartMfoody renderCartMfoody() {
@@ -17,6 +17,14 @@ public class CartMfoodyPOJO {
         newCartMfoody.setSalePriceCart(this.getSalePriceCart());
         newCartMfoody.setFullPriceCart(this.getFullPriceCart());
         return newCartMfoody;
+    }
+
+    public CartMfoodyPOJO(int idCart, int quantityAllProductsInCart, float salePriceCart, float fullPriceCart, int idUser) {
+        this.idCart = idCart;
+        this.quantityAllProductsInCart = quantityAllProductsInCart;
+        this.salePriceCart = salePriceCart;
+        this.fullPriceCart = fullPriceCart;
+        this.idUser = idUser;
     }
 
     public int getIdCart() {
@@ -35,19 +43,19 @@ public class CartMfoodyPOJO {
         this.quantityAllProductsInCart = quantityAllProductsInCart;
     }
 
-    public int getSalePriceCart() {
+    public float getSalePriceCart() {
         return salePriceCart;
     }
 
-    public void setSalePriceCart(int salePriceCart) {
+    public void setSalePriceCart(float salePriceCart) {
         this.salePriceCart = salePriceCart;
     }
 
-    public int getFullPriceCart() {
+    public float getFullPriceCart() {
         return fullPriceCart;
     }
 
-    public void setFullPriceCart(int fullPriceCart) {
+    public void setFullPriceCart(float fullPriceCart) {
         this.fullPriceCart = fullPriceCart;
     }
 

@@ -1,11 +1,14 @@
 package com.macmie.mfoodyex.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -33,11 +36,11 @@ public class CartMfoody {
 
     @NonNull
     @Column(name = "SALE_PRICE_CART")
-    private int salePriceCart;
+    private float salePriceCart;
 
     @NonNull
     @Column(name = "FULL_PRICE_CART")
-    private int fullPriceCart;
+    private float fullPriceCart;
 
     // Map to User
     @JsonBackReference
@@ -45,14 +48,21 @@ public class CartMfoody {
     @JoinColumn(name = "ID_USER")
     private UserMfoody user;
 
+    // Refer to DETAIL_PRODUCT_CART_MFOODY
+    @JsonManagedReference
+    @OneToMany(mappedBy = "cart")
+    private List<DetailProductCartMfoody> listDetailProductCarts;
+
     public CartMfoody() {
     }
 
-    public CartMfoody( @NonNull int quantityAllProductsInCart, @NonNull int salePriceCart, @NonNull int fullPriceCart, UserMfoody user) {
+    public CartMfoody( int idCart, @NonNull int quantityAllProductsInCart, @NonNull float salePriceCart, @NonNull float fullPriceCart, UserMfoody user, List<DetailProductCartMfoody> listDetailProductCarts) {
+        this.idCart = idCart;
         this.quantityAllProductsInCart = quantityAllProductsInCart;
         this.salePriceCart = salePriceCart;
         this.fullPriceCart = fullPriceCart;
         this.user = user;
+        this.listDetailProductCarts = listDetailProductCarts;
     }
 
     public int getIdCart() {
@@ -71,19 +81,19 @@ public class CartMfoody {
         this.quantityAllProductsInCart = quantityAllProductsInCart;
     }
 
-    public int getSalePriceCart() {
+    public float getSalePriceCart() {
         return salePriceCart;
     }
 
-    public void setSalePriceCart(int salePriceCart) {
+    public void setSalePriceCart(float salePriceCart) {
         this.salePriceCart = salePriceCart;
     }
 
-    public int getFullPriceCart() {
+    public float getFullPriceCart() {
         return fullPriceCart;
     }
 
-    public void setFullPriceCart(int fullPriceCart) {
+    public void setFullPriceCart(float fullPriceCart) {
         this.fullPriceCart = fullPriceCart;
     }
 
@@ -93,5 +103,13 @@ public class CartMfoody {
 
     public void setUser(UserMfoody user) {
         this.user = user;
+    }
+
+    public List<DetailProductCartMfoody> getListDetailProductCarts() {
+        return listDetailProductCarts;
+    }
+
+    public void setListDetailProductCarts(List<DetailProductCartMfoody> listDetailProductCarts) {
+        this.listDetailProductCarts = listDetailProductCarts;
     }
 }

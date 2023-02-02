@@ -7,10 +7,10 @@ public class OrderMfoodyPOJO {
     private int idOrder;
     private String dateOrder;
     private String dateReceiptOrder;
-    private int shippingPriceOrder;
+    private float shippingPriceOrder;
     private String shippingMethodOrder;
-    private int totalFullPriceOrder;
-    private int totalSalePriceOrder;
+    private float totalFullPriceOrder;
+    private float totalSalePriceOrder;
     private String statusOrder;
     private int idUser;
 
@@ -51,11 +51,11 @@ public class OrderMfoodyPOJO {
         this.dateReceiptOrder = dateReceiptOrder;
     }
 
-    public int getShippingPriceOrder() {
+    public float getShippingPriceOrder() {
         return shippingPriceOrder;
     }
 
-    public void setShippingPriceOrder(int shippingPriceOrder) {
+    public void setShippingPriceOrder(float shippingPriceOrder) {
         this.shippingPriceOrder = shippingPriceOrder;
     }
 
@@ -67,19 +67,19 @@ public class OrderMfoodyPOJO {
         this.shippingMethodOrder = shippingMethodOrder;
     }
 
-    public int getTotalFullPriceOrder() {
+    public float getTotalFullPriceOrder() {
         return totalFullPriceOrder;
     }
 
-    public void setTotalFullPriceOrder(int totalFullPriceOrder) {
+    public void setTotalFullPriceOrder(float totalFullPriceOrder) {
         this.totalFullPriceOrder = totalFullPriceOrder;
     }
 
-    public int getTotalSalePriceOrder() {
+    public float getTotalSalePriceOrder() {
         return totalSalePriceOrder;
     }
 
-    public void setTotalSalePriceOrder(int totalSalePriceOrder) {
+    public void setTotalSalePriceOrder(float totalSalePriceOrder) {
         this.totalSalePriceOrder = totalSalePriceOrder;
     }
 

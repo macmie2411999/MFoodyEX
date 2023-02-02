@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
+import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
@@ -101,8 +102,13 @@ public class UserMfoodyController {
         // Save the User to DB
         userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
 
-        // Create a new Cart
-        cartMfoodyInterfaceService.saveCartMfoody(new CartMfoody(0,0,0,newUserMfoody));
+        // Create and save a new Cart
+        CartMfoodyPOJO newCartMfoodyPOJO = new CartMfoodyPOJO(0,0,0,0, newUserMfoody.getIdUser());
+        CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
+        newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoody.getEmailUser()));
+        System.out.println("-------- JSon: " + gson.toJson(newCartMfoodyPOJO));
+        System.out.println("-------- Convert from JSon: " + newCartMfoody.getUser().getIdUser());
+        cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
 
         return new ResponseEntity<>(newUserMfoody, HttpStatus.CREATED);
     }
