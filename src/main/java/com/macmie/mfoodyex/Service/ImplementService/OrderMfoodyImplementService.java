@@ -1,6 +1,11 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
+import com.macmie.mfoodyex.Model.CartMfoody;
+import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
+import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
+import com.macmie.mfoodyex.Repository.DetailProductCartMfoodyRepository;
+import com.macmie.mfoodyex.Repository.DetailProductOrderMfoodyRepository;
 import com.macmie.mfoodyex.Repository.OrderMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.OrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
@@ -22,6 +27,9 @@ import java.util.List;
 public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService {
     @Autowired
     private OrderMfoodyRepository orderMfoodyRepository;
+
+    @Autowired
+    private DetailProductOrderMfoodyRepository detailProductOrderMfoodyRepository;
 
     @Autowired
     private StringUtil stringUtil;
@@ -70,6 +78,21 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
     @Override
     public void deleteOrderMfoodyByID(int idOrderMfoody) {
         log.info("Deleting OrderMfoody with ID: {}", idOrderMfoody);
+
+        // Delete DetailProductOrderMfoody and Order
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(idOrderMfoody);
+        detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
         orderMfoodyRepository.deleteById(idOrderMfoody);
+    }
+
+    @Override
+    public void deleteOrderMfoodyByIdUser(int idUser) {
+        log.info("Deleting OrderMfoody with idUser: {}", idUser);
+
+        // Delete DetailProductOrderMfoody and Order
+        OrderMfoody orderMfoody = orderMfoodyRepository.findByIdUser(idUser);
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(orderMfoody.getIdOrder());
+        detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
+        orderMfoodyRepository.deleteByIdUser(idUser);
     }
 }

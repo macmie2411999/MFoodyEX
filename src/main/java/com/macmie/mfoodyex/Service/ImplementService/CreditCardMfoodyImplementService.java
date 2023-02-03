@@ -78,4 +78,10 @@ public class CreditCardMfoodyImplementService implements CreditCardMfoodyInterfa
         log.info("Deleting CreditCardMfoody with ID: {}", idCreditCardMfoody);
         creditCardMfoodyRepository.deleteById(idCreditCardMfoody);
     }
+
+    @Override
+    public void deleteAllCreditCardsMfoodyByIdUser(int idUser) {
+        log.info("Deleting All CreditCardsMfoody with idUser: {}", idUser);
+        creditCardMfoodyRepository.deleteAllByIdUser(idUser);
+    }
 }

@@ -14,4 +14,8 @@ public interface CommentMfoodyInterfaceService {
     public CommentMfoody updateCommentMfoody(CommentMfoody newCommentMfoody);
 
     public void deleteCommentMfoodyByID(int idCommentMfoody);
+
+    public void deleteAllCommentsMfoodyByIdUser(int idUser);
+
+    public void deleteAllCommentsMfoodyByIdProduct(int idProduct);
 }

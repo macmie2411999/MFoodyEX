@@ -14,4 +14,6 @@ public interface OrderMfoodyInterfaceService {
     public OrderMfoody updateOrderMfoody(OrderMfoody newOrderMfoody);
 
     public void deleteOrderMfoodyByID(int idOrderMfoody);
+
+    public void deleteOrderMfoodyByIdUser(int idUser);
 }

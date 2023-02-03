@@ -49,6 +49,12 @@ public class CreditCardMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(URL_DELETE_BY_ID_USER)
+    public ResponseEntity<?> deleteCreditCardMfoodyByIdUser(@PathVariable("ID") int ID){
+        creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors){
         // Check Error

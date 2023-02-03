@@ -42,6 +42,18 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
     }
 
     @Override
+    public ProductMfoody getProductMfoodyByNameProduct(String nameProduct) {
+        log.info("Fetching ProductMfoody with name: {}", nameProduct);
+        return productMfoodyRepository.findByNameProduct(nameProduct);
+    }
+
+    @Override
+    public ProductMfoody getProductMfoodyByAlbumProduct(String albumProduct) {
+        log.info("Fetching ProductMfoody with album: {}", albumProduct);
+        return productMfoodyRepository.findByAlbumProduct(albumProduct);
+    }
+
+    @Override
     public ProductMfoody saveProductMfoody(ProductMfoody productMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        ProductMfoody.setNameUserCard(stringUtil.parseName(ProductMfoody.getNameUserCard()));

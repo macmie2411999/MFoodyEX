@@ -9,12 +9,18 @@ public class ViewConstant {
     public static final String PRODUCT_MFOODY = "/product";
     public static final String COMMENT_MFOODY = "/comment";
     public static final String ORDER_MFOODY = "/order";
+    public static final String DETAIL_PRODUCT_CART_MFOODY = "/detailProductCart";
+    public static final String DETAIL_PRODUCT_ORDER_MFOODY = "/detailProductOrder";
 
     // URL for all APIs
     public static final String URL_GET_ALL = "/getAll";
     public static final String URL_GET_BY_ID = "/get/{ID}";
     public static final String URL_ADD = "/add";
     public static final String URL_DELETE = "/delete/{ID}";
+    public static final String URL_DELETE_BY_ID_USER = "/deleteByIdUser/{ID}";
+    public static final String URL_DELETE_BY_ID_PRODUCT = "/deleteByIdProduct/{ID}";
+    public static final String URL_DELETE_BY_ID_CART = "/deleteByIdCart/{ID}";
+    public static final String URL_DELETE_BY_ID_ORDER = "/deleteByIdOrder/{ID}";
     public static final String URL_EDIT = "/edit";
     /*
     * Mac Mie end

@@ -52,6 +52,12 @@ public class CartFoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(URL_DELETE_BY_ID_USER)
+    public ResponseEntity<?> deleteCartMfoodyByIdUser(@PathVariable("ID") int ID){
+        cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editCartMfoody(@RequestBody String cartPOJOJsonObject, BindingResult errors){
         // Check Error
@@ -59,7 +65,7 @@ public class CartFoodyController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CommentPOJO object, add new User to Comment
+        // Convert JsonObject to CartMfoodyPOJO object, add new User to Comment
         Gson gson = new Gson();
         CartMfoodyPOJO newCartMfoodyPOJO = gson.fromJson(cartPOJOJsonObject, CartMfoodyPOJO.class);
         CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();

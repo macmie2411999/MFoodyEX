@@ -9,8 +9,7 @@ import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
-import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
-import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
+import com.macmie.mfoodyex.Service.InterfaceService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,16 @@ public class UserMfoodyController {
     private UserMfoodyInterfaceService userMfoodyInterfaceService;
 
     @Autowired
+    private CreditCardMfoodyInterfaceService creditCardMfoodyInterfaceService;
+
+    @Autowired
+    private CommentMfoodyInterfaceService commentMfoodyInterfaceService;
+
+    @Autowired
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
+
+    @Autowired
+    private DetailProductCartMfoodyInterfaceService detailProductCartMfoodyInterfaceService;
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<List<UserMfoody>> getAllUserMfoodys(){
@@ -53,9 +61,11 @@ public class UserMfoodyController {
 
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteUserMfoodyByID(@PathVariable("ID") int ID){
-        // Delete User and Cart
+        // Delete Cart (Detail Product Cart), Comment, Credit Card, and User
+        creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
+        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
+        cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
         userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
-        cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -66,12 +76,12 @@ public class UserMfoodyController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
+        // Convert JsonObject to UserMfoodyPOJO object
         Gson gson = new Gson();
         UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
         System.out.println("-------- JSon: " + userMfoodyPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newUserMfoody.getAddressUser());
+        System.out.println("-------- Convert from JSon: " + newUserMfoody.toString());
 
         // Save to DB
         userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
@@ -90,7 +100,7 @@ public class UserMfoodyController {
         UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
         System.out.println("-------- JSon: " + userMfoodyPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newUserMfoody);
+        System.out.println("-------- Convert from JSon: " + newUserMfoody.toString());
 
         // Check duplicate
         UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoody.getEmailUser());

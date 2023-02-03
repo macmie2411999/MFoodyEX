@@ -17,4 +17,6 @@ public interface CreditCardMfoodyInterfaceService {
     public CreditCardMfoody updateCreditCardMfoody(CreditCardMfoody newCreditCardMfoody);
 
     public void deleteCreditCardMfoodyByID(int idCreditCardMfoody);
+
+    public void deleteAllCreditCardsMfoodyByIdUser(int idUser);
 }

@@ -10,7 +10,6 @@ import java.util.Optional;
 @Repository
 // JpaRepository<name entity class, type of id of entity class>
 public interface UserMfoodyRepository extends JpaRepository<UserMfoody, Integer> {
-
     UserMfoody findByEmailUser(String emailUserMfoody);
     UserMfoody findByPhoneNumberUser(String phoneNumberUserMfoody);
 }

@@ -14,4 +14,6 @@ public interface CartMfoodyInterfaceService {
     public CartMfoody updateCartMfoody(CartMfoody newCartMfoody);
 
     public void deleteCartMfoodyByID(int idCartMfoody);
+
+    public void deleteCartMfoodyByIdUser(int idUser);
 }

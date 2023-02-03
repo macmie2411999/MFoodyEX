@@ -51,6 +51,12 @@ public class OrderMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(URL_DELETE_BY_ID_USER)
+    public ResponseEntity<?> deleteOrderMfoodyByIdUser(@PathVariable("ID") int ID){
+        orderMfoodyInterfaceService.deleteOrderMfoodyByIdUser(ID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors){
         // Check Error
@@ -63,7 +69,7 @@ public class OrderMfoodyController {
         OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
         OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
 
-        // Add new User to CreditCard and log
+        // Add new User to OrderMfoody and log
         newOrderMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser()));
         System.out.println("-------- JSon: " + orderPOJOJsonObject);
         System.out.println("-------- Convert from JSon: " + newOrderMfoody.getUser().getIdUser());
@@ -85,7 +91,7 @@ public class OrderMfoodyController {
         OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
         OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
 
-        // Add new User to CreditCard and log
+        // Add new User to OrderMfoody and log
         newOrderMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser()));
         System.out.println("-------- JSon: " + orderPOJOJsonObject);
         System.out.println("-------- Convert from JSon: " + newOrderMfoody.getUser().getIdUser());

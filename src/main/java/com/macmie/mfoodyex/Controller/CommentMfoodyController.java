@@ -53,6 +53,18 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(URL_DELETE_BY_ID_USER)
+    public ResponseEntity<?> deleteCommentMfoodyByIdUser(@PathVariable("ID") int ID){
+        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(URL_DELETE_BY_ID_PRODUCT)
+    public ResponseEntity<?> deleteCommentMfoodyByIdProduct(@PathVariable("ID") int ID){
+        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editCommentMfoody(@RequestBody String commentPOJOJsonObject, BindingResult errors){
         // Check Error
@@ -60,7 +72,7 @@ public class CommentMfoodyController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CommentPOJO object, add new User to Comment
+        // Convert JsonObject to CommentPOJO object
         Gson gson = new Gson();
         CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentPOJOJsonObject, CommentMfoodyPOJO.class);
         CommentMfoody newCommentMfoody = newCommentMfoodyPOJO.renderCommentMfoody();
@@ -77,21 +89,21 @@ public class CommentMfoodyController {
     }
 
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewCommentMfoody(@RequestBody String commentMPOJOJsonObject, BindingResult errors){
+    public ResponseEntity<?> addNewCommentMfoody(@RequestBody String commentPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CommentPOJO object, add new User to Comment
+        // Convert JsonObject to CommentPOJO object
         Gson gson = new Gson();
-        CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentMPOJOJsonObject, CommentMfoodyPOJO.class);
+        CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentPOJOJsonObject, CommentMfoodyPOJO.class);
         CommentMfoody newCommentMfoody = newCommentMfoodyPOJO.renderCommentMfoody();
 
         // Add new User and Product to Comment and log
         newCommentMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCommentMfoodyPOJO.getIdUser()));
         newCommentMfoody.setProduct(productMfoodyInterfaceService.getProductMfoodyByID(newCommentMfoodyPOJO.getIdProduct()));
-        System.out.println("-------- JSon: " + commentMPOJOJsonObject);
+        System.out.println("-------- JSon: " + commentPOJOJsonObject);
         System.out.println("-------- Convert from JSon: " + newCommentMfoody.getProduct().getIdProduct());
 
         // Save Comment to DB

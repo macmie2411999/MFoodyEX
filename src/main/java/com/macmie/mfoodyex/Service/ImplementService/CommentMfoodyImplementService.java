@@ -67,4 +67,16 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
         log.info("Deleting CommentMfoody with ID: {}", idCommentMfoody);
         commentMfoodyRepository.deleteById(idCommentMfoody);
     }
+
+    @Override
+    public void deleteAllCommentsMfoodyByIdUser(int idUser) {
+        log.info("Deleting All CommentMfoodys with idUser: {}", idUser);
+        commentMfoodyRepository.deleteAllByIdUser(idUser);
+    }
+
+    @Override
+    public void deleteAllCommentsMfoodyByIdProduct(int idProduct) {
+        log.info("Deleting All CommentMfoodys with idProduct: {}", idProduct);
+        commentMfoodyRepository.deleteAllByIdProduct(idProduct);
+    }
 }
