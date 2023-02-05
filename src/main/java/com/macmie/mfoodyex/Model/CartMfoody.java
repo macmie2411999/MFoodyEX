@@ -2,15 +2,12 @@ package com.macmie.mfoodyex.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.List;
 
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /* Handle Jackson – Bidirectional Relationships (Loop)
@@ -21,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 
 @Entity
-@Table(name= "`CART_MFOODY`")
+@Table(name = "`CART_MFOODY`")
 @RequiredArgsConstructor
 public class CartMfoody {
     @Id
@@ -55,7 +52,7 @@ public class CartMfoody {
     public CartMfoody() {
     }
 
-    public CartMfoody( int idCart, @NonNull int quantityAllProductsInCart, @NonNull float totalSalePriceCart, @NonNull float totalFullPriceCart, UserMfoody user, List<DetailProductCartMfoody> listDetailProductCarts) {
+    public CartMfoody(int idCart, @NonNull int quantityAllProductsInCart, @NonNull float totalSalePriceCart, @NonNull float totalFullPriceCart, UserMfoody user, List<DetailProductCartMfoody> listDetailProductCarts) {
         this.idCart = idCart;
         this.quantityAllProductsInCart = quantityAllProductsInCart;
         this.totalSalePriceCart = totalSalePriceCart;

@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.ProductMfoody;
-import com.macmie.mfoodyex.Model.UserMfoody;
 
 public class ProductMfoodyPOJO {
     private int idProduct;

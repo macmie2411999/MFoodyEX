@@ -3,7 +3,6 @@ package com.macmie.mfoodyex.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 
 /* Handle Jackson – Bidirectional Relationships (Loop)
@@ -13,20 +12,21 @@ import java.io.Serializable;
     @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id": show full)
     */
 @Entity
-@Table(name= "`DETAIL_PRODUCT_CART_MFOODY`")
+@Table(name = "`DETAIL_PRODUCT_CART_MFOODY`")
 public class DetailProductCartMfoody implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId // indicate that a field or property maps to a composite primary key class that is stored as an embedded object
+    @EmbeddedId
+    // indicate that a field or property maps to a composite primary key class that is stored as an embedded object
     private DetailProductCartMfoodyId idDetailProductCartMFoody;
 
-    @Column(name="QUANTITY_DETAIL_PRODUCT_CART")
+    @Column(name = "QUANTITY_DETAIL_PRODUCT_CART")
     private int quantityDetailProductCart;
 
-    @Column(name="SALE_PRICE_DETAIL_PRODUCT_CART")
+    @Column(name = "SALE_PRICE_DETAIL_PRODUCT_CART")
     private float salePriceDetailProductCart;
 
-    @Column(name="FULL_PRICE_DETAIL_PRODUCT_CART")
+    @Column(name = "FULL_PRICE_DETAIL_PRODUCT_CART")
     private float fullPriceDetailProductCart;
 
     // Map to CART_MFOODY

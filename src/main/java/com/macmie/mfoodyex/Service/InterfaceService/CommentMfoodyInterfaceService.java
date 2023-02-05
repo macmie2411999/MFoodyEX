@@ -9,6 +9,8 @@ public interface CommentMfoodyInterfaceService {
 
     public List<CommentMfoody> getListCommentMfoodysByIdProduct(int idProduct);
 
+    public List<CommentMfoody> getListCommentMfoodysByIdUser(int idUser);
+
     public CommentMfoody getCommentMfoodyByID(int idCommentMfoody);
 
     public CommentMfoody saveCommentMfoody(CommentMfoody commentMfoody);

@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +13,7 @@ import java.io.Serializable;
     */
 
 @Entity
-@Table(name= "`DETAIL_PRODUCT_ORDER_MFOODY`")
+@Table(name = "`DETAIL_PRODUCT_ORDER_MFOODY`")
 public class DetailProductOrderMfoody implements Serializable {
     private static final long serialVersionUID = 1L;
 

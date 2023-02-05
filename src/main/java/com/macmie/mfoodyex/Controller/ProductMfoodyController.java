@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.ProductMfoody;
-import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.ProductMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
+
+/*
+ * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)
+ * be used when a successful request returns no content (empty): HttpStatus.NO_CONTENT (204)
+ * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
+ * */
 
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(PRODUCT_MFOODY)
@@ -42,7 +47,7 @@ public class ProductMfoodyController {
     public ResponseEntity<?> getAllProductMfoodys() {
         List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
         if (productMfoodyList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of ProductMfoodys", HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
@@ -51,13 +56,17 @@ public class ProductMfoodyController {
     public ResponseEntity<?> getProductMfoodyByID(@PathVariable("ID") int ID) {
         ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(ID);
         if (productMfoody == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(productMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteProductMfoodyByID(@PathVariable("ID") int ID) {
+        if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+
         // Delete Detail Product Cart, Detail Product Order, Comment and Product
         detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
         detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
@@ -78,8 +87,8 @@ public class ProductMfoodyController {
         ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
         ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
         ProductMfoody oldProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
-        if(oldProductMfoody == null){
-            return new ResponseEntity<>("Can't find any ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+        if (oldProductMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
         }
 
         // Save to DB
@@ -122,7 +131,7 @@ public class ProductMfoodyController {
         ProductMfoody existingNameProduct = productMfoodyInterfaceService.getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
         ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
         if (existingNameProduct != null || existingAlbumProduct != null) {
-            return new ResponseEntity<>("A product with the same name or album already exists!", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("CONFLICT - A product with the same name or album already exists!", HttpStatus.CONFLICT);
         }
 
         // Save to DB and return (Updated Cart in DB could have ID differs from user's request)

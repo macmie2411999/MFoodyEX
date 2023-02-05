@@ -15,14 +15,18 @@ public class ViewConstant {
     // URL for all APIs
     public static final String URL_GET_ALL = "/getAll";
     public static final String URL_GET_BY_ID = "/get/{ID}";
+    public static final String URL_GET_BY_ID_USER = "/getByIdUser/{ID}";
+    public static final String URL_GET_BY_ID_PRODUCT = "/getByIdProduct/{ID}";
+    public static final String URL_GET_BY_ID_CART = "/getByIdCart/{ID}";
+    public static final String URL_GET_BY_ID_ORDER = "/getByIdOrder/{ID}";
     public static final String URL_GET_BY_ID_CART_AND_ID_PRODUCT = "/get/idCart/{IdCart}/idProduct/{IdProduct}";
     public static final String URL_GET_BY_ID_ORDER_AND_ID_PRODUCT = "/get/idOrder/{IdOrder}/idProduct/{IdProduct}";
-    public static final String URL_ADD = "/add";
     public static final String URL_DELETE = "/delete/{ID}";
     public static final String URL_DELETE_BY_ID_USER = "/deleteByIdUser/{ID}";
     public static final String URL_DELETE_BY_ID_PRODUCT = "/deleteByIdProduct/{ID}";
     public static final String URL_DELETE_BY_ID_CART = "/deleteByIdCart/{ID}";
     public static final String URL_DELETE_BY_ID_ORDER = "/deleteByIdOrder/{ID}";
+    public static final String URL_ADD = "/add";
     public static final String URL_EDIT = "/edit";
     /*
     * Mac Mie end

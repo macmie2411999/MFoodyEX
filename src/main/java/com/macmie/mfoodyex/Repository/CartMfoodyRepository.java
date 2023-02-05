@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.Repository;
 
 import com.macmie.mfoodyex.Model.CartMfoody;
-import com.macmie.mfoodyex.Model.FeedbackMail;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

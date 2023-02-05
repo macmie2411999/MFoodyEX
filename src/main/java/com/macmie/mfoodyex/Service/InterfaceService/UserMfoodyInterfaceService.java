@@ -1,6 +1,5 @@
 package com.macmie.mfoodyex.Service.InterfaceService;
 
-import com.macmie.mfoodyex.Model.FeedbackMail;
 import com.macmie.mfoodyex.Model.UserMfoody;
 
 import java.util.List;

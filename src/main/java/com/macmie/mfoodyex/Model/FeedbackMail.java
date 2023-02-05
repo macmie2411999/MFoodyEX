@@ -1,10 +1,10 @@
 package com.macmie.mfoodyex.Model;
-import lombok.*;
 
-//import jakarta.persistence.*;
-//import static jakarta.persistence.GenerationType.IDENTITY;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 /* Handle Jackson – Bidirectional Relationships (Loop)
@@ -15,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 
 @Entity
-@Table(name= "`FEEDBACK_MAIL`")
+@Table(name = "`FEEDBACK_MAIL`")
 @RequiredArgsConstructor
 public class FeedbackMail {
     @Id

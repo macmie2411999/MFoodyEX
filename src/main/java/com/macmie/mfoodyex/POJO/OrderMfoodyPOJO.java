@@ -1,6 +1,5 @@
 package com.macmie.mfoodyex.POJO;
 
-import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
 
 public class OrderMfoodyPOJO {

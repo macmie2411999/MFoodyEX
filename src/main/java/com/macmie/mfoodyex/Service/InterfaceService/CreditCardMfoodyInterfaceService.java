@@ -1,12 +1,13 @@
 package com.macmie.mfoodyex.Service.InterfaceService;
 
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
-import com.macmie.mfoodyex.Model.FeedbackMail;
 
 import java.util.List;
 
 public interface CreditCardMfoodyInterfaceService {
     public List<CreditCardMfoody> getListCreditCardMfoodys();
+
+    public List<CreditCardMfoody> getListCreditCardMfoodysByIdUser(int idUser);
 
     public CreditCardMfoody getCreditCardMfoodyByID(int idCreditCardMfoody);
 

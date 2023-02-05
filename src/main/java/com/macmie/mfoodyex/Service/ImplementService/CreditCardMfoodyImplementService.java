@@ -1,11 +1,8 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
-import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.Repository.CreditCardMfoodyRepository;
-import com.macmie.mfoodyex.Repository.UserMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.CreditCardMfoodyInterfaceService;
-import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
 import com.macmie.mfoodyex.Util.TextUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +17,8 @@ import java.util.List;
 @Slf4j
 
 /* @Transactional: Handle rollback when exceptions occur
-* @Slf4j: Spring Boot Logging
-* */
+ * @Slf4j: Spring Boot Logging
+ * */
 public class CreditCardMfoodyImplementService implements CreditCardMfoodyInterfaceService {
     @Autowired
     private CreditCardMfoodyRepository creditCardMfoodyRepository;
@@ -36,6 +33,12 @@ public class CreditCardMfoodyImplementService implements CreditCardMfoodyInterfa
     public List<CreditCardMfoody> getListCreditCardMfoodys() {
         log.info("Fetching all CreditCardMfoodys: ");
         return creditCardMfoodyRepository.findAll();
+    }
+
+    @Override
+    public List<CreditCardMfoody> getListCreditCardMfoodysByIdUser(int idUser) {
+        log.info("Fetching all CreditCardMfoodys by idUser: {}", idUser);
+        return creditCardMfoodyRepository.findAllByIdUser(idUser);
     }
 
     @Override

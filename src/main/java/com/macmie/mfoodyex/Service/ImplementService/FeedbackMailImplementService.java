@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.FeedbackMail;
-import com.macmie.mfoodyex.POJO.FeedbackMailPOJO;
 import com.macmie.mfoodyex.Repository.FeedbackMailRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.FeedbackMailInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
@@ -18,8 +17,8 @@ import java.util.List;
 @Slf4j
 
 /* @Transactional: Handle rollback when exceptions occur
-* @Slf4j: Spring Boot Logging
-* */
+ * @Slf4j: Spring Boot Logging
+ * */
 public class FeedbackMailImplementService implements FeedbackMailInterfaceService {
     @Autowired
     private FeedbackMailRepository feedbackMailRepository;

@@ -1,8 +1,6 @@
 package com.macmie.mfoodyex.Service.InterfaceService;
 
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
-import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

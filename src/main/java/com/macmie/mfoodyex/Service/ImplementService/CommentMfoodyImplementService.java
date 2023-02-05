@@ -17,8 +17,8 @@ import java.util.List;
 @Slf4j
 
 /* @Transactional: Handle rollback when exceptions occur
-* @Slf4j: Spring Boot Logging
-* */
+ * @Slf4j: Spring Boot Logging
+ * */
 public class CommentMfoodyImplementService implements CommentMfoodyInterfaceService {
     @Autowired
     private CommentMfoodyRepository commentMfoodyRepository;
@@ -39,6 +39,12 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
     public List<CommentMfoody> getListCommentMfoodysByIdProduct(int idProduct) {
         log.info("Fetching all CommentMfoodys by idProduct: {}", idProduct);
         return commentMfoodyRepository.findAllByIdProduct(idProduct);
+    }
+
+    @Override
+    public List<CommentMfoody> getListCommentMfoodysByIdUser(int idUser) {
+        log.info("Fetching all CommentMfoodys by idUser: {}", idUser);
+        return commentMfoodyRepository.findAllByIdUser(idUser);
     }
 
     @Override

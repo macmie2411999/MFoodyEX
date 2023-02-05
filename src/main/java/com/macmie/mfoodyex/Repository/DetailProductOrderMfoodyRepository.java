@@ -1,9 +1,6 @@
 package com.macmie.mfoodyex.Repository;
 
-import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
-import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
-import com.macmie.mfoodyex.Model.FeedbackMail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,7 +20,7 @@ public interface DetailProductOrderMfoodyRepository extends JpaRepository<Detail
     @Query("SELECT d FROM DetailProductOrderMfoody d " +
             "WHERE d.order.idOrder = :idOrder " +
             "AND d.product.idProduct = :idProduct")
-    DetailProductCartMfoody findByIdOrderAndIdProduct(@Param("idOrder") int idOrder,
-                                                     @Param("idProduct") int idProduct);
+    DetailProductOrderMfoody findByIdOrderAndIdProduct(@Param("idOrder") int idOrder,
+                                                       @Param("idProduct") int idProduct);
 }
 

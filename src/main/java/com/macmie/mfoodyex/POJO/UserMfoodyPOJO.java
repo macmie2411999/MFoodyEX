@@ -3,12 +3,7 @@ package com.macmie.mfoodyex.POJO;
 import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
-import lombok.NonNull;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 public class UserMfoodyPOJO {

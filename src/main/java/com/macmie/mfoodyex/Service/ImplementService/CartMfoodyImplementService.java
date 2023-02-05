@@ -2,7 +2,6 @@ package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
-import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.Repository.CartMfoodyRepository;
 import com.macmie.mfoodyex.Repository.DetailProductCartMfoodyRepository;
 import com.macmie.mfoodyex.Repository.UserMfoodyRepository;
@@ -21,8 +20,8 @@ import java.util.List;
 @Slf4j
 
 /* @Transactional: Handle rollback when exceptions occur
-* @Slf4j: Spring Boot Logging
-* */
+ * @Slf4j: Spring Boot Logging
+ * */
 public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
     @Autowired
     private CartMfoodyRepository cartMfoodyRepository;

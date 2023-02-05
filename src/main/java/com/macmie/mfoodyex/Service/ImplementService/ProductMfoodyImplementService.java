@@ -17,8 +17,8 @@ import java.util.List;
 @Slf4j
 
 /* @Transactional: Handle rollback when exceptions occur
-* @Slf4j: Spring Boot Logging
-* */
+ * @Slf4j: Spring Boot Logging
+ * */
 public class ProductMfoodyImplementService implements ProductMfoodyInterfaceService {
     @Autowired
     private ProductMfoodyRepository productMfoodyRepository;

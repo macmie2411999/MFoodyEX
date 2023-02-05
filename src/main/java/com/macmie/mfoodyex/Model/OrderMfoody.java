@@ -2,15 +2,12 @@ package com.macmie.mfoodyex.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.List;
 
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /* Handle Jackson – Bidirectional Relationships (Loop)
@@ -21,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 
 @Entity
-@Table(name= "`ORDER_MFOODY`")
+@Table(name = "`ORDER_MFOODY`")
 @RequiredArgsConstructor
 public class OrderMfoody {
     @Id
@@ -79,7 +76,7 @@ public class OrderMfoody {
     public OrderMfoody() {
     }
 
-    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull float shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull int quantityAllProductsInOrder , @NonNull float totalFullPriceOrder, @NonNull float totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user, List<DetailProductOrderMfoody> listDetailProductOrders) {
+    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull float shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull int quantityAllProductsInOrder, @NonNull float totalFullPriceOrder, @NonNull float totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user, List<DetailProductOrderMfoody> listDetailProductOrders) {
         this.idOrder = idOrder;
         this.dateOrder = dateOrder;
         this.dateReceiptOrder = dateReceiptOrder;

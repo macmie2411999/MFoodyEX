@@ -1,14 +1,10 @@
 package com.macmie.mfoodyex.Model;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /* Handle Jackson – Bidirectional Relationships (Loop)
@@ -19,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 
 @Entity
-@Table(name= "`CREDIT_CARD_MFOODY`")
+@Table(name = "`CREDIT_CARD_MFOODY`")
 public class CreditCardMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)

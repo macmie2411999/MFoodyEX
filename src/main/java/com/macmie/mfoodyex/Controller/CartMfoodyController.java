@@ -16,9 +16,15 @@ import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
 
+/*
+ * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)
+ * be used when a successful request returns no content (empty): HttpStatus.NO_CONTENT (204)
+ * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
+ * */
+
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(CART_MFOODY)
-public class CartFoodyController {
+public class CartMfoodyController {
     @Autowired
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
@@ -27,30 +33,48 @@ public class CartFoodyController {
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllCartMfoodys() {
-        List<CartMfoody> CartMfoodyList = cartMfoodyInterfaceService.getListCartMfoodys();
-        if (CartMfoodyList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        List<CartMfoody> cartMfoodyList = cartMfoodyInterfaceService.getListCartMfoodys();
+        if (cartMfoodyList.isEmpty()) {
+            return new ResponseEntity<>("NO_CONTENT List of CartMfoodys", HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(CartMfoodyList, HttpStatus.OK);
+        return new ResponseEntity<>(cartMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getCartMfoodyByID(@PathVariable("ID") int ID) {
         CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(ID);
         if (cartMfoody == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
+    }
+
+    @GetMapping(URL_GET_BY_ID_USER)
+    public ResponseEntity<?> getCartMfoodyByIdUser(@PathVariable("ID") int ID) {
+        if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+        CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByIdUser(ID);
+        if (cartMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with idUser: " + ID, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteCartMfoodyByID(@PathVariable("ID") int ID) {
+        if (cartMfoodyInterfaceService.getCartMfoodyByID(ID) == null) {
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
         cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE_BY_ID_USER)
     public ResponseEntity<?> deleteCartMfoodyByIdUser(@PathVariable("ID") int ID) {
+        if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
         cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -67,7 +91,7 @@ public class CartFoodyController {
         CartMfoodyPOJO newCartMfoodyPOJO = gson.fromJson(cartMfoodyPOJOJsonObject, CartMfoodyPOJO.class);
         CartMfoody newCartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(newCartMfoodyPOJO.getIdCart());
         if (newCartMfoody == null) {
-            return new ResponseEntity<>("Can't find any CardMfoody with ID: " + newCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND CardMfoody with ID: " + newCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
         }
         newCartMfoody.setQuantityAllProductsInCart(newCartMfoodyPOJO.getQuantityAllProductsInCart());
         newCartMfoody.setTotalSalePriceCart(newCartMfoodyPOJO.getTotalSalePriceCart());
@@ -92,8 +116,8 @@ public class CartFoodyController {
 
         // Check input idUser and attach UserMfoody to CartMfoody
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCartMfoodyPOJO.getIdUser());
-        if(attachUserMfoody == null){
-            return new ResponseEntity<>("Can't find any UserMfoody with ID: " + newCartMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+        if (attachUserMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCartMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
         }
         newCartMfoody.setUser(attachUserMfoody);
 

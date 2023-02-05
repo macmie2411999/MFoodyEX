@@ -1,8 +1,6 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
-import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
-import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
 import com.macmie.mfoodyex.Repository.DetailProductCartMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductCartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;

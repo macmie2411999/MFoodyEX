@@ -1,10 +1,7 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
-import com.macmie.mfoodyex.Model.FeedbackMail;
 import com.macmie.mfoodyex.Model.UserMfoody;
-import com.macmie.mfoodyex.Repository.FeedbackMailRepository;
 import com.macmie.mfoodyex.Repository.UserMfoodyRepository;
-import com.macmie.mfoodyex.Service.InterfaceService.FeedbackMailInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
 import com.macmie.mfoodyex.Util.TextUtil;
@@ -20,8 +17,8 @@ import java.util.List;
 @Slf4j
 
 /* @Transactional: Handle rollback when exceptions occur
-* @Slf4j: Spring Boot Logging
-* */
+ * @Slf4j: Spring Boot Logging
+ * */
 public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
     @Autowired
     private UserMfoodyRepository userMfoodyRepository;

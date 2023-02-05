@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.Repository;
 
 import com.macmie.mfoodyex.Model.CommentMfoody;
-import com.macmie.mfoodyex.Model.FeedbackMail;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,5 +26,8 @@ public interface CommentMfoodyRepository extends JpaRepository<CommentMfoody, In
 
     @Query("SELECT c FROM CommentMfoody c WHERE c.product.idProduct = :idProduct")
     List<CommentMfoody> findAllByIdProduct(@Param("idProduct") int idProduct);
+
+    @Query("SELECT c FROM CommentMfoody c WHERE c.user.idUser = :idUser")
+    List<CommentMfoody> findAllByIdUser(@Param("idUser") int idUser);
 }
 

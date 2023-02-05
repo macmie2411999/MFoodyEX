@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.CommentMfoody;
-import com.macmie.mfoodyex.Model.CreditCardMfoody;
 
 public class CommentMfoodyPOJO {
     private int idComment;

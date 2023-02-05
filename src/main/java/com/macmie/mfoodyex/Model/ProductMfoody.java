@@ -1,12 +1,10 @@
 package com.macmie.mfoodyex.Model;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -19,7 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 
 @Entity
-@Table(name= "`PRODUCT_MFOODY`")
+@Table(name = "`PRODUCT_MFOODY`")
 @RequiredArgsConstructor
 public class ProductMfoody {
     @Id
@@ -238,5 +236,24 @@ public class ProductMfoody {
 
     public void setListDetailProductOrders(List<DetailProductOrderMfoody> listDetailProductOrders) {
         this.listDetailProductOrders = listDetailProductOrders;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductMfoody{" +
+                "idProduct=" + idProduct +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", albumProduct='" + albumProduct + '\'' +
+                ", descriptionProduct='" + descriptionProduct + '\'' +
+                ", fullPriceProduct=" + fullPriceProduct +
+                ", salePriceProduct=" + salePriceProduct +
+                ", weightProduct='" + weightProduct + '\'' +
+                ", importQuantityProduct=" + importQuantityProduct +
+                ", importDateProduct='" + importDateProduct + '\'' +
+                ", storehouseQuantityProduct=" + storehouseQuantityProduct +
+                ", ratingProduct=" + ratingProduct +
+                ", categoryProduct='" + categoryProduct + '\'' +
+                ", brandProduct='" + brandProduct + '\'' +
+                '}';
     }
 }

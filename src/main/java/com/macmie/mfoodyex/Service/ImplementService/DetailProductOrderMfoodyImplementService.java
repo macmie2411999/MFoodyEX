@@ -1,6 +1,5 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
-import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Repository.DetailProductOrderMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
@@ -37,7 +36,7 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
     }
 
     @Override
-    public DetailProductCartMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct) {
+    public DetailProductOrderMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct) {
         log.info("Fetching DetailProductOrderMfoody with idOrder and idProduct: {}, {}", idOrder, idProduct);
         return detailProductOrderMfoodyRepository.findByIdOrderAndIdProduct(idOrder, idProduct);
     }
