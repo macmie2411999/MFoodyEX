@@ -57,6 +57,30 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
     }
 
     @Override
+    public UserMfoody getUserMfoodyByIdCard(int idCard) {
+        log.info("Fetching UserMfoody with idCard: {}", idCard);
+        return userMfoodyRepository.findUserMfoodyByIdCard(idCard);
+    }
+
+    @Override
+    public UserMfoody getUserMfoodyByIdComment(int idComment) {
+        log.info("Fetching UserMfoody with idComment: {}", idComment);
+        return userMfoodyRepository.findUserMfoodyByIdComment(idComment);
+    }
+
+    @Override
+    public UserMfoody getUserMfoodyByIdCart(int idCart) {
+        log.info("Fetching UserMfoody with idCart: {}", idCart);
+        return userMfoodyRepository.findUserMfoodyByIdCart(idCart);
+    }
+
+    @Override
+    public UserMfoody getUserMfoodyByIdOrder(int idOrder) {
+        log.info("Fetching UserMfoody with idOrder: {}", idOrder);
+        return userMfoodyRepository.findUserMfoodyByIdOrder(idOrder);
+    }
+
+    @Override
     public UserMfoody saveUserMfoody(UserMfoody userMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        userMfoody.setEmailUser(stringUtil.parseEmail(userMfoody.getEmailUser()));

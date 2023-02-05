@@ -58,13 +58,8 @@ public class FeedbackMailController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to FeedbackMail object
-        Gson gson = new Gson();
-        FeedbackMail newFeedbackMail = gson.fromJson(feedbackMailJsonObject, FeedbackMail.class);
-        System.out.println("-------- JSon: " + feedbackMailJsonObject);
-        System.out.println("-------- Convert from JSon: " + newFeedbackMail);
-
-        // Save to DB
+        // Convert JsonObject to FeedbackMail object, Save to DB and return
+        FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
         feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -76,14 +71,14 @@ public class FeedbackMailController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to FeedbackMail object
-        Gson gson = new Gson();
-        FeedbackMail newFeedbackMail = gson.fromJson(feedbackMailJsonObject, FeedbackMail.class);
-        System.out.println("-------- JSon: " + feedbackMailJsonObject);
-        System.out.println("-------- Convert from JSon: " + newFeedbackMail);
-
-        // Save to DB
+        // Convert JsonObject to FeedbackMail object, Save to DB and return (Updated Cart in DB could have ID differs from user's request)
+        FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
         feedbackMailInterfaceService.saveFeedbackMail(newFeedbackMail);
         return new ResponseEntity<>(newFeedbackMail, HttpStatus.CREATED);
+    }
+
+    public FeedbackMail convertJsonToFeedbackMail(String feedbackMailJsonObject){
+        Gson gson = new Gson();
+        return gson.fromJson(feedbackMailJsonObject, FeedbackMail.class);
     }
 }

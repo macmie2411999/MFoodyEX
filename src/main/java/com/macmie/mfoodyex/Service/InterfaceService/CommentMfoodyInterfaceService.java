@@ -7,6 +7,8 @@ import java.util.List;
 public interface CommentMfoodyInterfaceService {
     public List<CommentMfoody> getListCommentMfoodys();
 
+    public List<CommentMfoody> getListCommentMfoodysByIdProduct(int idProduct);
+
     public CommentMfoody getCommentMfoodyByID(int idCommentMfoody);
 
     public CommentMfoody saveCommentMfoody(CommentMfoody commentMfoody);

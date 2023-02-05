@@ -16,7 +16,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name= "`FEEDBACK_MAIL`")
-@Data
 @RequiredArgsConstructor
 public class FeedbackMail {
     @Id

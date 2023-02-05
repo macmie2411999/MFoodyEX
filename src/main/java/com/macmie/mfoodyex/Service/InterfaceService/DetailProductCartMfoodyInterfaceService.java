@@ -1,13 +1,15 @@
 package com.macmie.mfoodyex.Service.InterfaceService;
 
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
+import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface DetailProductCartMfoodyInterfaceService {
     public List<DetailProductCartMfoody> getListDetailProductCartMfoodys();
 
-    public DetailProductCartMfoody getDetailProductCartMfoodyByID(int idDetailProductCartMfoody);
+    public DetailProductCartMfoody getDetailProductCartMfoodyByICartAndIdProduct(int idCart, int idProduct);
 
     public DetailProductCartMfoody saveDetailProductCartMfoody(DetailProductCartMfoody DetailProductCartMfoody);
 
@@ -18,4 +20,8 @@ public interface DetailProductCartMfoodyInterfaceService {
     public void deleteAllDetailProductCartsMfoodyByIdCart(int idCart);
 
     public void deleteAllDetailProductCartsMfoodyByIdProduct(int idProduct);
+
+    public List<DetailProductCartMfoody> findAllDetailProductCartsMfoodyByIdCart(int idCart);
+
+    public List<DetailProductCartMfoody> findAllDetailProductCartsMfoodyByIdProduct(int idProduct);
 }

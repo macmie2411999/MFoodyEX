@@ -22,7 +22,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name= "`CART_MFOODY`")
-@Data
 @RequiredArgsConstructor
 public class CartMfoody {
     @Id
@@ -35,12 +34,12 @@ public class CartMfoody {
     private int quantityAllProductsInCart;
 
     @NonNull
-    @Column(name = "SALE_PRICE_CART")
-    private float salePriceCart;
+    @Column(name = "TOTAL_SALE_PRICE_CART")
+    private float totalSalePriceCart;
 
     @NonNull
-    @Column(name = "FULL_PRICE_CART")
-    private float fullPriceCart;
+    @Column(name = "TOTAL_FULL_PRICE_CART")
+    private float totalFullPriceCart;
 
     // Map to User
     @JsonBackReference
@@ -56,11 +55,11 @@ public class CartMfoody {
     public CartMfoody() {
     }
 
-    public CartMfoody( int idCart, @NonNull int quantityAllProductsInCart, @NonNull float salePriceCart, @NonNull float fullPriceCart, UserMfoody user, List<DetailProductCartMfoody> listDetailProductCarts) {
+    public CartMfoody( int idCart, @NonNull int quantityAllProductsInCart, @NonNull float totalSalePriceCart, @NonNull float totalFullPriceCart, UserMfoody user, List<DetailProductCartMfoody> listDetailProductCarts) {
         this.idCart = idCart;
         this.quantityAllProductsInCart = quantityAllProductsInCart;
-        this.salePriceCart = salePriceCart;
-        this.fullPriceCart = fullPriceCart;
+        this.totalSalePriceCart = totalSalePriceCart;
+        this.totalFullPriceCart = totalFullPriceCart;
         this.user = user;
         this.listDetailProductCarts = listDetailProductCarts;
     }
@@ -81,20 +80,20 @@ public class CartMfoody {
         this.quantityAllProductsInCart = quantityAllProductsInCart;
     }
 
-    public float getSalePriceCart() {
-        return salePriceCart;
+    public float getTotalSalePriceCart() {
+        return totalSalePriceCart;
     }
 
-    public void setSalePriceCart(float salePriceCart) {
-        this.salePriceCart = salePriceCart;
+    public void setTotalSalePriceCart(float totalSalePriceCart) {
+        this.totalSalePriceCart = totalSalePriceCart;
     }
 
-    public float getFullPriceCart() {
-        return fullPriceCart;
+    public float getTotalFullPriceCart() {
+        return totalFullPriceCart;
     }
 
-    public void setFullPriceCart(float fullPriceCart) {
-        this.fullPriceCart = fullPriceCart;
+    public void setTotalFullPriceCart(float totalFullPriceCart) {
+        this.totalFullPriceCart = totalFullPriceCart;
     }
 
     public UserMfoody getUser() {

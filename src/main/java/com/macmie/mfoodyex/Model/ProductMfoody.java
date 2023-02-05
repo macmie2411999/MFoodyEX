@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name= "`PRODUCT_MFOODY`")
-@Data
 @RequiredArgsConstructor
 public class ProductMfoody {
     @Id

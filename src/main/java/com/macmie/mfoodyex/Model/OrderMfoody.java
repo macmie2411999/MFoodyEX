@@ -22,7 +22,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name= "`ORDER_MFOODY`")
-@Data
 @RequiredArgsConstructor
 public class OrderMfoody {
     @Id
@@ -45,6 +44,10 @@ public class OrderMfoody {
     @NonNull
     @Column(name = "SHIPPING_METHOD_ORDER")
     private String shippingMethodOrder;
+
+    @NonNull
+    @Column(name = "QUANTITY_ALL_PRODUCTS_IN_ORDER")
+    private int quantityAllProductsInOrder;
 
     @NonNull
     @Column(name = "TOTAL_FULL_PRICE_ORDER")
@@ -76,12 +79,13 @@ public class OrderMfoody {
     public OrderMfoody() {
     }
 
-    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull float shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull float totalFullPriceOrder, @NonNull float totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user, List<DetailProductOrderMfoody> listDetailProductOrders) {
+    public OrderMfoody(int idOrder, @NonNull String dateOrder, @NonNull String dateReceiptOrder, @NonNull float shippingPriceOrder, @NonNull String shippingMethodOrder, @NonNull int quantityAllProductsInOrder , @NonNull float totalFullPriceOrder, @NonNull float totalSalePriceOrder, @NonNull String paymentMethodOrder, @NonNull String statusOrder, UserMfoody user, List<DetailProductOrderMfoody> listDetailProductOrders) {
         this.idOrder = idOrder;
         this.dateOrder = dateOrder;
         this.dateReceiptOrder = dateReceiptOrder;
         this.shippingPriceOrder = shippingPriceOrder;
         this.shippingMethodOrder = shippingMethodOrder;
+        this.quantityAllProductsInOrder = quantityAllProductsInOrder;
         this.totalFullPriceOrder = totalFullPriceOrder;
         this.totalSalePriceOrder = totalSalePriceOrder;
         this.paymentMethodOrder = paymentMethodOrder;
@@ -128,6 +132,14 @@ public class OrderMfoody {
 
     public void setShippingMethodOrder(String shippingMethodOrder) {
         this.shippingMethodOrder = shippingMethodOrder;
+    }
+
+    public int getQuantityAllProductsInOrder() {
+        return quantityAllProductsInOrder;
+    }
+
+    public void setQuantityAllProductsInOrder(int quantityAllProductsInOrder) {
+        this.quantityAllProductsInOrder = quantityAllProductsInOrder;
     }
 
     public float getTotalFullPriceOrder() {

@@ -52,10 +52,13 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
     }
 
     @Override
-    public CartMfoody saveCartMfoody(CartMfoody cartMfoody) {
-//        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
-//        CartMfoody.setNameUserCard(stringUtil.parseName(CartMfoody.getNameUserCard()));
+    public CartMfoody getCartMfoodyByIdUser(int idUser) {
+        log.info("Fetching CartMfoody with idUser: {}", idUser);
+        return cartMfoodyRepository.findByIdUser(idUser);
+    }
 
+    @Override
+    public CartMfoody saveCartMfoody(CartMfoody cartMfoody) {
         log.info("Saving CartMfoody with ID: {}", cartMfoody.getIdCart());
         return cartMfoodyRepository.save(cartMfoody);
     }

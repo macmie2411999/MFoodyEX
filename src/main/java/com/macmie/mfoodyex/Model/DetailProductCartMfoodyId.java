@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-class DetailProductCartMFoodyId implements Serializable {
+public class DetailProductCartMfoodyId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -15,10 +15,10 @@ class DetailProductCartMFoodyId implements Serializable {
     @Column(name = "ID_PRODUCT")
     private int idProduct;
 
-    public DetailProductCartMFoodyId() {
+    public DetailProductCartMfoodyId() {
     }
 
-    public DetailProductCartMFoodyId(int idCart, int idProduct) {
+    public DetailProductCartMfoodyId(int idCart, int idProduct) {
         this.idCart = idCart;
         this.idProduct = idProduct;
     }

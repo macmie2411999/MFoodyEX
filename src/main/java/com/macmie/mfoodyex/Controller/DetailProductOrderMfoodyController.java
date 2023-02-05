@@ -1,7 +1,10 @@
 package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
+import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
+import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
+import com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId;
 import com.macmie.mfoodyex.POJO.DetailProductOrderMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.OrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
@@ -18,7 +21,7 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
 
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(DETAIL_PRODUCT_ORDER_MFOODY)
-public class DetailProductOrderMFoodyController {
+public class DetailProductOrderMfoodyController {
     @Autowired
     private DetailProductOrderMfoodyInterfaceService detailProductOrderMfoodyInterfaceService;
 
@@ -37,14 +40,13 @@ public class DetailProductOrderMFoodyController {
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
 
-    @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<DetailProductOrderMfoody> getDetailProductOrderMfoodyByID(@PathVariable("ID") int ID){
-        DetailProductOrderMfoody detailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByID(ID);
-        if(detailProductOrderMfoody == null){
+    @GetMapping(URL_GET_BY_ID_ORDER_AND_ID_PRODUCT)
+    public ResponseEntity<DetailProductCartMfoody> getDetailProductCartMfoodyByID(@PathVariable("IdOrder") int idOrder, @PathVariable("IdProduct") int idProduct){
+        DetailProductCartMfoody detailProductCartMfoody = detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
+        if(detailProductCartMfoody == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        System.out.println(detailProductOrderMfoody.getIdDetailProductOrderMfoody());
-        return new ResponseEntity<>(detailProductOrderMfoody, HttpStatus.OK);
+        return new ResponseEntity<>(detailProductCartMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE)
@@ -65,7 +67,7 @@ public class DetailProductOrderMFoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(URL_EDIT)
+    @PutMapping(URL_EDIT) // idOrder and idProduct in Json must be accurate
     public ResponseEntity<?> editDetailProductOrderMfoody(@RequestBody String detailProductOrderPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
@@ -77,18 +79,16 @@ public class DetailProductOrderMFoodyController {
         DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO = gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
         DetailProductOrderMfoody newDetailProductOrderMfoody = newDetailProductOrderMfoodyPOJO.renderDetailProductOrderMfoody();
 
-        // Add new Order and Product to DetailProductOrder and log
+        // Add Order and Product to DetailProductOrder
         newDetailProductOrderMfoody.setOrder(orderMfoodyInterfaceService.getOrderMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdOrder()));
         newDetailProductOrderMfoody.setProduct(productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct()));
-        System.out.println("-------- JSon: " + detailProductOrderPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newDetailProductOrderMfoody.toString());
 
-        // Save to DB
+        // Save to DB and return
         detailProductOrderMfoodyInterfaceService.updateDetailProductOrderMfoody(newDetailProductOrderMfoody);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(URL_ADD)
+    @PostMapping(URL_ADD) // idOrder and idProduct in Json must be accurate
     public ResponseEntity<?> addNewDetailProductOrderMfoody(@RequestBody String detailProductOrderPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
@@ -100,14 +100,13 @@ public class DetailProductOrderMFoodyController {
         DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO = gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
         DetailProductOrderMfoody newDetailProductOrderMfoody = newDetailProductOrderMfoodyPOJO.renderDetailProductOrderMfoody();
 
-        // Add new Order and Product to DetailProductOrder and log
+        // Add new Order and Product to DetailProductOrder
+        newDetailProductOrderMfoody.setIdDetailProductOrderMfoody(new DetailProductOrderMfoodyId(newDetailProductOrderMfoodyPOJO.getIdOrder(), newDetailProductOrderMfoodyPOJO.getIdProduct()));
         newDetailProductOrderMfoody.setOrder(orderMfoodyInterfaceService.getOrderMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdOrder()));
         newDetailProductOrderMfoody.setProduct(productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct()));
-        System.out.println("-------- JSon: " + detailProductOrderPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newDetailProductOrderMfoody.toString());
 
-        // Save DetailProductOrder to DB
+        // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
         detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(newDetailProductOrderMfoody);
-        return new ResponseEntity<>(newDetailProductOrderMfoody, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

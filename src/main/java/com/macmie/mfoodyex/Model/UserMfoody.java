@@ -22,7 +22,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "`USER_MFOODY`")
-@Data
 @RequiredArgsConstructor
 public class UserMfoody {
     @Id

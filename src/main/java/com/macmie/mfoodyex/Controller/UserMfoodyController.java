@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
+import com.macmie.mfoodyex.Model.ProductMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
@@ -76,12 +77,14 @@ public class UserMfoodyController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to UserMfoodyPOJO object
+        // Convert JsonObject to UserMfoodyPOJO object, Check the input idUser
         Gson gson = new Gson();
         UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
-        System.out.println("-------- JSon: " + userMfoodyPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newUserMfoody.toString());
+        UserMfoody oldUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newUserMfoodyPOJO.getIdUser());
+        if(oldUserMfoody == null){
+            return new ResponseEntity<>("Can't find any ProductMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+        }
 
         // Save to DB
         userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
@@ -99,25 +102,21 @@ public class UserMfoodyController {
         Gson gson = new Gson();
         UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
-        System.out.println("-------- JSon: " + userMfoodyPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newUserMfoody.toString());
 
         // Check duplicate
-        UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoody.getEmailUser());
-        UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(newUserMfoody.getPhoneNumberUser());
+        UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser());
+        UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(newUserMfoodyPOJO.getPhoneNumberUser());
         if (existingEmailUser != null || existingPhoneNumberUser != null) {
             return new ResponseEntity<>("A user with the same email or phone number already exists!", HttpStatus.CONFLICT);
         }
 
-        // Save the User to DB
+        // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from user's request)
         userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
 
-        // Create and save a new Cart
-        CartMfoodyPOJO newCartMfoodyPOJO = new CartMfoodyPOJO(0,0,0,0, newUserMfoody.getIdUser());
+        // Create and save a new CartMfoody (CartMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
+        CartMfoodyPOJO newCartMfoodyPOJO = new CartMfoodyPOJO(0,0,0,0, newUserMfoodyPOJO.getIdUser());
         CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
-        newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoody.getEmailUser()));
-        System.out.println("-------- JSon: " + gson.toJson(newCartMfoodyPOJO));
-        System.out.println("-------- Convert from JSon: " + newCartMfoody.getUser().getIdUser());
+        newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
         cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
 
         return new ResponseEntity<>(newUserMfoody, HttpStatus.CREATED);

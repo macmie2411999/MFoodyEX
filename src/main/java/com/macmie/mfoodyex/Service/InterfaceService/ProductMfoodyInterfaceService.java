@@ -14,6 +14,8 @@ public interface ProductMfoodyInterfaceService {
 
     public ProductMfoody getProductMfoodyByAlbumProduct(String albumProduct);
 
+    public ProductMfoody getProductMfoodyByIdComment(int idComment);
+
     public ProductMfoody saveProductMfoody(ProductMfoody productMfoody);
 
     public ProductMfoody updateProductMfoody(ProductMfoody newProductMfoody);

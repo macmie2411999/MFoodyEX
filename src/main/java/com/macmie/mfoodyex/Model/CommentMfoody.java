@@ -19,7 +19,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name= "`COMMENT_MFOODY`")
-@Data
 @RequiredArgsConstructor
 public class CommentMfoody {
     @Id
@@ -104,5 +103,16 @@ public class CommentMfoody {
 
     public void setProduct(ProductMfoody product) {
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "CommentMfoody{" +
+                "idComment=" + idComment +
+                ", ratingComment=" + ratingComment +
+                ", contentComment='" + contentComment + '\'' +
+                ", user=" + user +
+                ", product=" + product +
+                '}';
     }
 }

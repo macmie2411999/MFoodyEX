@@ -18,5 +18,8 @@ public interface CartMfoodyRepository extends JpaRepository<CartMfoody, Integer>
 
     @Query("SELECT c FROM CartMfoody c WHERE c.user.idUser = :idUser")
     CartMfoody findByIdUser(@Param("idUser") int idUser);
+
+    @Query("SELECT u FROM UserMfoody u INNER JOIN CartMfoody c ON u.idUser = c.user.idUser WHERE c.idCart = :idCart")
+    UserMfoody findUserByCartId(@Param("idCart") Integer idCart);
 }
 

@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-class DetailProductOrderMfoodyId implements Serializable {
+public class DetailProductOrderMfoodyId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

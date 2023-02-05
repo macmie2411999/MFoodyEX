@@ -6,24 +6,24 @@ import com.macmie.mfoodyex.Model.CommentMfoody;
 public class CartMfoodyPOJO {
     private int idCart;
     private int quantityAllProductsInCart;
-    private float salePriceCart;
-    private float fullPriceCart;
+    private float totalSalePriceCart;
+    private float totalFullPriceCart;
     private int idUser;
 
     public CartMfoody renderCartMfoody() {
         CartMfoody newCartMfoody = new CartMfoody();
         newCartMfoody.setIdCart(this.getIdCart());
         newCartMfoody.setQuantityAllProductsInCart(this.getQuantityAllProductsInCart());
-        newCartMfoody.setSalePriceCart(this.getSalePriceCart());
-        newCartMfoody.setFullPriceCart(this.getFullPriceCart());
+        newCartMfoody.setTotalSalePriceCart(this.getTotalSalePriceCart());
+        newCartMfoody.setTotalFullPriceCart(this.getTotalFullPriceCart());
         return newCartMfoody;
     }
 
-    public CartMfoodyPOJO(int idCart, int quantityAllProductsInCart, float salePriceCart, float fullPriceCart, int idUser) {
+    public CartMfoodyPOJO(int idCart, int quantityAllProductsInCart, float totalSalePriceCart, float totalFullPriceCart, int idUser) {
         this.idCart = idCart;
         this.quantityAllProductsInCart = quantityAllProductsInCart;
-        this.salePriceCart = salePriceCart;
-        this.fullPriceCart = fullPriceCart;
+        this.totalSalePriceCart = totalSalePriceCart;
+        this.totalFullPriceCart = totalFullPriceCart;
         this.idUser = idUser;
     }
 
@@ -43,20 +43,20 @@ public class CartMfoodyPOJO {
         this.quantityAllProductsInCart = quantityAllProductsInCart;
     }
 
-    public float getSalePriceCart() {
-        return salePriceCart;
+    public float getTotalSalePriceCart() {
+        return totalSalePriceCart;
     }
 
-    public void setSalePriceCart(float salePriceCart) {
-        this.salePriceCart = salePriceCart;
+    public void setTotalSalePriceCart(float totalSalePriceCart) {
+        this.totalSalePriceCart = totalSalePriceCart;
     }
 
-    public float getFullPriceCart() {
-        return fullPriceCart;
+    public float getTotalFullPriceCart() {
+        return totalFullPriceCart;
     }
 
-    public void setFullPriceCart(float fullPriceCart) {
-        this.fullPriceCart = fullPriceCart;
+    public void setTotalFullPriceCart(float totalFullPriceCart) {
+        this.totalFullPriceCart = totalFullPriceCart;
     }
 
     public int getIdUser() {

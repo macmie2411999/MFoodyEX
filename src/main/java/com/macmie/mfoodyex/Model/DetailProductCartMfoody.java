@@ -1,14 +1,10 @@
 package com.macmie.mfoodyex.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-import lombok.NonNull;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 /* Handle Jackson – Bidirectional Relationships (Loop)
     @JsonIgnore: ignore Serialization
@@ -18,12 +14,11 @@ import static javax.persistence.GenerationType.IDENTITY;
     */
 @Entity
 @Table(name= "`DETAIL_PRODUCT_CART_MFOODY`")
-@Data
 public class DetailProductCartMfoody implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId // indicate that a field or property maps to a composite primary key class that is stored as an embedded object
-    private DetailProductCartMFoodyId idDetailProductCartMFoody;
+    private DetailProductCartMfoodyId idDetailProductCartMFoody;
 
     @Column(name="QUANTITY_DETAIL_PRODUCT_CART")
     private int quantityDetailProductCart;
@@ -49,7 +44,7 @@ public class DetailProductCartMfoody implements Serializable {
     public DetailProductCartMfoody() {
     }
 
-    public DetailProductCartMfoody(DetailProductCartMFoodyId idDetailProductCartMFoody, int quantityDetailProductCart, float salePriceDetailProductCart, float fullPriceDetailProductCart, CartMfoody cart, ProductMfoody product) {
+    public DetailProductCartMfoody(DetailProductCartMfoodyId idDetailProductCartMFoody, int quantityDetailProductCart, float salePriceDetailProductCart, float fullPriceDetailProductCart, CartMfoody cart, ProductMfoody product) {
         this.idDetailProductCartMFoody = idDetailProductCartMFoody;
         this.quantityDetailProductCart = quantityDetailProductCart;
         this.salePriceDetailProductCart = salePriceDetailProductCart;
@@ -58,11 +53,11 @@ public class DetailProductCartMfoody implements Serializable {
         this.product = product;
     }
 
-    public DetailProductCartMFoodyId getIdDetailProductCartMFoody() {
+    public DetailProductCartMfoodyId getIdDetailProductCartMFoody() {
         return idDetailProductCartMFoody;
     }
 
-    public void setId(DetailProductCartMFoodyId idDetailProductCartMFoody) {
+    public void setIdDetailProductCartMfoody(DetailProductCartMfoodyId idDetailProductCartMFoody) {
         this.idDetailProductCartMFoody = idDetailProductCartMFoody;
     }
 

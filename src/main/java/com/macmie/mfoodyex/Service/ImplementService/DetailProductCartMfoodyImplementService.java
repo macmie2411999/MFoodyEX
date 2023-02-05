@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
+import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
 import com.macmie.mfoodyex.Repository.DetailProductCartMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductCartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
@@ -37,9 +38,9 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
     }
 
     @Override
-    public DetailProductCartMfoody getDetailProductCartMfoodyByID(int idDetailProductCartMfoody) {
-        log.info("Fetching DetailProductCartMfoody with ID: {}", idDetailProductCartMfoody);
-        return detailProductCartMfoodyRepository.findById(idDetailProductCartMfoody).orElse(null);
+    public DetailProductCartMfoody getDetailProductCartMfoodyByICartAndIdProduct(int idCart, int idProduct) {
+        log.info("Fetching DetailProductCartMfoody with idCart and idProduct: {}, {}", idCart, idProduct);
+        return detailProductCartMfoodyRepository.findByIdCartAndIdProduct(idCart, idProduct);
     }
 
     @Override
@@ -81,5 +82,17 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
         log.info("Deleting All DetailProductCartMfoodys with idProduct: {}", idProduct);
         List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyRepository.findAllByIdProduct(idProduct);
         detailProductCartMfoodyRepository.deleteAll(detailProductCartMfoodyList);
+    }
+
+    @Override
+    public List<DetailProductCartMfoody> findAllDetailProductCartsMfoodyByIdCart(int idCart) {
+        log.info("Fetching All DetailProductCartMfoodys with idCart: {}", idCart);
+        return detailProductCartMfoodyRepository.findAllByIdCart(idCart);
+    }
+
+    @Override
+    public List<DetailProductCartMfoody> findAllDetailProductCartsMfoodyByIdProduct(int idProduct) {
+        log.info("Fetching All DetailProductCartMfoodys with idProduct: {}", idProduct);
+        return detailProductCartMfoodyRepository.findAllByIdProduct(idProduct);
     }
 }

@@ -14,6 +14,14 @@ public interface UserMfoodyInterfaceService {
 
     public UserMfoody getUserMfoodyByPhoneNumber(String phoneNumberUserMfoody);
 
+    public UserMfoody getUserMfoodyByIdCard(int idCard);
+
+    public UserMfoody getUserMfoodyByIdComment(int idComment);
+
+    public UserMfoody getUserMfoodyByIdCart(int idCart);
+
+    public UserMfoody getUserMfoodyByIdOrder(int idOrder);
+
     public UserMfoody saveUserMfoody(UserMfoody userMfoody);
 
     public UserMfoody updateUserMfoody(UserMfoody newUserMfoody);

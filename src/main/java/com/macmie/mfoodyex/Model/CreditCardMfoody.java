@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name= "`CREDIT_CARD_MFOODY`")
-@Data
 public class CreditCardMfoody {
     @Id
     @GeneratedValue(strategy = IDENTITY)

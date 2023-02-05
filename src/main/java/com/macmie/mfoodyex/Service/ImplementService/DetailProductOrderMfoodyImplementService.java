@@ -1,5 +1,6 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
+import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Repository.DetailProductOrderMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
@@ -36,9 +37,9 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
     }
 
     @Override
-    public DetailProductOrderMfoody getDetailProductOrderMfoodyByID(int idDetailProductOrderMfoody) {
-        log.info("Fetching DetailProductOrderMfoody with ID: {}", idDetailProductOrderMfoody);
-        return detailProductOrderMfoodyRepository.findById(idDetailProductOrderMfoody).orElse(null);
+    public DetailProductCartMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct) {
+        log.info("Fetching DetailProductOrderMfoody with idOrder and idProduct: {}, {}", idOrder, idProduct);
+        return detailProductOrderMfoodyRepository.findByIdOrderAndIdProduct(idOrder, idProduct);
     }
 
     @Override
@@ -80,5 +81,17 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
         log.info("Deleting All DetailProductOrderMfoodys with idProduct: {}", idProduct);
         List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdProduct(idProduct);
         detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
+    }
+
+    @Override
+    public List<DetailProductOrderMfoody> findAllDetailProductOrdersMfoodyByIdOrder(int idOrder) {
+        log.info("Fetching All DetailProductOrderMfoodys with idCart: {}", idOrder);
+        return detailProductOrderMfoodyRepository.findAllByIdOrder(idOrder);
+    }
+
+    @Override
+    public List<DetailProductOrderMfoody> findAllDetailProductOrdersMfoodyByIdProduct(int idProduct) {
+        log.info("Fetching All DetailProductOrderMfoodys with idProduct: {}", idProduct);
+        return detailProductOrderMfoodyRepository.findAllByIdProduct(idProduct);
     }
 }

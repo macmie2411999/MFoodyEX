@@ -9,6 +9,8 @@ public interface CartMfoodyInterfaceService {
 
     public CartMfoody getCartMfoodyByID(int idCartMfoody);
 
+    public CartMfoody getCartMfoodyByIdUser(int idUser);
+
     public CartMfoody saveCartMfoody(CartMfoody cartMfoody);
 
     public CartMfoody updateCartMfoody(CartMfoody newCartMfoody);

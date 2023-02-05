@@ -9,8 +9,10 @@ public class OrderMfoodyPOJO {
     private String dateReceiptOrder;
     private float shippingPriceOrder;
     private String shippingMethodOrder;
+    private int quantityAllProductsInOrder;
     private float totalFullPriceOrder;
     private float totalSalePriceOrder;
+    private String paymentMethodOrder;
     private String statusOrder;
     private int idUser;
 
@@ -21,8 +23,10 @@ public class OrderMfoodyPOJO {
         newOrderMfoody.setDateReceiptOrder(this.getDateReceiptOrder());
         newOrderMfoody.setShippingPriceOrder(this.getShippingPriceOrder());
         newOrderMfoody.setShippingMethodOrder(this.getShippingMethodOrder());
+        newOrderMfoody.setQuantityAllProductsInOrder(this.getQuantityAllProductsInOrder());
         newOrderMfoody.setTotalFullPriceOrder(this.getTotalFullPriceOrder());
         newOrderMfoody.setTotalSalePriceOrder(this.getTotalSalePriceOrder());
+        newOrderMfoody.setPaymentMethodOrder(this.getPaymentMethodOrder());
         newOrderMfoody.setStatusOrder(this.getStatusOrder());
         return newOrderMfoody;
     }
@@ -67,6 +71,14 @@ public class OrderMfoodyPOJO {
         this.shippingMethodOrder = shippingMethodOrder;
     }
 
+    public int getQuantityAllProductsInOrder() {
+        return quantityAllProductsInOrder;
+    }
+
+    public void setQuantityAllProductsInOrder(int quantityAllProductsInOrder) {
+        this.quantityAllProductsInOrder = quantityAllProductsInOrder;
+    }
+
     public float getTotalFullPriceOrder() {
         return totalFullPriceOrder;
     }
@@ -97,5 +109,13 @@ public class OrderMfoodyPOJO {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public String getPaymentMethodOrder() {
+        return paymentMethodOrder;
+    }
+
+    public void setPaymentMethodOrder(String paymentMethodOrder) {
+        this.paymentMethodOrder = paymentMethodOrder;
     }
 }

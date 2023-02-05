@@ -1,5 +1,6 @@
 package com.macmie.mfoodyex.Service.InterfaceService;
 
+import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface DetailProductOrderMfoodyInterfaceService {
     public List<DetailProductOrderMfoody> getListDetailProductOrderMfoodys();
 
-    public DetailProductOrderMfoody getDetailProductOrderMfoodyByID(int idDetailProductOrderMfoody);
+    public DetailProductCartMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct);
 
     public DetailProductOrderMfoody saveDetailProductOrderMfoody(DetailProductOrderMfoody DetailProductOrderMfoody);
 
@@ -18,4 +19,8 @@ public interface DetailProductOrderMfoodyInterfaceService {
     public void deleteAllDetailProductOrdersMfoodyByIdOrder(int idOrder);
 
     public void deleteAllDetailProductOrdersMfoodyByIdProduct(int idProduct);
+
+    public List<DetailProductOrderMfoody> findAllDetailProductOrdersMfoodyByIdOrder(int idOrder);
+
+    public List<DetailProductOrderMfoody> findAllDetailProductOrdersMfoodyByIdProduct(int idProduct);
 }

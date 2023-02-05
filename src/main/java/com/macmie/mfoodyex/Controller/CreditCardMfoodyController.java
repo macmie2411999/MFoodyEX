@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
+import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CreditCardMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CreditCardMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
@@ -39,7 +40,6 @@ public class CreditCardMfoodyController {
         if(creditCardMfoody == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        System.out.println(creditCardMfoody.getNameUserCard());
         return new ResponseEntity<>(creditCardMfoody, HttpStatus.OK);
     }
 
@@ -55,53 +55,55 @@ public class CreditCardMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(URL_EDIT)
+    @PutMapping(URL_EDIT) // idUser is ignored
     public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
+        // Convert JsonObject to CreditCardPOJO object, Check input idCard and attach UserMfoody to CreditCardMfoody
         Gson gson = new Gson();
         CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
         CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
+        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdCard(newCreditCardPOJO.getIdCard());
+        if(attachUserMfoody == null){
+            return new ResponseEntity<>("Can't find any UserMfoody with IdCard: " + newCreditCardPOJO.getIdCard(), HttpStatus.NOT_FOUND);
+        }
+        newCreditCardMfoody.setUser(attachUserMfoody);
 
-        // Add new User to CreditCard and log
-        newCreditCardMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser()));
-        System.out.println("-------- JSon: " + creditCardPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newCreditCardMfoody.getIdCard());
-
-        // Save to DB
+        // Save to DB and return
         creditCardMfoodyInterfaceService.updateCreditCardMfoody(newCreditCardMfoody);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(newCreditCardMfoody, HttpStatus.OK);
     }
 
-    @PostMapping(URL_ADD)
+    @PostMapping(URL_ADD) // idUser must be accurate
     public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors){
         // Check Error
         if(errors.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CreditCardPOJO object, add new User to CreditCard
+        // Convert JsonObject to CreditCardPOJO object
         Gson gson = new Gson();
         CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
         CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
 
         // Check duplicate
-        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.getCreditCardMfoodyByNumberCard(newCreditCardMfoody.getNumberCard());
+        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.getCreditCardMfoodyByNumberCard(newCreditCardPOJO.getNumberCard());
         if (existingCard != null) {
             return new ResponseEntity<>("A card with the same number already exists!", HttpStatus.CONFLICT);
         }
 
-        // Add new User to CreditCard and log
-        newCreditCardMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser()));
-        System.out.println("-------- JSon: " + creditCardPOJOJsonObject);
-        System.out.println("-------- Convert from JSon: " + newCreditCardMfoody.getUser().getIdUser());
+        // Check input idUser and attach UserMfoody to CreditCardMfoody
+        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser());
+        if(attachUserMfoody == null){
+            return new ResponseEntity<>("Can't find any UserMfoody with ID: " + newCreditCardPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+        }
+        newCreditCardMfoody.setUser(attachUserMfoody);
 
-        // Save CreditCard to DB
+        // Save CreditCard to DB and return (Updated Cart in DB could have ID differs from user's request)
         creditCardMfoodyInterfaceService.saveCreditCardMfoody(newCreditCardMfoody);
-        return new ResponseEntity<>(newCreditCardMfoody, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

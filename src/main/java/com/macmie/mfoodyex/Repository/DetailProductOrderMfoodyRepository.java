@@ -1,5 +1,6 @@
 package com.macmie.mfoodyex.Repository;
 
+import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Model.FeedbackMail;
@@ -18,5 +19,11 @@ public interface DetailProductOrderMfoodyRepository extends JpaRepository<Detail
 
     @Query("SELECT c FROM DetailProductOrderMfoody c WHERE c.idDetailProductOrderMfoody.idProduct = :idProduct")
     List<DetailProductOrderMfoody> findAllByIdProduct(@Param("idProduct") int idProduct);
+
+    @Query("SELECT d FROM DetailProductOrderMfoody d " +
+            "WHERE d.order.idOrder = :idOrder " +
+            "AND d.product.idProduct = :idProduct")
+    DetailProductCartMfoody findByIdOrderAndIdProduct(@Param("idOrder") int idOrder,
+                                                     @Param("idProduct") int idProduct);
 }
 

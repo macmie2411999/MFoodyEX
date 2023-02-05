@@ -54,6 +54,12 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
     }
 
     @Override
+    public ProductMfoody getProductMfoodyByIdComment(int idComment) {
+        log.info("Fetching ProductMfoody with idComment: {}", idComment);
+        return productMfoodyRepository.findProductMfoodyByIdComment(idComment);
+    }
+
+    @Override
     public ProductMfoody saveProductMfoody(ProductMfoody productMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        ProductMfoody.setNameUserCard(stringUtil.parseName(ProductMfoody.getNameUserCard()));

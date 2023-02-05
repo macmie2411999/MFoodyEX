@@ -36,6 +36,12 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
     }
 
     @Override
+    public List<CommentMfoody> getListCommentMfoodysByIdProduct(int idProduct) {
+        log.info("Fetching all CommentMfoodys by idProduct: {}", idProduct);
+        return commentMfoodyRepository.findAllByIdProduct(idProduct);
+    }
+
+    @Override
     public CommentMfoody getCommentMfoodyByID(int idCommentMfoody) {
         log.info("Fetching CommentMfoody with ID: {}", idCommentMfoody);
         return commentMfoodyRepository.findById(idCommentMfoody).orElse(null);
