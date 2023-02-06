@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
+import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.OrderMfoodyPOJO;
@@ -49,6 +50,19 @@ public class OrderMfoodyController {
         return new ResponseEntity<>(OrderMfoody, HttpStatus.OK);
     }
 
+    @GetMapping(URL_GET_BY_ID_USER)
+    public ResponseEntity<?> getOrderMfoodyByIdUser(@PathVariable("ID") int ID) {
+        if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+        List<OrderMfoody> orderMfoodyList = orderMfoodyInterfaceService.getListOrderMfoodysByIdUser(ID);
+        if (orderMfoodyList.isEmpty()) {
+            return new ResponseEntity<>("NO_CONTENT List of OrderMfoodys with idUser: " + ID,
+                    HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(orderMfoodyList, HttpStatus.OK);
+    }
+
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteOrderMfoodyByID(@PathVariable("ID") int ID) {
         if (orderMfoodyInterfaceService.getOrderMfoodyByID(ID) == null) {
@@ -63,24 +77,41 @@ public class OrderMfoodyController {
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        orderMfoodyInterfaceService.deleteOrderMfoodyByIdUser(ID);
+        orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(URL_EDIT) // idUser is ignored
+    /*
+     * 1. idOrder in Json must be accurate, idUser/quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
+     * 2. This API is required coz its attributes like dateOder/shippingPrice... still can be updated
+     *    (excepts quantityAllProductsInOrder/totalSalPrice/totalFullPrice)
+     * 3. The attributes quantityAllProductsInOrder/totalSalPrice/totalFullPrice will get default values 0 and will be
+     *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
+     * */
+    @PutMapping(URL_EDIT)
     public ResponseEntity<?> editOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors) {
         // Check Error
         if (errors.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to OrderPOJO object, Check input idOrder and attach UserMfoody to OrderMfoody
+        // Convert JsonObject to OrderPOJO object, Check input idOrder and set default values for newOrderMfoody
         Gson gson = new Gson();
         OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
+        if (orderMfoodyInterfaceService.getOrderMfoodyByID(newOrderPOJO.getIdOrder()) == null) {
+            return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + newOrderPOJO.getIdOrder(),
+                    HttpStatus.NOT_FOUND);
+        }
         OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
-        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdOrder(newOrderMfoody.getIdOrder());
+        newOrderMfoody.setQuantityAllProductsInOrder(0);
+        newOrderMfoody.setTotalFullPriceOrder(0);
+        newOrderMfoody.setTotalSalePriceOrder(0);
+
+        // Check UserMfoody and set it to OrderMfoody
+        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdOrder(newOrderPOJO.getIdOrder());
         if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
+                    HttpStatus.NOT_FOUND);
         }
         newOrderMfoody.setUser(attachUserMfoody);
 
@@ -89,7 +120,13 @@ public class OrderMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(URL_ADD) // idUser in Json must be accurate
+    /*
+     * 1. idUser in Json must be accurate, quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
+     * 2. Need to create a new OrderMfoody coz it has it own attributes like dateOder/shippingPrice...
+     * 3. Every OrderMfoody is created with quantityAllProductsInOrder/totalSalPrice/totalFullPrice = 0 and will be
+     *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
+     * */
+    @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors) {
         // Check Error
         if (errors.hasErrors()) {
@@ -104,7 +141,8 @@ public class OrderMfoodyController {
         // Check input idUser and attach UserMfoody to OrderMfoody
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
         if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
+                    HttpStatus.NOT_FOUND);
         }
         newOrderMfoody.setUser(attachUserMfoody);
 

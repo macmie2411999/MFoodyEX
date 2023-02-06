@@ -9,6 +9,8 @@ public interface FeedbackMailInterfaceService {
 
     public FeedbackMail getFeedbackMailByID(int idFeedbackMail);
 
+    public FeedbackMail getFeedbackMailByEmailUserAndContentFeedbackMail(String emailUser, String contentFeedbackMail);
+
     public FeedbackMail saveFeedbackMail(FeedbackMail feedbackMail);
 
     public FeedbackMail updateFeedbackMail(FeedbackMail newFeedbackMail);

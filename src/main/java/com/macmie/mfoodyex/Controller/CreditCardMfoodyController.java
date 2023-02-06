@@ -92,7 +92,8 @@ public class CreditCardMfoodyController {
         CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdCard(newCreditCardPOJO.getIdCard());
         if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with IdCard: " + newCreditCardPOJO.getIdCard(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with idCard: " + newCreditCardPOJO.getIdCard(),
+                    HttpStatus.NOT_FOUND);
         }
         newCreditCardMfoody.setUser(attachUserMfoody);
 
@@ -113,16 +114,19 @@ public class CreditCardMfoodyController {
         CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
         CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
 
-        // Check duplicate
-        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.getCreditCardMfoodyByNumberCard(newCreditCardPOJO.getNumberCard());
+        // Check duplicate by numberCard
+        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.
+                getCreditCardMfoodyByNumberCard(newCreditCardPOJO.getNumberCard());
         if (existingCard != null) {
-            return new ResponseEntity<>("CONFLICT - A card with the same number already exists!", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("CONFLICT - A CreditCardMfoody with the same numberCard already exists!",
+                    HttpStatus.CONFLICT);
         }
 
         // Check input idUser and attach UserMfoody to CreditCardMfoody
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser());
         if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCreditCardPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCreditCardPOJO.getIdUser(),
+                    HttpStatus.NOT_FOUND);
         }
         newCreditCardMfoody.setUser(attachUserMfoody);
 

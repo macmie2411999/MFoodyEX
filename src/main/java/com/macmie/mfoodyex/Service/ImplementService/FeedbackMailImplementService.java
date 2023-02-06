@@ -42,6 +42,12 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
     }
 
     @Override
+    public FeedbackMail getFeedbackMailByEmailUserAndContentFeedbackMail(String emailUser, String contentFeedbackMail) {
+        log.info("Fetching FeedbackMail with emailUser: {} and contentFeedbackMail: {}", emailUser, contentFeedbackMail );
+        return feedbackMailRepository.findByEmailUserFeedbackMailAndContentFeedbackMail(emailUser, contentFeedbackMail);
+    }
+
+    @Override
     public FeedbackMail saveFeedbackMail(FeedbackMail feedbackMail) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        feedbackMail.setEmailUserFeedbackMail(stringUtil.parseEmail(feedbackMail.getEmailUserFeedbackMail()));

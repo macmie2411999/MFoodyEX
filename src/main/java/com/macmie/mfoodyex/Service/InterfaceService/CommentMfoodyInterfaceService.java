@@ -13,6 +13,8 @@ public interface CommentMfoodyInterfaceService {
 
     public CommentMfoody getCommentMfoodyByID(int idCommentMfoody);
 
+    public CommentMfoody getCommentMfoodyByContentComment(String contentComment);
+
     public CommentMfoody saveCommentMfoody(CommentMfoody commentMfoody);
 
     public CommentMfoody updateCommentMfoody(CommentMfoody newCommentMfoody);

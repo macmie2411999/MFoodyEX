@@ -86,7 +86,8 @@ public class UserMfoodyController {
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
         UserMfoody oldUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newUserMfoodyPOJO.getIdUser());
         if (oldUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    "NOT_FOUND UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
         }
 
         // Save to DB
@@ -106,23 +107,28 @@ public class UserMfoodyController {
         UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
         UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
 
-        // Check duplicate
+        // Check duplicate by emailUser/phoneNumber
         UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser());
-        UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(newUserMfoodyPOJO.getPhoneNumberUser());
+        UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(
+                newUserMfoodyPOJO.getPhoneNumberUser());
         if (existingEmailUser != null || existingPhoneNumberUser != null) {
-            return new ResponseEntity<>("CONFLICT - A user with the same email or phone number already exists!", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(
+                    "CONFLICT - A user with the same emailUser or phoneNumber already exists!",
+                    HttpStatus.CONFLICT);
         }
 
         // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from user's request)
         userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
 
         // Create and save a new CartMfoody (CartMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
-        CartMfoodyPOJO newCartMfoodyPOJO = new CartMfoodyPOJO(0, 0, 0, 0, newUserMfoodyPOJO.getIdUser());
+        CartMfoodyPOJO newCartMfoodyPOJO = new
+                CartMfoodyPOJO(0, 0, 0, 0,
+                newUserMfoodyPOJO.getIdUser());
         CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
         newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
         cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
 
         // Save to DB and return (New UserMfoody in DB could have ID differs from user's request)
-        return new ResponseEntity<>(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

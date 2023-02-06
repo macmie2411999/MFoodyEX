@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
+import com.macmie.mfoodyex.Model.ProductMfoody;
 import com.macmie.mfoodyex.POJO.DetailProductCartMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductCartMfoodyInterfaceService;
@@ -72,7 +73,11 @@ public class DetailProductCartMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(URL_EDIT) // idCart and idProduct in Json must be accurate
+    /*
+    * 1. idCart and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
+    * 2. salePrice/fullPrice of DetailProductCartMfoody are fetched from ProductMfoody
+    * */
+    @PutMapping(URL_EDIT)
     public ResponseEntity<?> editDetailProductCartMfoody(@RequestBody String detailProductCartPOJOJsonObject, BindingResult errors) {
         // Check Error
         if (errors.hasErrors()) {
@@ -83,6 +88,14 @@ public class DetailProductCartMfoodyController {
         Gson gson = new Gson();
         DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO = gson.fromJson(detailProductCartPOJOJsonObject, DetailProductCartMfoodyPOJO.class);
         DetailProductCartMfoody newDetailProductCartMfoody = newDetailProductCartMfoodyPOJO.renderDetailProductCartMfoody();
+
+        // Check valid idCart and idProduct
+        if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+        }
+        if (cartMfoodyInterfaceService.getCartMfoodyByID(newDetailProductCartMfoodyPOJO.getIdCart()) == null) {
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
+        }
         if (detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(
                 newDetailProductCartMfoodyPOJO.getIdCart(),
                 newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
@@ -91,9 +104,14 @@ public class DetailProductCartMfoodyController {
                             + " and idProduct: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
         }
 
-        // Update IdDetailProductCartMfoody, ProductMfoody, and CartMfoody
-        newDetailProductCartMfoody.setIdDetailProductCartMfoody(new DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(), newDetailProductCartMfoodyPOJO.getIdProduct()));
-        newDetailProductCartMfoody.setProduct(productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()));
+        // Update IdDetailProductCartMfoody, ProductMfoody, and CartMfoody; re-assign values for salePrice/fullPrice from ProductMfoody
+        newDetailProductCartMfoody.setIdDetailProductCartMfoody(
+                new DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(),
+                        newDetailProductCartMfoodyPOJO.getIdProduct()));
+        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct());
+        newDetailProductCartMfoody.setProduct(productMfoody);
+        newDetailProductCartMfoody.setSalePriceDetailProductCart(productMfoody.getSalePriceProduct());
+        newDetailProductCartMfoody.setFullPriceDetailProductCart(productMfoody.getFullPriceProduct());
         processCartMfoody(newDetailProductCartMfoodyPOJO, newDetailProductCartMfoody);
 
         // Save to DB and return
@@ -101,7 +119,11 @@ public class DetailProductCartMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(URL_ADD) // idCart and idProduct in Json must be accurate
+    /*
+     * 1. idCart and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
+     * 2. salePrice/fullPrice of DetailProductCartMfoody are fetched from ProductMfoody
+     * */
+    @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewDetailProductCartMfoody(@RequestBody String detailProductCartPOJOJsonObject, BindingResult errors) {
         // Check Error
         if (errors.hasErrors()) {
@@ -112,22 +134,28 @@ public class DetailProductCartMfoodyController {
         Gson gson = new Gson();
         DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO = gson.fromJson(detailProductCartPOJOJsonObject, DetailProductCartMfoodyPOJO.class);
         DetailProductCartMfoody newDetailProductCartMfoody = newDetailProductCartMfoodyPOJO.renderDetailProductCartMfoody();
-        if (detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(
-                newDetailProductCartMfoodyPOJO.getIdCart(),
-                newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
-            return new ResponseEntity<>(
-                    "NOT_FOUND DetailProductCartMfoody with idCart: " + newDetailProductCartMfoodyPOJO.getIdCart()
-                            + " and idProduct: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+
+        // Check valid idCart and idProduct
+        if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+        }
+        if (cartMfoodyInterfaceService.getCartMfoodyByID(newDetailProductCartMfoodyPOJO.getIdCart()) == null) {
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
         }
 
-        // Update IdDetailProductCartMfoody, ProductMfoody, and CartMfoody
-        newDetailProductCartMfoody.setIdDetailProductCartMfoody(new DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(), newDetailProductCartMfoodyPOJO.getIdProduct()));
-        newDetailProductCartMfoody.setProduct(productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()));
+        // Add IdDetailProductCartMfoody, ProductMfoody, and CartMfoody; re-assign values for salePrice/fullPrice from ProductMfoody
+        newDetailProductCartMfoody.setIdDetailProductCartMfoody(
+                new DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(),
+                        newDetailProductCartMfoodyPOJO.getIdProduct()));
+        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct());
+        newDetailProductCartMfoody.setProduct(productMfoody);
+        newDetailProductCartMfoody.setSalePriceDetailProductCart(productMfoody.getSalePriceProduct());
+        newDetailProductCartMfoody.setFullPriceDetailProductCart(productMfoody.getFullPriceProduct());
         processCartMfoody(newDetailProductCartMfoodyPOJO, newDetailProductCartMfoody);
 
         // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
         detailProductCartMfoodyInterfaceService.saveDetailProductCartMfoody(newDetailProductCartMfoody);
-        return new ResponseEntity<>(newDetailProductCartMfoody, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     public void processCartMfoody(DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO, DetailProductCartMfoody newDetailProductCartMfoody) {

@@ -41,6 +41,12 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
     }
 
     @Override
+    public List<OrderMfoody> getListOrderMfoodysByIdUser(int idUser) {
+        log.info("Fetching all OrderMfoodys with idUser: {}", idUser);
+        return orderMfoodyRepository.findAllByIdUser(idUser);
+    }
+
+    @Override
     public OrderMfoody getOrderMfoodyByID(int idOrderMfoody) {
         log.info("Fetching OrderMfoody with ID: {}", idOrderMfoody);
         return orderMfoodyRepository.findById(idOrderMfoody).orElse(null);
@@ -79,17 +85,23 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
         // Delete DetailProductOrderMfoody and Order
         List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(idOrderMfoody);
         detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
+
+        // Delete Order
         orderMfoodyRepository.deleteById(idOrderMfoody);
     }
 
     @Override
-    public void deleteOrderMfoodyByIdUser(int idUser) {
+    public void deleteAllOrderMfoodysByIdUser(int idUser) {
         log.info("Deleting OrderMfoody with idUser: {}", idUser);
 
-        // Delete DetailProductOrderMfoody and Order
-        OrderMfoody orderMfoody = orderMfoodyRepository.findByIdUser(idUser);
-        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(orderMfoody.getIdOrder());
-        detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
-        orderMfoodyRepository.deleteByIdUser(idUser);
+        // Delete all DetailProductOrderMfoody attaching to Order
+        List<OrderMfoody> orderMfoodyList = orderMfoodyRepository.findAllByIdUser(idUser);
+        for(OrderMfoody element : orderMfoodyList){
+            List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(element.getIdOrder());
+            detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
+        }
+
+        // Delete Order
+        orderMfoodyRepository.deleteAllByIdUser(idUser);
     }
 }

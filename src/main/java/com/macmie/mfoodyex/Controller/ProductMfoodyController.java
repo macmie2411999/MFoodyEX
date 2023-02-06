@@ -86,18 +86,26 @@ public class ProductMfoodyController {
         Gson gson = new Gson();
         ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
         ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
-        ProductMfoody oldProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
+        ProductMfoody oldProductMfoody = productMfoodyInterfaceService.
+                getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
         if (oldProductMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    "NOT_FOUND ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(),
+                    HttpStatus.NOT_FOUND);
         }
 
         // Save to DB
         productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
 
-        // Update price in Detail Product Cart, Cart if the price changes (Do not update in Order or Detail Product Order coz price Order will not be change)
+        /*
+        * 1. Update price in DetailProductCart, CartMfoody if the price changes
+        * 2. There is no need to update in OrderMfoody or DetailProductOrder coz price Order will not be change accordingly
+        * */
         if (newProductMfoody.getSalePriceProduct() != oldProductMfoody.getSalePriceProduct()
                 || newProductMfoody.getFullPriceProduct() != oldProductMfoody.getFullPriceProduct()) {
-            List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.findAllDetailProductCartsMfoodyByIdProduct(newProductMfoody.getIdProduct());
+            List<DetailProductCartMfoody> detailProductCartMfoodyList =
+                    detailProductCartMfoodyInterfaceService.findAllDetailProductCartsMfoodyByIdProduct(
+                            newProductMfoody.getIdProduct());
             for (DetailProductCartMfoody element : detailProductCartMfoodyList) {
                 element.setFullPriceDetailProductCart(newProductMfoody.getFullPriceProduct());
                 element.setSalePriceDetailProductCart(newProductMfoody.getSalePriceProduct());
@@ -127,15 +135,19 @@ public class ProductMfoodyController {
         ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
         ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
 
-        // Check duplicate
-        ProductMfoody existingNameProduct = productMfoodyInterfaceService.getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
-        ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
+        // Check duplicate by nameProduct/albumProduct
+        ProductMfoody existingNameProduct = productMfoodyInterfaceService.
+                getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
+        ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.
+                getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
         if (existingNameProduct != null || existingAlbumProduct != null) {
-            return new ResponseEntity<>("CONFLICT - A product with the same name or album already exists!", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(
+                    "CONFLICT - A product with the same nameProduct or albumProduct already exists!",
+                    HttpStatus.CONFLICT);
         }
 
         // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
         productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
-        return new ResponseEntity<>(newProductMfoody, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

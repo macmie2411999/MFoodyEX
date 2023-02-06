@@ -37,19 +37,19 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
 
     @Override
     public UserMfoody getUserMfoodyByID(int idUserMfoody) {
-        log.info("Fetching UserMfoody with id: {}", idUserMfoody);
+        log.info("Fetching UserMfoody with ID: {}", idUserMfoody);
         return userMfoodyRepository.findById(idUserMfoody).orElse(null);
     }
 
     @Override
     public UserMfoody getUserMfoodyByEmail(String emailUserMfoody) {
-        log.info("Fetching UserMfoody with email: {}", emailUserMfoody);
+        log.info("Fetching UserMfoody with emailUserMfoody: {}", emailUserMfoody);
         return userMfoodyRepository.findByEmailUser(emailUserMfoody);
     }
 
     @Override
     public UserMfoody getUserMfoodyByPhoneNumber(String phoneNumberUserMfoody) {
-        log.info("Fetching UserMfoody with phone number: {}", phoneNumberUserMfoody);
+        log.info("Fetching UserMfoody with phoneNumberUserMfoody: {}", phoneNumberUserMfoody);
         return userMfoodyRepository.findByPhoneNumberUser(phoneNumberUserMfoody);
     }
 
@@ -87,7 +87,7 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
 //        userMfoody.setAddressUser(stringUtil.parseEmail(userMfoody.getAddressUser()));
 //        userMfoody.setRoleUser(stringUtil.parseEmail(userMfoody.getRoleUser()));
 
-        log.info("Saving UserMfoody with id: {}", userMfoody.getIdUser());
+        log.info("Saving UserMfoody with ID: {}", userMfoody.getIdUser());
         return userMfoodyRepository.save(userMfoody);
     }
 
@@ -101,13 +101,13 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
 //        userMfoodyToUpdate.setNameUser((newUserMfoody.getNameUser()));
 //        userMfoodyToUpdate.setPhoneNumberUser((newUserMfoody.getPhoneNumberUser()));
 //        userMfoodyToUpdate.setRoleUser((newUserMfoody.getRoleUser()));
-        log.info("Updating UserMfoody with id: {}", newUserMfoody.getIdUser());
+        log.info("Updating UserMfoody with ID: {}", newUserMfoody.getIdUser());
         return userMfoodyRepository.save(newUserMfoody);
     }
 
     @Override
     public void deleteUserMfoodyByID(int idUserMfoody) {
-        log.info("Deleting UserMfoody with id: {}", idUserMfoody);
+        log.info("Deleting UserMfoody with ID: {}", idUserMfoody);
         userMfoodyRepository.deleteById(idUserMfoody);
     }
 }

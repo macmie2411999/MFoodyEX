@@ -29,5 +29,7 @@ public interface CommentMfoodyRepository extends JpaRepository<CommentMfoody, In
 
     @Query("SELECT c FROM CommentMfoody c WHERE c.user.idUser = :idUser")
     List<CommentMfoody> findAllByIdUser(@Param("idUser") int idUser);
+
+    CommentMfoody findCommentMfoodyByContentComment(String contentComment);
 }
 

@@ -11,10 +11,10 @@ USE MFoodyEx;
 CREATE TABLE
     IF NOT EXISTS USER_MFOODY(
                                  ID_USER INT NOT NULL AUTO_INCREMENT,
-                                 EMAIL_USER NVARCHAR(50) NOT NULL,
+                                 EMAIL_USER NVARCHAR(50) NOT NULL UNIQUE,
     PASSWORD_USER NVARCHAR(50) NOT NULL,
     NAME_USER NVARCHAR(50) NOT NULL,
-    PHONE_NUMBER_USER NVARCHAR(20) NOT NULL,
+    PHONE_NUMBER_USER NVARCHAR(20) NOT NULL UNIQUE,
     ADDRESS_USER NVARCHAR(100) NOT NULL,
     ROLE_USER NVARCHAR(20) NOT NULL,
     PRIMARY KEY (ID_USER)
@@ -37,16 +37,16 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS PRODUCT_MFOODY(
                                     ID_PRODUCT INT NOT NULL AUTO_INCREMENT,
-                                    NAME_PRODUCT NVARCHAR(100) NOT NULL,
-    ALBUM_PRODUCT NVARCHAR(20) NOT NULL,
+                                    NAME_PRODUCT NVARCHAR(100) NOT NULL UNIQUE,
+    ALBUM_PRODUCT NVARCHAR(20) NOT NULL UNIQUE,
     DESCRIPTION_PRODUCT TEXT NOT NULL,
-    FULL_PRICE_PRODUCT INT NOT NULL,
-    SALE_PRICE_PRODUCT INT NOT NULL,
+    FULL_PRICE_PRODUCT FLOAT NOT NULL,
+    SALE_PRICE_PRODUCT FLOAT NOT NULL,
     WEIGHT_PRODUCT TEXT NOT NULL,
     IMPORT_QUANTITY_PRODUCT INT NOT NULL,
     IMPORT_DATE_PRODUCT NVARCHAR(20) NOT NULL,
     STOREHOUSE_QUANTITY_PRODUCT INT NOT NULL,
-    RATING_PRODUCT INT NOT NULL,
+    RATING_PRODUCT FLOAT NOT NULL,
     CATEGORY_PRODUCT NVARCHAR(50) NOT NULL,
     BRAND_PRODUCT NVARCHAR(50),
     PRIMARY KEY (ID_PRODUCT)
@@ -70,8 +70,8 @@ CREATE TABLE
     IF NOT EXISTS CART_MFOODY(
                                  ID_CART INT NOT NULL AUTO_INCREMENT,
                                  QUANTITY_ALL_PRODUCTS_IN_CART INT NOT NULL,
-                                 SALE_PRICE_CART INT NOT NULL,
-                                 FULL_PRICE_CART INT NOT NULL,
+                                 TOTAL_SALE_PRICE_CART FLOAT NOT NULL,
+                                 TOTAL_FULL_PRICE_CART FLOAT NOT NULL,
                                  ID_USER INT NOT NULL UNIQUE,
                                  PRIMARY KEY (ID_CART),
     CONSTRAINT FK_CART_VS_USER FOREIGN KEY (ID_USER) REFERENCES USER_MFOODY(ID_USER)
@@ -83,8 +83,8 @@ CREATE TABLE
                                                 ID_CART INT NOT NULL AUTO_INCREMENT,
                                                 ID_PRODUCT INT NOT NULL,
                                                 QUANTITY_DETAIL_PRODUCT_CART INT NOT NULL,
-                                                SALE_PRICE_DETAIL_PRODUCT_CART INT NOT NULL,
-                                                FULL_PRICE_DETAIL_PRODUCT_CART INT NOT NULL,
+                                                SALE_PRICE_DETAIL_PRODUCT_CART FLOAT NOT NULL,
+                                                FULL_PRICE_DETAIL_PRODUCT_CART FLOAT NOT NULL,
                                                 PRIMARY KEY (ID_CART, ID_PRODUCT),
     CONSTRAINT FK_DETAILPRODUCTCARD_VS_CART FOREIGN KEY (ID_CART) REFERENCES CART_MFOODY(ID_CART),
     CONSTRAINT FK_DETAILPRODUCTCARD_VS_PRODUCT FOREIGN KEY (ID_PRODUCT) REFERENCES PRODUCT_MFOODY(ID_PRODUCT)
@@ -96,10 +96,11 @@ CREATE TABLE
                                   ID_ORDER INT NOT NULL AUTO_INCREMENT,
                                   DATE_ORDER NVARCHAR(20) NOT NULL,
     DATE_RECEIPT_ORDER NVARCHAR(20) NOT NULL,
-    SHIPPING_PRICE_ORDER INT NOT NULL,
+    SHIPPING_PRICE_ORDER FLOAT NOT NULL,
     SHIPPING_METHOD_ORDER NVARCHAR(50) NOT NULL,
-    TOTAL_FULL_PRICE_ORDER INT NOT NULL,
-    TOTAL_SALE_PRICE_ORDER INT NOT NULL,
+    QUANTITY_ALL_PRODUCTS_IN_ORDER INT NOT NULL,
+    TOTAL_FULL_PRICE_ORDER FLOAT NOT NULL,
+    TOTAL_SALE_PRICE_ORDER FLOAT NOT NULL,
     PAYMENT_METHOD_ORDER NVARCHAR(50) NOT NULL,
     STATUS_ORDER NVARCHAR(20) NOT NULL,
     ID_USER INT NOT NULL,
@@ -113,8 +114,8 @@ CREATE TABLE
                                                  ID_PRODUCT INT NOT NULL AUTO_INCREMENT,
                                                  ID_ORDER INT NOT NULL,
                                                  QUANTITY_DETAIL_PRODUCT_ORDER INT NOT NULL,
-                                                 SALE_PRICE_DETAIL_PRODUCT_ORDER INT NOT NULL,
-                                                 FULL_PRICE_DETAIL_PRODUCT_ORDER INT NOT NULL,
+                                                 SALE_PRICE_DETAIL_PRODUCT_ORDER FLOAT NOT NULL,
+                                                 FULL_PRICE_DETAIL_PRODUCT_ORDER FLOAT NOT NULL,
                                                  PRIMARY KEY (ID_PRODUCT, ID_ORDER),
     CONSTRAINT FK_DETAILPRODUCTORDER_VS_ORDER FOREIGN KEY (ID_ORDER) REFERENCES ORDER_MFOODY(ID_ORDER),
     CONSTRAINT FK_DETAILPRODUCTORDER_VS_PRODUCT FOREIGN KEY (ID_PRODUCT) REFERENCES PRODUCT_MFOODY(ID_PRODUCT)
@@ -190,8 +191,8 @@ INSERT INTO
     CART_MFOODY (
     ID_CART,
     QUANTITY_ALL_PRODUCTS_IN_CART,
-    SALE_PRICE_CART,
-    FULL_PRICE_CART,
+    TOTAL_SALE_PRICE_CART,
+    TOTAL_FULL_PRICE_CART,
     ID_USER
 )
 VALUES (350060, 1, 50, 50, 215231),
@@ -212,6 +213,17 @@ VALUES (430710, 'Christ Black', '5379653043547446', '20/12/22', '505', 215230),
        (430711, 'Robinson Hank', '6589652343548896', '01/01/23', '714', 215231),
        (430712, 'Williams Swift', '5238759847350934', '06/12/24', '272', 215232);
 
+-- INSERT INTO
+--     CREDIT_CARD_MFOODY (
+--     ID_CARD,
+--     NAME_USER_CARD,
+--     NUMBER_CARD,
+--     EXPIRATION_CARD,
+--     SECURITY_CODE_CARD,
+--     ID_USER
+-- )
+-- VALUES (430713, 'Williams Swift', '2305759847357788', '06/11/25', '525', 215232);
+
 -- insert data to PRODUCT_MFOODY
 INSERT INTO
     PRODUCT_MFOODY (
@@ -229,7 +241,7 @@ INSERT INTO
     CATEGORY_PRODUCT,
     BRAND_PRODUCT
 )
-VALUES (530020, 'Картофель мытый', 'Vegetable_Tomato_1', 'Срок хранения макс: 9 дней. Страна: Россия', 80, 50, '1 Kg', 150, '22/01/2023', 100, 5, 'Овощи', 'Без Бренда'),
+VALUES (530020, 'Картофель мытый', 'Vegetable_Tomato_1', 'Срок хранения макс: 9 дней. Страна: Россия', 80, 50, '1 Kg', 150, '22/01/2023', 100, 3, 'Овощи', 'Без Бренда'),
        (530021, 'Картофель', 'Vegetable_Tomato_2', 'Срок хранения макс: 8 дней. Страна: Россия', 40, 40, '1 Kg', 100, '19/02/2023', 30, 4, 'Овощи', 'Без Бренда'),
        (530022, 'Картофель красный мытый', 'Vegetable_Tomato_3', 'Срок хранения макс: 6 дней. Страна: Россия', 50, 50, '1 Kg', 250, '22/01/2023', 100, 5, 'Овощи', 'Без Бренда');
 
@@ -254,15 +266,16 @@ INSERT INTO
     DATE_RECEIPT_ORDER,
     SHIPPING_PRICE_ORDER,
     SHIPPING_METHOD_ORDER,
+    QUANTITY_ALL_PRODUCTS_IN_ORDER,
     TOTAL_FULL_PRICE_ORDER,
     TOTAL_SALE_PRICE_ORDER,
     PAYMENT_METHOD_ORDER,
     STATUS_ORDER,
     ID_USER
 )
-VALUES (750020, '22/03/2023', '21/03/2023', 0, "Recieve at Store", 50, 50, 'Credit Card', 'Processing', 215231),
-       (750021, '19/03/2023', '19/03/2023', 0, "Recieve at Store", 40, 40, 'By Cash', 'Processing', 215230),
-       (750022, '24/03/2023', '25/03/2023', 0, "Recieve at Store", 50, 50, 'Credit Card', 'Processing', 215232);
+VALUES (750020, '22/03/2023', '21/03/2023', 0, "Recieve at Store", 1, 50, 50, 'Credit Card', 'Processing', 215231),
+       (750021, '19/03/2023', '19/03/2023', 0, "Recieve at Store", 1, 40, 40, 'By Cash', 'Processing', 215230),
+       (750022, '24/03/2023', '25/03/2023', 0, "Recieve at Store", 1, 50, 50, 'Credit Card', 'Processing', 215232);
 
 -- insert data to DETAIL_PRODUCT_CART_MFOODY
 INSERT INTO

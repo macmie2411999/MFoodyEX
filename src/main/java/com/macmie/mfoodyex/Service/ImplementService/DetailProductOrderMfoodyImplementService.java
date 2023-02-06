@@ -37,7 +37,7 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
 
     @Override
     public DetailProductOrderMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct) {
-        log.info("Fetching DetailProductOrderMfoody with idOrder and idProduct: {}, {}", idOrder, idProduct);
+        log.info("Fetching DetailProductOrderMfoody with idOrder: {} and idProduct: {}", idOrder, idProduct);
         return detailProductOrderMfoodyRepository.findByIdOrderAndIdProduct(idOrder, idProduct);
     }
 

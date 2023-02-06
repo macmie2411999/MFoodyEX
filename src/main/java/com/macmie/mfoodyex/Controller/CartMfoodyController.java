@@ -79,7 +79,12 @@ public class CartMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(URL_EDIT) // Redundant // idUser in Json is ignored
+    /*
+     * 1. idCart in Json must be accurate, idUser/quantityAllProductsInCart/totalSalPrice/totalFullPrice are ignored
+     * 2. This API is quite redundant coz quantityAllProductsInCart/totalSalPrice/totalFullPrice (all of its attributes)
+     *    will be updated later with APIs of DetailProductCartMfoody (coz the oneToMany table is always created first)
+     * */
+    @PutMapping(URL_EDIT)
     public ResponseEntity<?> editCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject, BindingResult errors) {
         // Check Error
         if (errors.hasErrors()) {
@@ -91,34 +96,53 @@ public class CartMfoodyController {
         CartMfoodyPOJO newCartMfoodyPOJO = gson.fromJson(cartMfoodyPOJOJsonObject, CartMfoodyPOJO.class);
         CartMfoody newCartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(newCartMfoodyPOJO.getIdCart());
         if (newCartMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND CardMfoody with ID: " + newCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newCartMfoodyPOJO.getIdCart(),
+                    HttpStatus.NOT_FOUND);
         }
-        newCartMfoody.setQuantityAllProductsInCart(newCartMfoodyPOJO.getQuantityAllProductsInCart());
-        newCartMfoody.setTotalSalePriceCart(newCartMfoodyPOJO.getTotalSalePriceCart());
-        newCartMfoody.setTotalFullPriceCart(newCartMfoodyPOJO.getTotalFullPriceCart());
+        newCartMfoody.setQuantityAllProductsInCart(0);
+        newCartMfoody.setTotalSalePriceCart(0);
+        newCartMfoody.setTotalFullPriceCart(0);
 
         // Save to DB and return
         cartMfoodyInterfaceService.updateCartMfoody(newCartMfoody);
         return new ResponseEntity<>(newCartMfoody, HttpStatus.OK);
     }
 
-    @PostMapping(URL_ADD) // idUser in Json must be accurate
+    /*
+    * 1. idUser in Json must be accurate, quantityAllProductsInCart/totalSalPrice/totalFullPrice are ignored
+    * 2. There is no need to create a new CartMfoody coz every UserMfoody will have one automatically right after
+    *    their account is created
+    * 3. Every CartMfoody is created with quantityAllProductsInCart/totalSalPrice/totalFullPrice = 0 and will be
+    *    updated later with APIs of DetailProductCartMfoody coz the oneToMany table is always created first
+    * */
+    @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject, BindingResult errors) {
         // Check Error
         if (errors.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        // Convert JsonObject to CardMfoodyPOJO object
+        // Convert JsonObject to CardMfoodyPOJO object and set default value
         Gson gson = new Gson();
         CartMfoodyPOJO newCartMfoodyPOJO = gson.fromJson(cartMfoodyPOJOJsonObject, CartMfoodyPOJO.class);
         CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
+        newCartMfoody.setQuantityAllProductsInCart(0);
+        newCartMfoody.setTotalFullPriceCart(0);
+        newCartMfoody.setTotalSalePriceCart(0);
 
         // Check input idUser and attach UserMfoody to CartMfoody
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCartMfoodyPOJO.getIdUser());
         if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCartMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCartMfoodyPOJO.getIdUser(),
+                    HttpStatus.NOT_FOUND);
         }
+
+        // Check duplicate by idUser (UserMfoody and CartMfoody have one-to-one relationship)
+        if (cartMfoodyInterfaceService.getCartMfoodyByIdUser(newCartMfoodyPOJO.getIdUser()) != null) {
+            return new ResponseEntity<>("CONFLICT - A CartMfoody with the same idUser already exists!",
+                    HttpStatus.CONFLICT);
+        }
+
         newCartMfoody.setUser(attachUserMfoody);
 
         // Save to DB and return (Updated CartMfoody in DB could have ID differs from user's request)

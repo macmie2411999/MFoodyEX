@@ -37,7 +37,7 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
 
     @Override
     public DetailProductCartMfoody getDetailProductCartMfoodyByICartAndIdProduct(int idCart, int idProduct) {
-        log.info("Fetching DetailProductCartMfoody with idCart and idProduct: {}, {}", idCart, idProduct);
+        log.info("Fetching DetailProductCartMfoody with idCart {} and idProduct: {}", idCart, idProduct);
         return detailProductCartMfoodyRepository.findByIdCartAndIdProduct(idCart, idProduct);
     }
 

@@ -54,6 +54,12 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
     }
 
     @Override
+    public CommentMfoody getCommentMfoodyByContentComment(String contentComment) {
+        log.info("Fetching CommentMfoody with contentComment: {}", contentComment);
+        return commentMfoodyRepository.findCommentMfoodyByContentComment(contentComment);
+    }
+
+    @Override
     public CommentMfoody saveCommentMfoody(CommentMfoody commentMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        CommentMfoody.setNameUserCard(stringUtil.parseName(CommentMfoody.getNameUserCard()));

@@ -43,19 +43,19 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
 
     @Override
     public ProductMfoody getProductMfoodyByNameProduct(String nameProduct) {
-        log.info("Fetching ProductMfoody with name: {}", nameProduct);
+        log.info("Fetching ProductMfoody with nameProduct: {}", nameProduct);
         return productMfoodyRepository.findByNameProduct(nameProduct);
     }
 
     @Override
     public ProductMfoody getProductMfoodyByAlbumProduct(String albumProduct) {
-        log.info("Fetching ProductMfoody with album: {}", albumProduct);
+        log.info("Fetching ProductMfoody with albumProduct: {}", albumProduct);
         return productMfoodyRepository.findByAlbumProduct(albumProduct);
     }
 
     @Override
     public ProductMfoody getProductMfoodyByIdComment(int idComment) {
-        log.info("Fetching ProductMfoody with idComment: {}", idComment);
+        log.info("Fetching ProductMfoody with ID: {}", idComment);
         return productMfoodyRepository.findProductMfoodyByIdComment(idComment);
     }
 

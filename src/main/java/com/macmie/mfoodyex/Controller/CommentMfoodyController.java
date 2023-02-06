@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CommentMfoody;
+import com.macmie.mfoodyex.Model.CreditCardMfoody;
 import com.macmie.mfoodyex.Model.ProductMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CommentMfoodyPOJO;
@@ -63,7 +64,8 @@ public class CommentMfoodyController {
         }
         List<CommentMfoody> commentMfoodyList = commentMfoodyInterfaceService.getListCommentMfoodysByIdUser(ID);
         if (commentMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with IdUser: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with idUser: " + ID,
+                    HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(commentMfoodyList, HttpStatus.OK);
     }
@@ -75,7 +77,8 @@ public class CommentMfoodyController {
         }
         List<CommentMfoody> commentMfoodyList = commentMfoodyInterfaceService.getListCommentMfoodysByIdProduct(ID);
         if (commentMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with IdProduct: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with idProduct: " + ID,
+                    HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(commentMfoodyList, HttpStatus.OK);
     }
@@ -103,9 +106,12 @@ public class CommentMfoodyController {
         // Update ratingProduct in ProductMfoody
         List<CommentMfoody> commentMfoodyList = commentMfoodyInterfaceService.getListCommentMfoodysByIdUser(ID);
         if (commentMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with IdUser: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with idUser: " + ID,
+                    HttpStatus.NO_CONTENT);
         }
-        Set<ProductMfoody> productMfoodyList = new HashSet<>(); // Use HashSet to ensure that each ProductMfoody object is only added once
+
+        // Use HashSet to ensure that each ProductMfoody object is only added once
+        Set<ProductMfoody> productMfoodyList = new HashSet<>();
         for (CommentMfoody element : commentMfoodyList) {
             productMfoodyList.add(element.getProduct());
         }
@@ -142,9 +148,11 @@ public class CommentMfoodyController {
         // Convert JsonObject to CommentPOJO object, Check input idComment and update CommentMfoody
         Gson gson = new Gson();
         CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentPOJOJsonObject, CommentMfoodyPOJO.class);
-        CommentMfoody newCommentMfoody = commentMfoodyInterfaceService.getCommentMfoodyByID(newCommentMfoodyPOJO.getIdComment());
+        CommentMfoody newCommentMfoody = commentMfoodyInterfaceService.
+                getCommentMfoodyByID(newCommentMfoodyPOJO.getIdComment());
         if (newCommentMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND CommentMfoody with ID: " + newCommentMfoodyPOJO.getIdComment(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND CommentMfoody with ID: " + newCommentMfoodyPOJO.getIdComment(),
+                    HttpStatus.NOT_FOUND);
         }
         newCommentMfoody.setRatingComment(newCommentMfoodyPOJO.getRatingComment());
         newCommentMfoody.setContentComment(newCommentMfoodyPOJO.getContentComment());
@@ -168,13 +176,23 @@ public class CommentMfoodyController {
         CommentMfoodyPOJO newCommentMfoodyPOJO = gson.fromJson(commentPOJOJsonObject, CommentMfoodyPOJO.class);
         CommentMfoody newCommentMfoody = newCommentMfoodyPOJO.renderCommentMfoody();
 
+        // Check duplicate by contentComment
+        if (commentMfoodyInterfaceService.
+                getCommentMfoodyByContentComment(newCommentMfoodyPOJO.getContentComment()) != null) {
+            return new ResponseEntity<>("CONFLICT - A CommentMfoody with the same contentComment already exists!",
+                    HttpStatus.CONFLICT);
+        }
+
         // Check input idUser and idProduct, attach new UserMfoody and ProductMfoody to CommentMfoody
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCommentMfoodyPOJO.getIdUser());
-        ProductMfoody attachProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newCommentMfoodyPOJO.getIdProduct());
+        ProductMfoody attachProductMfoody = productMfoodyInterfaceService.
+                getProductMfoodyByID(newCommentMfoodyPOJO.getIdProduct());
         if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCommentMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCommentMfoodyPOJO.getIdUser(),
+                    HttpStatus.NOT_FOUND);
         } else if (attachProductMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newCommentMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newCommentMfoodyPOJO.getIdProduct(),
+                    HttpStatus.NOT_FOUND);
         }
         newCommentMfoody.setUser(attachUserMfoody);
         newCommentMfoody.setProduct(attachProductMfoody);
