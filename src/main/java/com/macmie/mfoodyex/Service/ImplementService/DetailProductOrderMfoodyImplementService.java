@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
+import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Repository.DetailProductOrderMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
@@ -36,6 +37,18 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
     }
 
     @Override
+    public List<DetailProductOrderMfoody> getListDetailProductOrderMfoodysByIdOrder(int idOrder) {
+        log.info("Fetching all DetailProductOrderMfoodys with idOrder: {}", idOrder);
+        return detailProductOrderMfoodyRepository.findAllByIdOrder(idOrder);
+    }
+
+    @Override
+    public List<DetailProductOrderMfoody> getListDetailProductOrderMfoodysByIdProduct(int idProduct) {
+        log.info("Fetching all DetailProductOrderMfoodys with idProduct: {}", idProduct);
+        return detailProductOrderMfoodyRepository.findAllByIdProduct(idProduct);
+    }
+
+    @Override
     public DetailProductOrderMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct) {
         log.info("Fetching DetailProductOrderMfoody with idOrder: {} and idProduct: {}", idOrder, idProduct);
         return detailProductOrderMfoodyRepository.findByIdOrderAndIdProduct(idOrder, idProduct);
@@ -63,9 +76,9 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
     }
 
     @Override
-    public void deleteDetailProductOrderMfoodyByID(int idDetailProductOrderMfoody) {
-        log.info("Deleting DetailProductOrderMfoody with ID: {}", idDetailProductOrderMfoody);
-        detailProductOrderMfoodyRepository.deleteById(idDetailProductOrderMfoody);
+    public void deleteDetailProductOrderMfoodyByIdDetailProductOrderMfoody(int idOrder, int idProduct) {
+        log.info("Deleting DetailProductOrderMfoody with idOrder: {} and idProduct: {}", idOrder, idProduct);
+        detailProductOrderMfoodyRepository.deleteDetailProductOrderMfoodyByIdOrderAndIdProduct(idOrder, idProduct);
     }
 
     @Override
@@ -84,7 +97,7 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
 
     @Override
     public List<DetailProductOrderMfoody> findAllDetailProductOrdersMfoodyByIdOrder(int idOrder) {
-        log.info("Fetching All DetailProductOrderMfoodys with idCart: {}", idOrder);
+        log.info("Fetching All DetailProductOrderMfoodys with idOrder: {}", idOrder);
         return detailProductOrderMfoodyRepository.findAllByIdOrder(idOrder);
     }
 

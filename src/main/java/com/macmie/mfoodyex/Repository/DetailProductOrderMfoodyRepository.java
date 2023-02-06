@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.Repository;
 
 import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,12 @@ public interface DetailProductOrderMfoodyRepository extends JpaRepository<Detail
             "AND d.product.idProduct = :idProduct")
     DetailProductOrderMfoody findByIdOrderAndIdProduct(@Param("idOrder") int idOrder,
                                                        @Param("idProduct") int idProduct);
+
+    @Modifying
+    @Query("DELETE FROM DetailProductOrderMfoody d " +
+            "WHERE d.idDetailProductOrderMfoody.idProduct = :idProduct " +
+            "AND d.idDetailProductOrderMfoody.idOrder = :idOrder")
+    void deleteDetailProductOrderMfoodyByIdOrderAndIdProduct( @Param("idOrder") int idOrder,
+                                                            @Param("idProduct") int idProduct);
 }
 

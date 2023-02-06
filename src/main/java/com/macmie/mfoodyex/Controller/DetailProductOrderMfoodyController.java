@@ -44,6 +44,24 @@ public class DetailProductOrderMfoodyController {
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
 
+    @GetMapping(URL_GET_BY_ID_ORDER)
+    public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdOrder(@PathVariable("ID") int ID) {
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdOrder(ID);
+        if (detailProductOrderMfoodyList.isEmpty()) {
+            return new ResponseEntity<>("NO_CONTENT List of DetailProductOrderMfoodys with idOrder: " + ID, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
+    }
+
+    @GetMapping(URL_GET_BY_ID_PRODUCT)
+    public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdProduct(@PathVariable("ID") int ID) {
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdProduct(ID);
+        if (detailProductOrderMfoodyList.isEmpty()) {
+            return new ResponseEntity<>("NO_CONTENT List of DetailProductOrderMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
+    }
+
     @GetMapping(URL_GET_BY_ID_ORDER_AND_ID_PRODUCT)
     public ResponseEntity<?> getDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder, @PathVariable("IdProduct") int idProduct) {
         DetailProductOrderMfoody detailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
@@ -51,6 +69,16 @@ public class DetailProductOrderMfoodyController {
             return new ResponseEntity<>("NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductOrderMfoody, HttpStatus.OK);
+    }
+
+    @DeleteMapping(URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT)
+    public ResponseEntity<?> deleteDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder, @PathVariable("IdProduct") int idProduct) {
+        DetailProductOrderMfoody detailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
+        if (detailProductOrderMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
+        }
+        detailProductOrderMfoodyInterfaceService.deleteDetailProductOrderMfoodyByIdDetailProductOrderMfoody(idOrder, idProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE_BY_ID_ORDER)

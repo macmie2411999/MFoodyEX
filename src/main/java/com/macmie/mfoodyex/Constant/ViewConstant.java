@@ -26,6 +26,8 @@ public class ViewConstant {
     public static final String URL_DELETE_BY_ID_PRODUCT = "/deleteByIdProduct/{ID}";
     public static final String URL_DELETE_BY_ID_CART = "/deleteByIdCart/{ID}";
     public static final String URL_DELETE_BY_ID_ORDER = "/deleteByIdOrder/{ID}";
+    public static final String URL_DELETE_BY_ID_CART_AND_ID_PRODUCT = "/delete/idCart/{IdCart}/idProduct/{IdProduct}";
+    public static final String URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT = "/delete/idOrder/{IdOrder}/idProduct/{IdProduct}";
     public static final String URL_ADD = "/add";
     public static final String URL_EDIT = "/edit";
     /*

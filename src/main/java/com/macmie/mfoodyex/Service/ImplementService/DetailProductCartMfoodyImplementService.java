@@ -36,6 +36,18 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
     }
 
     @Override
+    public List<DetailProductCartMfoody> getListDetailProductCartMfoodysByIdCart(int idCart) {
+        log.info("Fetching all DetailProductCartMfoodys with idCart: {}", idCart);
+        return detailProductCartMfoodyRepository.findAllByIdCart(idCart);
+    }
+
+    @Override
+    public List<DetailProductCartMfoody> getListDetailProductCartMfoodysByIdProduct(int idProduct) {
+        log.info("Fetching all DetailProductCartMfoodys with idProduct: {}", idProduct);
+        return detailProductCartMfoodyRepository.findAllByIdProduct(idProduct);
+    }
+
+    @Override
     public DetailProductCartMfoody getDetailProductCartMfoodyByICartAndIdProduct(int idCart, int idProduct) {
         log.info("Fetching DetailProductCartMfoody with idCart {} and idProduct: {}", idCart, idProduct);
         return detailProductCartMfoodyRepository.findByIdCartAndIdProduct(idCart, idProduct);
@@ -63,9 +75,9 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
     }
 
     @Override
-    public void deleteDetailProductCartMfoodyByID(int idDetailProductCartMfoody) {
-        log.info("Deleting DetailProductCartMfoody with ID: {}", idDetailProductCartMfoody);
-        detailProductCartMfoodyRepository.deleteById(idDetailProductCartMfoody);
+    public void deleteDetailProductCartMfoodyByIdDetailProductCartMfoody(int idCart, int idProduct) {
+        log.info("Deleting DetailProductCartMfoody with idCart: {} and idProduct: {}", idCart, idProduct);
+        detailProductCartMfoodyRepository.deleteDetailProductCartMfoodyByIdProductAndIdCart(idCart, idProduct);
     }
 
     @Override

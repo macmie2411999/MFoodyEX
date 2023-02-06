@@ -46,6 +46,24 @@ public class DetailProductCartMfoodyController {
         return new ResponseEntity<>(detailProductCartMfoodyList, HttpStatus.OK);
     }
 
+    @GetMapping(URL_GET_BY_ID_CART)
+    public ResponseEntity<?> getAllDetailProductCartMfoodysByIdCart(@PathVariable("ID") int ID) {
+        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodysByIdCart(ID);
+        if (detailProductCartMfoodyList.isEmpty()) {
+            return new ResponseEntity<>("NO_CONTENT List of DetailProductCartMfoodys with idCart: " + ID, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(detailProductCartMfoodyList, HttpStatus.OK);
+    }
+
+    @GetMapping(URL_GET_BY_ID_PRODUCT)
+    public ResponseEntity<?> getAllDetailProductCartMfoodysByIdProduct(@PathVariable("ID") int ID) {
+        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodysByIdProduct(ID);
+        if (detailProductCartMfoodyList.isEmpty()) {
+            return new ResponseEntity<>("NO_CONTENT List of DetailProductCartMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(detailProductCartMfoodyList, HttpStatus.OK);
+    }
+
     @GetMapping(URL_GET_BY_ID_CART_AND_ID_PRODUCT)
     public ResponseEntity<?> getDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart, @PathVariable("IdProduct") int idProduct) {
         DetailProductCartMfoody detailProductCartMfoody = detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(idCart, idProduct);
@@ -53,6 +71,16 @@ public class DetailProductCartMfoodyController {
             return new ResponseEntity<>("NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(detailProductCartMfoody, HttpStatus.OK);
+    }
+
+    @DeleteMapping(URL_DELETE_BY_ID_CART_AND_ID_PRODUCT)
+    public ResponseEntity<?> deleteDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart, @PathVariable("IdProduct") int idProduct) {
+        DetailProductCartMfoody detailProductCartMfoody = detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(idCart, idProduct);
+        if (detailProductCartMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
+        }
+        detailProductCartMfoodyInterfaceService.deleteDetailProductCartMfoodyByIdDetailProductCartMfoody(idCart, idProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE_BY_ID_CART)
