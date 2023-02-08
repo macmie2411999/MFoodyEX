@@ -3,6 +3,7 @@ package com.macmie.mfoodyex.POJO;
 import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
 
 import java.util.List;
 
@@ -40,6 +41,15 @@ public class UserMfoodyPOJO {
         newUserMfoody.setAddressUser(this.getAddressUser());
         newUserMfoody.setRoleUser(this.getRoleUser());
         return newUserMfoody;
+    }
+
+    public boolean checkProductMfoodyValidAttributes() {
+        if(InputChecker.isValidEmail(this.emailUser) && InputChecker.isStringValid(this.passwordUser)
+                && InputChecker.isStringValid(this.nameUser) && InputChecker.isStringInt(this.phoneNumberUser)
+                && InputChecker.isStringValid(this.addressUser) && InputChecker.isStringValid(this.roleUser)) {
+            return true;
+        }
+        return  false;
     }
 
     public int getIdUser() {

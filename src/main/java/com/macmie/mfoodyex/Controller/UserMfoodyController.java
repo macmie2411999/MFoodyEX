@@ -2,7 +2,6 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CartMfoody;
-import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
@@ -11,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -94,66 +92,69 @@ public class UserMfoodyController {
     }
 
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        // Convert JsonObject to UserMfoodyPOJO object, Check the input idUser
-        Gson gson = new Gson();
-        UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
-        UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
-        UserMfoody oldUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newUserMfoodyPOJO.getIdUser());
-        if (oldUserMfoody == null) {
-            return new ResponseEntity<>(
-                    "NOT_FOUND UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
-        }
-
-        // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+    public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyPOJOJsonObject) {
         try {
-            userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
+            // Convert JsonObject to UserMfoodyPOJO object, Check the input idUser
+            Gson gson = new Gson();
+            UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
+            UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
+            UserMfoody oldUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newUserMfoodyPOJO.getIdUser());
+            if (oldUserMfoody == null) {
+                return new ResponseEntity<>(
+                        "NOT_FOUND UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+            }
+
+            // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+            try {
+                userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        "BAD_REQUEST Failed to update UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser());
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    "BAD_REQUEST Failed to update UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser());
+            log.error("An error occurred while editing UserMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(URL_ADD) // idUser is ignored
-    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject) {
+        try {
+            // Convert JsonObject to UserMfoody object
+            Gson gson = new Gson();
+            UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
+
+            UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
+
+            // Check duplicate by emailUser/phoneNumber
+            UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser());
+            UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(
+                    newUserMfoodyPOJO.getPhoneNumberUser());
+            if (existingEmailUser != null || existingPhoneNumberUser != null) {
+                return new ResponseEntity<>(
+                        "CONFLICT - A user with the same emailUser or phoneNumber already exists!",
+                        HttpStatus.CONFLICT);
+            }
+
+            // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from user's request)
+            userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
+
+            // Create and save a new CartMfoody (CartMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
+            CartMfoodyPOJO newCartMfoodyPOJO = new
+                    CartMfoodyPOJO(0, 0, 0, 0,
+                    newUserMfoodyPOJO.getIdUser());
+            CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
+            newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
+            cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
+
+            // Save to DB and return (New UserMfoody in DB could have ID differs from user's request)
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("An error occurred while adding UserMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-
-        // Convert JsonObject to UserMfoody object
-        Gson gson = new Gson();
-        UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
-        UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
-
-        // Check duplicate by emailUser/phoneNumber
-        UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser());
-        UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(
-                newUserMfoodyPOJO.getPhoneNumberUser());
-        if (existingEmailUser != null || existingPhoneNumberUser != null) {
-            return new ResponseEntity<>(
-                    "CONFLICT - A user with the same emailUser or phoneNumber already exists!",
-                    HttpStatus.CONFLICT);
-        }
-
-        // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from user's request)
-        userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
-
-        // Create and save a new CartMfoody (CartMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
-        CartMfoodyPOJO newCartMfoodyPOJO = new
-                CartMfoodyPOJO(0, 0, 0, 0,
-                newUserMfoodyPOJO.getIdUser());
-        CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
-        newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
-        cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
-
-        // Save to DB and return (New UserMfoody in DB could have ID differs from user's request)
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

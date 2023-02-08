@@ -7,6 +7,7 @@ import static org.springframework.util.StringUtils.*;
 
 @Component
 public class StringUtil {
+
     // Search word
     public boolean isWordContains(String s, String word) {
         return hasText(s) ? s.toUpperCase().contains(word.toUpperCase()) : false;

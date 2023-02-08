@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -88,83 +87,85 @@ public class ProductMfoodyController {
     }
 
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        // Convert JsonObject to ProductMfoodyPOJO object, Check the input idProduct
-        Gson gson = new Gson();
-        ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
-        ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
-        ProductMfoody oldProductMfoody = productMfoodyInterfaceService.
-                getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
-        if (oldProductMfoody == null) {
-            return new ResponseEntity<>(
-                    "NOT_FOUND ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(),
-                    HttpStatus.NOT_FOUND);
-        }
-
-        // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+    public ResponseEntity<?> editProductMfoody(@RequestBody String productMfoodyPOJOJsonObject) {
         try {
-            productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    "BAD_REQUEST Failed to update ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct());
-        }
-
-        /*
-        * 1. Update price in DetailProductCart, CartMfoody if the price changes
-        * 2. There is no need to update in OrderMfoody or DetailProductOrder coz price Order will not be change accordingly
-        * */
-        if (newProductMfoody.getSalePriceProduct() != oldProductMfoody.getSalePriceProduct()
-                || newProductMfoody.getFullPriceProduct() != oldProductMfoody.getFullPriceProduct()) {
-            List<DetailProductCartMfoody> detailProductCartMfoodyList =
-                    detailProductCartMfoodyInterfaceService.findAllDetailProductCartsMfoodyByIdProduct(
-                            newProductMfoody.getIdProduct());
-            for (DetailProductCartMfoody element : detailProductCartMfoodyList) {
-                element.setFullPriceDetailProductCart(newProductMfoody.getFullPriceProduct());
-                element.setSalePriceDetailProductCart(newProductMfoody.getSalePriceProduct());
-                detailProductCartMfoodyInterfaceService.updateDetailProductCartMfoody(element);
-
-                CartMfoody updateCartMfoody = element.getCart();
-                updateCartMfoody.setTotalSalePriceCart(updateCartMfoody.getTotalSalePriceCart() +
-                        newProductMfoody.getSalePriceProduct() - oldProductMfoody.getSalePriceProduct());
-                updateCartMfoody.setTotalFullPriceCart(updateCartMfoody.getTotalFullPriceCart() +
-                        newProductMfoody.getFullPriceProduct() - oldProductMfoody.getFullPriceProduct());
-                cartMfoodyInterfaceService.updateCartMfoody(updateCartMfoody);
+            // Convert JsonObject to ProductMfoodyPOJO object, Check the input idProduct
+            Gson gson = new Gson();
+            ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
+            ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
+            ProductMfoody oldProductMfoody = productMfoodyInterfaceService.
+                    getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
+            if (oldProductMfoody == null) {
+                return new ResponseEntity<>(
+                        "NOT_FOUND ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(),
+                        HttpStatus.NOT_FOUND);
             }
-        }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+            // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+            try {
+                productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        "BAD_REQUEST Failed to update ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct());
+            }
+
+            /*
+             * 1. Update price in DetailProductCart, CartMfoody if the price changes
+             * 2. There is no need to update in OrderMfoody or DetailProductOrder coz price Order will not be change accordingly
+             * */
+            if (newProductMfoody.getSalePriceProduct() != oldProductMfoody.getSalePriceProduct()
+                    || newProductMfoody.getFullPriceProduct() != oldProductMfoody.getFullPriceProduct()) {
+                List<DetailProductCartMfoody> detailProductCartMfoodyList =
+                        detailProductCartMfoodyInterfaceService.findAllDetailProductCartsMfoodyByIdProduct(
+                                newProductMfoody.getIdProduct());
+                for (DetailProductCartMfoody element : detailProductCartMfoodyList) {
+                    element.setFullPriceDetailProductCart(newProductMfoody.getFullPriceProduct());
+                    element.setSalePriceDetailProductCart(newProductMfoody.getSalePriceProduct());
+                    detailProductCartMfoodyInterfaceService.updateDetailProductCartMfoody(element);
+
+                    CartMfoody updateCartMfoody = element.getCart();
+                    updateCartMfoody.setTotalSalePriceCart(updateCartMfoody.getTotalSalePriceCart() +
+                            newProductMfoody.getSalePriceProduct() - oldProductMfoody.getSalePriceProduct());
+                    updateCartMfoody.setTotalFullPriceCart(updateCartMfoody.getTotalFullPriceCart() +
+                            newProductMfoody.getFullPriceProduct() - oldProductMfoody.getFullPriceProduct());
+                    cartMfoodyInterfaceService.updateCartMfoody(updateCartMfoody);
+                }
+            }
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while editing ProductMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(URL_ADD) // idProduct is ignored
-    public ResponseEntity<?> addNewProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> addNewProductMfoody(@RequestBody String productMfoodyPOJOJsonObject) {
+        try {
+            // Convert JsonObject to ProductMfoody object
+            Gson gson = new Gson();
+            ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
+            ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
+
+            // Check duplicate by nameProduct/albumProduct
+            ProductMfoody existingNameProduct = productMfoodyInterfaceService.
+                    getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
+            ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.
+                    getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
+            if (existingNameProduct != null || existingAlbumProduct != null) {
+                return new ResponseEntity<>(
+                        "CONFLICT - A product with the same nameProduct or albumProduct already exists!",
+                        HttpStatus.CONFLICT);
+            }
+
+            // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
+            productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("An error occurred while adding ProductMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-
-        // Convert JsonObject to ProductMfoody object
-        Gson gson = new Gson();
-        ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
-        ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
-
-        // Check duplicate by nameProduct/albumProduct
-        ProductMfoody existingNameProduct = productMfoodyInterfaceService.
-                getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
-        ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.
-                getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
-        if (existingNameProduct != null || existingAlbumProduct != null) {
-            return new ResponseEntity<>(
-                    "CONFLICT - A product with the same nameProduct or albumProduct already exists!",
-                    HttpStatus.CONFLICT);
-        }
-
-        // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
-        productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

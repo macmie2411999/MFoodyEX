@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.CommentMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
 
 public class CommentMfoodyPOJO {
     private int idComment;
@@ -15,6 +16,13 @@ public class CommentMfoodyPOJO {
         newCommentMfoody.setRatingComment(this.getRatingComment());
         newCommentMfoody.setContentComment(this.getContentComment());
         return newCommentMfoody;
+    }
+
+    public boolean checkCommentMfoodyValidAttributes() {
+        if(InputChecker.isStringValid(this.contentComment)) {
+            return true;
+        }
+        return  false;
     }
 
     public int getIdComment() {

@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.ProductMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
 
 public class ProductMfoodyPOJO {
     private int idProduct;
@@ -53,6 +54,16 @@ public class ProductMfoodyPOJO {
         newProductMfoody.setCategoryProduct(this.getCategoryProduct());
         newProductMfoody.setBrandProduct(this.getBrandProduct());
         return newProductMfoody;
+    }
+
+    public boolean checkProductMfoodyValidAttributes() {
+        if(InputChecker.isStringValid(this.nameProduct) && InputChecker.isStringValid(this.albumProduct)
+                && InputChecker.isStringValid(this.descriptionProduct) && InputChecker.isStringValid(this.weightProduct)
+                && InputChecker.isValidDateFormat(this.importDateProduct) && InputChecker.isStringValid(this.categoryProduct)
+                && InputChecker.isStringValid(this.brandProduct)) {
+            return true;
+        }
+        return  false;
     }
 
     public int getIdProduct() {

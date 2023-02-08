@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -66,47 +65,49 @@ public class FeedbackMailController {
     }
 
     @PutMapping(URL_EDIT) // idFeedbackMail in Json must be accurate
-    public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject) {
+        try {
+            // Convert JsonObject to FeedbackMail object, Save to DB and return
+            FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
+
+            // Check idFeedbackMail
+            if (feedbackMailInterfaceService.getFeedbackMailByID(newFeedbackMail.getIdFeedbackMail()) == null) {
+                return new ResponseEntity<>(
+                        "NOT_FOUND FeedbackMail with ID: " + newFeedbackMail.getIdFeedbackMail(),
+                        HttpStatus.NOT_FOUND);
+            }
+
+            feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while editing FeedbackMail");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-
-        // Convert JsonObject to FeedbackMail object, Save to DB and return
-        FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
-
-        // Check idFeedbackMail
-        if (feedbackMailInterfaceService.getFeedbackMailByID(newFeedbackMail.getIdFeedbackMail()) == null) {
-            return new ResponseEntity<>(
-                    "NOT_FOUND FeedbackMail with ID: " + newFeedbackMail.getIdFeedbackMail(),
-                    HttpStatus.NOT_FOUND);
-        }
-
-        feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(URL_ADD) // idFeedbackMail in Json is ignored
-    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject) {
+        try {
+            // Convert JsonObject to FeedbackMail object (Updated Cart in DB could have ID differs from user's request)
+            FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
+
+            // Check duplicate by emailUser and contentFeedbackMail
+            if (feedbackMailInterfaceService.getFeedbackMailByEmailUserAndContentFeedbackMail(
+                    newFeedbackMail.getEmailUserFeedbackMail(),
+                    newFeedbackMail.getContentFeedbackMail()) != null) {
+                return new ResponseEntity<>(
+                        "CONFLICT - A FeedbackMail with the same emailUser and content already exists!",
+                        HttpStatus.CONFLICT);
+            }
+
+            feedbackMailInterfaceService.saveFeedbackMail(newFeedbackMail);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("An error occurred while adding FeedbackMail");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-
-        // Convert JsonObject to FeedbackMail object (Updated Cart in DB could have ID differs from user's request)
-        FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
-
-        // Check duplicate by emailUser and contentFeedbackMail
-        if (feedbackMailInterfaceService.getFeedbackMailByEmailUserAndContentFeedbackMail(
-                newFeedbackMail.getEmailUserFeedbackMail(),
-                newFeedbackMail.getContentFeedbackMail()) != null) {
-            return new ResponseEntity<>(
-                    "CONFLICT - A FeedbackMail with the same emailUser and content already exists!",
-                    HttpStatus.CONFLICT);
-        }
-
-        feedbackMailInterfaceService.saveFeedbackMail(newFeedbackMail);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     public FeedbackMail convertJsonToFeedbackMail(String feedbackMailJsonObject) {

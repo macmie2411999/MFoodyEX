@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.OrderMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
 
 public class OrderMfoodyPOJO {
     private int idOrder;
@@ -28,6 +29,15 @@ public class OrderMfoodyPOJO {
         newOrderMfoody.setPaymentMethodOrder(this.getPaymentMethodOrder());
         newOrderMfoody.setStatusOrder(this.getStatusOrder());
         return newOrderMfoody;
+    }
+
+    public boolean checkOrderMfoodyValidAttributes() {
+        if(InputChecker.isValidDateFormat(this.dateOrder) && InputChecker.isValidDateFormat(this.dateReceiptOrder)
+                && InputChecker.isStringValid(this.shippingMethodOrder) && InputChecker.isStringValid(this.paymentMethodOrder)
+                && InputChecker.isStringValid(this.statusOrder)) {
+            return true;
+        }
+        return  false;
     }
 
     public int getIdOrder() {

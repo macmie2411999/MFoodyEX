@@ -1,8 +1,14 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.CartMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
+import com.macmie.mfoodyex.Util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CartMfoodyPOJO {
+    @Autowired
+    private InputChecker inputChecker;
+
     private int idCart;
     private int quantityAllProductsInCart;
     private float totalSalePriceCart;
@@ -16,6 +22,10 @@ public class CartMfoodyPOJO {
         newCartMfoody.setTotalSalePriceCart(this.getTotalSalePriceCart());
         newCartMfoody.setTotalFullPriceCart(this.getTotalFullPriceCart());
         return newCartMfoody;
+    }
+
+    public boolean checkCartMfoodyValidAttributes() {
+            return true;
     }
 
     public CartMfoodyPOJO(int idCart, int quantityAllProductsInCart, float totalSalePriceCart, float totalFullPriceCart, int idUser) {

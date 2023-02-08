@@ -20,6 +20,10 @@ public class DetailProductOrderMfoodyPOJO {
         this.fullPriceDetailProductOrder = fullPriceDetailProductOrder;
     }
 
+    public boolean checkDetailProductOrderMfoodyValidAttributes() {
+        return true;
+    }
+
     public DetailProductOrderMfoody renderDetailProductOrderMfoody() {
         DetailProductOrderMfoody newDetailProductOrderMfoody = new DetailProductOrderMfoody();
         newDetailProductOrderMfoody.setQuantityDetailProductOrder(this.getQuantityDetailProductOrder());

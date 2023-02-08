@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -101,64 +100,66 @@ public class CreditCardMfoodyController {
     }
 
     @PutMapping(URL_EDIT) // idUser is ignored
-    public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        // Convert JsonObject to CreditCardPOJO object, Check input idCard and attach UserMfoody to CreditCardMfoody
-        Gson gson = new Gson();
-        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
-        CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
-        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdCard(newCreditCardPOJO.getIdCard());
-        if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with idCard: " + newCreditCardPOJO.getIdCard(),
-                    HttpStatus.NOT_FOUND);
-        }
-        newCreditCardMfoody.setUser(attachUserMfoody);
-
-        // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+    public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject) {
         try {
-            creditCardMfoodyInterfaceService.updateCreditCardMfoody(newCreditCardMfoody);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    "BAD_REQUEST Failed to update CreditCardMfoody with ID: " + newCreditCardPOJO.getIdCard());
-        }
+            // Convert JsonObject to CreditCardPOJO object, Check input idCard and attach UserMfoody to CreditCardMfoody
+            Gson gson = new Gson();
+            CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
+            CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdCard(newCreditCardPOJO.getIdCard());
+            if (attachUserMfoody == null) {
+                return new ResponseEntity<>("NOT_FOUND UserMfoody with idCard: " + newCreditCardPOJO.getIdCard(),
+                        HttpStatus.NOT_FOUND);
+            }
+            newCreditCardMfoody.setUser(attachUserMfoody);
 
-        return new ResponseEntity<>(newCreditCardMfoody, HttpStatus.OK);
+            // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+            try {
+                creditCardMfoodyInterfaceService.updateCreditCardMfoody(newCreditCardMfoody);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        "BAD_REQUEST Failed to update CreditCardMfoody with ID: " + newCreditCardPOJO.getIdCard());
+            }
+
+            return new ResponseEntity<>(newCreditCardMfoody, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while editing CreditCardMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(URL_ADD) // idUser must be accurate
-    public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject) {
+        try {
+            // Convert JsonObject to CreditCardPOJO object
+            Gson gson = new Gson();
+            CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
+            CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
+
+            // Check duplicate by numberCard
+            CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.
+                    getCreditCardMfoodyByNumberCard(newCreditCardPOJO.getNumberCard());
+            if (existingCard != null) {
+                return new ResponseEntity<>("CONFLICT - A CreditCardMfoody with the same numberCard already exists!",
+                        HttpStatus.CONFLICT);
+            }
+
+            // Check input idUser and attach UserMfoody to CreditCardMfoody
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser());
+            if (attachUserMfoody == null) {
+                return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCreditCardPOJO.getIdUser(),
+                        HttpStatus.NOT_FOUND);
+            }
+            newCreditCardMfoody.setUser(attachUserMfoody);
+
+            // Save CreditCard to DB and return (Updated Cart in DB could have ID differs from user's request)
+            creditCardMfoodyInterfaceService.saveCreditCardMfoody(newCreditCardMfoody);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("An error occurred while adding CreditCardMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-
-        // Convert JsonObject to CreditCardPOJO object
-        Gson gson = new Gson();
-        CreditCardMfoodyPOJO newCreditCardPOJO = gson.fromJson(creditCardPOJOJsonObject, CreditCardMfoodyPOJO.class);
-        CreditCardMfoody newCreditCardMfoody = newCreditCardPOJO.renderCreditCardMfoody();
-
-        // Check duplicate by numberCard
-        CreditCardMfoody existingCard = creditCardMfoodyInterfaceService.
-                getCreditCardMfoodyByNumberCard(newCreditCardPOJO.getNumberCard());
-        if (existingCard != null) {
-            return new ResponseEntity<>("CONFLICT - A CreditCardMfoody with the same numberCard already exists!",
-                    HttpStatus.CONFLICT);
-        }
-
-        // Check input idUser and attach UserMfoody to CreditCardMfoody
-        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser());
-        if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCreditCardPOJO.getIdUser(),
-                    HttpStatus.NOT_FOUND);
-        }
-        newCreditCardMfoody.setUser(attachUserMfoody);
-
-        // Save CreditCard to DB and return (Updated Cart in DB could have ID differs from user's request)
-        creditCardMfoodyInterfaceService.saveCreditCardMfoody(newCreditCardMfoody);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

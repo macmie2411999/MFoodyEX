@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.CreditCardMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
 
 public class CreditCardMfoodyPOJO {
     private int idCard;
@@ -18,6 +19,14 @@ public class CreditCardMfoodyPOJO {
         newCreditCardMfoody.setExpirationCard(this.getExpirationCard());
         newCreditCardMfoody.setSecurityCodeCard(this.getSecurityCodeCard());
         return newCreditCardMfoody;
+    }
+
+    public boolean checkCreditCardMfoodyValidAttributes() {
+        if(InputChecker.isStringValid(this.nameUserCard) && InputChecker.isStringInt(this.numberCard)
+        && InputChecker.isValidDateFormat(this.expirationCard) && InputChecker.isStringInt(this.securityCodeCard)) {
+            return true;
+        }
+        return  false;
     }
 
     public int getIdCard() {

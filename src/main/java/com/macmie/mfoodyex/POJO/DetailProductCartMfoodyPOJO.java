@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.POJO;
 
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
+import com.macmie.mfoodyex.Util.InputChecker;
 
 public class DetailProductCartMfoodyPOJO {
     private int idProduct;
@@ -18,6 +19,10 @@ public class DetailProductCartMfoodyPOJO {
         this.quantityDetailProductCart = quantityDetailProductCart;
         this.salePriceDetailProductCart = salePriceDetailProductCart;
         this.fullPriceDetailProductCart = fullPriceDetailProductCart;
+    }
+
+    public boolean checkDetailProductCartMfoodyValidAttributes() {
+        return true;
     }
 
     public DetailProductCartMfoody renderDetailProductCartMfoody() {

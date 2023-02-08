@@ -1,7 +1,6 @@
 package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
-import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.OrderMfoodyPOJO;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -114,35 +112,36 @@ public class OrderMfoodyController {
      *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
      * */
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> editOrderMfoody(@RequestBody String orderPOJOJsonObject) {
+        try {
+            // Convert JsonObject to OrderPOJO object, Check input idOrder and set default values for newOrderMfoody
+            Gson gson = new Gson();
+            OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
+            if (orderMfoodyInterfaceService.getOrderMfoodyByID(newOrderPOJO.getIdOrder()) == null) {
+                return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + newOrderPOJO.getIdOrder(),
+                        HttpStatus.NOT_FOUND);
+            }
+            OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
+            newOrderMfoody.setQuantityAllProductsInOrder(0);
+            newOrderMfoody.setTotalFullPriceOrder(0);
+            newOrderMfoody.setTotalSalePriceOrder(0);
 
-        // Convert JsonObject to OrderPOJO object, Check input idOrder and set default values for newOrderMfoody
-        Gson gson = new Gson();
-        OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
-        if (orderMfoodyInterfaceService.getOrderMfoodyByID(newOrderPOJO.getIdOrder()) == null) {
-            return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + newOrderPOJO.getIdOrder(),
-                    HttpStatus.NOT_FOUND);
-        }
-        OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
-        newOrderMfoody.setQuantityAllProductsInOrder(0);
-        newOrderMfoody.setTotalFullPriceOrder(0);
-        newOrderMfoody.setTotalSalePriceOrder(0);
+            // Check UserMfoody and set it to OrderMfoody
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdOrder(newOrderPOJO.getIdOrder());
+            if (attachUserMfoody == null) {
+                return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
+                        HttpStatus.NOT_FOUND);
+            }
+            newOrderMfoody.setUser(attachUserMfoody);
 
-        // Check UserMfoody and set it to OrderMfoody
-        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByIdOrder(newOrderPOJO.getIdOrder());
-        if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
-                    HttpStatus.NOT_FOUND);
+            // Save to DB and return
+            orderMfoodyInterfaceService.updateOrderMfoody(newOrderMfoody);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while editing OrderMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-        newOrderMfoody.setUser(attachUserMfoody);
-
-        // Save to DB and return
-        orderMfoodyInterfaceService.updateOrderMfoody(newOrderMfoody);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*
@@ -152,30 +151,31 @@ public class OrderMfoodyController {
      *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
      * */
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewOrderMfoody(@RequestBody String orderPOJOJsonObject, BindingResult errors) {
-        // Check Error
-        if (errors.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> addNewOrderMfoody(@RequestBody String orderPOJOJsonObject) {
+        try {
+            // Convert JsonObject to OrderPOJO object and Add new UserMfoody to OrderMfoody
+            Gson gson = new Gson();
+            OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
+            OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
+            newOrderMfoody.setQuantityAllProductsInOrder(0);
+            newOrderMfoody.setTotalFullPriceOrder(0);
+            newOrderMfoody.setTotalSalePriceOrder(0);
+
+            // Check input idUser and attach UserMfoody to OrderMfoody
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
+            if (attachUserMfoody == null) {
+                return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
+                        HttpStatus.NOT_FOUND);
+            }
+            newOrderMfoody.setUser(attachUserMfoody);
+
+            // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
+            orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("An error occurred while adding OrderMfoody");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
-
-        // Convert JsonObject to OrderPOJO object and Add new UserMfoody to OrderMfoody
-        Gson gson = new Gson();
-        OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
-        OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
-        newOrderMfoody.setQuantityAllProductsInOrder(0);
-        newOrderMfoody.setTotalFullPriceOrder(0);
-        newOrderMfoody.setTotalSalePriceOrder(0);
-
-        // Check input idUser and attach UserMfoody to OrderMfoody
-        UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
-        if (attachUserMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
-                    HttpStatus.NOT_FOUND);
-        }
-        newOrderMfoody.setUser(attachUserMfoody);
-
-        // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
-        orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

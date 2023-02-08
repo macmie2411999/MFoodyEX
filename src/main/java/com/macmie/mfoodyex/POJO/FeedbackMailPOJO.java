@@ -1,5 +1,7 @@
 package com.macmie.mfoodyex.POJO;
 
+import com.macmie.mfoodyex.Util.InputChecker;
+
 public class FeedbackMailPOJO {
     private int idFeedbackMail;
     private String nameUserFeedbackMail;
@@ -16,6 +18,14 @@ public class FeedbackMailPOJO {
         this.emailUserFeedbackMail = emailUserFeedbackMail;
         this.titleFeedbackMail = titleFeedbackMail;
         this.contentFeedbackMail = contentFeedbackMail;
+    }
+
+    public boolean checkFeedbackMailValidAttributes() {
+        if(InputChecker.isStringValid(this.nameUserFeedbackMail) && InputChecker.isValidEmail(this.emailUserFeedbackMail)
+                && InputChecker.isStringValid(this.titleFeedbackMail) && InputChecker.isStringValid(this.contentFeedbackMail)) {
+            return true;
+        }
+        return  false;
     }
 
     public int getIdFeedbackMail() {
