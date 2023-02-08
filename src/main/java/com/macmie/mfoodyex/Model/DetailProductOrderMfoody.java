@@ -100,5 +100,17 @@ public class DetailProductOrderMfoody implements Serializable {
     public void setProduct(ProductMfoody product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "DetailProductOrderMfoody{" +
+                "idDetailProductOrderMfoody=" + idDetailProductOrderMfoody +
+                ", quantityDetailProductOrder=" + quantityDetailProductOrder +
+                ", salePriceDetailProductOrder=" + salePriceDetailProductOrder +
+                ", fullPriceDetailProductOrder=" + fullPriceDetailProductOrder +
+                ", order=" + order.getIdOrder() +
+                ", product=" + product.getIdProduct() +
+                '}';
+    }
 }
 

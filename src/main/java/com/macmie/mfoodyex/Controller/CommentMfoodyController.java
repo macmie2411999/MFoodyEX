@@ -9,12 +9,15 @@ import com.macmie.mfoodyex.POJO.CommentMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CommentMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.ProductMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +30,8 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
  * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
  * */
 
+@Slf4j
+@Transactional
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(COMMENT_MFOODY)
 public class CommentMfoodyController {
@@ -89,7 +94,15 @@ public class CommentMfoodyController {
             return new ResponseEntity<>("NOT_FOUND CommentMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
         int idProduct = commentMfoodyInterfaceService.getCommentMfoodyByID(ID).getProduct().getIdProduct();
-        commentMfoodyInterfaceService.deleteCommentMfoodyByID(ID);
+
+
+        try {
+            commentMfoodyInterfaceService.deleteCommentMfoodyByID(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting CommentMfoody with ID: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+        }
 
         // Update ratingProduct in ProductMfoody
         updateRatingProduct(idProduct);
@@ -115,7 +128,15 @@ public class CommentMfoodyController {
         for (CommentMfoody element : commentMfoodyList) {
             productMfoodyList.add(element.getProduct());
         }
-        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
+
+        try {
+            commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting CommentMfoody with idUser: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+        }
+
         for (ProductMfoody element : productMfoodyList) {
             updateRatingProduct(element.getIdProduct());
         }
@@ -128,7 +149,14 @@ public class CommentMfoodyController {
         if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
+
+        try {
+            commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting CommentMfoody with idProduct: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+        }
 
         // Update ratingProduct in ProductMfoody (Delete all comments, ratingProduct = 0)
         ProductMfoody newProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(ID);

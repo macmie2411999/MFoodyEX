@@ -1,9 +1,10 @@
 package com.macmie.mfoodyex.Service.ImplementService;
 
-import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Repository.DetailProductOrderMfoodyRepository;
 import com.macmie.mfoodyex.Repository.OrderMfoodyRepository;
+import com.macmie.mfoodyex.Service.InterfaceService.DetailProductCartMfoodyInterfaceService;
+import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.OrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Util.StringUtil;
 import com.macmie.mfoodyex.Util.TextUtil;
@@ -82,11 +83,9 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
     public void deleteOrderMfoodyByID(int idOrderMfoody) {
         log.info("Deleting OrderMfoody with ID: {}", idOrderMfoody);
 
-        // Delete DetailProductOrderMfoody and Order
-        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(idOrderMfoody);
-        detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
+        // Delete all DetailProductOrderMfoodys associate with OrderMfoody
+        detailProductOrderMfoodyRepository.deleteAllDetailProductOrderMfoodysByIdOrder(idOrderMfoody);
 
-        // Delete Order
         orderMfoodyRepository.deleteById(idOrderMfoody);
     }
 
@@ -94,14 +93,14 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
     public void deleteAllOrderMfoodysByIdUser(int idUser) {
         log.info("Deleting OrderMfoody with idUser: {}", idUser);
 
-        // Delete all DetailProductOrderMfoody attaching to Order
+        // Delete all DetailProductOrderMfoodys associate with OrderMfoody
         List<OrderMfoody> orderMfoodyList = orderMfoodyRepository.findAllByIdUser(idUser);
-        for(OrderMfoody element : orderMfoodyList){
-            List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyRepository.findAllByIdOrder(element.getIdOrder());
-            detailProductOrderMfoodyRepository.deleteAll(detailProductOrderMfoodyList);
+        if (!orderMfoodyList.isEmpty()) {
+            for (OrderMfoody element : orderMfoodyList) {
+                detailProductOrderMfoodyRepository.deleteAllDetailProductOrderMfoodysByIdOrder(element.getIdOrder());
+            }
         }
 
-        // Delete Order
         orderMfoodyRepository.deleteAllByIdUser(idUser);
     }
 }

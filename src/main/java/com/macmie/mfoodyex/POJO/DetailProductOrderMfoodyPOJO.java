@@ -67,4 +67,15 @@ public class DetailProductOrderMfoodyPOJO {
     public void setFullPriceDetailProductOrder(float fullPriceDetailProductOrder) {
         this.fullPriceDetailProductOrder = fullPriceDetailProductOrder;
     }
+
+    @Override
+    public String toString() {
+        return "DetailProductOrderMfoodyPOJO{" +
+                "idProduct=" + idProduct +
+                ", idOrder=" + idOrder +
+                ", quantityDetailProductOrder=" + quantityDetailProductOrder +
+                ", salePriceDetailProductOrder=" + salePriceDetailProductOrder +
+                ", fullPriceDetailProductOrder=" + fullPriceDetailProductOrder +
+                '}';
+    }
 }

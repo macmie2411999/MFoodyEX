@@ -6,12 +6,15 @@ import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.ProductMfoody;
 import com.macmie.mfoodyex.POJO.ProductMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
@@ -22,6 +25,8 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
  * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
  * */
 
+@Slf4j
+@Transactional
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(PRODUCT_MFOODY)
 public class ProductMfoodyController {
@@ -67,11 +72,18 @@ public class ProductMfoodyController {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
 
-        // Delete Detail Product Cart, Detail Product Order, Comment and Product
-        detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
-        detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
-        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
-        productMfoodyInterfaceService.deleteProductMfoodyByID(ID);
+        try {
+            // Delete Detail Product Cart, Detail Product Order, Comment and Product
+            detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
+            detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
+            commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
+            productMfoodyInterfaceService.deleteProductMfoodyByID(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting ProductMfoody with ID: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting ProductMfoody");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -94,8 +106,13 @@ public class ProductMfoodyController {
                     HttpStatus.NOT_FOUND);
         }
 
-        // Save to DB
-        productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
+        // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+        try {
+            productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    "BAD_REQUEST Failed to update ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct());
+        }
 
         /*
         * 1. Update price in DetailProductCart, CartMfoody if the price changes

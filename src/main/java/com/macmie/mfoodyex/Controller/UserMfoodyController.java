@@ -2,16 +2,20 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CartMfoody;
+import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
@@ -22,6 +26,8 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
  * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
  * */
 
+@Slf4j
+@Transactional
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(USER_MFOODY)
 public class UserMfoodyController {
@@ -38,7 +44,13 @@ public class UserMfoodyController {
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
     @Autowired
+    private OrderMfoodyInterfaceService orderMfoodyInterfaceService;
+
+    @Autowired
     private DetailProductCartMfoodyInterfaceService detailProductCartMfoodyInterfaceService;
+
+    @Autowired
+    private DetailProductOrderMfoodyInterfaceService detailProductOrderMfoodyInterfaceService;
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllUserMfoodys() {
@@ -65,11 +77,19 @@ public class UserMfoodyController {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
 
-        // Delete Cart (Detail Product Cart), Comment, Credit Card, and User
-        creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
-        commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
-        cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
-        userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
+        try {
+            // Delete Cart (DetailProductCart), DeleteOrder (DetailProductOrder), Comment, Credit Card, and User
+            creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
+            commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
+            cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
+            orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
+            userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting UserMfoody with ID: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting UserMfoody");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -90,8 +110,13 @@ public class UserMfoodyController {
                     "NOT_FOUND UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
         }
 
-        // Save to DB
-        userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
+        // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+        try {
+            userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    "BAD_REQUEST Failed to update UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser());
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

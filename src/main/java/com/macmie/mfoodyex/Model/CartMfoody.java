@@ -108,4 +108,16 @@ public class CartMfoody {
     public void setListDetailProductCarts(List<DetailProductCartMfoody> listDetailProductCarts) {
         this.listDetailProductCarts = listDetailProductCarts;
     }
+
+    @Override
+    public String toString() {
+        return "CartMfoody{" +
+                "idCart=" + idCart +
+                ", quantityAllProductsInCart=" + quantityAllProductsInCart +
+                ", totalSalePriceCart=" + totalSalePriceCart +
+                ", totalFullPriceCart=" + totalFullPriceCart +
+                ", user=" + user.getIdUser() +
+                ", listDetailProductCarts=" + listDetailProductCarts +
+                '}';
+    }
 }

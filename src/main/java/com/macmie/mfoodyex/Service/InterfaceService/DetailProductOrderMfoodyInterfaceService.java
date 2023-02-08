@@ -14,7 +14,9 @@ public interface DetailProductOrderMfoodyInterfaceService {
 
     public DetailProductOrderMfoody getDetailProductOrderMfoodyByIOrderAndIdProduct(int idOrder, int idProduct);
 
-    public DetailProductOrderMfoody saveDetailProductOrderMfoody(DetailProductOrderMfoody DetailProductOrderMfoody);
+    public DetailProductOrderMfoody saveDetailProductOrderMfoody(DetailProductOrderMfoody detailProductOrderMfoody);
+
+    public DetailProductOrderMfoody saveDetailProductOrderMfoodyByQuery(int idOrder, int idProduct, int quantityDetailProductOrder, float salePriceDetailProductOrder, float fullPriceDetailProductOrder);
 
     public DetailProductOrderMfoody updateDetailProductOrderMfoody(DetailProductOrderMfoody newDetailProductOrderMfoody);
 

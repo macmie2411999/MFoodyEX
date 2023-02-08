@@ -6,12 +6,15 @@ import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
@@ -22,6 +25,8 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
  * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
  * */
 
+@Slf4j
+@Transactional
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(CART_MFOODY)
 public class CartMfoodyController {
@@ -66,7 +71,15 @@ public class CartMfoodyController {
         if (cartMfoodyInterfaceService.getCartMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
+
+        try {
+            cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting CartMfoody with ID: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CartMfoody");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -75,7 +88,15 @@ public class CartMfoodyController {
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
+
+        try {
+            cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting CartMfoody with idUser: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CartMfoody");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

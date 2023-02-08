@@ -5,14 +5,18 @@ import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.OrderMfoodyPOJO;
+import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.OrderMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.UserMfoodyInterfaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
@@ -23,6 +27,8 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
  * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
  * */
 
+@Slf4j
+@Transactional
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(ORDER_MFOODY)
 public class OrderMfoodyController {
@@ -31,6 +37,9 @@ public class OrderMfoodyController {
 
     @Autowired
     private UserMfoodyInterfaceService userMfoodyInterfaceService;
+
+    @Autowired
+    private DetailProductOrderMfoodyInterfaceService detailProductOrderMfoodyInterfaceService;
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllOrderMfoodys() {
@@ -68,7 +77,15 @@ public class OrderMfoodyController {
         if (orderMfoodyInterfaceService.getOrderMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        orderMfoodyInterfaceService.deleteOrderMfoodyByID(ID);
+
+        try {
+            orderMfoodyInterfaceService.deleteOrderMfoodyByID(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting OrderMfoody with ID: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -77,7 +94,15 @@ public class OrderMfoodyController {
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
+
+        try {
+            orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting OrderMfoody with idUser: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -137,6 +162,9 @@ public class OrderMfoodyController {
         Gson gson = new Gson();
         OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
         OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
+        newOrderMfoody.setQuantityAllProductsInOrder(0);
+        newOrderMfoody.setTotalFullPriceOrder(0);
+        newOrderMfoody.setTotalSalePriceOrder(0);
 
         // Check input idUser and attach UserMfoody to OrderMfoody
         UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());

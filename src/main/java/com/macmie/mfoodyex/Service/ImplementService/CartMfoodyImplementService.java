@@ -78,9 +78,10 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
     public void deleteCartMfoodyByID(int idCartMfoody) {
         log.info("Deleting CartMfoody with ID: {}", idCartMfoody);
 
-        // Delete DetailProductCartMfoody and Cart
+        // Delete all DetailProductCartMfoodys associate with CartMfoody
         List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyRepository.findAllByIdCart(idCartMfoody);
         detailProductCartMfoodyRepository.deleteAll(detailProductCartMfoodyList);
+
         cartMfoodyRepository.deleteById(idCartMfoody);
     }
 
@@ -88,10 +89,11 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
     public void deleteCartMfoodyByIdUser(int idUser) {
         log.info("Deleting CartMfoody with idUser: {}", idUser);
 
-        // Delete DetailProductCartMfoody and Cart
+        // Delete all DetailProductCartMfoodys associate with CartMfoody
         CartMfoody cartMfoody = cartMfoodyRepository.findByIdUser(idUser);
         List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyRepository.findAllByIdCart(cartMfoody.getIdCart());
         detailProductCartMfoodyRepository.deleteAll(detailProductCartMfoodyList);
+
         cartMfoodyRepository.deleteByIdUser(idUser);
     }
 }

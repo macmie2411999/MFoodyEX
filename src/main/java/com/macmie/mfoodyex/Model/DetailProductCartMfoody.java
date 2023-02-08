@@ -100,5 +100,17 @@ public class DetailProductCartMfoody implements Serializable {
     public void setFullPriceDetailProductCart(float fullPriceDetailProductCart) {
         this.fullPriceDetailProductCart = fullPriceDetailProductCart;
     }
+
+    @Override
+    public String toString() {
+        return "DetailProductCartMfoody{" +
+                "idDetailProductCartMFoody=" + idDetailProductCartMFoody +
+                ", quantityDetailProductCart=" + quantityDetailProductCart +
+                ", salePriceDetailProductCart=" + salePriceDetailProductCart +
+                ", fullPriceDetailProductCart=" + fullPriceDetailProductCart +
+                ", cart=" + cart.getIdCart() +
+                ", product=" + product.getIdProduct() +
+                '}';
+    }
 }
 

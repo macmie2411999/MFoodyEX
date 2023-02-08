@@ -186,4 +186,22 @@ public class OrderMfoody {
     public void setListDetailProductOrders(List<DetailProductOrderMfoody> listDetailProductOrders) {
         this.listDetailProductOrders = listDetailProductOrders;
     }
+
+    @Override
+    public String toString() {
+        return "OrderMfoody{" +
+                "idOrder=" + idOrder +
+                ", dateOrder='" + dateOrder + '\'' +
+                ", dateReceiptOrder='" + dateReceiptOrder + '\'' +
+                ", shippingPriceOrder=" + shippingPriceOrder +
+                ", shippingMethodOrder='" + shippingMethodOrder + '\'' +
+                ", quantityAllProductsInOrder=" + quantityAllProductsInOrder +
+                ", totalFullPriceOrder=" + totalFullPriceOrder +
+                ", totalSalePriceOrder=" + totalSalePriceOrder +
+                ", paymentMethodOrder='" + paymentMethodOrder + '\'' +
+                ", statusOrder='" + statusOrder + '\'' +
+                ", user=" + user.getIdUser() +
+                ", listDetailProductOrders=" + listDetailProductOrders +
+                '}';
+    }
 }

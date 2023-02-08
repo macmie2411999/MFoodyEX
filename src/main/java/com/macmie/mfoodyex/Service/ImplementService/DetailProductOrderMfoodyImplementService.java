@@ -64,6 +64,12 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
     }
 
     @Override
+    public DetailProductOrderMfoody saveDetailProductOrderMfoodyByQuery(int idOrder, int idProduct, int quantityDetailProductOrder, float salePriceDetailProductOrder, float fullPriceDetailProductOrder) {
+        log.info("Saving DetailProductOrderMfoody with idOrder: {} and idProduct: {}", idOrder, idProduct);
+        return detailProductOrderMfoodyRepository.addNewDetailProductOrderMfoody(idOrder, idProduct, quantityDetailProductOrder, salePriceDetailProductOrder, fullPriceDetailProductOrder);
+    }
+
+    @Override
     public DetailProductOrderMfoody updateDetailProductOrderMfoody(DetailProductOrderMfoody newDetailProductOrderMfoody) {
 //        DetailProductOrderMfoody DetailProductOrderMfoodyToUpdate = detailProductOrderMfoodyRepository.getById(newDetailProductOrderMfoody.getIdDetailProductOrder());
 //        DetailProductOrderMfoodyToUpdate.setRatingDetailProductOrder((newDetailProductOrderMfoody.getRatingDetailProductOrder()));

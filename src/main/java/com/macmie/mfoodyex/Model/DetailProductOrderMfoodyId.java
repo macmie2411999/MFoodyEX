@@ -9,18 +9,18 @@ public class DetailProductOrderMfoodyId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "ID_PRODUCT")
-    private int idProduct;
-
     @Column(name = "ID_ORDER")
     private int idOrder;
+
+    @Column(name = "ID_PRODUCT")
+    private int idProduct;
 
     public DetailProductOrderMfoodyId() {
     }
 
-    public DetailProductOrderMfoodyId(int idProduct, int idOrder) {
-        this.idProduct = idProduct;
+    public DetailProductOrderMfoodyId(int idOrder, int idProduct) {
         this.idOrder = idOrder;
+        this.idProduct = idProduct;
     }
 
     public int getIdProduct() {

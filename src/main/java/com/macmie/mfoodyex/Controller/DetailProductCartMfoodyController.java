@@ -9,12 +9,15 @@ import com.macmie.mfoodyex.POJO.DetailProductCartMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.CartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductCartMfoodyInterfaceService;
 import com.macmie.mfoodyex.Service.InterfaceService.ProductMfoodyInterfaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.macmie.mfoodyex.Constant.ViewConstant.*;
@@ -25,6 +28,8 @@ import static com.macmie.mfoodyex.Constant.ViewConstant.*;
  * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
  * */
 
+@Slf4j
+@Transactional
 @RestController // = @ResponseBody + @Controller
 @RequestMapping(DETAIL_PRODUCT_CART_MFOODY)
 public class DetailProductCartMfoodyController {
@@ -79,7 +84,15 @@ public class DetailProductCartMfoodyController {
         if (detailProductCartMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
         }
-        detailProductCartMfoodyInterfaceService.deleteDetailProductCartMfoodyByIdDetailProductCartMfoody(idCart, idProduct);
+
+        try {
+            detailProductCartMfoodyInterfaceService.deleteDetailProductCartMfoodyByIdDetailProductCartMfoody(idCart, idProduct);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting DetailProductCarts with idCart: {} and idProduct: {}", idCart, idProduct);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -88,7 +101,16 @@ public class DetailProductCartMfoodyController {
         if (cartMfoodyInterfaceService.getCartMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdCart(ID);
+
+        try {
+            detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdCart(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting DetailProductCarts with idCart: " + ID);
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
+        }
+
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -97,14 +119,21 @@ public class DetailProductCartMfoodyController {
         if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
+
+        try {
+            detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
+        } catch (Exception e) {
+            log.error("An error occurred while deleting DetailProductCarts with idProduct: " + ID + "; " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*
-    * 1. idCart and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
-    * 2. salePrice/fullPrice of DetailProductCartMfoody are fetched from ProductMfoody
-    * */
+     * 1. idCart and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
+     * 2. salePrice/fullPrice of DetailProductCartMfoody are fetched from ProductMfoody
+     * */
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editDetailProductCartMfoody(@RequestBody String detailProductCartPOJOJsonObject, BindingResult errors) {
         // Check Error
@@ -114,8 +143,12 @@ public class DetailProductCartMfoodyController {
 
         // Convert JsonObject to DetailProductCartPOJO object
         Gson gson = new Gson();
-        DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO = gson.fromJson(detailProductCartPOJOJsonObject, DetailProductCartMfoodyPOJO.class);
-        DetailProductCartMfoody newDetailProductCartMfoody = newDetailProductCartMfoodyPOJO.renderDetailProductCartMfoody();
+        DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO = gson.fromJson(detailProductCartPOJOJsonObject,
+                DetailProductCartMfoodyPOJO.class);
+        DetailProductCartMfoody newDetailProductCartMfoody = detailProductCartMfoodyInterfaceService.
+                getDetailProductCartMfoodyByICartAndIdProduct(
+                        newDetailProductCartMfoodyPOJO.getIdCart(),
+                        newDetailProductCartMfoodyPOJO.getIdProduct());
 
         // Check valid idCart and idProduct
         if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
@@ -124,26 +157,24 @@ public class DetailProductCartMfoodyController {
         if (cartMfoodyInterfaceService.getCartMfoodyByID(newDetailProductCartMfoodyPOJO.getIdCart()) == null) {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
         }
-        if (detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(
-                newDetailProductCartMfoodyPOJO.getIdCart(),
-                newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
+        if (newDetailProductCartMfoody == null) {
             return new ResponseEntity<>(
                     "NOT_FOUND DetailProductCartMfoody with idCart: " + newDetailProductCartMfoodyPOJO.getIdCart()
                             + " and idProduct: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
         }
 
         // Update IdDetailProductCartMfoody, ProductMfoody, and CartMfoody; re-assign values for salePrice/fullPrice from ProductMfoody
-        newDetailProductCartMfoody.setIdDetailProductCartMfoody(
-                new DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(),
-                        newDetailProductCartMfoodyPOJO.getIdProduct()));
-        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct());
+        newDetailProductCartMfoody.setQuantityDetailProductCart(newDetailProductCartMfoodyPOJO.getQuantityDetailProductCart());
+        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(
+                newDetailProductCartMfoodyPOJO.getIdProduct());
         newDetailProductCartMfoody.setProduct(productMfoody);
         newDetailProductCartMfoody.setSalePriceDetailProductCart(productMfoody.getSalePriceProduct());
         newDetailProductCartMfoody.setFullPriceDetailProductCart(productMfoody.getFullPriceProduct());
-        processCartMfoody(newDetailProductCartMfoodyPOJO, newDetailProductCartMfoody);
 
-        // Save to DB and return
+        // Save to DB and Update associated CartMfoody
         detailProductCartMfoodyInterfaceService.updateDetailProductCartMfoody(newDetailProductCartMfoody);
+        processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -164,6 +195,12 @@ public class DetailProductCartMfoodyController {
         DetailProductCartMfoody newDetailProductCartMfoody = newDetailProductCartMfoodyPOJO.renderDetailProductCartMfoody();
 
         // Check valid idCart and idProduct
+        DetailProductCartMfoody checkNewDetailProductCartMfoody = detailProductCartMfoodyInterfaceService.
+                getDetailProductCartMfoodyByICartAndIdProduct(
+                        newDetailProductCartMfoodyPOJO.getIdCart(),
+                        newDetailProductCartMfoodyPOJO.getIdProduct());
+        ProductMfoody productMfoody = productMfoodyInterfaceService.
+                getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct());
         if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
         }
@@ -171,32 +208,57 @@ public class DetailProductCartMfoodyController {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
         }
 
-        // Add IdDetailProductCartMfoody, ProductMfoody, and CartMfoody; re-assign values for salePrice/fullPrice from ProductMfoody
-        newDetailProductCartMfoody.setIdDetailProductCartMfoody(
-                new DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(),
+        // If the DetailProductCartMfoody is already in the DB, update it
+        if(checkNewDetailProductCartMfoody != null){
+            checkNewDetailProductCartMfoody.setQuantityDetailProductCart(
+                    checkNewDetailProductCartMfoody.getQuantityDetailProductCart() + newDetailProductCartMfoodyPOJO.getQuantityDetailProductCart());
+            detailProductCartMfoodyInterfaceService.saveDetailProductCartMfoody(checkNewDetailProductCartMfoody);
+            processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
+            return new ResponseEntity<>("OK DetailProductCartMfoody updated", HttpStatus.OK);
+        }
+
+        // If the DetailProductCartMfoody is completely new, add new
+        newDetailProductCartMfoody.setIdDetailProductCartMfoody(new
+                DetailProductCartMfoodyId(newDetailProductCartMfoodyPOJO.getIdCart(),
                         newDetailProductCartMfoodyPOJO.getIdProduct()));
-        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct());
         newDetailProductCartMfoody.setProduct(productMfoody);
         newDetailProductCartMfoody.setSalePriceDetailProductCart(productMfoody.getSalePriceProduct());
         newDetailProductCartMfoody.setFullPriceDetailProductCart(productMfoody.getFullPriceProduct());
-        processCartMfoody(newDetailProductCartMfoodyPOJO, newDetailProductCartMfoody);
+        newDetailProductCartMfoody.setCart(cartMfoodyInterfaceService.
+                getCartMfoodyByID(newDetailProductCartMfoodyPOJO.getIdCart()));
 
-        // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
+        // Save to DB and Update associated CartMfoody
         detailProductCartMfoodyInterfaceService.saveDetailProductCartMfoody(newDetailProductCartMfoody);
+        processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
+
+        System.out.println("++++++++++ newDetailProductCartMfoody to save: " + newDetailProductCartMfoody.toString());
+        System.out.println("++++++++++ Cart of newDetailProductCartMfoody: " + newDetailProductCartMfoody.getCart().toString());
+        System.out.println("++++++++++ Product of newDetailProductCartMfoody: " + newDetailProductCartMfoody.getProduct().toString());
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    public void processCartMfoody(DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO, DetailProductCartMfoody newDetailProductCartMfoody) {
-        DetailProductCartMfoody oldDetailProductCartMfoody = detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(
-                newDetailProductCartMfoodyPOJO.getIdCart(), newDetailProductCartMfoodyPOJO.getIdProduct());
-        CartMfoody newCartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(newDetailProductCartMfoodyPOJO.getIdCart());
-        newCartMfoody.setQuantityAllProductsInCart(newCartMfoody.getQuantityAllProductsInCart()
-                + newDetailProductCartMfoody.getQuantityDetailProductCart() - oldDetailProductCartMfoody.getQuantityDetailProductCart());
-        newCartMfoody.setTotalSalePriceCart(newCartMfoody.getTotalSalePriceCart()
-                + newDetailProductCartMfoody.getSalePriceDetailProductCart() - oldDetailProductCartMfoody.getSalePriceDetailProductCart());
-        newCartMfoody.setTotalFullPriceCart(newCartMfoody.getTotalFullPriceCart()
-                + newDetailProductCartMfoody.getFullPriceDetailProductCart() - oldDetailProductCartMfoody.getFullPriceDetailProductCart());
-        cartMfoodyInterfaceService.updateCartMfoody(newCartMfoody);
-        newDetailProductCartMfoody.setCart(newCartMfoody);
+    // Update associated CartMfoody
+    public void processCartMfoody(int idCartMfoody) {
+        CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(idCartMfoody);
+        int quantityAllProductInCart = 0;
+        float totalSalePriceCart = 0;
+        float totalFullPriceCart = 0;
+
+        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.
+                getListDetailProductCartMfoodysByIdCart(idCartMfoody);
+        if (!detailProductCartMfoodyList.isEmpty()) {
+            for (DetailProductCartMfoody element : detailProductCartMfoodyList) {
+                quantityAllProductInCart += element.getQuantityDetailProductCart();
+                totalSalePriceCart += element.getQuantityDetailProductCart() * element.getSalePriceDetailProductCart();
+                totalFullPriceCart += element.getQuantityDetailProductCart() * element.getFullPriceDetailProductCart();
+            }
+        }
+
+        cartMfoody.setQuantityAllProductsInCart(quantityAllProductInCart);
+        cartMfoody.setTotalSalePriceCart(totalSalePriceCart);
+        cartMfoody.setTotalFullPriceCart(totalFullPriceCart);
+
+        cartMfoodyInterfaceService.updateCartMfoody(cartMfoody);
     }
 }
