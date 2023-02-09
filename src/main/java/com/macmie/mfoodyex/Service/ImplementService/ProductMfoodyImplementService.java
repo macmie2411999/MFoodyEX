@@ -31,7 +31,7 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
 
     @Override
     public List<ProductMfoody> getListProductMfoodys() {
-        log.info("Fetching all ProductMfoodys: ");
+        log.info("Fetching all ProductMfoodys ");
         return productMfoodyRepository.findAll();
     }
 

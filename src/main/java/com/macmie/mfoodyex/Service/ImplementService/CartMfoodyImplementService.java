@@ -40,7 +40,7 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
 
     @Override
     public List<CartMfoody> getListCartMfoodys() {
-        log.info("Fetching all CartMfoodys: ");
+        log.info("Fetching all CartMfoodys ");
         return cartMfoodyRepository.findAll();
     }
 

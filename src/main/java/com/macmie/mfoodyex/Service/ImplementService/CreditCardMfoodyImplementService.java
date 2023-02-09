@@ -31,7 +31,7 @@ public class CreditCardMfoodyImplementService implements CreditCardMfoodyInterfa
 
     @Override
     public List<CreditCardMfoody> getListCreditCardMfoodys() {
-        log.info("Fetching all CreditCardMfoodys: ");
+        log.info("Fetching all CreditCardMfoodys ");
         return creditCardMfoodyRepository.findAll();
     }
 

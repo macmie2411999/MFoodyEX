@@ -32,7 +32,7 @@ public class DetailProductOrderMfoodyImplementService implements DetailProductOr
 
     @Override
     public List<DetailProductOrderMfoody> getListDetailProductOrderMfoodys() {
-        log.info("Fetching all DetailProductOrderMfoodys: ");
+        log.info("Fetching all DetailProductOrderMfoodys ");
         return detailProductOrderMfoodyRepository.findAll();
     }
 

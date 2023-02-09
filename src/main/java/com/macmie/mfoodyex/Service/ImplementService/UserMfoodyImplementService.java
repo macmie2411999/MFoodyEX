@@ -31,7 +31,7 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
 
     @Override
     public List<UserMfoody> getListUserMfoodys() {
-        log.info("Fetching all UserMfoodys: ");
+        log.info("Fetching all UserMfoodys ");
         return userMfoodyRepository.findAll();
     }
 

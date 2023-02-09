@@ -31,7 +31,7 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
 
     @Override
     public List<CommentMfoody> getListCommentMfoodys() {
-        log.info("Fetching all CommentMfoodys: ");
+        log.info("Fetching all CommentMfoodys ");
         return commentMfoodyRepository.findAll();
     }
 

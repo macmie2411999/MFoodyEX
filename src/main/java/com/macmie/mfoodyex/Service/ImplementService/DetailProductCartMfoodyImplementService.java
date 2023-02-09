@@ -31,7 +31,7 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
 
     @Override
     public List<DetailProductCartMfoody> getListDetailProductCartMfoodys() {
-        log.info("Fetching all DetailProductCartMfoodys: ");
+        log.info("Fetching all DetailProductCartMfoodys ");
         return detailProductCartMfoodyRepository.findAll();
     }
 

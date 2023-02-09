@@ -86,8 +86,8 @@ CREATE TABLE
                                                 SALE_PRICE_DETAIL_PRODUCT_CART FLOAT NOT NULL,
                                                 FULL_PRICE_DETAIL_PRODUCT_CART FLOAT NOT NULL,
                                                 PRIMARY KEY (ID_CART, ID_PRODUCT),
-    CONSTRAINT FK_DETAILPRODUCTCARD_VS_CART FOREIGN KEY (ID_CART) REFERENCES CART_MFOODY(ID_CART),
-    CONSTRAINT FK_DETAILPRODUCTCARD_VS_PRODUCT FOREIGN KEY (ID_PRODUCT) REFERENCES PRODUCT_MFOODY(ID_PRODUCT)
+    CONSTRAINT FK_DETAILPRODUCTCART_VS_CART FOREIGN KEY (ID_CART) REFERENCES CART_MFOODY(ID_CART),
+    CONSTRAINT FK_DETAILPRODUCTCART_VS_PRODUCT FOREIGN KEY (ID_PRODUCT) REFERENCES PRODUCT_MFOODY(ID_PRODUCT)
     );
 
 -- create table ORDER_MFOODY
@@ -241,9 +241,9 @@ INSERT INTO
     CATEGORY_PRODUCT,
     BRAND_PRODUCT
 )
-VALUES (530020, 'Картофель мытый', 'Vegetable_Tomato_1', 'Срок хранения макс: 9 дней. Страна: Россия', 50, 80, '1 Kg', 150, '22/01/2023', 100, 3, 'Овощи', 'Без Бренда'),
-       (530021, 'Картофель', 'Vegetable_Tomato_2', 'Срок хранения макс: 8 дней. Страна: Россия', 40, 40, '1 Kg', 100, '19/02/2023', 30, 4, 'Овощи', 'Без Бренда'),
-       (530022, 'Картофель красный мытый', 'Vegetable_Tomato_3', 'Срок хранения макс: 6 дней. Страна: Россия', 50, 50, '1 Kg', 250, '22/01/2023', 100, 5, 'Овощи', 'Без Бренда');
+VALUES (530020, 'Картофель мытый', 'Vegetable_Potatp_1', 'Срок хранения макс: 9 дней. Страна: Россия', 50, 80, '1 Kg', 150, '22/01/2023', 100, 3, 'Овощи', 'Без Бренда'),
+       (530021, 'Картофель', 'Vegetable_Potato_2', 'Срок хранения макс: 8 дней. Страна: Россия', 40, 40, '1 Kg', 100, '19/02/2023', 30, 4, 'Овощи', 'Без Бренда'),
+       (530022, 'Картофель красный мытый', 'Vegetable_Potato_3', 'Срок хранения макс: 6 дней. Страна: Россия', 50, 50, '1 Kg', 250, '22/01/2023', 100, 5, 'Овощи', 'Без Бренда');
 
 -- insert data to COMMENT_MFOODY
 INSERT INTO

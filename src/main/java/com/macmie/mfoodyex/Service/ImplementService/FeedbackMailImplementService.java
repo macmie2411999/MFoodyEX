@@ -31,7 +31,7 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
 
     @Override
     public List<FeedbackMail> getListFeedbackMails() {
-        log.info("Fetching all FeedbackMails: ");
+        log.info("Fetching all FeedbackMails ");
         return feedbackMailRepository.findAll();
     }
 

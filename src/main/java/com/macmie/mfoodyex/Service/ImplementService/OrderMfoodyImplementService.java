@@ -37,7 +37,7 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
 
     @Override
     public List<OrderMfoody> getListOrderMfoodys() {
-        log.info("Fetching all OrderMfoodys: ");
+        log.info("Fetching all OrderMfoodys ");
         return orderMfoodyRepository.findAll();
     }
 
