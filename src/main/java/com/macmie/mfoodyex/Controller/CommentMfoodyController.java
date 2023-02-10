@@ -99,7 +99,8 @@ public class CommentMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting CommentMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
         }
 
         // Update ratingProduct in ProductMfoody
@@ -132,7 +133,8 @@ public class CommentMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting CommentMfoody with idUser: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
         }
 
         for (ProductMfoody element : productMfoodyList) {
@@ -153,7 +155,8 @@ public class CommentMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting CommentMfoody with idProduct: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
         }
 
         // Update ratingProduct in ProductMfoody (Delete all comments, ratingProduct = 0)

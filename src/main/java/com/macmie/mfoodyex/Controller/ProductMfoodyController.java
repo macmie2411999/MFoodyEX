@@ -80,7 +80,8 @@ public class ProductMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting ProductMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting ProductMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting ProductMfoody");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

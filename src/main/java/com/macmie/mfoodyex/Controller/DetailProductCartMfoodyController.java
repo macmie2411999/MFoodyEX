@@ -43,7 +43,8 @@ public class DetailProductCartMfoodyController {
 
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllDetailProductCartMfoodys() {
-        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodys();
+        List<DetailProductCartMfoody> detailProductCartMfoodyList =
+                detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodys();
         if (detailProductCartMfoodyList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of DetailProductCartMfoodys", HttpStatus.NO_CONTENT);
         }
@@ -52,36 +53,48 @@ public class DetailProductCartMfoodyController {
 
     @GetMapping(URL_GET_BY_ID_CART)
     public ResponseEntity<?> getAllDetailProductCartMfoodysByIdCart(@PathVariable("ID") int ID) {
-        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodysByIdCart(ID);
+        List<DetailProductCartMfoody> detailProductCartMfoodyList =
+                detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodysByIdCart(ID);
         if (detailProductCartMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of DetailProductCartMfoodys with idCart: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of DetailProductCartMfoodys with idCart: " + ID,
+                    HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductCartMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID_PRODUCT)
     public ResponseEntity<?> getAllDetailProductCartMfoodysByIdProduct(@PathVariable("ID") int ID) {
-        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodysByIdProduct(ID);
+        List<DetailProductCartMfoody> detailProductCartMfoodyList =
+                detailProductCartMfoodyInterfaceService.getListDetailProductCartMfoodysByIdProduct(ID);
         if (detailProductCartMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of DetailProductCartMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(
+                    "NO_CONTENT List of DetailProductCartMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductCartMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID_CART_AND_ID_PRODUCT)
-    public ResponseEntity<?> getDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart, @PathVariable("IdProduct") int idProduct) {
-        DetailProductCartMfoody detailProductCartMfoody = detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(idCart, idProduct);
+    public ResponseEntity<?> getDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart,
+                                                            @PathVariable("IdProduct") int idProduct) {
+        DetailProductCartMfoody detailProductCartMfoody =
+                detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(idCart, idProduct);
         if (detailProductCartMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    "NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct,
+                    HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(detailProductCartMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE_BY_ID_CART_AND_ID_PRODUCT)
-    public ResponseEntity<?> deleteDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart, @PathVariable("IdProduct") int idProduct) {
-        DetailProductCartMfoody detailProductCartMfoody = detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(idCart, idProduct);
+    public ResponseEntity<?> deleteDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart,
+                                                               @PathVariable("IdProduct") int idProduct) {
+        DetailProductCartMfoody detailProductCartMfoody =
+                detailProductCartMfoodyInterfaceService.getDetailProductCartMfoodyByICartAndIdProduct(idCart, idProduct);
         if (detailProductCartMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    "NOT_FOUND DetailProductCartMfoody with idCart: " + idCart + ", idProduct: " + idProduct,
+                    HttpStatus.NOT_FOUND);
         }
 
         try {
@@ -89,7 +102,8 @@ public class DetailProductCartMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting DetailProductCarts with idCart: {} and idProduct: {}", idCart, idProduct);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -106,7 +120,8 @@ public class DetailProductCartMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting DetailProductCarts with idCart: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -122,7 +137,8 @@ public class DetailProductCartMfoodyController {
             detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
         } catch (Exception e) {
             log.error("An error occurred while deleting DetailProductCarts with idProduct: " + ID + "; " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -146,10 +162,14 @@ public class DetailProductCartMfoodyController {
 
             // Check valid idCart and idProduct
             if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
-                return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        "NOT_FOUND ProductMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdProduct(),
+                        HttpStatus.NOT_FOUND);
             }
             if (cartMfoodyInterfaceService.getCartMfoodyByID(newDetailProductCartMfoodyPOJO.getIdCart()) == null) {
-                return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdCart(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        "NOT_FOUND CartMfoody with ID: " + newDetailProductCartMfoodyPOJO.getIdCart(),
+                        HttpStatus.NOT_FOUND);
             }
             if (newDetailProductCartMfoody == null) {
                 return new ResponseEntity<>(

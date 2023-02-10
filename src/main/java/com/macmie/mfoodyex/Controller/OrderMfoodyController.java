@@ -81,7 +81,8 @@ public class OrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting OrderMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -98,7 +99,8 @@ public class OrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting OrderMfoody with idUser: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

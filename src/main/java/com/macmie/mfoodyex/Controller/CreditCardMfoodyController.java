@@ -76,7 +76,8 @@ public class CreditCardMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting CreditCardMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CreditCardMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CreditCardMfoody");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -93,7 +94,8 @@ public class CreditCardMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting CreditCardMfoody with idUser: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting CreditCardMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CreditCardMfoody");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

@@ -64,7 +64,8 @@ public class DetailProductOrderMfoodyController {
     public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdOrder(@PathVariable("ID") int ID) {
         List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdOrder(ID);
         if (detailProductOrderMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of DetailProductOrderMfoodys with idOrder: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(
+                    "NO_CONTENT List of DetailProductOrderMfoodys with idOrder: " + ID, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
@@ -73,25 +74,34 @@ public class DetailProductOrderMfoodyController {
     public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdProduct(@PathVariable("ID") int ID) {
         List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdProduct(ID);
         if (detailProductOrderMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of DetailProductOrderMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(
+                    "NO_CONTENT List of DetailProductOrderMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
 
     @GetMapping(URL_GET_BY_ID_ORDER_AND_ID_PRODUCT)
-    public ResponseEntity<?> getDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder, @PathVariable("IdProduct") int idProduct) {
-        DetailProductOrderMfoody detailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
+    public ResponseEntity<?> getDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder,
+                                                             @PathVariable("IdProduct") int idProduct) {
+        DetailProductOrderMfoody detailProductOrderMfoody =
+                detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
         if (detailProductOrderMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(
+                    "NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct,
+                    HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductOrderMfoody, HttpStatus.OK);
     }
 
     @DeleteMapping(URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT)
-    public ResponseEntity<?> deleteDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder, @PathVariable("IdProduct") int idProduct) {
-        DetailProductOrderMfoody detailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
+    public ResponseEntity<?> deleteDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder,
+                                                                @PathVariable("IdProduct") int idProduct) {
+        DetailProductOrderMfoody detailProductOrderMfoody =
+                detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
         if (detailProductOrderMfoody == null) {
-            return new ResponseEntity<>("NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    "NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct,
+                    HttpStatus.NOT_FOUND);
         }
 
         try {
@@ -99,7 +109,8 @@ public class DetailProductOrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting DetailProductOrders with idOrder: {} and idProduct: {}", idOrder, idProduct);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -116,7 +127,8 @@ public class DetailProductOrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting DetailProductOrders with idOrder: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -133,7 +145,8 @@ public class DetailProductOrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting DetailProductOrders with idProduct: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -148,7 +161,8 @@ public class DetailProductOrderMfoodyController {
         try {
             // Convert JsonObject to DetailProductOrderPOJO object
             Gson gson = new Gson();
-            DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO = gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
+            DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO =
+                    gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
             DetailProductOrderMfoody newDetailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.
                     getDetailProductOrderMfoodyByIOrderAndIdProduct(
                             newDetailProductOrderMfoodyPOJO.getIdOrder(),
@@ -156,10 +170,14 @@ public class DetailProductOrderMfoodyController {
 
             // Check valid idOrder and idProduct
             if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct()) == null) {
-                return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        "NOT_FOUND ProductMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdProduct(),
+                        HttpStatus.NOT_FOUND);
             }
             if (orderMfoodyInterfaceService.getOrderMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdOrder()) == null) {
-                return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdOrder(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        "NOT_FOUND OrderMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdOrder(),
+                        HttpStatus.NOT_FOUND);
             }
             if (newDetailProductOrderMfoody == null) {
                 return new ResponseEntity<>(
@@ -196,7 +214,8 @@ public class DetailProductOrderMfoodyController {
         try {
             // Convert JsonObject to DetailProductOrderPOJO object
             Gson gson = new Gson();
-            DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO = gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
+            DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO =
+                    gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
             DetailProductOrderMfoody newDetailProductOrderMfoody = newDetailProductOrderMfoodyPOJO.renderDetailProductOrderMfoody();
 
             // Check valid idOrder and idProduct
@@ -207,16 +226,21 @@ public class DetailProductOrderMfoodyController {
             ProductMfoody productMfoody = productMfoodyInterfaceService.
                     getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct());
             if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct()) == null) {
-                return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        "NOT_FOUND ProductMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdProduct(),
+                        HttpStatus.NOT_FOUND);
             }
             if (orderMfoodyInterfaceService.getOrderMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdOrder()) == null) {
-                return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdOrder(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        "NOT_FOUND OrderMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdOrder(),
+                        HttpStatus.NOT_FOUND);
             }
 
             // If the DetailProductCartMfoody is already in the DB, update it and update associated OrderMfoody
             if (checkNewDetailProductOrderMfoody != null) {
                 checkNewDetailProductOrderMfoody.setQuantityDetailProductOrder(
-                        checkNewDetailProductOrderMfoody.getQuantityDetailProductOrder() + newDetailProductOrderMfoodyPOJO.getQuantityDetailProductOrder());
+                        checkNewDetailProductOrderMfoody.getQuantityDetailProductOrder()
+                                + newDetailProductOrderMfoodyPOJO.getQuantityDetailProductOrder());
                 detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(checkNewDetailProductOrderMfoody);
                 processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
                 return new ResponseEntity<>("OK DetailProductOrderMfoody updated", HttpStatus.OK);
@@ -234,12 +258,8 @@ public class DetailProductOrderMfoodyController {
 
             // Save to DB and Update associated OrderMfoody
             // entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS=0").executeUpdate();
-            detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(newDetailProductOrderMfoody); // error
+            detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(newDetailProductOrderMfoody);
             processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
-
-            System.out.println("++++++++++ newDetailProductOrderMfoody to save: " + newDetailProductOrderMfoody.toString());
-            System.out.println("++++++++++ Order of newDetailProductOrderMfoody: " + newDetailProductOrderMfoody.getOrder().toString());
-            System.out.println("++++++++++ Product of newDetailProductOrderMfoody: " + newDetailProductOrderMfoody.getProduct().toString());
 
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
@@ -284,9 +304,6 @@ public class DetailProductOrderMfoodyController {
                 * newDetailProductOrderMfoody.getFullPriceDetailProductOrder());
         orderMfoodyInterfaceService.updateOrderMfoody(orderMfoody);
         newDetailProductOrderMfoody.setOrder(orderMfoody);
-
-        System.out.println("++++++++++ newDetailProductOrderMfoody to save: " + newDetailProductOrderMfoody.toString());
-        System.out.println("++++++++++ Order of newDetailProductOrderMfoody: " + newDetailProductOrderMfoody.getOrder().toString());
     }
 }
 
