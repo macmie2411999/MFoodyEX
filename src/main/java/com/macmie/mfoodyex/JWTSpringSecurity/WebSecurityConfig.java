@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/demo/user").hasRole("USER")
 //                .antMatchers("/demo/admin").hasRole("ADMIN")
 //                .antMatchers("/demo/guest").hasRole("GUEST")
-//                .antMatchers("/demo/logout").permitAll()
+                .antMatchers("/demo/logout").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(jwtAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter.class); // Run the custom filter first

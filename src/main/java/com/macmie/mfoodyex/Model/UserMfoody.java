@@ -147,4 +147,20 @@ public class UserMfoody {
     public void setListCreditCards(List<CreditCardMfoody> listCreditCards) {
         this.listCreditCards = listCreditCards;
     }
+
+    @Override
+    public String toString() {
+        return "UserMfoody{" +
+                "idUser=" + idUser +
+                ", emailUser='" + emailUser + '\'' +
+                ", passwordUser='" + passwordUser + '\'' +
+                ", nameUser='" + nameUser + '\'' +
+                ", phoneNumberUser='" + phoneNumberUser + '\'' +
+                ", addressUser='" + addressUser + '\'' +
+                ", roleUser='" + roleUser + '\'' +
+//                ", listCreditCards=" + listCreditCards +
+//                ", listCarts=" + listCarts +
+//                ", listComments=" + listComments +
+                '}';
+    }
 }

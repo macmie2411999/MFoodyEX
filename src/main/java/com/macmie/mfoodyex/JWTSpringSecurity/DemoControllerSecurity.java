@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.JWTSpringSecurity;
 
 import com.macmie.mfoodyex.JWTHelper.JWTProvider;
 import com.macmie.mfoodyex.JWTPayload.LoginRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @RestController
 @RequestMapping("/demo")
 public class DemoControllerSecurity {
@@ -57,15 +59,15 @@ public class DemoControllerSecurity {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
-
+        log.info("--- DemoControllerSecurity: Start");
         // Manually authenticate
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getUserPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        log.info("--- DemoControllerSecurity: Pass Authen");
         // Create Token (method getPrincipal() returns authenticated Object)
         String jwtToken = jwtProvider.generateTokenIncludeUserName(loginRequest.getUserName());
-
+        log.info("--- DemoControllerSecurity: End");
         return new ResponseEntity<>(jwtToken, HttpStatus.OK);
     }
 }
