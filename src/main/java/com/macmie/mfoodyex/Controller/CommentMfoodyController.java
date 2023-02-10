@@ -23,9 +23,9 @@ import java.util.Set;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
- * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)
- * be used when a successful request returns no content (empty): HttpStatus.NO_CONTENT (204)
- * be used when the request is invalid or contains incorrect parameters: HttpStatus.BAD_REQUEST (400)
+ * HttpStatus.NOT_FOUND (404): use when the requested resource cannot be found (null)
+ * HttpStatus.NO_CONTENT (204): use when a successful request returns no content (empty)
+ * HttpStatus.BAD_REQUEST (400): use when the request is invalid or contains incorrect parameters
  * */
 
 @Slf4j
