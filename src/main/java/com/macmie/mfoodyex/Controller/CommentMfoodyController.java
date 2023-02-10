@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.macmie.mfoodyex.Constant.ViewConstant.*;
+import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
  * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)

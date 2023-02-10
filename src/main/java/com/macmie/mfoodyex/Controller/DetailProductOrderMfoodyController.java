@@ -22,7 +22,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static com.macmie.mfoodyex.Constant.ViewConstant.*;
+import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
  * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)

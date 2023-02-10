@@ -1,7 +1,8 @@
 package com.macmie.mfoodyex.Constant;
 
-public class ViewConstant {
-    // Main URL
+public class ViewConstants {
+    // Main URLs
+    public static final String API_MFOODY = "/api";
     public static final String FEEDBACK_MAIL = "/feedback";
     public static final String USER_MFOODY = "/user";
     public static final String CREDIT_CARD_MFOODY = "/creditcard";
@@ -11,8 +12,12 @@ public class ViewConstant {
     public static final String ORDER_MFOODY = "/order";
     public static final String DETAIL_PRODUCT_CART_MFOODY = "/detailProductCart";
     public static final String DETAIL_PRODUCT_ORDER_MFOODY = "/detailProductOrder";
+    public static final String APPLICATION_MFOODY = "/applicationMfoody";
+    public static final String LOGIN_MFOODY = "/login";
+    public static final String LOGOUT_MFOODY = "/logout";
+    public static final String BLANK_MFOODY = "/blank";
 
-    // URL for all APIs
+    // URLs for all APIs
     public static final String URL_GET_ALL = "/getAll";
     public static final String URL_GET_BY_ID = "/get/{ID}";
     public static final String URL_GET_BY_ID_USER = "/getByIdUser/{ID}";

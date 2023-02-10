@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_SECURITY;
+
 @Service // to Bean
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -28,10 +30,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserMfoody userMfoody = userMfoodyInterfaceService.getUserMfoodyByEmail(username);
         if(userMfoody != null){
             List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-            SimpleGrantedAuthority rolesAdmin = new SimpleGrantedAuthority("ROLE_" + userMfoody.getRoleUser());
+            SimpleGrantedAuthority rolesAdmin = new SimpleGrantedAuthority(ROLE_SECURITY + userMfoody.getRoleUser());
             roles.add(rolesAdmin);
             return new User(userMfoody.getEmailUser(), userMfoody.getPasswordUser(), roles);
         }
-        throw new UsernameNotFoundException("User no found!");
+        throw new UsernameNotFoundException("User not found!");
     }
 }

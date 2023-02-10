@@ -36,38 +36,10 @@ public class DemoControllerSecurity {
         return "Hello Guess";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication != null){
-            new SecurityContextLogoutHandler().logout(request, response, authentication);
-        }
-
-        return "Hello Logout";
-    }
-
     @GetMapping("/test")
     public String test(){
         return "Hello Test";
     }
 
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    JWTProvider jwtProvider;
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
-        log.info("--- DemoControllerSecurity: Start");
-        // Manually authenticate
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getUserPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        log.info("--- DemoControllerSecurity: Pass Authen");
-        // Create Token (method getPrincipal() returns authenticated Object)
-        String jwtToken = jwtProvider.generateTokenIncludeUserName(loginRequest.getUserName());
-        log.info("--- DemoControllerSecurity: End");
-        return new ResponseEntity<>(jwtToken, HttpStatus.OK);
-    }
 }

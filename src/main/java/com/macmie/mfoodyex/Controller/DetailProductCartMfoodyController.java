@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static com.macmie.mfoodyex.Constant.ViewConstant.*;
+import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
  * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)
@@ -108,7 +108,6 @@ public class DetailProductCartMfoodyController {
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductCarts");
         }
-
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

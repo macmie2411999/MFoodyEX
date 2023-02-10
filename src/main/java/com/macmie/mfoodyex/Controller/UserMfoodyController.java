@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static com.macmie.mfoodyex.Constant.ViewConstant.*;
+import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
  * be used when the requested resource cannot be found (null): HttpStatus.NOT_FOUND (404)
@@ -85,7 +85,8 @@ public class UserMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting UserMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR Exceptions occur when deleting UserMfoody");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting UserMfoody");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

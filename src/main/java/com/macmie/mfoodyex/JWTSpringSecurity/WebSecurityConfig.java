@@ -13,7 +13,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+
+import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 @Configuration
 @EnableWebSecurity
@@ -21,9 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;
-
-    @Autowired
-    private HttpSessionRequestCache httpSessionRequestCache;
 
     // Set encryption standard: BCrypt
     @Bean
@@ -36,10 +36,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new JWTAuthenticationFilter();
     }
 
+    // Expose the authentication manager bean in the Spring context, so that it can be used for authentication
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
+    }
+
+    /*
+    * Disallow the creation of a new HTTP session if one does not already exist.
+    * This means that if a session does not exist, no target URL will be stored in the session
+    * */
+    @Bean
+    public HttpSessionRequestCache getHttpSessionRequestCache() {
+        var httpSessionRequestCache = new HttpSessionRequestCache();
+        httpSessionRequestCache.setCreateSessionAllowed(false);
+        return httpSessionRequestCache;
     }
 
     /*
@@ -48,27 +60,58 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     * */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // super.configure(auth);
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    // Config Domains
+    // Config URLs
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .anyRequest().permitAll();
-        http.csrf().disable().cors().disable().requestCache().requestCache(httpSessionRequestCache).and() // Block attacks from Sessions
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // No Session is allowed
-                .authorizeHttpRequests()
-                .antMatchers("/demo/login").permitAll()
-//                .antMatchers("/demo/user").hasRole("USER")
-//                .antMatchers("/demo/admin").hasRole("ADMIN")
-//                .antMatchers("/demo/guest").hasRole("GUEST")
-                .antMatchers("/demo/logout").permitAll()
+        http
+                /*
+                * 1. Disables CSRF protection
+                * 2. Cross-Site Request Forgery (CSRF) is a type of attack that tricks a user into making
+                * an unintended request to a web application. CSRF protection helps to prevent such attacks
+                * by requiring that a token be included in a request to verify that the request is legitimate
+                * */
+                .csrf().disable()
+
+                /*
+                * 1. Disables CORS protection
+                * 2. Cross-Origin Resource Sharing (CORS) is a security feature that restricts the types of requests
+                * that can be made from a web application running in one origin to a resource in another origin
+                * */
+                .cors().disable()
+
+                /*
+                * 1. Sets the request cache to be used by the application
+                * 2. The request cache is used to redirect the user to the originally requested resource after they have logged in
+                * */
+                .requestCache().requestCache(getHttpSessionRequestCache())
+
+                /*
+                * 1. Sets the session creation policy to be stateless
+                * 2. A stateless session means that the server does not maintain any state about the client, so it
+                * does not store any information in a session. Instead, all required information is passed in each request
+                * 3. This can improve the security of the application and make it more scalable, since there is no need
+                * to manage and store session state on the server
+                * */
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                /*
+                * Define which requests are allowed and which are not based on the authentication and authorization
+                * of the user making the request
+                * */
+                .and().authorizeHttpRequests()
+
+                .antMatchers(APPLICATION_MFOODY + LOGIN_MFOODY).permitAll()
+                .antMatchers(APPLICATION_MFOODY + LOGOUT_MFOODY).permitAll()
                 .anyRequest().authenticated()
+                .and().logout().logoutUrl(APPLICATION_MFOODY + LOGOUT_MFOODY) // Specify the logout endpoint URL
+                .invalidateHttpSession(true) // Invalidate the user's HTTP session when they log out
+                .clearAuthentication(true) // Clears the user's security context, effectively logging them out of the application
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
                 .and().addFilterBefore(jwtAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter.class); // Run the custom filter first
-//                .and().logout()
-//                .and().httpBasic();
+
     }
 }
