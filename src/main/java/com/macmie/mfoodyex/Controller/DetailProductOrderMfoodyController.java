@@ -1,10 +1,7 @@
 package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
-import com.macmie.mfoodyex.Model.DetailProductOrderMfoody;
-import com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId;
-import com.macmie.mfoodyex.Model.OrderMfoody;
-import com.macmie.mfoodyex.Model.ProductMfoody;
+import com.macmie.mfoodyex.Model.*;
 import com.macmie.mfoodyex.POJO.DetailProductOrderMfoodyPOJO;
 import com.macmie.mfoodyex.Repository.DetailProductCartMfoodyRepository;
 import com.macmie.mfoodyex.Service.InterfaceService.DetailProductOrderMfoodyInterfaceService;
@@ -14,14 +11,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_ADMIN_SECURITY;
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_USER_SECURITY;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
@@ -51,28 +52,47 @@ public class DetailProductOrderMfoodyController {
     @Autowired
     DetailProductCartMfoodyRepository detailProductCartMfoodyRepository;
 
+    @Autowired
+    private ApplicationCheckAuthorController applicationCheckAuthorController;
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllDetailProductOrderMfoodys() {
-        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodys();
+    public ResponseEntity<?> getAllDetailProductOrderMfoodys(Principal principal) {
+        log.info("Get List of DetailProductOrderMfoodys by " + principal.getName());
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList =
+                detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodys();
         if (detailProductOrderMfoodyList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of DetailProductOrderMfoodys", HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID_ORDER)
-    public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdOrder(@PathVariable("ID") int ID) {
-        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdOrder(ID);
+    public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdOrder(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get List of DetailProductOrderMfoodys with idOrder: {} by {}", ID, principal.getName());
+
+        // Check if the current UserMfoody has role ADMIN or the owner of DetailProductOrderMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal,
+                orderMfoodyInterfaceService.getOrderMfoodyByID(ID).getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList =
+                detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdOrder(ID);
         if (detailProductOrderMfoodyList.isEmpty()) {
-            return new ResponseEntity<>(
-                    "NO_CONTENT List of DetailProductOrderMfoodys with idOrder: " + ID, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of DetailProductOrderMfoodys with idOrder: " + ID,
+                    HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_BY_ID_PRODUCT)
-    public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdProduct(@PathVariable("ID") int ID) {
-        List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdProduct(ID);
+    public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdProduct(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get List of DetailProductCartMfoodys with idProduct: {} by {}", ID, principal.getName());
+        List<DetailProductOrderMfoody> detailProductOrderMfoodyList =
+                detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdProduct(ID);
         if (detailProductOrderMfoodyList.isEmpty()) {
             return new ResponseEntity<>(
                     "NO_CONTENT List of DetailProductOrderMfoodys with idProduct: " + ID, HttpStatus.NO_CONTENT);
@@ -80,9 +100,19 @@ public class DetailProductOrderMfoodyController {
         return new ResponseEntity<>(detailProductOrderMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID_ORDER_AND_ID_PRODUCT)
     public ResponseEntity<?> getDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder,
-                                                             @PathVariable("IdProduct") int idProduct) {
+                                                             @PathVariable("IdProduct") int idProduct,
+                                                             Principal principal) {
+        log.info("Get DetailProductOrderMfoody with idOrder: {} and idProduct: {} by {}", idOrder, idProduct, principal.getName());
+
+        // Check if the current UserMfoody has role ADMIN or the owner of DetailProductOrderMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal,
+                orderMfoodyInterfaceService.getOrderMfoodyByID(idOrder).getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
         DetailProductOrderMfoody detailProductOrderMfoody =
                 detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
         if (detailProductOrderMfoody == null) {
@@ -93,49 +123,76 @@ public class DetailProductOrderMfoodyController {
         return new ResponseEntity<>(detailProductOrderMfoody, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT)
     public ResponseEntity<?> deleteDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder,
-                                                                @PathVariable("IdProduct") int idProduct) {
+                                                                @PathVariable("IdProduct") int idProduct,
+                                                                Principal principal) {
+        log.info("Delete DetailProductOrderMfoody with idCart: {} and idProduct: {} by {}",
+                idOrder, idProduct, principal.getName());
         DetailProductOrderMfoody detailProductOrderMfoody =
-                detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(idOrder, idProduct);
+                detailProductOrderMfoodyInterfaceService.getDetailProductOrderMfoodyByIOrderAndIdProduct(
+                        idOrder, idProduct);
         if (detailProductOrderMfoody == null) {
             return new ResponseEntity<>(
                     "NOT_FOUND DetailProductOrderMfoody with idOrder: " + idOrder + ", idProduct: " + idProduct,
                     HttpStatus.NOT_FOUND);
         }
 
+        // Check if the current UserMfoody has role ADMIN or the owner of DetailProductOrderMfoody
+        OrderMfoody orderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(idOrder);
+        if(orderMfoody != null){
+            if(!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())){
+                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            }
+        }
+
         try {
-            detailProductOrderMfoodyInterfaceService.deleteDetailProductOrderMfoodyByIdDetailProductOrderMfoody(idOrder, idProduct);
+            detailProductOrderMfoodyInterfaceService.deleteDetailProductOrderMfoodyByIdDetailProductOrderMfoody(
+                    idOrder, idProduct);
         } catch (Exception e) {
-            log.error("An error occurred while deleting DetailProductOrders with idOrder: {} and idProduct: {}", idOrder, idProduct);
+            log.error("An error occurred while deleting DetailProductOrder with idOrder: {} and idProduct: {}",
+                    idOrder, idProduct);
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrder");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_ORDER)
-    public ResponseEntity<?> deleteDetailProductOrderMfoodyByIdOrder(@PathVariable("ID") int ID) {
-        if (orderMfoodyInterfaceService.getOrderMfoodyByID(ID) == null) {
+    public ResponseEntity<?> deleteAllDetailProductOrderMfoodysByIdOrder(@PathVariable("ID") int ID,
+                                                                         Principal principal) {
+        log.info("Delete List of DetailProductOrderMfoodys with idOrder: {} by {}", ID, principal.getName());
+        OrderMfoody orderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(ID);
+        if (orderMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of DetailProductOrderMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         try {
             detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdOrder(ID);
         } catch (Exception e) {
-            log.error("An error occurred while deleting DetailProductOrders with idOrder: " + ID);
+            log.error("An error occurred while deleting List of DetailProductOrderMfoodys with idOrder: " + ID);
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of DetailProductOrderMfoodys");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_PRODUCT)
-    public ResponseEntity<?> deleteDetailProductOrderMfoodyByIdProduct(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteAllDetailProductOrderMfoodysByIdProduct(@PathVariable("ID") int ID,
+                                                                           Principal principal) {
+        log.info("Delete List of DetailProductOrderMfoodys with idProduct: {} by {}", ID, principal.getName());
         if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
@@ -143,10 +200,10 @@ public class DetailProductOrderMfoodyController {
         try {
             detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
         } catch (Exception e) {
-            log.error("An error occurred while deleting DetailProductOrders with idProduct: " + ID);
+            log.error("An error occurred while deleting List of DetailProductCartMfoodys with idProduct: " + ID);
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting DetailProductOrders");
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of DetailProductCartMfoodys");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -156,8 +213,10 @@ public class DetailProductOrderMfoodyController {
      * 1. idOrder and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
      * 2. salePrice/fullPrice of DetailProductOrderMfoody are fetched from ProductMfoody
      * */
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editDetailProductOrderMfoody(@RequestBody String detailProductOrderPOJOJsonObject) {
+    public ResponseEntity<?> editDetailProductOrderMfoody(@RequestBody String detailProductOrderPOJOJsonObject,
+                                                          Principal principal) {
         try {
             // Convert JsonObject to DetailProductOrderPOJO object
             Gson gson = new Gson();
@@ -167,31 +226,41 @@ public class DetailProductOrderMfoodyController {
                     getDetailProductOrderMfoodyByIOrderAndIdProduct(
                             newDetailProductOrderMfoodyPOJO.getIdOrder(),
                             newDetailProductOrderMfoodyPOJO.getIdProduct());
+            ProductMfoody newProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(
+                    newDetailProductOrderMfoodyPOJO.getIdProduct());
+            OrderMfoody newOrderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(
+                    newDetailProductOrderMfoodyPOJO.getIdOrder());
 
             // Check valid idOrder and idProduct
-            if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct()) == null) {
+            if (newProductMfoody == null) {
                 return new ResponseEntity<>(
                         "NOT_FOUND ProductMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdProduct(),
                         HttpStatus.NOT_FOUND);
             }
-            if (orderMfoodyInterfaceService.getOrderMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdOrder()) == null) {
+            if (newOrderMfoody == null) {
                 return new ResponseEntity<>(
                         "NOT_FOUND OrderMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdOrder(),
                         HttpStatus.NOT_FOUND);
             }
             if (newDetailProductOrderMfoody == null) {
                 return new ResponseEntity<>(
-                        "NOT_FOUND DetailProductOrderMfoody with idOrder: " + newDetailProductOrderMfoodyPOJO.getIdOrder()
-                                + " and idProduct: " + newDetailProductOrderMfoodyPOJO.getIdProduct(), HttpStatus.NOT_FOUND);
+                        "NOT_FOUND DetailProductOrderMfoody with idOrder: "
+                                + newDetailProductOrderMfoodyPOJO.getIdOrder()
+                                + " and idProduct: " + newDetailProductOrderMfoodyPOJO.getIdProduct(),
+                        HttpStatus.NOT_FOUND);
+            }
+
+            // Check if the current UserMfoody has role ADMIN or the owner of DetailProductOrderMfoody
+            if(!applicationCheckAuthorController.checkAuthorization(principal, newOrderMfoody.getUser().getIdUser())){
+                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
 
             // Add IdDetailProductOrderMfoody, ProductMfoody, and OrderMfoody; re-assign values for salePrice/fullPrice from ProductMfoody
-            newDetailProductOrderMfoody.setQuantityDetailProductOrder(newDetailProductOrderMfoodyPOJO.getQuantityDetailProductOrder());
-            ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(
-                    newDetailProductOrderMfoodyPOJO.getIdProduct());
-            newDetailProductOrderMfoody.setProduct(productMfoody);
-            newDetailProductOrderMfoody.setSalePriceDetailProductOrder(productMfoody.getSalePriceProduct());
-            newDetailProductOrderMfoody.setFullPriceDetailProductOrder(productMfoody.getFullPriceProduct());
+            newDetailProductOrderMfoody.setQuantityDetailProductOrder(
+                    newDetailProductOrderMfoodyPOJO.getQuantityDetailProductOrder());
+            newDetailProductOrderMfoody.setProduct(newProductMfoody);
+            newDetailProductOrderMfoody.setSalePriceDetailProductOrder(newProductMfoody.getSalePriceProduct());
+            newDetailProductOrderMfoody.setFullPriceDetailProductOrder(newProductMfoody.getFullPriceProduct());
 
             // Save to DB and Update associated OrderMfoody
             detailProductOrderMfoodyInterfaceService.updateDetailProductOrderMfoody(newDetailProductOrderMfoody);
@@ -209,14 +278,17 @@ public class DetailProductOrderMfoodyController {
      * 1. idOrder and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
      * 2. salePrice/fullPrice of DetailProductOrderMfoody are fetched from ProductMfoody
      * */
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewDetailProductOrderMfoody(@RequestBody String detailProductOrderPOJOJsonObject) {
+    public ResponseEntity<?> addNewDetailProductOrderMfoody(@RequestBody String detailProductOrderPOJOJsonObject,
+                                                            Principal principal) {
         try {
             // Convert JsonObject to DetailProductOrderPOJO object
             Gson gson = new Gson();
             DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO =
                     gson.fromJson(detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO.class);
-            DetailProductOrderMfoody newDetailProductOrderMfoody = newDetailProductOrderMfoodyPOJO.renderDetailProductOrderMfoody();
+            DetailProductOrderMfoody newDetailProductOrderMfoody =
+                    newDetailProductOrderMfoodyPOJO.renderDetailProductOrderMfoody();
 
             // Check valid idOrder and idProduct
             DetailProductOrderMfoody checkNewDetailProductOrderMfoody = detailProductOrderMfoodyInterfaceService.
@@ -225,12 +297,14 @@ public class DetailProductOrderMfoodyController {
                             newDetailProductOrderMfoodyPOJO.getIdProduct());
             ProductMfoody productMfoody = productMfoodyInterfaceService.
                     getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct());
-            if (productMfoodyInterfaceService.getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct()) == null) {
+            if (productMfoodyInterfaceService.getProductMfoodyByID(
+                    newDetailProductOrderMfoodyPOJO.getIdProduct()) == null) {
                 return new ResponseEntity<>(
                         "NOT_FOUND ProductMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdProduct(),
                         HttpStatus.NOT_FOUND);
             }
-            if (orderMfoodyInterfaceService.getOrderMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdOrder()) == null) {
+            if (orderMfoodyInterfaceService.getOrderMfoodyByID(
+                    newDetailProductOrderMfoodyPOJO.getIdOrder()) == null) {
                 return new ResponseEntity<>(
                         "NOT_FOUND OrderMfoody with ID: " + newDetailProductOrderMfoodyPOJO.getIdOrder(),
                         HttpStatus.NOT_FOUND);
@@ -241,7 +315,8 @@ public class DetailProductOrderMfoodyController {
                 checkNewDetailProductOrderMfoody.setQuantityDetailProductOrder(
                         checkNewDetailProductOrderMfoody.getQuantityDetailProductOrder()
                                 + newDetailProductOrderMfoodyPOJO.getQuantityDetailProductOrder());
-                detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(checkNewDetailProductOrderMfoody);
+                detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(
+                        checkNewDetailProductOrderMfoody);
                 processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
                 return new ResponseEntity<>("OK DetailProductOrderMfoody updated", HttpStatus.OK);
             }

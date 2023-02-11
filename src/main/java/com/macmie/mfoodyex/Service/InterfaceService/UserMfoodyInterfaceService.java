@@ -9,6 +9,8 @@ public interface UserMfoodyInterfaceService {
 
     public UserMfoody getUserMfoodyByID(int idUserMfoody);
 
+    public UserMfoody getUserMfoodyByNameUser(String nameUserMfoody);
+
     public UserMfoody getUserMfoodyByEmail(String emailUserMfoody);
 
     public UserMfoody getUserMfoodyByPhoneNumber(String phoneNumberUserMfoody);

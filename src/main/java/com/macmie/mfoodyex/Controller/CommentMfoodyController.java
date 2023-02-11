@@ -12,14 +12,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_ADMIN_SECURITY;
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_USER_SECURITY;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
@@ -42,29 +46,51 @@ public class CommentMfoodyController {
     @Autowired
     private ProductMfoodyInterfaceService productMfoodyInterfaceService;
 
+    @Autowired
+    private ApplicationCheckAuthorController applicationCheckAuthorController;
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllCommentMfoodys() {
+    public ResponseEntity<?> getAllCommentMfoodys(Principal principal) {
+        log.info("Get List of CommentMfoodys by " + principal.getName());
         List<CommentMfoody> commentMfoodyList = commentMfoodyInterfaceService.getListCommentMfoodys();
         if (commentMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of CartMfoodys", HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys", HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(commentMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<?> getCommentMfoodyByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getCommentMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get CommentMfoody with ID: {} by {}", ID, principal.getName());
         CommentMfoody commentMfoody = commentMfoodyInterfaceService.getCommentMfoodyByID(ID);
+
         if (commentMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND CommentMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CommentMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, commentMfoody.getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
         return new ResponseEntity<>(commentMfoody, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID_USER)
-    public ResponseEntity<?> getCommentMfoodyByIdUser(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getAllCommentMfoodysByIdUser(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get List of CommentMfoodys with idUser: {} by {}", ID, principal.getName());
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CommentMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
         List<CommentMfoody> commentMfoodyList = commentMfoodyInterfaceService.getListCommentMfoodysByIdUser(ID);
         if (commentMfoodyList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of CommentMfoodys with idUser: " + ID,
@@ -73,8 +99,10 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(commentMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_BY_ID_PRODUCT)
-    public ResponseEntity<?> getCommentMfoodyByIdProduct(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getAllCommentMfoodysByIdProduct(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get List of CommentMfoodys with idProduct: {} by {}", ID, principal.getName());
         if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
@@ -86,13 +114,23 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(commentMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE)
-    public ResponseEntity<?> deleteCommentMfoodyByID(@PathVariable("ID") int ID) {
-        if (commentMfoodyInterfaceService.getCommentMfoodyByID(ID) == null) {
+    public ResponseEntity<?> deleteCommentMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete CommentMfoody with ID: {} by {}", ID, principal.getName());
+
+        CommentMfoody commentMfoody = commentMfoodyInterfaceService.getCommentMfoodyByID(ID);
+        if (commentMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND CommentMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
-        int idProduct = commentMfoodyInterfaceService.getCommentMfoodyByID(ID).getProduct().getIdProduct();
 
+        // Check if the current UserMfoody has role ADMIN or the owner of the CommentMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, commentMfoody.getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
+        // Save idProduct for updating associated attributes
+        int idProduct = commentMfoody.getProduct().getIdProduct();
 
         try {
             commentMfoodyInterfaceService.deleteCommentMfoodyByID(ID);
@@ -109,10 +147,17 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_USER)
-    public ResponseEntity<?> deleteCommentMfoodyByIdUser(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteAllCommentMfoodysByIdUser(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete List of CommentMfoodys with idUser: {} by {}", ID, principal.getName());
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CommentMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         // Update ratingProduct in ProductMfoody
@@ -131,10 +176,10 @@ public class CommentMfoodyController {
         try {
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
         } catch (Exception e) {
-            log.error("An error occurred while deleting CommentMfoody with idUser: " + ID);
+            log.error("An error occurred while deleting List of CommentMfoodys with idUser: " + ID);
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of CommentMfoodys");
         }
 
         for (ProductMfoody element : productMfoodyList) {
@@ -144,8 +189,10 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_PRODUCT)
-    public ResponseEntity<?> deleteCommentMfoodyByIdProduct(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteAllCommentMfoodysByIdProduct(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete List of CommentMfoodys with idProduct: {} by {}", ID, principal.getName());
         if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
@@ -153,10 +200,10 @@ public class CommentMfoodyController {
         try {
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
         } catch (Exception e) {
-            log.error("An error occurred while deleting CommentMfoody with idProduct: " + ID);
+            log.error("An error occurred while deleting List of CommentMfoodys with idProduct: " + ID);
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting CommentMfoody");
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of CommentMfoodys");
         }
 
         // Update ratingProduct in ProductMfoody (Delete all comments, ratingProduct = 0)
@@ -167,8 +214,9 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PutMapping(URL_EDIT) // idUser and idProduct in Json are ignored
-    public ResponseEntity<?> editCommentMfoody(@RequestBody String commentPOJOJsonObject) {
+    public ResponseEntity<?> editCommentMfoody(@RequestBody String commentPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CommentPOJO object, Check input idComment and update CommentMfoody
             Gson gson = new Gson();
@@ -179,6 +227,12 @@ public class CommentMfoodyController {
                 return new ResponseEntity<>("NOT_FOUND CommentMfoody with ID: " + newCommentMfoodyPOJO.getIdComment(),
                         HttpStatus.NOT_FOUND);
             }
+
+            // Check if the current UserMfoody has role ADMIN or the owner of the CommentMfoody
+            if(!applicationCheckAuthorController.checkAuthorization(principal, newCommentMfoody.getUser().getIdUser())){
+                return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            }
+
             newCommentMfoody.setRatingComment(newCommentMfoodyPOJO.getRatingComment());
             newCommentMfoody.setContentComment(newCommentMfoodyPOJO.getContentComment());
             commentMfoodyInterfaceService.updateCommentMfoody(newCommentMfoody);
@@ -194,8 +248,9 @@ public class CommentMfoodyController {
         }
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(URL_ADD) // idUser and idProduct in Json must be accurate
-    public ResponseEntity<?> addNewCommentMfoody(@RequestBody String commentPOJOJsonObject) {
+    public ResponseEntity<?> addNewCommentMfoody(@RequestBody String commentPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CommentPOJO object
             Gson gson = new Gson();

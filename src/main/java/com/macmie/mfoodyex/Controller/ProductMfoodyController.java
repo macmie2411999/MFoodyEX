@@ -10,12 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_ADMIN_SECURITY;
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_USER_SECURITY;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
@@ -45,10 +49,15 @@ public class ProductMfoodyController {
     private OrderMfoodyInterfaceService orderMfoodyInterfaceService;
 
     @Autowired
+    private ApplicationCheckAuthorController applicationCheckAuthorController;
+
+    @Autowired
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllProductMfoodys() {
+    public ResponseEntity<?> getAllProductMfoodys(Principal principal) {
+        log.info("Get List of ProductMfoodys by " + principal.getName());
         List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
         if (productMfoodyList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of ProductMfoodys", HttpStatus.NO_CONTENT);
@@ -56,8 +65,10 @@ public class ProductMfoodyController {
         return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<?> getProductMfoodyByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getProductMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get ProductMfoody with ID: {} by {}", ID, principal.getName());
         ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(ID);
         if (productMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
@@ -65,8 +76,10 @@ public class ProductMfoodyController {
         return new ResponseEntity<>(productMfoody, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @DeleteMapping(URL_DELETE)
-    public ResponseEntity<?> deleteProductMfoodyByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteProductMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete ProductMfoody with ID: {} by {}", ID, principal.getName());
         if (productMfoodyInterfaceService.getProductMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
@@ -87,8 +100,9 @@ public class ProductMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editProductMfoody(@RequestBody String productMfoodyPOJOJsonObject) {
+    public ResponseEntity<?> editProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to ProductMfoodyPOJO object, Check the input idProduct
             Gson gson = new Gson();
@@ -141,8 +155,9 @@ public class ProductMfoodyController {
         }
     }
 
-    @PostMapping(URL_ADD) // idProduct is ignored
-    public ResponseEntity<?> addNewProductMfoody(@RequestBody String productMfoodyPOJOJsonObject) {
+    @Secured({ROLE_ADMIN_SECURITY})
+    @PostMapping(URL_ADD) // idProduct in Json is ignored
+    public ResponseEntity<?> addNewProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to ProductMfoody object
             Gson gson = new Gson();

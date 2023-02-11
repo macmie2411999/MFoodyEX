@@ -10,12 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_ADMIN_SECURITY;
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_USER_SECURITY;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
@@ -50,8 +54,13 @@ public class UserMfoodyController {
     @Autowired
     private DetailProductOrderMfoodyInterfaceService detailProductOrderMfoodyInterfaceService;
 
+    @Autowired
+    private ApplicationCheckAuthorController applicationCheckAuthorController;
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllUserMfoodys() {
+    public ResponseEntity<?> getAllUserMfoodys(Principal principal) {
+        log.info("Get List of UserMfoodys by " + principal.getName());
         List<UserMfoody> userMfoodyList = userMfoodyInterfaceService.getListUserMfoodys();
         if (userMfoodyList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of UserMfoodys", HttpStatus.NO_CONTENT);
@@ -60,19 +69,34 @@ public class UserMfoodyController {
         return new ResponseEntity<>(userMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<?> getUserMfoodyByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getUserMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get UserMfoody with ID: {} by {}", ID, principal.getName());
         UserMfoody userMfoody = userMfoodyInterfaceService.getUserMfoodyByID(ID);
         if (userMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of account
+        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
         return new ResponseEntity<>(userMfoody, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE)
-    public ResponseEntity<?> deleteUserMfoodyByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteUserMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete UserMfoody with ID: {} by {}", ID, principal.getName());
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of account
+        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         try {
@@ -92,8 +116,9 @@ public class UserMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyPOJOJsonObject) {
+    public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to UserMfoodyPOJO object, Check the input idUser
             Gson gson = new Gson();
@@ -103,6 +128,11 @@ public class UserMfoodyController {
             if (oldUserMfoody == null) {
                 return new ResponseEntity<>(
                         "NOT_FOUND UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser(), HttpStatus.NOT_FOUND);
+            }
+
+            // Check if the current UserMfoody has role ADMIN or the owner of account
+            if(!applicationCheckAuthorController.checkAuthorization(principal, newUserMfoodyPOJO.getIdUser())){
+                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
 
             // Save to DB (Handle Exception in case the unique attributes in the request already exist)
@@ -120,8 +150,8 @@ public class UserMfoodyController {
         }
     }
 
-    @PostMapping(URL_ADD) // idUser is ignored
-    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject) {
+    @PostMapping(URL_ADD) // idUser in Json is ignored
+    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to UserMfoody object
             Gson gson = new Gson();

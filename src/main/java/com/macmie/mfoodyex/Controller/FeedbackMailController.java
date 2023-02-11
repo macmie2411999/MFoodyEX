@@ -7,12 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_ADMIN_SECURITY;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
@@ -29,8 +32,13 @@ public class FeedbackMailController {
     @Autowired
     private FeedbackMailInterfaceService feedbackMailInterfaceService;
 
+    @Autowired
+    private ApplicationCheckAuthorController applicationCheckAuthorController;
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllFeedbackMails() {
+    public ResponseEntity<?> getAllFeedbackMails(Principal principal) {
+        log.info("Get List of FeedbackMails by " + principal.getName());
         List<FeedbackMail> feedbackMailList = feedbackMailInterfaceService.getListFeedbackMails();
         if (feedbackMailList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of FeedbackMails", HttpStatus.NO_CONTENT);
@@ -38,8 +46,10 @@ public class FeedbackMailController {
         return new ResponseEntity<>(feedbackMailList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<?> getFeedbackMailByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getFeedbackMailByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get FeedbackMail with ID: {} by {}", ID, principal.getName());
         FeedbackMail feedbackMail = feedbackMailInterfaceService.getFeedbackMailByID(ID);
         if (feedbackMail == null) {
             return new ResponseEntity<>("NOT_FOUND FeedbackMail with ID: " + ID, HttpStatus.NOT_FOUND);
@@ -47,8 +57,10 @@ public class FeedbackMailController {
         return new ResponseEntity<>(feedbackMail, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @DeleteMapping(URL_DELETE)
-    public ResponseEntity<?> deleteFeedbackMailByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteFeedbackMailByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete FeedbackMail with ID: {} by {}", ID, principal.getName());
         if (feedbackMailInterfaceService.getFeedbackMailByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND FeedbackMail with ID: " + ID, HttpStatus.NOT_FOUND);
         }
@@ -65,8 +77,9 @@ public class FeedbackMailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY})
     @PutMapping(URL_EDIT) // idFeedbackMail in Json must be accurate
-    public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject) {
+    public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject, Principal principal) {
         try {
             // Convert JsonObject to FeedbackMail object, Save to DB and return
             FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
@@ -88,7 +101,7 @@ public class FeedbackMailController {
     }
 
     @PostMapping(URL_ADD) // idFeedbackMail in Json is ignored
-    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject) {
+    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject, Principal principal) {
         try {
             // Convert JsonObject to FeedbackMail object (Updated Cart in DB could have ID differs from user's request)
             FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);

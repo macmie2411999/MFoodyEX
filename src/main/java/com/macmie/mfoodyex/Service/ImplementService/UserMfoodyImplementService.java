@@ -42,6 +42,12 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
     }
 
     @Override
+    public UserMfoody getUserMfoodyByNameUser(String nameUserMfoody) {
+        log.info("Fetching UserMfoody with nameUser: {}", nameUserMfoody);
+        return userMfoodyRepository.findByNameUser(nameUserMfoody);
+    }
+
+    @Override
     public UserMfoody getUserMfoodyByEmail(String emailUserMfoody) {
         log.info("Fetching UserMfoody with emailUserMfoody: {}", emailUserMfoody);
         return userMfoodyRepository.findByEmailUser(emailUserMfoody);

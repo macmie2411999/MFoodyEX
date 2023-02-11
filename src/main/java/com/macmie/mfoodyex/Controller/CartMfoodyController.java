@@ -10,12 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_ADMIN_SECURITY;
+import static com.macmie.mfoodyex.Constant.SecurityConstants.ROLE_USER_SECURITY;
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
 /*
@@ -35,8 +39,13 @@ public class CartMfoodyController {
     @Autowired
     private UserMfoodyInterfaceService userMfoodyInterfaceService;
 
+    @Autowired
+    private ApplicationCheckAuthorController applicationCheckAuthorController;
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllCartMfoodys() {
+    public ResponseEntity<?> getAllCartMfoodys(Principal principal) {
+        log.info("Get List of CartMfoodys by " + principal.getName());
         List<CartMfoody> cartMfoodyList = cartMfoodyInterfaceService.getListCartMfoodys();
         if (cartMfoodyList.isEmpty()) {
             return new ResponseEntity<>("NO_CONTENT List of CartMfoodys", HttpStatus.NO_CONTENT);
@@ -44,20 +53,36 @@ public class CartMfoodyController {
         return new ResponseEntity<>(cartMfoodyList, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID)
-    public ResponseEntity<?> getCartMfoodyByID(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getCartMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get CartMfoody with ID: {} by {}", ID, principal.getName());
         CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(ID);
         if (cartMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
         return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_BY_ID_USER)
-    public ResponseEntity<?> getCartMfoodyByIdUser(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> getCartMfoodyByIdUser(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get CartMfoody with idUser: {} by {}", ID, principal.getName());
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
         CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByIdUser(ID);
         if (cartMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with idUser: " + ID, HttpStatus.NOT_FOUND);
@@ -65,10 +90,18 @@ public class CartMfoodyController {
         return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE)
-    public ResponseEntity<?> deleteCartMfoodyByID(@PathVariable("ID") int ID) {
-        if (cartMfoodyInterfaceService.getCartMfoodyByID(ID) == null) {
+    public ResponseEntity<?> deleteCartMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete CartMfoody with ID: {} by {}", ID, principal.getName());
+        CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(ID);
+        if (cartMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         try {
@@ -83,10 +116,17 @@ public class CartMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_USER)
-    public ResponseEntity<?> deleteCartMfoodyByIdUser(@PathVariable("ID") int ID) {
+    public ResponseEntity<?> deleteCartMfoodyByIdUser(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Delete CartMfoody with idUser: {} by {}", ID, principal.getName());
         if (userMfoodyInterfaceService.getUserMfoodyByID(ID) == null) {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
+        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         try {
@@ -106,8 +146,9 @@ public class CartMfoodyController {
      * 2. This API is quite redundant coz quantityAllProductsInCart/totalSalPrice/totalFullPrice (all of its attributes)
      *    will be updated later with APIs of DetailProductCartMfoody (coz the oneToMany table is always created first)
      * */
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PutMapping(URL_EDIT)
-    public ResponseEntity<?> editCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject) {
+    public ResponseEntity<?> editCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CartMfoodyPOJO object, Check input idCart and update CartMfoody
             Gson gson = new Gson();
@@ -122,6 +163,12 @@ public class CartMfoodyController {
                 return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + newCartMfoodyPOJO.getIdCart(),
                         HttpStatus.NOT_FOUND);
             }
+
+            // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
+            if(!applicationCheckAuthorController.checkAuthorization(principal, newCartMfoody.getUser().getIdUser())){
+                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            }
+
             newCartMfoody.setQuantityAllProductsInCart(0);
             newCartMfoody.setTotalSalePriceCart(0);
             newCartMfoody.setTotalFullPriceCart(0);
@@ -143,8 +190,9 @@ public class CartMfoodyController {
      * 3. Every CartMfoody is created with quantityAllProductsInCart/totalSalPrice/totalFullPrice = 0 and will be
      *    updated later with APIs of DetailProductCartMfoody coz the oneToMany table is always created first
      * */
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(URL_ADD)
-    public ResponseEntity<?> addNewCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject) {
+    public ResponseEntity<?> addNewCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CardMfoodyPOJO object and set default value
             Gson gson = new Gson();

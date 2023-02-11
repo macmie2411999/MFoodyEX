@@ -11,11 +11,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.security.Principal;
 
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
@@ -32,6 +36,8 @@ public class ApplicationMfoodyController {
 
     @PostMapping(LOGIN_MFOODY)
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+        log.info("Login to ApplicationMfoody by {}", loginRequest.getUserName());
+
         // Authenticate by Spring Security
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getUserPassword()));
@@ -39,12 +45,14 @@ public class ApplicationMfoodyController {
 
         // Create Token if valid Authentication
         String jwtToken = jwtProvider.generateTokenIncludeUserName(loginRequest.getUserName());
+
         return new ResponseEntity<>(jwtToken, HttpStatus.OK);
     }
 
-
+    // @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(LOGOUT_MFOODY)
-    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response, Principal principal){
+        // log.info("Logout of ApplicationMfoody by {}", principal.getName());
         // Get the current authentication object
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -52,6 +60,7 @@ public class ApplicationMfoodyController {
         if(authentication != null){
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
