@@ -95,7 +95,7 @@ public class OrderMfoodyController {
         return new ResponseEntity<>(orderMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ROLE_ADMIN_SECURITY}) // User with role USER can't delete Order by themselves (Amin will do)
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteOrderMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete OrderMfoody with ID: {} by {}", ID, principal.getName());
@@ -105,9 +105,9 @@ public class OrderMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
-        }
+        // if(!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())){
+        //    return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // }
 
         try {
             orderMfoodyInterfaceService.deleteOrderMfoodyByID(ID);
@@ -121,7 +121,7 @@ public class OrderMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ROLE_ADMIN_SECURITY}) // User with role USER can't delete Order by themselves (Amin will do)
     @DeleteMapping(URL_DELETE_BY_ID_USER)
     public ResponseEntity<?> deleteAllOrderMfoodysByIdUser(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete List of OrderMfoodys with idUser: {} by {}", ID, principal.getName());
@@ -130,9 +130,9 @@ public class OrderMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
-        }
+        // if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+        //    return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // }
 
         try {
             orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
@@ -160,7 +160,8 @@ public class OrderMfoodyController {
             // Convert JsonObject to OrderPOJO object, Check input idOrder and set default values for newOrderMfoody
             Gson gson = new Gson();
             OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
-            if (orderMfoodyInterfaceService.getOrderMfoodyByID(newOrderPOJO.getIdOrder()) == null) {
+            OrderMfoody oldOrderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(newOrderPOJO.getIdOrder());
+            if (oldOrderMfoody == null) {
                 return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + newOrderPOJO.getIdOrder(),
                         HttpStatus.NOT_FOUND);
             }
@@ -178,14 +179,15 @@ public class OrderMfoodyController {
             }
 
             OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
-            newOrderMfoody.setQuantityAllProductsInOrder(0);
-            newOrderMfoody.setTotalFullPriceOrder(0);
-            newOrderMfoody.setTotalSalePriceOrder(0);
+            newOrderMfoody.setQuantityAllProductsInOrder(oldOrderMfoody.getQuantityAllProductsInOrder());
+            newOrderMfoody.setTotalFullPriceOrder(oldOrderMfoody.getTotalFullPriceOrder());
+            newOrderMfoody.setTotalSalePriceOrder(oldOrderMfoody.getTotalSalePriceOrder());
             newOrderMfoody.setUser(attachUserMfoody);
 
             // Save to DB and return
             orderMfoodyInterfaceService.updateOrderMfoody(newOrderMfoody);
-            return new ResponseEntity<>(HttpStatus.OK);
+            log.info("OrderMfoody with ID: {} by {} is edited", newOrderMfoody.getIdOrder(), principal.getName());
+            return new ResponseEntity<>(newOrderMfoody, HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing OrderMfoody");
             log.error("Detail Error: " + e);
@@ -194,10 +196,12 @@ public class OrderMfoodyController {
     }
 
     /*
-     * 1. idUser in Json must be accurate, quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
+     * 1. quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
      * 2. Need to create a new OrderMfoody coz it has it own attributes like dateOder/shippingPrice...
      * 3. Every OrderMfoody is created with quantityAllProductsInOrder/totalSalPrice/totalFullPrice = 0 and will be
      *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
+     * 4. Get idUser from Principal (Token)
+     *    (The threat is any UserMfoodys can create CreditCardMfoody using different idUser)
      * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(URL_ADD)
@@ -212,7 +216,10 @@ public class OrderMfoodyController {
             newOrderMfoody.setTotalSalePriceOrder(0);
 
             // Check input idUser and attach UserMfoody to OrderMfoody
-            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
+            // UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(
+                    userMfoodyInterfaceService.getUserMfoodyByEmail(principal.getName()).getIdUser());
+
             if (attachUserMfoody == null) {
                 return new ResponseEntity<>("NOT_FOUND UserMfoody with idOrder: " + newOrderPOJO.getIdOrder(),
                         HttpStatus.NOT_FOUND);
@@ -221,6 +228,7 @@ public class OrderMfoodyController {
 
             // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
             orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);
+            log.info("A new OrderMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding OrderMfoody");

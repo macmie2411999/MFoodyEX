@@ -214,8 +214,12 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /*
+    * 1. idUser and idProduct in Json are ignored
+    * 2. idComment must be accurate
+    * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
-    @PutMapping(URL_EDIT) // idUser and idProduct in Json are ignored
+    @PutMapping(URL_EDIT)
     public ResponseEntity<?> editCommentMfoody(@RequestBody String commentPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CommentPOJO object, Check input idComment and update CommentMfoody
@@ -239,7 +243,7 @@ public class CommentMfoodyController {
 
             // Update ratingProduct in ProductMfoody
             updateRatingProduct(newCommentMfoodyPOJO.getIdProduct());
-
+            log.info("CommentMfoody with ID: {} by {} is edited", newCommentMfoody.getIdComment(), principal.getName());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing CommentMfoody");
@@ -248,8 +252,12 @@ public class CommentMfoodyController {
         }
     }
 
+    /*
+    * 1. The threat is any UserMfoodys can create CommentMfoody using different idUser
+    * 2. Get idUser from Principal (Token) and idProduct in Json must be accurate
+    * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
-    @PostMapping(URL_ADD) // idUser and idProduct in Json must be accurate
+    @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewCommentMfoody(@RequestBody String commentPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CommentPOJO object
@@ -265,7 +273,10 @@ public class CommentMfoodyController {
             }
 
             // Check input idUser and idProduct, attach new UserMfoody and ProductMfoody to CommentMfoody
-            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCommentMfoodyPOJO.getIdUser());
+            // UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(
+            //        newCommentMfoodyPOJO.getIdUser());
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(
+                            userMfoodyInterfaceService.getUserMfoodyByEmail(principal.getName()).getIdUser());
             ProductMfoody attachProductMfoody = productMfoodyInterfaceService.
                     getProductMfoodyByID(newCommentMfoodyPOJO.getIdProduct());
             if (attachUserMfoody == null) {
@@ -283,7 +294,7 @@ public class CommentMfoodyController {
 
             // Update ratingProduct in ProductMfoody
             updateRatingProduct(newCommentMfoodyPOJO.getIdProduct());
-
+            log.info("A new CommentMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding CommentMfoody");

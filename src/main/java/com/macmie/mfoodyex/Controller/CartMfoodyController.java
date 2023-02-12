@@ -64,7 +64,7 @@ public class CartMfoodyController {
 
         // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
         if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
@@ -90,7 +90,7 @@ public class CartMfoodyController {
         return new ResponseEntity<>(cartMfoody, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ROLE_ADMIN_SECURITY})
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteCartMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete CartMfoody with ID: {} by {}", ID, principal.getName());
@@ -100,9 +100,9 @@ public class CartMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
-        }
+        // if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
+        //     return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // }
 
         try {
             cartMfoodyInterfaceService.deleteCartMfoodyByID(ID);
@@ -116,7 +116,7 @@ public class CartMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ROLE_ADMIN_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_USER)
     public ResponseEntity<?> deleteCartMfoodyByIdUser(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete CartMfoody with idUser: {} by {}", ID, principal.getName());
@@ -125,9 +125,9 @@ public class CartMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
-        }
+        // if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
+        //    return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // }
 
         try {
             cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
@@ -166,15 +166,16 @@ public class CartMfoodyController {
 
             // Check if the current UserMfoody has role ADMIN or the owner of the CartMfoody
             if(!applicationCheckAuthorController.checkAuthorization(principal, newCartMfoody.getUser().getIdUser())){
-                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
 
-            newCartMfoody.setQuantityAllProductsInCart(0);
-            newCartMfoody.setTotalSalePriceCart(0);
-            newCartMfoody.setTotalFullPriceCart(0);
+            // newCartMfoody.setQuantityAllProductsInCart(0);
+            // newCartMfoody.setTotalSalePriceCart(0);
+            // newCartMfoody.setTotalFullPriceCart(0);
 
             // Save to DB and return
             cartMfoodyInterfaceService.updateCartMfoody(newCartMfoody);
+            log.info("CartMfoody with ID: {} by {} is edited", newCartMfoody.getIdCart(), principal.getName());
             return new ResponseEntity<>(newCartMfoody, HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing CartMfoody");
@@ -190,7 +191,7 @@ public class CartMfoodyController {
      * 3. Every CartMfoody is created with quantityAllProductsInCart/totalSalPrice/totalFullPrice = 0 and will be
      *    updated later with APIs of DetailProductCartMfoody coz the oneToMany table is always created first
      * */
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ROLE_ADMIN_SECURITY})
     @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewCartMfoody(@RequestBody String cartMfoodyPOJOJsonObject, Principal principal) {
         try {
@@ -220,6 +221,7 @@ public class CartMfoodyController {
 
             // Save to DB and return (Updated CartMfoody in DB could have ID differs from user's request)
             cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
+            log.info("A new CartMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding CartMfoody");

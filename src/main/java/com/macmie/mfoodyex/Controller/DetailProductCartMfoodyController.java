@@ -254,8 +254,9 @@ public class DetailProductCartMfoodyController {
 
             // Save to DB and Update associated CartMfoody
             detailProductCartMfoodyInterfaceService.updateDetailProductCartMfoody(newDetailProductCartMfoody);
+            log.info("DetailProductCartMfoody with ID: {} by {} is edited",
+                    newDetailProductCartMfoody.getIdDetailProductCartMFoody(), principal.getName());
             processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
-
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing DetailProductCartMfoody");
@@ -267,6 +268,8 @@ public class DetailProductCartMfoodyController {
     /*
      * 1. idCart and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
      * 2. salePrice/fullPrice of DetailProductCartMfoody are fetched from ProductMfoody
+     * 3. The threat is any UserMfoodys can create DetailProductCartMfoody using different idCart and idProduct
+     *    (There is no double check)
      * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(URL_ADD)
@@ -317,6 +320,7 @@ public class DetailProductCartMfoodyController {
 
             // Save to DB and Update associated CartMfoody
             detailProductCartMfoodyInterfaceService.saveDetailProductCartMfoody(newDetailProductCartMfoody);
+            log.info("A new DetailProductCartMfoody is created by " + principal.getName());
             processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
@@ -348,5 +352,6 @@ public class DetailProductCartMfoodyController {
         cartMfoody.setTotalFullPriceCart(totalFullPriceCart);
 
         cartMfoodyInterfaceService.updateCartMfoody(cartMfoody);
+        log.info("CartMfoody with ID: {} is edited! ", cartMfoody.getIdCart());
     }
 }

@@ -117,7 +117,7 @@ public class UserMfoodyController {
     }
 
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
-    @PutMapping(URL_EDIT)
+    @PutMapping(URL_EDIT) // idUser in Json must be accurate
     public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to UserMfoodyPOJO object, Check the input idUser
@@ -138,6 +138,7 @@ public class UserMfoodyController {
             // Save to DB (Handle Exception in case the unique attributes in the request already exist)
             try {
                 userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
+                log.info("UserMfoody with ID: {} by {} is edited", newUserMfoody.getIdUser(), principal.getName());
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         "BAD_REQUEST Failed to update UserMfoody with ID: " + newUserMfoodyPOJO.getIdUser());
@@ -151,7 +152,7 @@ public class UserMfoodyController {
     }
 
     @PostMapping(URL_ADD) // idUser in Json is ignored
-    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, Principal principal) {
+    public ResponseEntity<?> addNewUserMfoody(@RequestBody String userMfoodyPOJOJsonObject) {
         try {
             // Convert JsonObject to UserMfoody object
             Gson gson = new Gson();
@@ -171,6 +172,7 @@ public class UserMfoodyController {
 
             // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from user's request)
             userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
+            log.info("A new UserMfoody is created!");
 
             // Create and save a new CartMfoody (CartMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
             CartMfoodyPOJO newCartMfoodyPOJO = new
@@ -179,8 +181,8 @@ public class UserMfoodyController {
             CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
             newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
             cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
+            log.info("A new CartMfoody is created!");
 
-            // Save to DB and return (New UserMfoody in DB could have ID differs from user's request)
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding UserMfoody");

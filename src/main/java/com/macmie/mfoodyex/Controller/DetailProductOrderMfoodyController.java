@@ -264,8 +264,9 @@ public class DetailProductOrderMfoodyController {
 
             // Save to DB and Update associated OrderMfoody
             detailProductOrderMfoodyInterfaceService.updateDetailProductOrderMfoody(newDetailProductOrderMfoody);
+            log.info("DetailProductOrderMfoody with ID: {} by {} is edited",
+                    newDetailProductOrderMfoody.getIdDetailProductOrderMfoody(), principal.getName());
             processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
-
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing DetailProductOrderMfoody");
@@ -277,6 +278,8 @@ public class DetailProductOrderMfoodyController {
     /*
      * 1. idOrder and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
      * 2. salePrice/fullPrice of DetailProductOrderMfoody are fetched from ProductMfoody
+     * 3. The threat is any UserMfoodys can create DetailProductCartMfoody using different idCart and idProduct
+     *    (There is no double check)
      * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(URL_ADD)
@@ -334,8 +337,8 @@ public class DetailProductOrderMfoodyController {
             // Save to DB and Update associated OrderMfoody
             // entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS=0").executeUpdate();
             detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(newDetailProductOrderMfoody);
+            log.info("A new DetailProductOrderMfoody is created by " + principal.getName());
             processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
-
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding DetailProductOrderMfoody");
@@ -365,6 +368,7 @@ public class DetailProductOrderMfoodyController {
         orderMfoody.setTotalFullPriceOrder(totalFullPriceOrder);
 
         orderMfoodyInterfaceService.updateOrderMfoody(orderMfoody);
+        log.info("OrderMfoody with ID: {} is edited! ", orderMfoody.getIdOrder());
     }
 
     public void processOrderMfoody(int idOrder, DetailProductOrderMfoody newDetailProductOrderMfoody) {

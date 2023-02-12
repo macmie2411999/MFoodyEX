@@ -101,7 +101,7 @@ public class ProductMfoodyController {
     }
 
     @Secured({ROLE_ADMIN_SECURITY})
-    @PutMapping(URL_EDIT)
+    @PutMapping(URL_EDIT) // idProduct in Json must be accurate
     public ResponseEntity<?> editProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to ProductMfoodyPOJO object, Check the input idProduct
@@ -119,6 +119,7 @@ public class ProductMfoodyController {
             // Save to DB (Handle Exception in case the unique attributes in the request already exist)
             try {
                 productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
+                log.info("ProductMfoody with ID: {} by {} is edited", newProductMfoody.getIdProduct(), principal.getName());
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         "BAD_REQUEST Failed to update ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct());
@@ -137,6 +138,8 @@ public class ProductMfoodyController {
                     element.setFullPriceDetailProductCart(newProductMfoody.getFullPriceProduct());
                     element.setSalePriceDetailProductCart(newProductMfoody.getSalePriceProduct());
                     detailProductCartMfoodyInterfaceService.updateDetailProductCartMfoody(element);
+                    log.info("DetailProductCartMfoody with ID: {} by {} is edited",
+                            element.getIdDetailProductCartMFoody(), principal.getName());
 
                     CartMfoody updateCartMfoody = element.getCart();
                     updateCartMfoody.setTotalSalePriceCart(updateCartMfoody.getTotalSalePriceCart() +
@@ -144,6 +147,7 @@ public class ProductMfoodyController {
                     updateCartMfoody.setTotalFullPriceCart(updateCartMfoody.getTotalFullPriceCart() +
                             newProductMfoody.getFullPriceProduct() - oldProductMfoody.getFullPriceProduct());
                     cartMfoodyInterfaceService.updateCartMfoody(updateCartMfoody);
+                    log.info("CartMfoody with ID: {} by {} is edited", updateCartMfoody.getIdCart(), principal.getName());
                 }
             }
 
@@ -177,6 +181,7 @@ public class ProductMfoodyController {
 
             // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
             productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
+            log.info("A new ProductMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding ProductMfoody");

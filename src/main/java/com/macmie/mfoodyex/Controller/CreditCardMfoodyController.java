@@ -140,8 +140,12 @@ public class CreditCardMfoodyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /*
+     * 1. idUser in Json is ignored
+     * 2. idCreditCard must be accurate
+     * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
-    @PutMapping(URL_EDIT) // idUser in Json is ignored
+    @PutMapping(URL_EDIT)
     public ResponseEntity<?> editCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CreditCardPOJO object, Check input idCard and attach UserMfoody to CreditCardMfoody
@@ -169,6 +173,7 @@ public class CreditCardMfoodyController {
                         "BAD_REQUEST Failed to update CreditCardMfoody with ID: " + newCreditCardPOJO.getIdCard());
             }
 
+            log.info("CreditCardMfoody with ID: {} by {} is edited", newCreditCardMfoody.getIdCard(), principal.getName());
             return new ResponseEntity<>(newCreditCardMfoody, HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing CreditCardMfoody");
@@ -177,8 +182,12 @@ public class CreditCardMfoodyController {
         }
     }
 
+    /*
+     * 1. The threat is any UserMfoodys can create CreditCardMfoody using different idUser
+     * 2. Get idUser from Principal (Token)
+     * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
-    @PostMapping(URL_ADD) // idUser in Json must be accurate
+    @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewCreditCardMfoody(@RequestBody String creditCardPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to CreditCardPOJO object
@@ -195,7 +204,9 @@ public class CreditCardMfoodyController {
             }
 
             // Check input idUser and attach UserMfoody to CreditCardMfoody
-            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser());
+            // UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newCreditCardPOJO.getIdUser());
+            UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(
+                    userMfoodyInterfaceService.getUserMfoodyByEmail(principal.getName()).getIdUser());
             if (attachUserMfoody == null) {
                 return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + newCreditCardPOJO.getIdUser(),
                         HttpStatus.NOT_FOUND);
@@ -204,6 +215,7 @@ public class CreditCardMfoodyController {
 
             // Save CreditCard to DB and return (Updated Cart in DB could have ID differs from user's request)
             creditCardMfoodyInterfaceService.saveCreditCardMfoody(newCreditCardMfoody);
+            log.info("A new CreditCardMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding CreditCardMfoody");

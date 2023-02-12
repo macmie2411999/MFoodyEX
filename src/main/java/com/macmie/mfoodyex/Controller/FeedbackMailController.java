@@ -92,6 +92,7 @@ public class FeedbackMailController {
             }
 
             feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
+            log.info("FeedbackMail with ID: {} by {} is edited", newFeedbackMail.getIdFeedbackMail(), principal.getName());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing FeedbackMail");
@@ -101,7 +102,7 @@ public class FeedbackMailController {
     }
 
     @PostMapping(URL_ADD) // idFeedbackMail in Json is ignored
-    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject, Principal principal) {
+    public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject) {
         try {
             // Convert JsonObject to FeedbackMail object (Updated Cart in DB could have ID differs from user's request)
             FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
@@ -116,6 +117,7 @@ public class FeedbackMailController {
             }
 
             feedbackMailInterfaceService.saveFeedbackMail(newFeedbackMail);
+            log.info("A new Feedback is created!");
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding FeedbackMail");
