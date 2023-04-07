@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -57,6 +58,9 @@ public class UserMfoodyController {
     @Autowired
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllUserMfoodys(Principal principal) {
@@ -102,15 +106,10 @@ public class UserMfoodyController {
         try {
             // Delete Cart (DetailProductCart), DeleteOrder (DetailProductOrder), Comment, Credit Card, and User
             creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
-            log.info("Deleting creditCard UserMfoody with ID: " + ID);
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
-            log.info("Deleting commentMfoody UserMfoody with ID: " + ID);
             cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
-            log.info("Deleting cartMfoody UserMfoody with ID: " + ID);
             orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
-            log.info("Deleting orderMfoody UserMfoody with ID: " + ID);
             userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
-            log.info("Deleting  UserMfoody with ID: " + ID);
         } catch (Exception e) {
             log.error("An error occurred while deleting UserMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
@@ -162,6 +161,9 @@ public class UserMfoodyController {
             // Convert JsonObject to UserMfoody object
             Gson gson = new Gson();
             UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
+
+            // Encode passwordUser
+            newUserMfoodyPOJO.setPasswordUser(passwordEncoder.encode(newUserMfoodyPOJO.getPasswordUser()));
 
             UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
 
