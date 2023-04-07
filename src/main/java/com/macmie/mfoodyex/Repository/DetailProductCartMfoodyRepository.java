@@ -31,6 +31,14 @@ public interface DetailProductCartMfoodyRepository extends JpaRepository<DetailP
     void deleteDetailProductCartMfoodyByIdProductAndIdCart( @Param("idCart") int idCart,
                                                             @Param("idProduct") int idProduct);
 
+    @Modifying
+    @Query("DELETE FROM DetailProductCartMfoody dpom WHERE dpom.idDetailProductCartMFoody.idCart= :idCart")
+    void deleteAllDetailProductCartMfoodysByIdCart(@Param("idCart") int idCart);
+
+    @Modifying
+    @Query("DELETE FROM DetailProductCartMfoody dpom WHERE dpom.idDetailProductCartMFoody.idProduct = :idProduct")
+    void deleteAllDetailProductCartMfoodysByIdProduct(@Param("idProduct") int idProduct);
+
 //    @Query("SELECT d FROM DetailProductCartMfoody d WHERE d.idDetailProductCartMFoody.idProduct = :idProduct")
 //    List<DetailProductCartMfoody> findAllByIdProduct(@Param("idProduct") Long idProduct);
 //

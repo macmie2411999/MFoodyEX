@@ -16,6 +16,7 @@ public class ViewConstants {
     public static final String LOGIN_MFOODY = "/login";
     public static final String LOGOUT_MFOODY = "/logout";
     public static final String BLANK_MFOODY = "/blank";
+    public static final String SWAGGER_MFOODY = "/swagger-ui";
 
     // URLs for all APIs
     public static final String URL_GET_ALL = "/getAll";

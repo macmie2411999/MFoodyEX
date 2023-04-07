@@ -16,6 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 import static com.macmie.mfoodyex.Constant.ViewConstants.*;
 
@@ -72,44 +77,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                /*
-                * 1. Disables CSRF protection
-                * 2. Cross-Site Request Forgery (CSRF) is a type of attack that tricks a user into making
-                * an unintended request to a web application. CSRF protection helps to prevent such attacks
-                * by requiring that a token be included in a request to verify that the request is legitimate
-                * */
                 .csrf().disable()
+                .cors()
 
-                /*
-                * 1. Disables CORS protection
-                * 2. Cross-Origin Resource Sharing (CORS) is a security feature that restricts the types of requests
-                * that can be made from a web application running in one origin to a resource in another origin
-                * */
-                .cors().disable()
-
-                /*
-                * 1. Sets the request cache to be used by the application
-                * 2. The request cache is used to redirect the user to the originally requested resource after they have logged in
-                * */
-                .requestCache().requestCache(getHttpSessionRequestCache())
-
-                /*
-                * 1. Sets the session creation policy to be stateless
-                * 2. A stateless session means that the server does not maintain any state about the client, so it
-                * does not store any information in a session. Instead, all required information is passed in each request
-                * 3. This can improve the security of the application and make it more scalable, since there is no need
-                * to manage and store session state on the server
-                * */
+                .and().requestCache().requestCache(getHttpSessionRequestCache())
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-                /*
-                * Define which requests are allowed and which are not based on the authentication and authorization
-                * of the user making the request
-                * */
                 .and().authorizeHttpRequests()
 
                 .antMatchers(APPLICATION_MFOODY + LOGIN_MFOODY).permitAll()
                 .antMatchers(APPLICATION_MFOODY + LOGOUT_MFOODY).permitAll()
+                .antMatchers(SWAGGER_MFOODY).permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutUrl(APPLICATION_MFOODY + LOGOUT_MFOODY) // Specify the logout endpoint URL
                 .invalidateHttpSession(true) // Invalidate the user's HTTP session when they log out
@@ -118,5 +95,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().addFilterBefore(jwtAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter.class); // Run the custom filter first
 
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(Arrays.asList("*"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }

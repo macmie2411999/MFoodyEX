@@ -102,10 +102,15 @@ public class UserMfoodyController {
         try {
             // Delete Cart (DetailProductCart), DeleteOrder (DetailProductOrder), Comment, Credit Card, and User
             creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
+            log.info("Deleting creditCard UserMfoody with ID: " + ID);
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
+            log.info("Deleting commentMfoody UserMfoody with ID: " + ID);
             cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
+            log.info("Deleting cartMfoody UserMfoody with ID: " + ID);
             orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
+            log.info("Deleting orderMfoody UserMfoody with ID: " + ID);
             userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
+            log.info("Deleting  UserMfoody with ID: " + ID);
         } catch (Exception e) {
             log.error("An error occurred while deleting UserMfoody with ID: " + ID);
             log.error("Detail Error: " + e);

@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.Service.ImplementService;
 
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
+import com.macmie.mfoodyex.Model.OrderMfoody;
 import com.macmie.mfoodyex.Repository.CartMfoodyRepository;
 import com.macmie.mfoodyex.Repository.DetailProductCartMfoodyRepository;
 import com.macmie.mfoodyex.Repository.UserMfoodyRepository;
@@ -91,9 +92,7 @@ public class CartMfoodyImplementService implements CartMfoodyInterfaceService {
 
         // Delete all DetailProductCartMfoodys associate with CartMfoody
         CartMfoody cartMfoody = cartMfoodyRepository.findByIdUser(idUser);
-        List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyRepository.findAllByIdCart(cartMfoody.getIdCart());
-        detailProductCartMfoodyRepository.deleteAll(detailProductCartMfoodyList);
-
+        detailProductCartMfoodyRepository.deleteAllDetailProductCartMfoodysByIdCart(cartMfoody.getIdCart());
         cartMfoodyRepository.deleteByIdUser(idUser);
     }
 }
