@@ -62,6 +62,22 @@ public class UserMfoodyController {
     private PasswordEncoder passwordEncoder;
 
     @Secured({ROLE_ADMIN_SECURITY})
+    @GetMapping(URL_COUNT_TOTAL)
+    public ResponseEntity<?> countTotalNumberOfUsers(Principal principal) {
+        log.info("Count Total Number of UserMfoodys by " + principal.getName());
+
+        try {
+            Long totalNumberOfUsers = userMfoodyInterfaceService.countTotalNumberOfUsers();
+            return new ResponseEntity<>(totalNumberOfUsers, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while counting number of UserMfoodys");
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when counting UserMfoodys");
+        }
+    }
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllUserMfoodys(Principal principal) {
         log.info("Get List of UserMfoodys by " + principal.getName());

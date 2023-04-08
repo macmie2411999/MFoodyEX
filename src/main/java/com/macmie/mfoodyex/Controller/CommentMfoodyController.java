@@ -50,6 +50,22 @@ public class CommentMfoodyController {
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
     @Secured({ROLE_ADMIN_SECURITY})
+    @GetMapping(URL_COUNT_TOTAL)
+    public ResponseEntity<?> countTotalNumberOfCommentMfoodys(Principal principal) {
+        log.info("Count Total Number of CommentMfoodys by " + principal.getName());
+
+        try {
+            Long totalNumberOfCommentMfoodys = commentMfoodyInterfaceService.countTotalNumberOfCommentMfoodys();
+            return new ResponseEntity<>(totalNumberOfCommentMfoodys, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while counting number of CommentMfoodys");
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when counting CommentMfoodys");
+        }
+    }
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllCommentMfoodys(Principal principal) {
         log.info("Get List of CommentMfoodys by " + principal.getName());

@@ -19,5 +19,8 @@ public interface OrderMfoodyRepository extends JpaRepository<OrderMfoody, Intege
 
     @Query("SELECT c FROM OrderMfoody c WHERE c.user.idUser = :idUser")
     List<OrderMfoody> findAllByIdUser(@Param("idUser") int idUser);
+
+    @Query("SELECT COUNT(u) FROM OrderMfoody u")
+    Long countTotalNumberOfOrderMfoodys();
 }
 

@@ -97,4 +97,10 @@ public class CommentMfoodyImplementService implements CommentMfoodyInterfaceServ
         log.info("Deleting All CommentMfoodys with idProduct: {}", idProduct);
         commentMfoodyRepository.deleteAllByIdProduct(idProduct);
     }
+
+    @Override
+    public Long countTotalNumberOfCommentMfoodys() {
+        log.info("Count Total Number of CommentMfoodys");
+        return commentMfoodyRepository.countTotalNumberOfCommentMfoodys();
+    }
 }

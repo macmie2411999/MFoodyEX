@@ -93,4 +93,10 @@ public class ProductMfoodyImplementService implements ProductMfoodyInterfaceServ
         log.info("Deleting ProductMfoody with ID: {}", idProductMfoody);
         productMfoodyRepository.deleteById(idProductMfoody);
     }
+
+    @Override
+    public Long countTotalNumberOfProductMfoodys() {
+        log.info("Count Total Number of ProductMfoodys");
+        return productMfoodyRepository.countTotalNumberOfProductMfoodys();
+    }
 }

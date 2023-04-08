@@ -116,4 +116,10 @@ public class UserMfoodyImplementService implements UserMfoodyInterfaceService {
         log.info("Deleting UserMfoody with ID: {}", idUserMfoody);
         userMfoodyRepository.deleteById(idUserMfoody);
     }
+
+    @Override
+    public Long countTotalNumberOfUsers() {
+        log.info("Count Total Number of UserMfoodys");
+        return userMfoodyRepository.countTotalNumberOfUsers();
+    }
 }

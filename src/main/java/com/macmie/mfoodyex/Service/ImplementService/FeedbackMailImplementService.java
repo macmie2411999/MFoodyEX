@@ -75,4 +75,10 @@ public class FeedbackMailImplementService implements FeedbackMailInterfaceServic
         log.info("Deleting FeedbackMail with ID: {}", idFeedbackMail);
         feedbackMailRepository.deleteById(idFeedbackMail);
     }
+
+    @Override
+    public Long countTotalNumberOfFeedbackMails() {
+        log.info("Count Total Number of FeedbackMails");
+        return feedbackMailRepository.countTotalNumberOfFeedbackMails();
+    }
 }

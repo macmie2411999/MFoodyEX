@@ -28,4 +28,6 @@ public interface UserMfoodyInterfaceService {
     public UserMfoody updateUserMfoody(UserMfoody newUserMfoody);
 
     public void deleteUserMfoodyByID(int idUserMfoody);
+
+    public Long countTotalNumberOfUsers();
 }

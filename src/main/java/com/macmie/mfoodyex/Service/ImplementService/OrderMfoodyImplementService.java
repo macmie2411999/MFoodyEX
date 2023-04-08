@@ -103,4 +103,10 @@ public class OrderMfoodyImplementService implements OrderMfoodyInterfaceService 
 
         orderMfoodyRepository.deleteAllByIdUser(idUser);
     }
+
+    @Override
+    public Long countTotalNumberOfOrderMfoodys() {
+        log.info("Count Total Number of OrderMfoodys");
+        return orderMfoodyRepository.countTotalNumberOfOrderMfoodys();
+    }
 }

@@ -36,6 +36,22 @@ public class FeedbackMailController {
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
     @Secured({ROLE_ADMIN_SECURITY})
+    @GetMapping(URL_COUNT_TOTAL)
+    public ResponseEntity<?> countTotalNumberOfFeedbackMails(Principal principal) {
+        log.info("Count Total Number of FeedbackMails by " + principal.getName());
+
+        try {
+            Long totalNumberOfFeedbackMails = feedbackMailInterfaceService.countTotalNumberOfFeedbackMails();
+            return new ResponseEntity<>(totalNumberOfFeedbackMails, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while counting number of FeedbackMails");
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when counting FeedbackMails");
+        }
+    }
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllFeedbackMails(Principal principal) {
         log.info("Get List of FeedbackMails by " + principal.getName());

@@ -24,4 +24,6 @@ public interface CommentMfoodyInterfaceService {
     public void deleteAllCommentsMfoodyByIdUser(int idUser);
 
     public void deleteAllCommentsMfoodyByIdProduct(int idProduct);
+
+    public Long countTotalNumberOfCommentMfoodys();
 }

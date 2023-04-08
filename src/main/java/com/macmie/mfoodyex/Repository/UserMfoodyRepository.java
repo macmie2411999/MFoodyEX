@@ -27,5 +27,9 @@ public interface UserMfoodyRepository extends JpaRepository<UserMfoody, Integer>
 
     @Query("SELECT u FROM UserMfoody u JOIN OrderMfoody o ON u.idUser = o.user.idUser WHERE o.idOrder = :idOrder")
     UserMfoody findUserMfoodyByIdOrder(@Param("idOrder") int idOrder);
+
+    @Query("SELECT COUNT(u) FROM UserMfoody u")
+    Long countTotalNumberOfUsers();
+
 }
 

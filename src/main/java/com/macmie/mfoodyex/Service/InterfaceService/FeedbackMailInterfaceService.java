@@ -16,4 +16,6 @@ public interface FeedbackMailInterfaceService {
     public FeedbackMail updateFeedbackMail(FeedbackMail newFeedbackMail);
 
     public void deleteFeedbackMailByID(int idFeedbackMail);
+
+    public Long countTotalNumberOfFeedbackMails();
 }

@@ -47,6 +47,22 @@ public class OrderMfoodyController {
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
     @Secured({ROLE_ADMIN_SECURITY})
+    @GetMapping(URL_COUNT_TOTAL)
+    public ResponseEntity<?> countTotalNumberOfOrderMfoodys(Principal principal) {
+        log.info("Count Total Number of OrderMfoodys by " + principal.getName());
+
+        try {
+            Long totalNumberOfOrderMfoodys = orderMfoodyInterfaceService.countTotalNumberOfOrderMfoodys();
+            return new ResponseEntity<>(totalNumberOfOrderMfoodys, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while counting number of OrderMfoodys");
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when counting OrderMfoodys");
+        }
+    }
+
+    @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllOrderMfoodys(Principal principal) {
         log.info("Get List of OrderMfoodys by " + principal.getName());

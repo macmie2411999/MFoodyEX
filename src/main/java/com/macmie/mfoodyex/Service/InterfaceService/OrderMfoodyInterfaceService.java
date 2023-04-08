@@ -19,4 +19,6 @@ public interface OrderMfoodyInterfaceService {
     public void deleteOrderMfoodyByID(int idOrderMfoody);
 
     public void deleteAllOrderMfoodysByIdUser(int idUser);
+
+    public Long countTotalNumberOfOrderMfoodys();
 }

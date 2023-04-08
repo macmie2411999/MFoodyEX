@@ -20,4 +20,6 @@ public interface ProductMfoodyInterfaceService {
     public ProductMfoody updateProductMfoody(ProductMfoody newProductMfoody);
 
     public void deleteProductMfoodyByID(int idProductMfoody);
+
+    public Long countTotalNumberOfProductMfoodys();
 }

@@ -54,6 +54,22 @@ public class ProductMfoodyController {
     @Autowired
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
+    @Secured({ROLE_ADMIN_SECURITY})
+    @GetMapping(URL_COUNT_TOTAL)
+    public ResponseEntity<?> countTotalNumberOfProductMfoodys(Principal principal) {
+        log.info("Count Total Number of ProductMfoodys by " + principal.getName());
+
+        try {
+            Long totalNumberOfProductMfoodys = productMfoodyInterfaceService.countTotalNumberOfProductMfoodys();
+            return new ResponseEntity<>(totalNumberOfProductMfoodys, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while counting number of ProductMfoodys");
+            log.error("Detail Error: " + e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "INTERNAL_SERVER_ERROR Exceptions occur when counting ProductMfoodys");
+        }
+    }
+
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllProductMfoodys(Principal principal) {

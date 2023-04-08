@@ -31,5 +31,8 @@ public interface CommentMfoodyRepository extends JpaRepository<CommentMfoody, In
     List<CommentMfoody> findAllByIdUser(@Param("idUser") int idUser);
 
     CommentMfoody findCommentMfoodyByContentComment(String contentComment);
+
+    @Query("SELECT COUNT(u) FROM CommentMfoody u")
+    Long countTotalNumberOfCommentMfoodys();
 }
 
