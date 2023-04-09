@@ -29,10 +29,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         UserMfoody userMfoody = userMfoodyInterfaceService.getUserMfoodyByEmail(username);
         if(userMfoody != null){
-            List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-            SimpleGrantedAuthority rolesAdmin = new SimpleGrantedAuthority(ROLE_SECURITY + userMfoody.getRoleUser());
-            roles.add(rolesAdmin);
-            return new User(userMfoody.getEmailUser(), userMfoody.getPasswordUser(), roles);
+            List<SimpleGrantedAuthority> rolesList = new ArrayList<SimpleGrantedAuthority>();
+            SimpleGrantedAuthority roleUser = new SimpleGrantedAuthority(ROLE_SECURITY + userMfoody.getRoleUser());
+            rolesList.add(roleUser);
+            return new User(userMfoody.getEmailUser(), userMfoody.getPasswordUser(), rolesList);
         }
         throw new UsernameNotFoundException("User not found!");
     }

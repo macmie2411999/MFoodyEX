@@ -143,6 +143,10 @@ public class UserMfoodyController {
             // Convert JsonObject to UserMfoodyPOJO object, Check the input idUser
             Gson gson = new Gson();
             UserMfoodyPOJO newUserMfoodyPOJO = gson.fromJson(userMfoodyPOJOJsonObject, UserMfoodyPOJO.class);
+
+            // Encode passwordUser
+            newUserMfoodyPOJO.setPasswordUser(passwordEncoder.encode(newUserMfoodyPOJO.getPasswordUser()));
+
             UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
             UserMfoody oldUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newUserMfoodyPOJO.getIdUser());
             if (oldUserMfoody == null) {
