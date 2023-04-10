@@ -150,17 +150,17 @@ public class UserMfoody {
 
     @Override
     public String toString() {
-        return "UserMfoody{" +
-                "idUser=" + idUser +
-                ", emailUser='" + emailUser + '\'' +
-                ", passwordUser='" + passwordUser + '\'' +
-                ", nameUser='" + nameUser + '\'' +
-                ", phoneNumberUser='" + phoneNumberUser + '\'' +
-                ", addressUser='" + addressUser + '\'' +
-                ", roleUser='" + roleUser + '\'' +
+        return "{" +
+                "'idUser' : '" + idUser +
+                "', 'emailUser' : '" + emailUser +
+                "', 'passwordUser' : '" + passwordUser +
+                "', 'nameUser' : '" + nameUser +
+                "', 'phoneNumberUser' : '" + phoneNumberUser +
+                "', 'addressUser' : '" + addressUser +
+                "', 'roleUser' : '" + roleUser
 //                ", listCreditCards=" + listCreditCards +
 //                ", listCarts=" + listCarts +
 //                ", listComments=" + listComments +
-                '}';
+                + "'" + "}";
     }
 }

@@ -107,6 +107,23 @@ public class UserMfoodyController {
     }
 
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @GetMapping(URL_GET_BY_EMAIL)
+    public ResponseEntity<?> getUserMfoodyByEmail(@PathVariable("Email") String Email, Principal principal) {
+        log.info("Get UserMfoody with Email: {} by {}", Email, principal.getName());
+        UserMfoody userMfoody = userMfoodyInterfaceService.getUserMfoodyByEmail(Email);
+        if (userMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND UserMfoody with Email: " + Email, HttpStatus.NOT_FOUND);
+        }
+
+        // Check if the current UserMfoody has role ADMIN or the owner of account
+        if(!applicationCheckAuthorController.checkAuthorization(principal, userMfoody.getIdUser())){
+            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        }
+
+        return new ResponseEntity<>(userMfoody, HttpStatus.OK);
+    }
+
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteUserMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete UserMfoody with ID: {} by {}", ID, principal.getName());

@@ -1,5 +1,8 @@
 package com.macmie.mfoodyex.JWTHelper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.JWTSpringSecurity.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.macmie.mfoodyex.Constant.SecurityConstants.AUTHENTICATION_IN_HEADER_SECURITY;
 import static com.macmie.mfoodyex.Constant.SecurityConstants.BEARER_SECURITY;
@@ -44,7 +49,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         if(jwtProvider.validationToken(token)){
             log.info("JWTAuthenticationFilter: Check Token");
             // Get data (userName) in the valid Token
-            String jsonDataUserName = jwtProvider.decodeToken(token);
+            String jsonDataUser = jwtProvider.decodeToken(token);
+            String jsonDataUserName = getEmailFromJsonStringByJackson(jsonDataUser);
 
             // Query to get User by userName from DB
             User userDetail = (User) customUserDetailsService.loadUserByUsername(jsonDataUserName);
@@ -72,4 +78,28 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
+    // Function to get userName (emailUser) for customUserDetailsService.loadUserByUsername(userName)
+    private static String getEmailFromJsonString(String jsonString) {
+        Pattern emailPattern = Pattern.compile("'emailUser'\\s*:\\s*'([^']*)'");
+        Matcher matcher = emailPattern.matcher(jsonString);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
+    }
+
+    public String getEmailFromJsonStringByJackson(String jsonStringByJackson) {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = null;
+        String emailUser = "";
+        try {
+            jsonNode = mapper.readTree(jsonStringByJackson);
+            emailUser = jsonNode.get("emailUser").asText();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return emailUser;
+    }
+
 }

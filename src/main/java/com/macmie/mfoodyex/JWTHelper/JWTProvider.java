@@ -1,8 +1,13 @@
 package com.macmie.mfoodyex.JWTHelper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.macmie.mfoodyex.Model.UserMfoody;
+import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +18,7 @@ import java.util.Date;
 * 2. Decrypt/decode Token
 * 3. Check Token
 * */
+@Slf4j
 @Component
 public class JWTProvider {
     /*
@@ -21,15 +27,24 @@ public class JWTProvider {
     * */
     private final String SECRET_KEY = "RmluYWxQcm9qZWN0TWZvb2R5TUlSRUFCeU1hY01pZTE1NDYyNA==";
     private final long JWT_EXPIRED = 8 * 60 * 60 * 1000;
-    private Gson gson = new Gson();
 
-    public String generateTokenIncludeObject(User user){
+    public String generateTokenIncludeObject(UserMfoody userMfoody){
+        ObjectMapper objectMapper = new ObjectMapper();
         Date now = new Date();
         Date expiredDate = new Date(now.getTime() + JWT_EXPIRED);
-        String json = gson.toJson(user);
+//        private Gson gson = new Gson();
+//        String jsonUserMfoody = gson.toJson(userMfoody);
+//        log.info("jsonUserMfoody: " + userMfoody.toString());
+        String userJson = null;
+        try {
+            userJson = objectMapper.writeValueAsString(userMfoody);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        log.info("jsonObjectUserMfoody by jackSon: " + userJson);
 
         return Jwts.builder()
-                .setSubject(json) // Any Data can be attached here to save in Token when Login successfully
+                .setSubject(userJson) // Any Data can be attached here to save in Token when Login successfully
                 .setIssuedAt(now) // Time issue Token
                 .setExpiration(expiredDate)
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY) // Algorithm and Key for Encoding
