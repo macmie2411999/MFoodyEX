@@ -38,6 +38,16 @@ public class ViewConstants {
     public static final String URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT = "/delete/idOrder/{IdOrder}/idProduct/{IdProduct}";
     public static final String URL_ADD = "/add";
     public static final String URL_EDIT = "/edit";
+
+    // Swagger
+    public static final String[] AUTH_WHITELIST = {
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/swagger-ui",
+            "/swagger-ui/**",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
     /*
     * Mac Mie end
     * */
@@ -58,7 +68,7 @@ public class ViewConstants {
     public static final String PROFILE_VIEW = "/profile";
     public static final String REGISTER_VIEW = "/register";
     public static final String LOGOUT_VIEW = "/logout";
-    public static final String SUBCRIBE_VIEW = "/subcribe";
+    public static final String SUBSCRIBE_VIEW = "/subscribe";
     public static final String API_VIEW = "/api";
     public static final String TOKEN_VIEW = "/token";
     public static final String REFRESH_VIEW = "/refresh";

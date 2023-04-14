@@ -73,18 +73,6 @@ public class ApplicationMfoodyController {
         }
     }
 
-    @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<Object> handleUnauthorizedException(UnauthorizedException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
-    }
-
-    public class UnauthorizedException extends RuntimeException {
-        public UnauthorizedException(String message) {
-            super(message);
-        }
-    }
-
-
     // @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @PostMapping(LOGOUT_MFOODY)
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response, Principal principal) {
@@ -98,5 +86,16 @@ public class ApplicationMfoodyController {
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<Object> handleUnauthorizedException(UnauthorizedException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    public class UnauthorizedException extends RuntimeException {
+        public UnauthorizedException(String message) {
+            super(message);
+        }
     }
 }
