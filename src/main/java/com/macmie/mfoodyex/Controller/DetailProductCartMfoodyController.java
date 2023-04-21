@@ -1,6 +1,7 @@
 package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.macmie.mfoodyex.Model.CartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoodyId;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Type;
 import java.security.Principal;
 import java.util.List;
 
@@ -216,6 +218,7 @@ public class DetailProductCartMfoodyController {
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editDetailProductCartMfoody(@RequestBody String detailProductCartPOJOJsonObject,
                                                          Principal principal) {
+        log.info("Edit DetailProductCartMfoodys by {}", principal.getName());
         try {
             // Convert JsonObject to DetailProductCartPOJO object
             Gson gson = new Gson();
@@ -283,6 +286,7 @@ public class DetailProductCartMfoodyController {
     @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewDetailProductCartMfoody(@RequestBody String detailProductCartPOJOJsonObject,
                                                            Principal principal) {
+        log.info("Add DetailProductCartMfoodys by {}", principal.getName());
         try {
             // Convert JsonObject to DetailProductCartPOJO object and Add new CartMfoody and ProductMfoody to DetailProductCart
             Gson gson = new Gson();
@@ -337,6 +341,45 @@ public class DetailProductCartMfoodyController {
             return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @PostMapping(URL_UPDATE_PRODUCT_INFORMATION_IN_CART)
+    public ResponseEntity<?> saveListDetailProductCartMfoodyToCart(@RequestBody String cartJson, Principal principal) {
+        log.info("Update List of DetailProductCartMfoodys by {}", principal.getName());
+        try {
+            // Parse the JSON string into a list of DetailProductCartMfoodyPOJO objects
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<DetailProductCartMfoodyPOJO>>(){}.getType();
+            List<DetailProductCartMfoodyPOJO> productList = gson.fromJson(cartJson, listType);
+
+            for (DetailProductCartMfoodyPOJO product : productList) {
+                // Check if the product is already in the cart
+                DetailProductCartMfoody existingProductCart = detailProductCartMfoodyInterfaceService
+                        .getDetailProductCartMfoodyByICartAndIdProduct(product.getIdCart(), product.getIdProduct());
+
+                if (existingProductCart == null) {
+                    // If the product is not in the cart, add a new product
+                    ResponseEntity<?> addResult = addNewDetailProductCartMfoody(gson.toJson(product), principal);
+                    if (!addResult.getStatusCode().equals(HttpStatus.CREATED)) {
+                        return addResult;
+                    }
+                } else {
+                    // If the product is in the cart, update the product information
+                    ResponseEntity<?> updateResult = editDetailProductCartMfoody(gson.toJson(product), principal);
+                    if (!updateResult.getStatusCode().equals(HttpStatus.OK)) {
+                        return updateResult;
+                    }
+                }
+            }
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("An error occurred while saving the cart");
+            log.error("Detail Error: " + e);
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     // Update associated CartMfoody
     public void processCartMfoody(int idCartMfoody) {

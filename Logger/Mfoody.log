@@ -581,3 +581,114 @@ java.lang.NullPointerException: Cannot invoke "com.macmie.mfoodyex.Model.OrderMf
 2023-04-21 06:27:25.295 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
 2023-04-21 06:27:25.320 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
 2023-04-21 06:27:25.321 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-04-21 07:49:11.328 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Starting MFoodyExApplication using Java 17 on Macs-MacBook-Air.local with PID 42986 (/Users/macmie/Desktop/WEB/INTELIIJI/target/classes started by macmie in /Users/macmie/Desktop/WEB/INTELIIJI)
+2023-04-21 07:49:11.333 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - No active profile set, falling back to 1 default profile: "default"
+2023-04-21 07:49:11.402 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-21 07:49:11.402 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-21 07:49:12.530 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-21 07:49:12.687 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 151 ms. Found 9 JPA repository interfaces.
+2023-04-21 07:49:13.454 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-04-21 07:49:13.460 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-21 07:49:13.461 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-04-21 07:49:13.461 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2023-04-21 07:49:13.518 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-04-21 07:49:13.518 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2115 ms
+2023-04-21 07:49:13.580 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-21 07:49:13.661 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-04-21 07:49:14.060 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-04-21 07:49:14.113 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-21 07:49:14.334 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.5.Final
+2023-04-21 07:49:14.435 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-21 07:49:14.493 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-04-21 07:49:14.670 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-04-21 07:49:14.670 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-04-21 07:49:14.671 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-04-21 07:49:14.671 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-04-21 07:49:15.064 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-21 07:49:15.072 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-21 07:49:17.136 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2023-04-21 07:49:17.278 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-04-21 07:49:17.443 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-04-21 07:49:17.464 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-21 07:49:18.829 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-21 07:49:18.830 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-04-21 07:49:18.832 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2023-04-21 07:49:18.851 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-04-21 07:49:18.865 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-04-21 07:49:19.090 [http-nio-8080-exec-1] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by robinsonhank@gmail.com
+2023-04-21 07:49:19.213 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:49:19.703 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Started MFoodyExApplication in 8.808 seconds (JVM running for 9.845)
+2023-04-21 07:49:19.790 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:49:19.908 [http-nio-8080-exec-1] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215231,"emailUser":"robinsonhank@gmail.com","passwordUser":"$2a$12$iXPkaN0Ey.LFhPLbDdg0Suo07MCyDk9F4AaBMCYsEYTUw6HDetQDm","nameUser":"Robinson Hank","phoneNumberUser":"89346783005","addressUser":"Texas, USA","roleUser":"ADMIN","listCreditCards":[{"idCard":430711,"nameUserCard":"Robinson Hank","numberCard":"6589652343548896","expirationCard":"01/01/23","securityCodeCard":"714"}],"listCarts":[{"idCart":350060,"quantityAllProductsInCart":1,"totalSalePriceCart":50.0,"totalFullPriceCart":50.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350060,"idProduct":530022},"quantityDetailProductCart":1,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":50.0}]}],"listComments":[{"idComment":608751,"ratingComment":4,"contentComment":"The products is OKAY"}]}
+2023-04-21 07:49:36.590 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-04-21 07:49:36.651 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-04-21 07:49:36.673 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:49:36.723 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-04-21 07:49:36.782 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530021
+2023-04-21 07:49:36.834 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530021
+2023-04-21 07:49:36.839 [http-nio-8080-exec-3] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530021
+2023-04-21 07:49:36.855 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:49:36.856 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:49:36.861 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Updating DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@2b0cd2dc
+2023-04-21 07:49:36.879 [http-nio-8080-exec-3] INFO  c.m.m.C.DetailProductCartMfoodyController - DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@2b0cd2dc by robinsonhank@gmail.com is edited
+2023-04-21 07:49:36.879 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:49:36.880 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching all DetailProductCartMfoodys with idCart: 350061
+2023-04-21 07:49:36.925 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Updating CartMfoody with ID: 350061
+2023-04-21 07:49:36.932 [http-nio-8080-exec-3] INFO  c.m.m.C.DetailProductCartMfoodyController - CartMfoody with ID: 350061 is edited! 
+2023-04-21 07:49:36.932 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530020
+2023-04-21 07:49:36.938 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530020
+2023-04-21 07:49:36.942 [http-nio-8080-exec-3] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530020
+2023-04-21 07:49:36.945 [http-nio-8080-exec-3] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530020
+2023-04-21 07:49:36.945 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:49:36.945 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:49:36.946 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Saving DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@65ace447
+2023-04-21 07:49:36.958 [http-nio-8080-exec-3] INFO  c.m.m.C.DetailProductCartMfoodyController - A new DetailProductCartMfoody is created by robinsonhank@gmail.com
+2023-04-21 07:49:36.958 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:49:36.960 [http-nio-8080-exec-3] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching all DetailProductCartMfoodys with idCart: 350061
+2023-04-21 07:49:36.977 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Updating CartMfoody with ID: 350061
+2023-04-21 07:49:36.978 [http-nio-8080-exec-3] INFO  c.m.m.C.DetailProductCartMfoodyController - CartMfoody with ID: 350061 is edited! 
+2023-04-21 07:51:22.327 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-04-21 07:51:22.339 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-04-21 07:51:22.360 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:51:22.419 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-04-21 07:51:22.432 [http-nio-8080-exec-5] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530021
+2023-04-21 07:51:22.454 [http-nio-8080-exec-5] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530021
+2023-04-21 07:51:22.460 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530021
+2023-04-21 07:51:22.461 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:51:22.462 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:51:22.467 [http-nio-8080-exec-5] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Updating DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@7267965f
+2023-04-21 07:51:22.468 [http-nio-8080-exec-5] INFO  c.m.m.C.DetailProductCartMfoodyController - DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@7267965f by robinsonhank@gmail.com is edited
+2023-04-21 07:51:22.468 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:51:22.468 [http-nio-8080-exec-5] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching all DetailProductCartMfoodys with idCart: 350061
+2023-04-21 07:51:22.483 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CartMfoodyImplementService - Updating CartMfoody with ID: 350061
+2023-04-21 07:51:22.484 [http-nio-8080-exec-5] INFO  c.m.m.C.DetailProductCartMfoodyController - CartMfoody with ID: 350061 is edited! 
+2023-04-21 07:51:22.485 [http-nio-8080-exec-5] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 630020
+2023-04-21 07:51:22.492 [http-nio-8080-exec-5] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 630020
+2023-04-21 07:51:22.498 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 630020
+2023-04-21 07:51:22.503 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 630020
+2023-04-21 07:51:29.622 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-04-21 07:51:29.641 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-04-21 07:51:29.646 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:51:29.656 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-04-21 07:51:29.663 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530021
+2023-04-21 07:51:29.702 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530021
+2023-04-21 07:51:29.713 [http-nio-8080-exec-7] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530021
+2023-04-21 07:51:29.715 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:51:29.716 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:51:29.728 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Updating DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@1caf9d87
+2023-04-21 07:51:29.734 [http-nio-8080-exec-7] INFO  c.m.m.C.DetailProductCartMfoodyController - DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@1caf9d87 by robinsonhank@gmail.com is edited
+2023-04-21 07:51:29.735 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:51:29.739 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching all DetailProductCartMfoodys with idCart: 350061
+2023-04-21 07:51:29.761 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Updating CartMfoody with ID: 350061
+2023-04-21 07:51:29.764 [http-nio-8080-exec-7] INFO  c.m.m.C.DetailProductCartMfoodyController - CartMfoody with ID: 350061 is edited! 
+2023-04-21 07:51:29.765 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530020
+2023-04-21 07:51:29.776 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching DetailProductCartMfoody with idCart 350061 and idProduct: 530020
+2023-04-21 07:51:29.783 [http-nio-8080-exec-7] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530020
+2023-04-21 07:51:29.784 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:51:29.784 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-04-21 07:51:29.793 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Updating DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@3e3e794c
+2023-04-21 07:51:29.794 [http-nio-8080-exec-7] INFO  c.m.m.C.DetailProductCartMfoodyController - DetailProductCartMfoody with ID: com.macmie.mfoodyex.Model.DetailProductCartMfoodyId@3e3e794c by robinsonhank@gmail.com is edited
+2023-04-21 07:51:29.794 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with ID: 350061
+2023-04-21 07:51:29.794 [http-nio-8080-exec-7] INFO  c.m.m.S.I.DetailProductCartMfoodyImplementService - Fetching all DetailProductCartMfoodys with idCart: 350061
+2023-04-21 07:51:29.802 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Updating CartMfoody with ID: 350061
+2023-04-21 07:51:29.802 [http-nio-8080-exec-7] INFO  c.m.m.C.DetailProductCartMfoodyController - CartMfoody with ID: 350061 is edited! 
