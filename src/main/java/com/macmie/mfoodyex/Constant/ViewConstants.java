@@ -17,6 +17,7 @@ public class ViewConstants {
     public static final String LOGOUT_MFOODY = "/logout";
     public static final String BLANK_MFOODY = "/blank";
     public static final String SWAGGER_MFOODY = "/swagger-ui";
+    public static final String FORGOT_PASSWORD = "/forgotPassword";
 
     // URLs for all APIs
     public static final String URL_COUNT_TOTAL = "/countTotal";
@@ -38,6 +39,7 @@ public class ViewConstants {
     public static final String URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT = "/delete/idOrder/{IdOrder}/idProduct/{IdProduct}";
     public static final String URL_ADD = "/add";
     public static final String URL_EDIT = "/edit";
+
 
     // Swagger
     public static final String[] AUTH_WHITELIST = {

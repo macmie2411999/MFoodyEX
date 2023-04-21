@@ -38,8 +38,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.macmie.mfoodyex.Controller"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(new ApiInfoBuilder().title("Feedback Mail").description("Feedback Mail API").build());
+                .apiInfo(new ApiInfoBuilder().title("MFoody APIs").description("All APIs of MFoody BE").build());
 
     }
-
 }

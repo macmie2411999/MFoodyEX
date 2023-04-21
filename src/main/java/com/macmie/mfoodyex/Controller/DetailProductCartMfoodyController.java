@@ -67,9 +67,9 @@ public class DetailProductCartMfoodyController {
         log.info("Get List of DetailProductCartMfoodys with idCart: {} by {}", ID, principal.getName());
 
         // Check if the current UserMfoody has role ADMIN or the owner of DetailProductCartMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal,
-                cartMfoodyInterfaceService.getCartMfoodyByID(ID).getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (!applicationCheckAuthorController.checkAuthorization(principal,
+                cartMfoodyInterfaceService.getCartMfoodyByID(ID).getUser().getIdUser())) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         List<DetailProductCartMfoody> detailProductCartMfoodyList =
@@ -100,12 +100,20 @@ public class DetailProductCartMfoodyController {
     public ResponseEntity<?> getDetailProductCartMfoodyByID(@PathVariable("IdCart") int idCart,
                                                             @PathVariable("IdProduct") int idProduct,
                                                             Principal principal) {
-        log.info("Get DetailProductCartMfoody with idCart: {} and idProduct: {} by {}", idCart, idProduct, principal.getName());
+        log.info("Get DetailProductCartMfoody with idCart: {} and idProduct: {} by {}",
+                idCart, idProduct, principal.getName());
+
+        // Check valid idCart
+        CartMfoody currentCartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(idCart);
+        if (currentCartMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND CartMfoody with ID: " + idCart,
+                    HttpStatus.NOT_FOUND);
+        }
 
         // Check if the current UserMfoody has role ADMIN or the owner of DetailProductCartMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal,
-                cartMfoodyInterfaceService.getCartMfoodyByID(idCart).getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (!applicationCheckAuthorController.checkAuthorization(principal,
+                currentCartMfoody.getUser().getIdUser())) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         DetailProductCartMfoody detailProductCartMfoody =
@@ -135,9 +143,9 @@ public class DetailProductCartMfoodyController {
 
         // Check if the current UserMfoody has role ADMIN or the owner of DetailProductCartMfoody
         CartMfoody cartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(idCart);
-        if(cartMfoody != null){
-            if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
-                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (cartMfoody != null) {
+            if (!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())) {
+                return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
         }
 
@@ -163,8 +171,8 @@ public class DetailProductCartMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of DetailProductCartMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (!applicationCheckAuthorController.checkAuthorization(principal, cartMfoody.getUser().getIdUser())) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         try {
@@ -219,7 +227,7 @@ public class DetailProductCartMfoodyController {
                             newDetailProductCartMfoodyPOJO.getIdProduct());
             ProductMfoody newProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(
                     newDetailProductCartMfoodyPOJO.getIdProduct());
-            CartMfoody newCartMfoody =  cartMfoodyInterfaceService.getCartMfoodyByID(
+            CartMfoody newCartMfoody = cartMfoodyInterfaceService.getCartMfoodyByID(
                     newDetailProductCartMfoodyPOJO.getIdCart());
 
             // Check valid idCart and idProduct
@@ -241,8 +249,8 @@ public class DetailProductCartMfoodyController {
             }
 
             // Check if the current UserMfoody has role ADMIN or the owner of DetailProductCartMfoody
-            if(!applicationCheckAuthorController.checkAuthorization(principal, newCartMfoody.getUser().getIdUser())){
-                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            if (!applicationCheckAuthorController.checkAuthorization(principal, newCartMfoody.getUser().getIdUser())) {
+                return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
 
             // Update IdDetailProductCartMfoody, ProductMfoody, and CartMfoody

@@ -149,7 +149,6 @@ public class UserMfoodyController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                     "INTERNAL_SERVER_ERROR Exceptions occur when deleting UserMfoody");
         }
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -105,11 +105,19 @@ public class DetailProductOrderMfoodyController {
     public ResponseEntity<?> getDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder,
                                                              @PathVariable("IdProduct") int idProduct,
                                                              Principal principal) {
-        log.info("Get DetailProductOrderMfoody with idOrder: {} and idProduct: {} by {}", idOrder, idProduct, principal.getName());
+        log.info("Get DetailProductOrderMfoody with idOrder: {} and idProduct: {} by {}",
+                idOrder, idProduct, principal.getName());
+
+        // Check valid idOrder
+        OrderMfoody currentOrderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(idOrder);
+        if (currentOrderMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + idOrder,
+                    HttpStatus.NOT_FOUND);
+        }
 
         // Check if the current UserMfoody has role ADMIN or the owner of DetailProductOrderMfoody
         if(!applicationCheckAuthorController.checkAuthorization(principal,
-                orderMfoodyInterfaceService.getOrderMfoodyByID(idOrder).getUser().getIdUser())){
+                currentOrderMfoody.getUser().getIdUser())){
             return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 

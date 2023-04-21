@@ -22,10 +22,10 @@ public class ApplicationCheckAuthorController {
                 || userMfoody.getIdUser() == idUserFromObject;
     }
 
-    // Check if the current UserMfoody has role USER
-    public boolean checkAuthorizationm(Principal principal, int idUserFromObject){
-        UserMfoody userMfoody = userMfoodyInterfaceService.getUserMfoodyByEmail(principal.getName());
-        return (ROLE_SECURITY + userMfoody.getRoleUser()).equals(ROLE_ADMIN_SECURITY)
-                || userMfoody.getIdUser() == idUserFromObject;
-    }
+//    // Check if the current UserMfoody has role USER
+//    public boolean checkAuthorizationm(Principal principal, int idUserFromObject){
+//        UserMfoody userMfoody = userMfoodyInterfaceService.getUserMfoodyByEmail(principal.getName());
+//        return (ROLE_SECURITY + userMfoody.getRoleUser()).equals(ROLE_ADMIN_SECURITY)
+//                || userMfoody.getIdUser() == idUserFromObject;
+//    }
 }

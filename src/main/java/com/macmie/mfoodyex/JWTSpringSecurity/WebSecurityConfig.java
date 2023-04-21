@@ -87,6 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(APPLICATION_MFOODY + LOGIN_MFOODY).permitAll()
                 .antMatchers(APPLICATION_MFOODY + LOGOUT_MFOODY).permitAll()
+                .antMatchers(APPLICATION_MFOODY + FORGOT_PASSWORD).permitAll()
                 .antMatchers(USER_MFOODY + URL_ADD).permitAll()
                 .antMatchers(FEEDBACK_MAIL + URL_ADD).permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
