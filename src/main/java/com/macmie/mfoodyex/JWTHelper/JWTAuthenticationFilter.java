@@ -80,11 +80,24 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     }
 
     // Function to get userName (emailUser) for customUserDetailsService.loadUserByUsername(userName)
+    // private static String getEmailFromJsonString(String jsonString) {
+    //     Pattern emailPattern = Pattern.compile("'emailUser'\\s*:\\s*'([^']*)'");
+    //     Matcher matcher = emailPattern.matcher(jsonString);
+    //     if (matcher.find()) {
+    //         return matcher.group(1);
+    //     }
+    //     return null;
+    // }
+
     private static String getEmailFromJsonString(String jsonString) {
-        Pattern emailPattern = Pattern.compile("'emailUser'\\s*:\\s*'([^']*)'");
-        Matcher matcher = emailPattern.matcher(jsonString);
-        if (matcher.find()) {
-            return matcher.group(1);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode rootNode = objectMapper.readTree(jsonString);
+            if (rootNode.has("emailUser")) {
+                return rootNode.get("emailUser").asText();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
