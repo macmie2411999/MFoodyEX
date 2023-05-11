@@ -68,6 +68,10 @@ public class UserMfoody {
     @OneToMany(mappedBy = "user")
     private List<CommentMfoody> listComments;
 
+    // @JsonManagedReference
+    // @OneToMany(mappedBy = "user")
+    // private List<FavoriteListMfoody> listFavoriteLists;
+
     public UserMfoody() {
     }
 

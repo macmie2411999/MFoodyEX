@@ -4,11 +4,13 @@ public class ViewConstants {
     // Main URLs
     public static final String API_MFOODY = "/api";
     public static final String FEEDBACK_MAIL = "/feedback";
+    public static final String SUBSCRIBER= "/subscriber";
     public static final String USER_MFOODY = "/user";
     public static final String CREDIT_CARD_MFOODY = "/creditcard";
     public static final String CART_MFOODY = "/cart";
     public static final String PRODUCT_MFOODY = "/product";
     public static final String COMMENT_MFOODY = "/comment";
+    public static final String FAVORITE_LIST_MFOODY = "/favoriteList";
     public static final String ORDER_MFOODY = "/order";
     public static final String DETAIL_PRODUCT_CART_MFOODY = "/detailProductCart";
     public static final String DETAIL_PRODUCT_ORDER_MFOODY = "/detailProductOrder";

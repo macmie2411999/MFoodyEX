@@ -40,6 +40,9 @@ public class ProductMfoodyController {
     private CommentMfoodyInterfaceService commentMfoodyInterfaceService;
 
     @Autowired
+    private FavoriteListMfoodyInterfaceService favoriteListMfoodyInterfaceService;
+
+    @Autowired
     private DetailProductCartMfoodyInterfaceService detailProductCartMfoodyInterfaceService;
 
     @Autowired
@@ -101,7 +104,7 @@ public class ProductMfoodyController {
         }
 
         try {
-            // Delete Detail Product Cart, Detail Product Order, Comment and Product
+            // Delete Detail Product Cart, Detail Product Order, Comment, FavoriteList and Product
             detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
             detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);

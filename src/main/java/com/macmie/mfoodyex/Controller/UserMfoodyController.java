@@ -44,6 +44,9 @@ public class UserMfoodyController {
     private CommentMfoodyInterfaceService commentMfoodyInterfaceService;
 
     @Autowired
+    private FavoriteListMfoodyInterfaceService favoriteListMfoodyInterfaceService;
+
+    @Autowired
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
     @Autowired
