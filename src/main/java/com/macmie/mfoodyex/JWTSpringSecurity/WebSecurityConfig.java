@@ -90,6 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(APPLICATION_MFOODY + FORGOT_PASSWORD).permitAll()
                 .antMatchers(USER_MFOODY + URL_ADD).permitAll()
                 .antMatchers(FEEDBACK_MAIL + URL_ADD).permitAll()
+                .antMatchers(SUBSCRIBER + URL_ADD).permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutUrl(APPLICATION_MFOODY + LOGOUT_MFOODY) // Specify the logout endpoint URL

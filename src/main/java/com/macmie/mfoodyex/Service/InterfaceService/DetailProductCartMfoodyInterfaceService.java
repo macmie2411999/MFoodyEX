@@ -14,7 +14,7 @@ public interface DetailProductCartMfoodyInterfaceService {
 
     public DetailProductCartMfoody getDetailProductCartMfoodyByICartAndIdProduct(int idCart, int idProduct);
 
-    public DetailProductCartMfoody saveDetailProductCartMfoody(DetailProductCartMfoody DetailProductCartMfoody);
+    public DetailProductCartMfoody saveDetailProductCartMfoody(DetailProductCartMfoody detailProductCartMfoody);
 
     public DetailProductCartMfoody updateDetailProductCartMfoody(DetailProductCartMfoody newDetailProductCartMfoody);
 

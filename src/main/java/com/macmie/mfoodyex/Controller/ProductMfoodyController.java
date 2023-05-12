@@ -40,10 +40,10 @@ public class ProductMfoodyController {
     private CommentMfoodyInterfaceService commentMfoodyInterfaceService;
 
     @Autowired
-    private FavoriteListMfoodyInterfaceService favoriteListMfoodyInterfaceService;
+    private DetailProductCartMfoodyInterfaceService detailProductCartMfoodyInterfaceService;
 
     @Autowired
-    private DetailProductCartMfoodyInterfaceService detailProductCartMfoodyInterfaceService;
+    private FavoriteProductMfoodyInterfaceService favoriteProductMfoodyInterfaceService;
 
     @Autowired
     private DetailProductOrderMfoodyInterfaceService detailProductOrderMfoodyInterfaceService;
@@ -56,6 +56,9 @@ public class ProductMfoodyController {
 
     @Autowired
     private CartMfoodyInterfaceService cartMfoodyInterfaceService;
+
+    @Autowired
+    private FavoriteListProductsMfoodyInterfaceService favoriteListProductsMfoodyInterfaceService;
 
     @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_COUNT_TOTAL)
@@ -106,6 +109,7 @@ public class ProductMfoodyController {
         try {
             // Delete Detail Product Cart, Detail Product Order, Comment, FavoriteList and Product
             detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
+            favoriteProductMfoodyInterfaceService.deleteAllFavoriteProductsMfoodyByIdProduct(ID);
             detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdProduct(ID);
             productMfoodyInterfaceService.deleteProductMfoodyByID(ID);

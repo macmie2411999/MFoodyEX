@@ -50,7 +50,7 @@ public class DetailProductOrderMfoodyController {
     private ProductMfoodyInterfaceService productMfoodyInterfaceService;
 
     @Autowired
-    DetailProductCartMfoodyRepository detailProductCartMfoodyRepository;
+    private DetailProductCartMfoodyRepository detailProductCartMfoodyRepository;
 
     @Autowired
     private ApplicationCheckAuthorController applicationCheckAuthorController;
@@ -90,7 +90,7 @@ public class DetailProductOrderMfoodyController {
     @Secured({ROLE_ADMIN_SECURITY})
     @GetMapping(URL_GET_BY_ID_PRODUCT)
     public ResponseEntity<?> getAllDetailProductOrderMfoodysByIdProduct(@PathVariable("ID") int ID, Principal principal) {
-        log.info("Get List of DetailProductCartMfoodys with idProduct: {} by {}", ID, principal.getName());
+        log.info("Get List of DetailProductOrderMfoodys with idProduct: {} by {}", ID, principal.getName());
         List<DetailProductOrderMfoody> detailProductOrderMfoodyList =
                 detailProductOrderMfoodyInterfaceService.getListDetailProductOrderMfoodysByIdProduct(ID);
         if (detailProductOrderMfoodyList.isEmpty()) {
@@ -133,7 +133,7 @@ public class DetailProductOrderMfoodyController {
 
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
     @DeleteMapping(URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT)
-    public ResponseEntity<?> deleteDetailProductOrderMfoodyByID(@PathVariable("IdOrder") int idOrder,
+    public ResponseEntity<?> deleteDetailProductOrderMfoodyByIDs(@PathVariable("IdOrder") int idOrder,
                                                                 @PathVariable("IdProduct") int idProduct,
                                                                 Principal principal) {
         log.info("Delete DetailProductOrderMfoody with idCart: {} and idProduct: {} by {}",
@@ -208,10 +208,10 @@ public class DetailProductOrderMfoodyController {
         try {
             detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
         } catch (Exception e) {
-            log.error("An error occurred while deleting List of DetailProductCartMfoodys with idProduct: " + ID);
+            log.error("An error occurred while deleting List of DetailProductOrderMfoodys with idProduct: " + ID);
             log.error("Detail Error: " + e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of DetailProductCartMfoodys");
+                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of DetailProductOrderMfoodys");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -286,7 +286,7 @@ public class DetailProductOrderMfoodyController {
     /*
      * 1. idOrder and idProduct in Json must be accurate, salePrice/fullPrice in Json are ignored
      * 2. salePrice/fullPrice of DetailProductOrderMfoody are fetched from ProductMfoody
-     * 3. The threat is any UserMfoodys can create DetailProductCartMfoody using different idCart and idProduct
+     * 3. The threat is any UserMfoodys can create DetailProductOrderMfoodys using different idCart and idProduct
      *    (There is no double check)
      * */
     @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
@@ -321,7 +321,7 @@ public class DetailProductOrderMfoodyController {
                         HttpStatus.NOT_FOUND);
             }
 
-            // If the DetailProductCartMfoody is already in the DB, update it and update associated OrderMfoody
+            // If the DetailProductOrderMfoodys is already in the DB, update it and update associated OrderMfoody
             if (checkNewDetailProductOrderMfoody != null) {
                 checkNewDetailProductOrderMfoody.setQuantityDetailProductOrder(
                         checkNewDetailProductOrderMfoody.getQuantityDetailProductOrder()
@@ -332,7 +332,7 @@ public class DetailProductOrderMfoodyController {
                 return new ResponseEntity<>("OK DetailProductOrderMfoody updated", HttpStatus.OK);
             }
 
-            // If the DetailProductCartMfoody is completely new, add new
+            // If the DetailProductOrderMfoodys is completely new, add new
             newDetailProductOrderMfoody.setIdDetailProductOrderMfoody(new
                     DetailProductOrderMfoodyId(newDetailProductOrderMfoodyPOJO.getIdOrder(),
                     newDetailProductOrderMfoodyPOJO.getIdProduct()));

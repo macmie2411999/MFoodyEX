@@ -2,8 +2,10 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CartMfoody;
+import com.macmie.mfoodyex.Model.FavoriteListProductsMfoody;
 import com.macmie.mfoodyex.Model.UserMfoody;
 import com.macmie.mfoodyex.POJO.CartMfoodyPOJO;
+import com.macmie.mfoodyex.POJO.FavoriteListProductsMfoodyPOJO;
 import com.macmie.mfoodyex.POJO.UserMfoodyPOJO;
 import com.macmie.mfoodyex.Service.InterfaceService.*;
 import lombok.extern.slf4j.Slf4j;
@@ -44,16 +46,19 @@ public class UserMfoodyController {
     private CommentMfoodyInterfaceService commentMfoodyInterfaceService;
 
     @Autowired
-    private FavoriteListMfoodyInterfaceService favoriteListMfoodyInterfaceService;
+    private CartMfoodyInterfaceService cartMfoodyInterfaceService;
 
     @Autowired
-    private CartMfoodyInterfaceService cartMfoodyInterfaceService;
+    private FavoriteListProductsMfoodyInterfaceService favoriteListProductsMfoodyInterfaceService;
 
     @Autowired
     private OrderMfoodyInterfaceService orderMfoodyInterfaceService;
 
     @Autowired
     private DetailProductCartMfoodyInterfaceService detailProductCartMfoodyInterfaceService;
+
+    @Autowired
+    private FavoriteProductMfoodyInterfaceService favoriteProductMfoodyInterfaceService;
 
     @Autowired
     private DetailProductOrderMfoodyInterfaceService detailProductOrderMfoodyInterfaceService;
@@ -144,6 +149,7 @@ public class UserMfoodyController {
             creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
             cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
+            favoriteListProductsMfoodyInterfaceService.deleteFavoriteListProductsMfoodyByIdUser(ID);
             orderMfoodyInterfaceService.deleteAllOrderMfoodysByIdUser(ID);
             userMfoodyInterfaceService.deleteUserMfoodyByID(ID);
         } catch (Exception e) {
@@ -228,6 +234,13 @@ public class UserMfoodyController {
             newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
             cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
             log.info("A new CartMfoody is created!");
+
+            // Create and save a new FavoriteListProductsMfoody (FavoriteListProductsMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
+            FavoriteListProductsMfoodyPOJO newFavoriteListProductsMfoodyPOJO = new FavoriteListProductsMfoodyPOJO(0,newUserMfoodyPOJO.getIdUser());
+            FavoriteListProductsMfoody newFavoriteListProductsMfoody = newFavoriteListProductsMfoodyPOJO.renderFavoriteListProductsMfoody();
+            newFavoriteListProductsMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
+            favoriteListProductsMfoodyInterfaceService.saveFavoriteListProductsMfoody(newFavoriteListProductsMfoody);
+            log.info("A new FavoriteListProductsMfoody is created!");
 
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {

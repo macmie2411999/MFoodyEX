@@ -8,11 +8,13 @@ public class ViewConstants {
     public static final String USER_MFOODY = "/user";
     public static final String CREDIT_CARD_MFOODY = "/creditcard";
     public static final String CART_MFOODY = "/cart";
+    public static final String FAVORITE_LIST_PRODUCTS_MFOODY = "/favoriteListProducts";
     public static final String PRODUCT_MFOODY = "/product";
     public static final String COMMENT_MFOODY = "/comment";
     public static final String FAVORITE_LIST_MFOODY = "/favoriteList";
     public static final String ORDER_MFOODY = "/order";
     public static final String DETAIL_PRODUCT_CART_MFOODY = "/detailProductCart";
+    public static final String FAVORITE_PRODUCT_MFOODY = "/favoriteProduct";
     public static final String DETAIL_PRODUCT_ORDER_MFOODY = "/detailProductOrder";
     public static final String APPLICATION_MFOODY = "/applicationMfoody";
     public static final String LOGIN_MFOODY = "/login";
@@ -29,19 +31,24 @@ public class ViewConstants {
     public static final String URL_GET_BY_ID_USER = "/getByIdUser/{ID}";
     public static final String URL_GET_BY_ID_PRODUCT = "/getByIdProduct/{ID}";
     public static final String URL_GET_BY_ID_CART = "/getByIdCart/{ID}";
+    public static final String URL_GET_BY_ID_FAVORITE_LIST_PRODUCTS = "/getByIdFavoriteListProducts/{ID}";
     public static final String URL_GET_BY_ID_ORDER = "/getByIdOrder/{ID}";
     public static final String URL_GET_BY_ID_CART_AND_ID_PRODUCT = "/get/idCart/{IdCart}/idProduct/{IdProduct}";
+    public static final String URL_GET_BY_ID_FAVORITE_LIST_PRODUCTS_AND_ID_PRODUCT = "/get/idFavoriteListProducts/{IdFavoriteListProducts}/idProduct/{IdProduct}";
     public static final String URL_GET_BY_ID_ORDER_AND_ID_PRODUCT = "/get/idOrder/{IdOrder}/idProduct/{IdProduct}";
     public static final String URL_DELETE = "/delete/{ID}";
     public static final String URL_DELETE_BY_ID_USER = "/deleteByIdUser/{ID}";
     public static final String URL_DELETE_BY_ID_PRODUCT = "/deleteByIdProduct/{ID}";
     public static final String URL_DELETE_BY_ID_CART = "/deleteByIdCart/{ID}";
+    public static final String URL_DELETE_BY_ID_FAVORITE_LIST_PRODUCTS = "/deleteByIdFavoriteListProducts/{ID}";
     public static final String URL_DELETE_BY_ID_ORDER = "/deleteByIdOrder/{ID}";
     public static final String URL_DELETE_BY_ID_CART_AND_ID_PRODUCT = "/delete/idCart/{IdCart}/idProduct/{IdProduct}";
     public static final String URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT = "/delete/idOrder/{IdOrder}/idProduct/{IdProduct}";
+    public static final String URL_DELETE_BY_ID_FAVORITE_LIST_PRODUCTS_AND_ID_PRODUCT = "/delete/idFavoriteListProducts/{IdFavoriteListProducts}/idProduct/{IdProduct}";
     public static final String URL_ADD = "/add";
     public static final String URL_EDIT = "/edit";
     public static final String URL_UPDATE_PRODUCT_INFORMATION_IN_CART = "/updateListToCart";
+    public static final String URL_UPDATE_PRODUCT_INFORMATION_IN_FAVORITE_LIST_PRODUCTS = "/updateListToFavoriteListProducts";
 
 
     // Swagger

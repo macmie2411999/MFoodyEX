@@ -54,12 +54,12 @@ public class DetailProductCartMfoodyImplementService implements DetailProductCar
     }
 
     @Override
-    public DetailProductCartMfoody saveDetailProductCartMfoody(DetailProductCartMfoody DetailProductCartMfoody) {
+    public DetailProductCartMfoody saveDetailProductCartMfoody(DetailProductCartMfoody detailProductCartMfoody) {
 //        feedbackMail.setIdFeedbackMail(feedbackMail.getIdFeedbackMail());
 //        DetailProductCartMfoody.setNameUserCard(stringUtil.parseName(DetailProductCartMfoody.getNameUserCard()));
 
-        log.info("Saving DetailProductCartMfoody with ID: {}", DetailProductCartMfoody.getIdDetailProductCartMFoody());
-        return detailProductCartMfoodyRepository.save(DetailProductCartMfoody);
+        log.info("Saving DetailProductCartMfoody with ID: {}", detailProductCartMfoody.getIdDetailProductCartMFoody());
+        return detailProductCartMfoodyRepository.save(detailProductCartMfoody);
     }
 
     @Override
