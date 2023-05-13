@@ -69,7 +69,7 @@ public class UserMfoodyController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfUsers(Principal principal) {
         log.info("Count Total Number of UserMfoodys by " + principal.getName());
@@ -80,24 +80,25 @@ public class UserMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while counting number of UserMfoodys");
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when counting UserMfoodys");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when counting UserMfoodys");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllUserMfoodys(Principal principal) {
         log.info("Get List of UserMfoodys by " + principal.getName());
         List<UserMfoody> userMfoodyList = userMfoodyInterfaceService.getListUserMfoodys();
-        if (userMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of UserMfoodys", HttpStatus.NO_CONTENT);
-        }
+        // if (userMfoodyList.isEmpty()) {
+        //     return new ResponseEntity<>("NO_CONTENT List of UserMfoodys", HttpStatus.NO_CONTENT);
+        // }
 
         return new ResponseEntity<>(userMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getUserMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get UserMfoody with ID: {} by {}", ID, principal.getName());
@@ -107,14 +108,14 @@ public class UserMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of account
-        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (!applicationCheckAuthorController.checkAuthorization(principal, ID)) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         return new ResponseEntity<>(userMfoody, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_EMAIL)
     public ResponseEntity<?> getUserMfoodyByEmail(@PathVariable("Email") String Email, Principal principal) {
         log.info("Get UserMfoody with Email: {} by {}", Email, principal.getName());
@@ -124,14 +125,14 @@ public class UserMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of account
-        if(!applicationCheckAuthorController.checkAuthorization(principal, userMfoody.getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (!applicationCheckAuthorController.checkAuthorization(principal, userMfoody.getIdUser())) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         return new ResponseEntity<>(userMfoody, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteUserMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete UserMfoody with ID: {} by {}", ID, principal.getName());
@@ -140,12 +141,13 @@ public class UserMfoodyController {
         }
 
         // Check if the current UserMfoody has role ADMIN or the owner of account
-        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        if (!applicationCheckAuthorController.checkAuthorization(principal, ID)) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         try {
-            // Delete Cart (DetailProductCart), DeleteOrder (DetailProductOrder), Comment, Credit Card, and User
+            // Delete Cart (DetailProductCart), DeleteOrder (DetailProductOrder), Comment,
+            // Credit Card, and User
             creditCardMfoodyInterfaceService.deleteAllCreditCardsMfoodyByIdUser(ID);
             commentMfoodyInterfaceService.deleteAllCommentsMfoodyByIdUser(ID);
             cartMfoodyInterfaceService.deleteCartMfoodyByIdUser(ID);
@@ -155,13 +157,14 @@ public class UserMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting UserMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting UserMfoody");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting UserMfoody");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @PutMapping(URL_EDIT) // idUser in Json must be accurate
     public ResponseEntity<?> editUserMfoody(@RequestBody String userMfoodyPOJOJsonObject, Principal principal) {
         try {
@@ -180,11 +183,12 @@ public class UserMfoodyController {
             }
 
             // Check if the current UserMfoody has role ADMIN or the owner of account
-            if(!applicationCheckAuthorController.checkAuthorization(principal, newUserMfoodyPOJO.getIdUser())){
-                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            if (!applicationCheckAuthorController.checkAuthorization(principal, newUserMfoodyPOJO.getIdUser())) {
+                return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
 
-            // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+            // Save to DB (Handle Exception in case the unique attributes in the request
+            // already exist)
             try {
                 userMfoodyInterfaceService.updateUserMfoody(newUserMfoody);
                 log.info("UserMfoody with ID: {} by {} is edited", newUserMfoody.getIdUser(), principal.getName());
@@ -213,7 +217,8 @@ public class UserMfoodyController {
             UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
 
             // Check duplicate by emailUser/phoneNumber
-            UserMfoody existingEmailUser = userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser());
+            UserMfoody existingEmailUser = userMfoodyInterfaceService
+                    .getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser());
             UserMfoody existingPhoneNumberUser = userMfoodyInterfaceService.getUserMfoodyByPhoneNumber(
                     newUserMfoodyPOJO.getPhoneNumberUser());
             if (existingEmailUser != null || existingPhoneNumberUser != null) {
@@ -222,23 +227,28 @@ public class UserMfoodyController {
                         HttpStatus.CONFLICT);
             }
 
-            // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from user's request)
+            // Save the UserMfoody to DB (Updated Cart in DB could have ID differs from
+            // user's request)
             userMfoodyInterfaceService.saveUserMfoody(newUserMfoody);
             log.info("A new UserMfoody is created!");
 
-            // Create and save a new CartMfoody (CartMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
-            CartMfoodyPOJO newCartMfoodyPOJO = new
-                    CartMfoodyPOJO(0, 0, 0, 0,
+            // Create and save a new CartMfoody (CartMfoody is automatically created when
+            // having a new UserMfoody, 1-to-1 relationship)
+            CartMfoodyPOJO newCartMfoodyPOJO = new CartMfoodyPOJO(0, 0, 0, 0,
                     newUserMfoodyPOJO.getIdUser());
             CartMfoody newCartMfoody = newCartMfoodyPOJO.renderCartMfoody();
             newCartMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
             cartMfoodyInterfaceService.saveCartMfoody(newCartMfoody);
             log.info("A new CartMfoody is created!");
 
-            // Create and save a new FavoriteListProductsMfoody (FavoriteListProductsMfoody is automatically created when having a new UserMfoody, 1-to-1 relationship)
-            FavoriteListProductsMfoodyPOJO newFavoriteListProductsMfoodyPOJO = new FavoriteListProductsMfoodyPOJO(0,newUserMfoodyPOJO.getIdUser());
-            FavoriteListProductsMfoody newFavoriteListProductsMfoody = newFavoriteListProductsMfoodyPOJO.renderFavoriteListProductsMfoody();
-            newFavoriteListProductsMfoody.setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
+            // Create and save a new FavoriteListProductsMfoody (FavoriteListProductsMfoody
+            // is automatically created when having a new UserMfoody, 1-to-1 relationship)
+            FavoriteListProductsMfoodyPOJO newFavoriteListProductsMfoodyPOJO = new FavoriteListProductsMfoodyPOJO(0,
+                    newUserMfoodyPOJO.getIdUser());
+            FavoriteListProductsMfoody newFavoriteListProductsMfoody = newFavoriteListProductsMfoodyPOJO
+                    .renderFavoriteListProductsMfoody();
+            newFavoriteListProductsMfoody
+                    .setUser(userMfoodyInterfaceService.getUserMfoodyByEmail(newUserMfoodyPOJO.getEmailUser()));
             favoriteListProductsMfoodyInterfaceService.saveFavoriteListProductsMfoody(newFavoriteListProductsMfoody);
             log.info("A new FavoriteListProductsMfoody is created!");
 

@@ -46,7 +46,7 @@ public class OrderMfoodyController {
     @Autowired
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfOrderMfoodys(Principal principal) {
         log.info("Count Total Number of OrderMfoodys by " + principal.getName());
@@ -57,23 +57,24 @@ public class OrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while counting number of OrderMfoodys");
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when counting OrderMfoodys");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when counting OrderMfoodys");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllOrderMfoodys(Principal principal) {
         log.info("Get List of OrderMfoodys by " + principal.getName());
         List<OrderMfoody> orderMfoodyList = orderMfoodyInterfaceService.getListOrderMfoodys();
-        if (orderMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of OrderMfoodys", HttpStatus.NO_CONTENT);
-        }
+        // if (orderMfoodyList.isEmpty()) {
+        //     return new ResponseEntity<>("NO_CONTENT List of OrderMfoodys", HttpStatus.NO_CONTENT);
+        // }
         return new ResponseEntity<>(orderMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getOrderMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get OrderMfoody with ID: {} by {}", ID, principal.getName());
@@ -82,15 +83,16 @@ public class OrderMfoodyController {
             return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
 
-        // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // Check if the current UserMfoody has role ADMIN or the owner of the
+        // OrderMfoody
+        if (!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         return new ResponseEntity<>(orderMfoody, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_ID_USER)
     public ResponseEntity<?> getAllOrderMfoodysByIdUser(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get List of OrderMfoodys with idUser: {} by {}", ID, principal.getName());
@@ -98,20 +100,21 @@ public class OrderMfoodyController {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
 
-        // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
-        if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
-            return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // Check if the current UserMfoody has role ADMIN or the owner of the
+        // OrderMfoody
+        if (!applicationCheckAuthorController.checkAuthorization(principal, ID)) {
+            return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
         }
 
         List<OrderMfoody> orderMfoodyList = orderMfoodyInterfaceService.getListOrderMfoodysByIdUser(ID);
-        if (orderMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of OrderMfoodys with idUser: " + ID,
-                    HttpStatus.NO_CONTENT);
-        }
+        // if (orderMfoodyList.isEmpty()) {
+        //     return new ResponseEntity<>("NO_CONTENT List of OrderMfoodys with idUser: " + ID,
+        //             HttpStatus.NO_CONTENT);
+        // }
         return new ResponseEntity<>(orderMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY}) // User with role USER can't delete Order by themselves (Amin will do)
+    @Secured({ ROLE_ADMIN_SECURITY }) // User with role USER can't delete Order by themselves (Amin will do)
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteOrderMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete OrderMfoody with ID: {} by {}", ID, principal.getName());
@@ -120,9 +123,12 @@ public class OrderMfoodyController {
             return new ResponseEntity<>("NOT_FOUND OrderMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
 
-        // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
-        // if(!applicationCheckAuthorController.checkAuthorization(principal, orderMfoody.getUser().getIdUser())){
-        //    return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // Check if the current UserMfoody has role ADMIN or the owner of the
+        // OrderMfoody
+        // if(!applicationCheckAuthorController.checkAuthorization(principal,
+        // orderMfoody.getUser().getIdUser())){
+        // return new ResponseEntity<>("FORBIDDEN Authorization failed!",
+        // HttpStatus.FORBIDDEN);
         // }
 
         try {
@@ -130,14 +136,15 @@ public class OrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting OrderMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting OrderMfoody");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY}) // User with role USER can't delete Order by themselves (Amin will do)
+    @Secured({ ROLE_ADMIN_SECURITY }) // User with role USER can't delete Order by themselves (Amin will do)
     @DeleteMapping(URL_DELETE_BY_ID_USER)
     public ResponseEntity<?> deleteAllOrderMfoodysByIdUser(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete List of OrderMfoodys with idUser: {} by {}", ID, principal.getName());
@@ -145,9 +152,11 @@ public class OrderMfoodyController {
             return new ResponseEntity<>("NOT_FOUND UserMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
 
-        // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
+        // Check if the current UserMfoody has role ADMIN or the owner of the
+        // OrderMfoody
         // if(!applicationCheckAuthorController.checkAuthorization(principal, ID)){
-        //    return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+        // return new ResponseEntity<>("FORBIDDEN Authorization failed!",
+        // HttpStatus.FORBIDDEN);
         // }
 
         try {
@@ -155,25 +164,31 @@ public class OrderMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting List of OrderMfoodys with idUser: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of OrderMfoodys");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting List of OrderMfoodys");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*
-     * 1. idOrder in Json must be accurate, idUser/quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
-     * 2. This API is required coz its attributes like dateOder/shippingPrice... still can be updated
-     *    (excepts quantityAllProductsInOrder/totalSalPrice/totalFullPrice)
-     * 3. The attributes quantityAllProductsInOrder/totalSalPrice/totalFullPrice will get default values 0 and will be
-     *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
-     * */
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+     * 1. idOrder in Json must be accurate,
+     * idUser/quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
+     * 2. This API is required coz its attributes like dateOder/shippingPrice...
+     * still can be updated
+     * (excepts quantityAllProductsInOrder/totalSalPrice/totalFullPrice)
+     * 3. The attributes quantityAllProductsInOrder/totalSalPrice/totalFullPrice
+     * will get default values 0 and will be
+     * updated later with APIs of DetailProductOrderMfoody coz the oneToMany table
+     * is always created first
+     */
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @PutMapping(URL_EDIT)
     public ResponseEntity<?> editOrderMfoody(@RequestBody String orderPOJOJsonObject, Principal principal) {
         try {
-            // Convert JsonObject to OrderPOJO object, Check input idOrder and set default values for newOrderMfoody
+            // Convert JsonObject to OrderPOJO object, Check input idOrder and set default
+            // values for newOrderMfoody
             Gson gson = new Gson();
             OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
             OrderMfoody oldOrderMfoody = orderMfoodyInterfaceService.getOrderMfoodyByID(newOrderPOJO.getIdOrder());
@@ -189,9 +204,10 @@ public class OrderMfoodyController {
                         HttpStatus.NOT_FOUND);
             }
 
-            // Check if the current UserMfoody has role ADMIN or the owner of the OrderMfoody
-            if(!applicationCheckAuthorController.checkAuthorization(principal, attachUserMfoody.getIdUser())){
-                return  new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
+            // Check if the current UserMfoody has role ADMIN or the owner of the
+            // OrderMfoody
+            if (!applicationCheckAuthorController.checkAuthorization(principal, attachUserMfoody.getIdUser())) {
+                return new ResponseEntity<>("FORBIDDEN Authorization failed!", HttpStatus.FORBIDDEN);
             }
 
             OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
@@ -213,13 +229,17 @@ public class OrderMfoodyController {
 
     /*
      * 1. quantityAllProductsInOrder/totalSalPrice/totalFullPrice are ignored
-     * 2. Need to create a new OrderMfoody coz it has it own attributes like dateOder/shippingPrice...
-     * 3. Every OrderMfoody is created with quantityAllProductsInOrder/totalSalPrice/totalFullPrice = 0 and will be
-     *    updated later with APIs of DetailProductOrderMfoody coz the oneToMany table is always created first
+     * 2. Need to create a new OrderMfoody coz it has it own attributes like
+     * dateOder/shippingPrice...
+     * 3. Every OrderMfoody is created with
+     * quantityAllProductsInOrder/totalSalPrice/totalFullPrice = 0 and will be
+     * updated later with APIs of DetailProductOrderMfoody coz the oneToMany table
+     * is always created first
      * 4. Get idUser from Principal (Token)
-     *    (The threat is any UserMfoodys can create CreditCardMfoody using different idUser)
-     * */
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+     * (The threat is any UserMfoodys can create CreditCardMfoody using different
+     * idUser)
+     */
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @PostMapping(URL_ADD)
     public ResponseEntity<?> addNewOrderMfoody(@RequestBody String orderPOJOJsonObject, Principal principal) {
         try {
@@ -232,7 +252,8 @@ public class OrderMfoodyController {
             newOrderMfoody.setTotalSalePriceOrder(0);
 
             // Check input idUser and attach UserMfoody to OrderMfoody
-            // UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
+            // UserMfoody attachUserMfoody =
+            // userMfoodyInterfaceService.getUserMfoodyByID(newOrderPOJO.getIdUser());
             UserMfoody attachUserMfoody = userMfoodyInterfaceService.getUserMfoodyByID(
                     userMfoodyInterfaceService.getUserMfoodyByEmail(principal.getName()).getIdUser());
 
@@ -242,7 +263,8 @@ public class OrderMfoodyController {
             }
             newOrderMfoody.setUser(attachUserMfoody);
 
-            // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
+            // Save to DB and return (Updated Cart in DB could have ID differs from user's
+            // request)
             orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);
             log.info("A new OrderMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);

@@ -35,7 +35,7 @@ public class SubscriberController {
     @Autowired
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfSubscribers(Principal principal) {
         log.info("Count Total Number of Subscribers by " + principal.getName());
@@ -46,12 +46,13 @@ public class SubscriberController {
         } catch (Exception e) {
             log.error("An error occurred while counting number of Subscribers");
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when counting Subscribers");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when counting Subscribers");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllSubscribers(Principal principal) {
         log.info("Get List of Subscribers by " + principal.getName());
@@ -62,7 +63,7 @@ public class SubscriberController {
         return new ResponseEntity<>(SubscriberList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getSubscriberByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get Subscriber with ID: {} by {}", ID, principal.getName());
@@ -73,7 +74,7 @@ public class SubscriberController {
         return new ResponseEntity<>(Subscriber, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteSubscriberByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete Subscriber with ID: {} by {}", ID, principal.getName());
@@ -86,14 +87,15 @@ public class SubscriberController {
         } catch (Exception e) {
             log.error("An error occurred while deleting Subscriber with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting Subscriber");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting Subscriber");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @PutMapping(URL_EDIT) // idSubscriber in Json must be accurate
     public ResponseEntity<?> editSubscriber(@RequestBody String SubscriberJsonObject, Principal principal) {
         try {
@@ -120,7 +122,8 @@ public class SubscriberController {
     @PostMapping(URL_ADD) // idSubscriber in Json is ignored
     public ResponseEntity<?> addNewSubscriber(@RequestBody String SubscriberJsonObject) {
         try {
-            // Convert JsonObject to Subscriber object (Updated Cart in DB could have ID differs from user's request)
+            // Convert JsonObject to Subscriber object (Updated Cart in DB could have ID
+            // differs from user's request)
             Subscriber newSubscriber = this.convertJsonToSubscriber(SubscriberJsonObject);
 
             // Check duplicate by emailUser and contentSubscriber

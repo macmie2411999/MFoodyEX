@@ -48,9 +48,9 @@ public class FavoriteListProductsMfoodyController {
         log.info("Get List of FavoriteListProductsMfoodys by " + principal.getName());
         List<FavoriteListProductsMfoody> favoriteListProductsMfoodyList = favoriteListProductsMfoodyInterfaceService
                 .getListFavoriteListProductsMfoodys();
-        if (favoriteListProductsMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of FavoriteListProductsMfoodys", HttpStatus.NO_CONTENT);
-        }
+        // if (favoriteListProductsMfoodyList.isEmpty()) {
+        //     return new ResponseEntity<>("NO_CONTENT List of FavoriteListProductsMfoodys", HttpStatus.NO_CONTENT);
+        // }
         return new ResponseEntity<>(favoriteListProductsMfoodyList, HttpStatus.OK);
     }
 
@@ -120,8 +120,10 @@ public class FavoriteListProductsMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting FavoriteListProductsMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting FavoriteListProductsMfoody");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting
+            // FavoriteListProductsMfoody");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -142,13 +144,19 @@ public class FavoriteListProductsMfoodyController {
         // HttpStatus.FORBIDDEN);
         // }
 
+        if(favoriteListProductsMfoodyInterfaceService.getFavoriteListProductsMfoodyByIdUser(ID) == null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
         try {
             favoriteListProductsMfoodyInterfaceService.deleteFavoriteListProductsMfoodyByIdUser(ID);
         } catch (Exception e) {
             log.error("An error occurred while deleting FavoriteListProductsMfoody with idUser: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting FavoriteListProductsMfoody");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting
+            // FavoriteListProductsMfoody");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

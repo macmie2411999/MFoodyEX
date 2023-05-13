@@ -60,7 +60,7 @@ public class ProductMfoodyController {
     @Autowired
     private FavoriteListProductsMfoodyInterfaceService favoriteListProductsMfoodyInterfaceService;
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfProductMfoodys(Principal principal) {
         log.info("Count Total Number of ProductMfoodys by " + principal.getName());
@@ -71,23 +71,24 @@ public class ProductMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while counting number of ProductMfoodys");
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when counting ProductMfoodys");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when counting ProductMfoodys");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllProductMfoodys(Principal principal) {
         log.info("Get List of ProductMfoodys by " + principal.getName());
         List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
-        if (productMfoodyList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of ProductMfoodys", HttpStatus.NO_CONTENT);
-        }
+        // if (productMfoodyList.isEmpty()) {
+        //     return new ResponseEntity<>("NO_CONTENT List of ProductMfoodys", HttpStatus.NO_CONTENT);
+        // }
         return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getProductMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get ProductMfoody with ID: {} by {}", ID, principal.getName());
@@ -98,7 +99,7 @@ public class ProductMfoodyController {
         return new ResponseEntity<>(productMfoody, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteProductMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete ProductMfoody with ID: {} by {}", ID, principal.getName());
@@ -107,7 +108,8 @@ public class ProductMfoodyController {
         }
 
         try {
-            // Delete Detail Product Cart, Detail Product Order, Comment, FavoriteList and Product
+            // Delete Detail Product Cart, Detail Product Order, Comment, FavoriteList and
+            // Product
             detailProductCartMfoodyInterfaceService.deleteAllDetailProductCartsMfoodyByIdProduct(ID);
             favoriteProductMfoodyInterfaceService.deleteAllFavoriteProductsMfoodyByIdProduct(ID);
             detailProductOrderMfoodyInterfaceService.deleteAllDetailProductOrdersMfoodyByIdProduct(ID);
@@ -116,33 +118,37 @@ public class ProductMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while deleting ProductMfoody with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting ProductMfoody");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting ProductMfoody");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @PutMapping(URL_EDIT) // idProduct in Json must be accurate
     public ResponseEntity<?> editProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to ProductMfoodyPOJO object, Check the input idProduct
             Gson gson = new Gson();
-            ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
+            ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject,
+                    ProductMfoodyPOJO.class);
             ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
-            ProductMfoody oldProductMfoody = productMfoodyInterfaceService.
-                    getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
+            ProductMfoody oldProductMfoody = productMfoodyInterfaceService
+                    .getProductMfoodyByID(newProductMfoodyPOJO.getIdProduct());
             if (oldProductMfoody == null) {
                 return new ResponseEntity<>(
                         "NOT_FOUND ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct(),
                         HttpStatus.NOT_FOUND);
             }
 
-            // Save to DB (Handle Exception in case the unique attributes in the request already exist)
+            // Save to DB (Handle Exception in case the unique attributes in the request
+            // already exist)
             try {
                 productMfoodyInterfaceService.updateProductMfoody(newProductMfoody);
-                log.info("ProductMfoody with ID: {} by {} is edited", newProductMfoody.getIdProduct(), principal.getName());
+                log.info("ProductMfoody with ID: {} by {} is edited", newProductMfoody.getIdProduct(),
+                        principal.getName());
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         "BAD_REQUEST Failed to update ProductMfoody with ID: " + newProductMfoodyPOJO.getIdProduct());
@@ -150,12 +156,13 @@ public class ProductMfoodyController {
 
             /*
              * 1. Update price in DetailProductCart, CartMfoody if the price changes
-             * 2. There is no need to update in OrderMfoody or DetailProductOrder coz price Order will not be change accordingly
-             * */
+             * 2. There is no need to update in OrderMfoody or DetailProductOrder coz price
+             * Order will not be change accordingly
+             */
             if (newProductMfoody.getSalePriceProduct() != oldProductMfoody.getSalePriceProduct()
                     || newProductMfoody.getFullPriceProduct() != oldProductMfoody.getFullPriceProduct()) {
-                List<DetailProductCartMfoody> detailProductCartMfoodyList =
-                        detailProductCartMfoodyInterfaceService.findAllDetailProductCartsMfoodyByIdProduct(
+                List<DetailProductCartMfoody> detailProductCartMfoodyList = detailProductCartMfoodyInterfaceService
+                        .findAllDetailProductCartsMfoodyByIdProduct(
                                 newProductMfoody.getIdProduct());
                 for (DetailProductCartMfoody element : detailProductCartMfoodyList) {
                     element.setFullPriceDetailProductCart(newProductMfoody.getFullPriceProduct());
@@ -170,7 +177,8 @@ public class ProductMfoodyController {
                     updateCartMfoody.setTotalFullPriceCart(updateCartMfoody.getTotalFullPriceCart() +
                             newProductMfoody.getFullPriceProduct() - oldProductMfoody.getFullPriceProduct());
                     cartMfoodyInterfaceService.updateCartMfoody(updateCartMfoody);
-                    log.info("CartMfoody with ID: {} by {} is edited", updateCartMfoody.getIdCart(), principal.getName());
+                    log.info("CartMfoody with ID: {} by {} is edited", updateCartMfoody.getIdCart(),
+                            principal.getName());
                 }
             }
 
@@ -182,27 +190,29 @@ public class ProductMfoodyController {
         }
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @PostMapping(URL_ADD) // idProduct in Json is ignored
     public ResponseEntity<?> addNewProductMfoody(@RequestBody String productMfoodyPOJOJsonObject, Principal principal) {
         try {
             // Convert JsonObject to ProductMfoody object
             Gson gson = new Gson();
-            ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject, ProductMfoodyPOJO.class);
+            ProductMfoodyPOJO newProductMfoodyPOJO = gson.fromJson(productMfoodyPOJOJsonObject,
+                    ProductMfoodyPOJO.class);
             ProductMfoody newProductMfoody = newProductMfoodyPOJO.renderProductMfoody();
 
             // Check duplicate by nameProduct/albumProduct
-            ProductMfoody existingNameProduct = productMfoodyInterfaceService.
-                    getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
-            ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.
-                    getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
+            ProductMfoody existingNameProduct = productMfoodyInterfaceService
+                    .getProductMfoodyByNameProduct(newProductMfoody.getNameProduct());
+            ProductMfoody existingAlbumProduct = productMfoodyInterfaceService
+                    .getProductMfoodyByAlbumProduct(newProductMfoody.getAlbumProduct());
             if (existingNameProduct != null || existingAlbumProduct != null) {
                 return new ResponseEntity<>(
                         "CONFLICT - A product with the same nameProduct or albumProduct already exists!",
                         HttpStatus.CONFLICT);
             }
 
-            // Save to DB and return (Updated Cart in DB could have ID differs from user's request)
+            // Save to DB and return (Updated Cart in DB could have ID differs from user's
+            // request)
             productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
             log.info("A new ProductMfoody is created by " + principal.getName());
             return new ResponseEntity<>(HttpStatus.CREATED);

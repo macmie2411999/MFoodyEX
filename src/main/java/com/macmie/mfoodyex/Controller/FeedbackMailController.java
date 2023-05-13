@@ -35,7 +35,7 @@ public class FeedbackMailController {
     @Autowired
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfFeedbackMails(Principal principal) {
         log.info("Count Total Number of FeedbackMails by " + principal.getName());
@@ -46,23 +46,24 @@ public class FeedbackMailController {
         } catch (Exception e) {
             log.error("An error occurred while counting number of FeedbackMails");
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when counting FeedbackMails");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when counting FeedbackMails");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllFeedbackMails(Principal principal) {
         log.info("Get List of FeedbackMails by " + principal.getName());
         List<FeedbackMail> feedbackMailList = feedbackMailInterfaceService.getListFeedbackMails();
-        if (feedbackMailList.isEmpty()) {
-            return new ResponseEntity<>("NO_CONTENT List of FeedbackMails", HttpStatus.NO_CONTENT);
-        }
+        // if (feedbackMailList.isEmpty()) {
+        //     return new ResponseEntity<>("NO_CONTENT List of FeedbackMails", HttpStatus.NO_CONTENT);
+        // }
         return new ResponseEntity<>(feedbackMailList, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getFeedbackMailByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get FeedbackMail with ID: {} by {}", ID, principal.getName());
@@ -73,7 +74,7 @@ public class FeedbackMailController {
         return new ResponseEntity<>(feedbackMail, HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @DeleteMapping(URL_DELETE)
     public ResponseEntity<?> deleteFeedbackMailByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Delete FeedbackMail with ID: {} by {}", ID, principal.getName());
@@ -86,14 +87,15 @@ public class FeedbackMailController {
         } catch (Exception e) {
             log.error("An error occurred while deleting FeedbackMail with ID: " + ID);
             log.error("Detail Error: " + e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "INTERNAL_SERVER_ERROR Exceptions occur when deleting FeedbackMail");
+            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+            // "INTERNAL_SERVER_ERROR Exceptions occur when deleting FeedbackMail");
+            return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({ROLE_ADMIN_SECURITY})
+    @Secured({ ROLE_ADMIN_SECURITY })
     @PutMapping(URL_EDIT) // idFeedbackMail in Json must be accurate
     public ResponseEntity<?> editFeedbackMail(@RequestBody String feedbackMailJsonObject, Principal principal) {
         try {
@@ -108,7 +110,8 @@ public class FeedbackMailController {
             }
 
             feedbackMailInterfaceService.updateFeedbackMail(newFeedbackMail);
-            log.info("FeedbackMail with ID: {} by {} is edited", newFeedbackMail.getIdFeedbackMail(), principal.getName());
+            log.info("FeedbackMail with ID: {} by {} is edited", newFeedbackMail.getIdFeedbackMail(),
+                    principal.getName());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             log.error("An error occurred while editing FeedbackMail");
@@ -120,7 +123,8 @@ public class FeedbackMailController {
     @PostMapping(URL_ADD) // idFeedbackMail in Json is ignored
     public ResponseEntity<?> addNewFeedbackMail(@RequestBody String feedbackMailJsonObject) {
         try {
-            // Convert JsonObject to FeedbackMail object (Updated Cart in DB could have ID differs from user's request)
+            // Convert JsonObject to FeedbackMail object (Updated Cart in DB could have ID
+            // differs from user's request)
             FeedbackMail newFeedbackMail = this.convertJsonToFeedbackMail(feedbackMailJsonObject);
 
             // Check duplicate by emailUser and contentFeedbackMail
