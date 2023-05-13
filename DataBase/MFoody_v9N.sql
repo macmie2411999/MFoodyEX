@@ -357,15 +357,42 @@ INSERT INTO
     EMAIL_SUBSCRIBER
 )
 VALUES 
-    (960051,'peterparker@gmail.com'),
-    (960052,'jamedion@gmail.com'),
-    (960053,'justinevan@gmail.com'),
-    (960054,'adamsmith@gmail.com'),
-    (960055,'sarahjohnson@gmail.com'),
-    (960056,'michaelbrown@gmail.com'),
-    (960057,'jessicamartin@gmail.com'),
-    (960058,'paulthompson@gmail.com'),
-    (960059,'emilywhite@gmail.com'),
-    (960060,'davidrobinson@gmail.com');
+    (860051,'peterparker@gmail.com'),
+    (860052,'jamedion@gmail.com'),
+    (860053,'justinevan@gmail.com'),
+    (860054,'adamsmith@gmail.com'),
+    (860055,'sarahjohnson@gmail.com'),
+    (860056,'michaelbrown@gmail.com'),
+    (860057,'jessicamartin@gmail.com'),
+    (860058,'paulthompson@gmail.com'),
+    (860059,'emilywhite@gmail.com'),
+    (860060,'davidrobinson@gmail.com');
+
+-- insert data to FAVORITE_LIST_PRODUCTS_MFOODY
+INSERT INTO
+    FAVORITE_LIST_PRODUCTS_MFOODY (
+    ID_FAVORITE_LIST_PRODUCTS,
+    ID_USER
+)
+VALUES (943000, 215230),
+       (943001, 215231),
+       (943002, 215232),
+       (943003, 215233),
+       (943004, 215234),
+       (943005, 215235),
+       (943006, 215236),
+       (943007, 215237),
+       (943008, 215238),
+       (943009, 215239);
+
+-- insert data to FAVORITE_PRODUCT_MFOODY
+INSERT INTO
+    FAVORITE_PRODUCT_MFOODY (
+    ID_FAVORITE_LIST_PRODUCTS,
+    ID_PRODUCT
+)
+VALUES (943000, 530020),
+       (943001, 530021),
+       (943002, 530022);
 
 ROLLBACK;
