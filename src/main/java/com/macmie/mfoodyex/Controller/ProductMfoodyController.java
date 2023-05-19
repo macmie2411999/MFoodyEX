@@ -2,6 +2,7 @@ package com.macmie.mfoodyex.Controller;
 
 import com.google.gson.Gson;
 import com.macmie.mfoodyex.Model.CartMfoody;
+import com.macmie.mfoodyex.Model.CommentMfoody;
 import com.macmie.mfoodyex.Model.DetailProductCartMfoody;
 import com.macmie.mfoodyex.Model.ProductMfoody;
 import com.macmie.mfoodyex.POJO.ProductMfoodyPOJO;
@@ -71,8 +72,6 @@ public class ProductMfoodyController {
         } catch (Exception e) {
             log.error("An error occurred while counting number of ProductMfoodys");
             log.error("Detail Error: " + e);
-            // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-            // "INTERNAL_SERVER_ERROR Exceptions occur when counting ProductMfoodys");
             return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
         }
     }
@@ -82,9 +81,22 @@ public class ProductMfoodyController {
     public ResponseEntity<?> getAllProductMfoodys(Principal principal) {
         log.info("Get List of ProductMfoodys by " + principal.getName());
         List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
-        // if (productMfoodyList.isEmpty()) {
-        //     return new ResponseEntity<>("NO_CONTENT List of ProductMfoodys", HttpStatus.NO_CONTENT);
+
+        // if (!productMfoodyList.isEmpty()) {
+        //     updateRatingListProducts(productMfoodyList);
         // }
+        return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
+    }
+
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+    @GetMapping(URL_GET_ALL_UPDATE)
+    public ResponseEntity<?> getAllProductMfoodysUpdate(Principal principal) {
+        log.info("Get List of ProductMfoodys by " + principal.getName());
+        List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
+
+        if (!productMfoodyList.isEmpty()) {
+            updateRatingListProducts(productMfoodyList);
+        }
         return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
 
@@ -96,6 +108,19 @@ public class ProductMfoodyController {
         if (productMfoody == null) {
             return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
         }
+        // updateRatingProduct(ID);
+        return new ResponseEntity<>(productMfoody, HttpStatus.OK);
+    }
+
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+    @GetMapping(URL_GET_BY_ID_UPDATE)
+    public ResponseEntity<?> getProductMfoodyByIDUpdate(@PathVariable("ID") int ID, Principal principal) {
+        log.info("Get ProductMfoody with ID: {} by {}", ID, principal.getName());
+        ProductMfoody productMfoody = productMfoodyInterfaceService.getProductMfoodyByID(ID);
+        if (productMfoody == null) {
+            return new ResponseEntity<>("NOT_FOUND ProductMfoody with ID: " + ID, HttpStatus.NOT_FOUND);
+        }
+        updateRatingProduct(ID);
         return new ResponseEntity<>(productMfoody, HttpStatus.OK);
     }
 
@@ -220,6 +245,36 @@ public class ProductMfoodyController {
             log.error("An error occurred while adding ProductMfoody");
             log.error("Detail Error: " + e);
             return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public void updateRatingProduct(int idProduct) {
+        ProductMfoody newProductMfoody = productMfoodyInterfaceService.getProductMfoodyByID(idProduct);
+        List<CommentMfoody> commentMfoodyList = commentMfoodyInterfaceService
+                .getListCommentMfoodysByIdProduct(idProduct);
+
+        // If there is no comments, the ProductMfoody gets ratingProduct = 0
+        if (commentMfoodyList.isEmpty()) {
+            newProductMfoody.setRatingProduct(0);
+            productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
+            return;
+        }
+
+        // Otherwise, calculate the average
+        float sumOfRatings = 0;
+        for (CommentMfoody c : commentMfoodyList) {
+            sumOfRatings += c.getRatingComment();
+        }
+        // log.info("Sum Ratting for idProduct {} is {}", idProduct, sumOfRatings);
+        // log.info("Total Comments are {}", commentMfoodyList.size());
+        // log.info("Ratting for idProduct {} is {}", idProduct, Math.round(( (double)(sumOfRatings / commentMfoodyList.size()) )*100.00)/100.00);
+        newProductMfoody.setRatingProduct((float) (Math.round(( (double)(sumOfRatings / commentMfoodyList.size()) )*100.00)/100.00));
+        productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
+    }
+
+    public void updateRatingListProducts(List<ProductMfoody> listProducts) {
+        for (ProductMfoody p : listProducts) {
+            updateRatingProduct(p.getIdProduct());
         }
     }
 }

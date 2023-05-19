@@ -49,7 +49,7 @@ public class CommentMfoodyController {
     @Autowired
     private ApplicationCheckAuthorController applicationCheckAuthorController;
 
-    @Secured({ ROLE_ADMIN_SECURITY })
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfCommentMfoodys(Principal principal) {
         log.info("Count Total Number of CommentMfoodys by " + principal.getName());
@@ -66,7 +66,7 @@ public class CommentMfoodyController {
         }
     }
 
-    @Secured({ ROLE_ADMIN_SECURITY })
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_ALL)
     public ResponseEntity<?> getAllCommentMfoodys(Principal principal) {
         log.info("Get List of CommentMfoodys by " + principal.getName());
@@ -120,7 +120,7 @@ public class CommentMfoodyController {
         return new ResponseEntity<>(commentMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ ROLE_ADMIN_SECURITY })
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_ID_PRODUCT)
     public ResponseEntity<?> getAllCommentMfoodysByIdProduct(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get List of CommentMfoodys with idProduct: {} by {}", ID, principal.getName());
@@ -358,7 +358,8 @@ public class CommentMfoodyController {
         for (CommentMfoody c : commentMfoodyList) {
             sumOfRatings += c.getRatingComment();
         }
-        newProductMfoody.setRatingProduct((sumOfRatings / commentMfoodyList.size()));
+        // newProductMfoody.setRatingProduct((sumOfRatings / commentMfoodyList.size()));
+        newProductMfoody.setRatingProduct((float) (Math.round(( (double)(sumOfRatings / commentMfoodyList.size()) )*100.00)/100.00));
         productMfoodyInterfaceService.saveProductMfoody(newProductMfoody);
     }
 }

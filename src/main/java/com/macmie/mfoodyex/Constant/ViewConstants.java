@@ -26,7 +26,9 @@ public class ViewConstants {
     // URLs for all APIs
     public static final String URL_COUNT_TOTAL = "/countTotal";
     public static final String URL_GET_ALL = "/getAll";
+    public static final String URL_GET_ALL_UPDATE = "/getAllUpdate";
     public static final String URL_GET_BY_ID = "/get/{ID}";
+    public static final String URL_GET_BY_ID_UPDATE = "/getUpdate/{ID}";
     public static final String URL_GET_BY_EMAIL = "/getByEmail/{Email}";
     public static final String URL_GET_BY_ID_USER = "/getByIdUser/{ID}";
     public static final String URL_GET_BY_ID_PRODUCT = "/getByIdProduct/{ID}";
