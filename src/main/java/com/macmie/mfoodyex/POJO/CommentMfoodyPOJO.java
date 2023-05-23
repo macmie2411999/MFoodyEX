@@ -18,6 +18,13 @@ public class CommentMfoodyPOJO {
         return newCommentMfoody;
     }
 
+    public CommentMfoody renderCommentMfoodyWithoutIdComment() {
+        CommentMfoody newCommentMfoody = new CommentMfoody();
+        newCommentMfoody.setRatingComment(this.getRatingComment());
+        newCommentMfoody.setContentComment(this.getContentComment());
+        return newCommentMfoody;
+    }
+
     public boolean checkCommentMfoodyValidAttributes() {
         if(InputChecker.isStringValid(this.contentComment)) {
             return true;

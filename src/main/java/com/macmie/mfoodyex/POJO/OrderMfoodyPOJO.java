@@ -31,6 +31,20 @@ public class OrderMfoodyPOJO {
         return newOrderMfoody;
     }
 
+    public OrderMfoody renderOrderMfoodyWithoutIdOrder() {
+        OrderMfoody newOrderMfoody = new OrderMfoody();
+        newOrderMfoody.setDateOrder(this.getDateOrder());
+        newOrderMfoody.setDateReceiptOrder(this.getDateReceiptOrder());
+        newOrderMfoody.setShippingPriceOrder(this.getShippingPriceOrder());
+        newOrderMfoody.setShippingMethodOrder(this.getShippingMethodOrder());
+        newOrderMfoody.setQuantityAllProductsInOrder(this.getQuantityAllProductsInOrder());
+        newOrderMfoody.setTotalFullPriceOrder(this.getTotalFullPriceOrder());
+        newOrderMfoody.setTotalSalePriceOrder(this.getTotalSalePriceOrder());
+        newOrderMfoody.setPaymentMethodOrder(this.getPaymentMethodOrder());
+        newOrderMfoody.setStatusOrder(this.getStatusOrder());
+        return newOrderMfoody;
+    }
+
     public boolean checkOrderMfoodyValidAttributes() {
         if(InputChecker.isValidDateFormat(this.dateOrder) && InputChecker.isValidDateFormat(this.dateReceiptOrder)
                 && InputChecker.isStringValid(this.shippingMethodOrder) && InputChecker.isStringValid(this.paymentMethodOrder)

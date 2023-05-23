@@ -43,6 +43,17 @@ public class UserMfoodyPOJO {
         return newUserMfoody;
     }
 
+    public UserMfoody renderUserMfoodyWithoutIdUser() {
+        UserMfoody newUserMfoody = new UserMfoody();
+        newUserMfoody.setEmailUser(this.getEmailUser());
+        newUserMfoody.setPasswordUser(this.getPasswordUser());
+        newUserMfoody.setNameUser(this.getNameUser());
+        newUserMfoody.setPhoneNumberUser(this.getPhoneNumberUser());
+        newUserMfoody.setAddressUser(this.getAddressUser());
+        newUserMfoody.setRoleUser(this.getRoleUser());
+        return newUserMfoody;
+    }
+
     public boolean checkProductMfoodyValidAttributes() {
         if(InputChecker.isValidEmail(this.emailUser) && InputChecker.isStringValid(this.passwordUser)
                 && InputChecker.isStringValid(this.nameUser) && InputChecker.isStringInt(this.phoneNumberUser)

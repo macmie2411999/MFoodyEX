@@ -21,6 +21,15 @@ public class CreditCardMfoodyPOJO {
         return newCreditCardMfoody;
     }
 
+    public CreditCardMfoody renderCreditCardMfoodyWithoutIdCard() {
+        CreditCardMfoody newCreditCardMfoody = new CreditCardMfoody();
+        newCreditCardMfoody.setNameUserCard(this.getNameUserCard());
+        newCreditCardMfoody.setNumberCard(this.getNumberCard());
+        newCreditCardMfoody.setExpirationCard(this.getExpirationCard());
+        newCreditCardMfoody.setSecurityCodeCard(this.getSecurityCodeCard());
+        return newCreditCardMfoody;
+    }
+
     public boolean checkCreditCardMfoodyValidAttributes() {
         if(InputChecker.isStringValid(this.nameUserCard) && InputChecker.isStringInt(this.numberCard)
         && InputChecker.isValidDateFormat(this.expirationCard) && InputChecker.isStringInt(this.securityCodeCard)) {

@@ -56,6 +56,23 @@ public class ProductMfoodyPOJO {
         return newProductMfoody;
     }
 
+    public ProductMfoody renderProductMfoodyWithoutIdProduct() {
+        ProductMfoody newProductMfoody = new ProductMfoody();
+        newProductMfoody.setNameProduct(this.getNameProduct());
+        newProductMfoody.setAlbumProduct(this.getAlbumProduct());
+        newProductMfoody.setDescriptionProduct(this.getDescriptionProduct());
+        newProductMfoody.setFullPriceProduct(this.getFullPriceProduct());
+        newProductMfoody.setSalePriceProduct(this.getSalePriceProduct());
+        newProductMfoody.setWeightProduct(this.getWeightProduct());
+        newProductMfoody.setImportQuantityProduct(this.getImportQuantityProduct());
+        newProductMfoody.setImportDateProduct(this.getImportDateProduct());
+        newProductMfoody.setStorehouseQuantityProduct(this.getStorehouseQuantityProduct());
+        newProductMfoody.setRatingProduct(this.getRatingProduct());
+        newProductMfoody.setCategoryProduct(this.getCategoryProduct());
+        newProductMfoody.setBrandProduct(this.getBrandProduct());
+        return newProductMfoody;
+    }
+
     public boolean checkProductMfoodyValidAttributes() {
         if(InputChecker.isStringValid(this.nameProduct) && InputChecker.isStringValid(this.albumProduct)
                 && InputChecker.isStringValid(this.descriptionProduct) && InputChecker.isStringValid(this.weightProduct)

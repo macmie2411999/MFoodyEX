@@ -24,6 +24,14 @@ public class CartMfoodyPOJO {
         return newCartMfoody;
     }
 
+    public CartMfoody renderCartMfoodyWithoutIdCart() {
+        CartMfoody newCartMfoody = new CartMfoody();
+        newCartMfoody.setQuantityAllProductsInCart(this.getQuantityAllProductsInCart());
+        newCartMfoody.setTotalSalePriceCart(this.getTotalSalePriceCart());
+        newCartMfoody.setTotalFullPriceCart(this.getTotalFullPriceCart());
+        return newCartMfoody;
+    }
+
     public boolean checkCartMfoodyValidAttributes() {
             return true;
     }

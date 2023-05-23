@@ -168,6 +168,17 @@ public class ProductMfoodyController {
                         HttpStatus.NOT_FOUND);
             }
 
+            // Check duplicate by nameProduct/phoneNumber
+            ProductMfoody existingNameProduct = productMfoodyInterfaceService
+                    .getProductMfoodyByNameProduct(newProductMfoodyPOJO.getNameProduct());
+            ProductMfoody existingAlbumProduct = productMfoodyInterfaceService.getProductMfoodyByAlbumProduct(
+                    newProductMfoodyPOJO.getAlbumProduct());
+            if (existingNameProduct != null || existingAlbumProduct != null) {
+                return new ResponseEntity<>(
+                        "CONFLICT - A Product with the same nameProduct or albumProduct already exists!",
+                        HttpStatus.CONFLICT);
+            }
+
             // Save to DB (Handle Exception in case the unique attributes in the request
             // already exist)
             try {

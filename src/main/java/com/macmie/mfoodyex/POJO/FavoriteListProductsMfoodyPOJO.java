@@ -25,6 +25,11 @@ public class FavoriteListProductsMfoodyPOJO {
         return newFavoriteListProductsMfoody;
     }
 
+    public FavoriteListProductsMfoody renderFavoriteListProductsMfoodyWithoutId() {
+        FavoriteListProductsMfoody newFavoriteListProductsMfoody = new FavoriteListProductsMfoody();
+        return newFavoriteListProductsMfoody;
+    }
+
     public boolean checkFavoriteListProductsMfoodyValidAttributes() {
         return true;
     }
