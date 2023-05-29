@@ -1,0 +1,129 @@
+2023-05-28 11:48:44.926 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Starting MFoodyExApplication using Java 17 on Macs-MacBook-Air.local with PID 85968 (/Users/macmie/Desktop/WEB/INTELIIJI_VS2/target/classes started by macmie in /Users/macmie/Desktop/WEB/INTELIIJI_VS2)
+2023-05-28 11:48:45.038 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-28 11:48:45.581 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-28 11:48:45.582 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-28 11:48:53.292 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-28 11:48:54.285 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 922 ms. Found 12 JPA repository interfaces.
+2023-05-28 11:49:00.488 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-05-28 11:49:00.506 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-28 11:49:00.508 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-28 11:49:00.509 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2023-05-28 11:49:00.953 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-28 11:49:00.953 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 15370 ms
+2023-05-28 11:49:01.727 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-28 11:49:02.810 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-28 11:49:04.455 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-28 11:49:04.831 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-28 11:49:04.966 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.5.Final
+2023-05-28 11:49:05.400 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-28 11:49:05.616 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-05-28 11:49:06.272 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-28 11:49:06.272 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-28 11:49:06.279 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-28 11:49:06.279 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-28 11:49:06.282 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-28 11:49:06.282 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-28 11:49:08.172 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-28 11:49:08.187 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 11:49:19.354 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2023-05-28 11:49:19.868 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-05-28 11:49:20.873 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-05-28 11:49:20.908 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-28 11:49:23.962 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Started MFoodyExApplication in 40.583 seconds (JVM running for 44.694)
+2023-05-28 11:49:39.702 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-28 11:49:39.703 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-28 11:49:39.721 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 17 ms
+2023-05-28 11:49:39.813 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 11:49:40.097 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 11:50:04.185 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 11:50:04.248 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 11:51:10.172 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 11:51:10.188 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 11:52:19.493 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 11:52:19.504 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 11:52:20.079 [http-nio-8080-exec-8] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by robinsonhank@gmail.com
+2023-05-28 11:52:20.260 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-28 11:52:20.953 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-28 11:52:21.133 [http-nio-8080-exec-8] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215231,"emailUser":"robinsonhank@gmail.com","passwordUser":"$2a$12$iXPkaN0Ey.LFhPLbDdg0Suo07MCyDk9F4AaBMCYsEYTUw6HDetQDm","nameUser":"Robinson Hank","phoneNumberUser":"89341183005","addressUser":"Texas, USA","roleUser":"ADMIN","listCreditCards":[{"idCard":430711,"nameUserCard":"Robinson Hank","numberCard":"6589652343548896","expirationCard":"01/01/23","securityCodeCard":"714"}],"listCarts":[{"idCart":350060,"quantityAllProductsInCart":3,"totalSalePriceCart":150.0,"totalFullPriceCart":150.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350060,"idProduct":530022},"quantityDetailProductCart":3,"salePriceDetailProductCart":71.0,"fullPriceDetailProductCart":299.0}]}],"listComments":[{"idComment":608751,"ratingComment":4,"contentComment":"The products is OKAY"},{"idComment":608754,"ratingComment":3,"contentComment":"The product is okay, but I expected better quality for the price."},{"idComment":608802,"ratingComment":5,"contentComment":"I'm impressed with the variety of vegan options available. The quality is top-notch."},{"idComment":608926,"ratingComment":3,"contentComment":"The goods are satisfactory. They meet my basic needs."}]}
+2023-05-28 11:52:41.229 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 11:52:41.249 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 11:52:41.280 [http-nio-8080-exec-10] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-28 11:52:41.280 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 11:52:41.681 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 11:52:41.766 [http-nio-8080-exec-10] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$12$S1BjZ6IWaNvpiioknCu4xe2Kj0mAZWg/eOorRc1u4gjJA66b3Nub6","nameUser":"Williams Swift","phoneNumberUser":"89005453428","addressUser":"Arizona, USA","roleUser":"USER","listCreditCards":[{"idCard":430712,"nameUserCard":"Williams Swift","numberCard":"5968751527350500","expirationCard":"06/12/24","securityCodeCard":"272"},{"idCard":430713,"nameUserCard":"Williams Swift","numberCard":"5238759847350934","expirationCard":"07/02/25","securityCodeCard":"566"},{"idCard":430714,"nameUserCard":"Williams Swift","numberCard":"6355789847714900","expirationCard":"06/10/26","securityCodeCard":"715"}],"listCarts":[{"idCart":350062,"quantityAllProductsInCart":1,"totalSalePriceCart":50.0,"totalFullPriceCart":80.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350062,"idProduct":530020},"quantityDetailProductCart":1,"salePriceDetailProductCart":49.0,"fullPriceDetailProductCart":259.0}]}],"listComments":[{"idComment":608752,"ratingComment":3,"contentComment":"The products is TERRIBLE"},{"idComment":608755,"ratingComment":4,"contentComment":"I'm satisfied with the product. It meets my needs."},{"idComment":608803,"ratingComment":3,"contentComment":"The plant-based products are average. Some could use more flavor."},{"idComment":608927,"ratingComment":4,"contentComment":"The products are commendable. They offer good value for the price."}]}
+2023-05-28 11:53:15.433 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 11:53:15.483 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-28 11:53:15.545 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 11:53:15.644 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 11:53:15.718 [http-nio-8080-exec-4] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys by williamsswift@gmail.com
+2023-05-28 11:53:15.735 [http-nio-8080-exec-4] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-28 11:53:37.904 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 11:53:37.926 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-28 11:53:38.014 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-05-28 14:11:34.143 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Starting MFoodyExApplication using Java 17 on Macs-MacBook-Air.local with PID 97704 (/Users/macmie/Desktop/WEB/INTELIIJI_VS2/target/classes started by macmie in /Users/macmie/Desktop/WEB/INTELIIJI_VS2)
+2023-05-28 14:11:34.161 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-28 14:11:34.392 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-28 14:11:34.392 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-28 14:11:43.611 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-28 14:11:44.401 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 760 ms. Found 12 JPA repository interfaces.
+2023-05-28 14:11:49.187 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-05-28 14:11:49.239 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-28 14:11:49.244 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-28 14:11:49.244 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2023-05-28 14:11:49.543 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-28 14:11:49.544 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 15150 ms
+2023-05-28 14:11:50.062 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-28 14:11:51.232 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-28 14:11:52.560 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-28 14:11:53.232 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-28 14:11:53.339 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.5.Final
+2023-05-28 14:11:53.876 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-28 14:11:54.296 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-05-28 14:11:55.128 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-28 14:11:55.129 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-28 14:11:55.129 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-28 14:11:55.129 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-28 14:11:55.129 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-28 14:11:55.129 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-28 14:11:56.787 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-28 14:11:56.804 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 14:12:05.563 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2023-05-28 14:12:05.881 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-05-28 14:12:06.642 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-05-28 14:12:06.700 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-28 14:12:08.560 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Started MFoodyExApplication in 37.402 seconds (JVM running for 41.704)
+2023-05-28 14:12:25.045 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-28 14:12:25.046 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-28 14:12:25.053 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2023-05-28 14:12:25.205 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 14:12:25.249 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 14:12:25.290 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 14:12:25.294 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 14:12:48.625 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 14:12:48.635 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 14:12:48.838 [http-nio-8080-exec-6] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-28 14:12:49.001 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:49.565 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:49.756 [http-nio-8080-exec-6] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$12$S1BjZ6IWaNvpiioknCu4xe2Kj0mAZWg/eOorRc1u4gjJA66b3Nub6","nameUser":"Williams Swift","phoneNumberUser":"89005453428","addressUser":"Arizona, USA","roleUser":"USER","listCreditCards":[{"idCard":430712,"nameUserCard":"Williams Swift","numberCard":"5968751527350500","expirationCard":"06/12/24","securityCodeCard":"272"},{"idCard":430713,"nameUserCard":"Williams Swift","numberCard":"5238759847350934","expirationCard":"07/02/25","securityCodeCard":"566"},{"idCard":430714,"nameUserCard":"Williams Swift","numberCard":"6355789847714900","expirationCard":"06/10/26","securityCodeCard":"715"}],"listCarts":[{"idCart":350062,"quantityAllProductsInCart":4,"totalSalePriceCart":200.0,"totalFullPriceCart":320.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350062,"idProduct":530020},"quantityDetailProductCart":4,"salePriceDetailProductCart":49.0,"fullPriceDetailProductCart":259.0}]}],"listComments":[{"idComment":608752,"ratingComment":3,"contentComment":"The products is TERRIBLE"},{"idComment":608755,"ratingComment":4,"contentComment":"I'm satisfied with the product. It meets my needs."},{"idComment":608803,"ratingComment":3,"contentComment":"The plant-based products are average. Some could use more flavor."},{"idComment":608927,"ratingComment":4,"contentComment":"The products are commendable. They offer good value for the price."},{"idComment":609042,"ratingComment":3,"contentComment":"The goods are decent. They serve their purpose."},{"idComment":609177,"ratingComment":3,"contentComment":"The items are average. They met my expectations."},{"idComment":609183,"ratingComment":5,"contentComment":"Outstanding products! I'm extremely satisfied."}]}
+2023-05-28 14:12:49.863 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 14:12:49.901 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-28 14:12:49.916 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:49.942 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 14:12:50.037 [http-nio-8080-exec-8] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: williamsswift@gmail.com by williamsswift@gmail.com
+2023-05-28 14:12:50.038 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:50.047 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:50.571 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 14:12:50.585 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-28 14:12:50.602 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:50.636 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 14:12:50.660 [http-nio-8080-exec-10] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys by williamsswift@gmail.com
+2023-05-28 14:12:50.663 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-28 14:12:54.132 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-28 14:12:54.151 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-28 14:12:54.163 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-28 14:12:54.194 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-28 14:12:54.234 [http-nio-8080-exec-2] INFO  c.m.m.C.CommentMfoodyController - Get List of CommentMfoodys by williamsswift@gmail.com
+2023-05-28 14:12:54.242 [http-nio-8080-exec-2] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys 
+2023-05-28 14:14:01.959 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 14:14:01.967 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-28 14:14:02.046 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

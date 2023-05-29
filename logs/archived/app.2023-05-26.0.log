@@ -1,0 +1,105 @@
+2023-05-26 13:52:56.964 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Starting MFoodyExApplication using Java 17 on Macs-MacBook-Air.local with PID 38449 (/Users/macmie/Desktop/WEB/INTELIIJI_VS2/target/classes started by macmie in /Users/macmie/Desktop/WEB/INTELIIJI_VS2)
+2023-05-26 13:52:57.138 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-26 13:52:57.634 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-26 13:52:57.638 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-26 13:53:07.393 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-26 13:53:08.622 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1111 ms. Found 12 JPA repository interfaces.
+2023-05-26 13:53:15.026 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-05-26 13:53:15.050 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-26 13:53:15.053 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-26 13:53:15.054 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2023-05-26 13:53:15.582 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-26 13:53:15.582 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 17937 ms
+2023-05-26 13:53:16.555 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-26 13:53:17.409 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-26 13:53:20.581 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-26 13:53:21.439 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-26 13:53:21.811 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.5.Final
+2023-05-26 13:53:22.501 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-26 13:53:23.300 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-05-26 13:53:25.338 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-26 13:53:25.342 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-26 13:53:25.343 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-26 13:53:25.343 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-26 13:53:25.345 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-26 13:53:25.345 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-26 13:53:31.244 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-26 13:53:31.437 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 13:53:50.637 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2023-05-26 13:53:51.294 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-05-26 13:53:52.460 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-05-26 13:53:52.496 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-26 13:54:00.641 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Started MFoodyExApplication in 66.436 seconds (JVM running for 70.885)
+2023-05-26 13:54:11.682 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-26 13:54:11.684 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-26 13:54:11.771 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 87 ms
+2023-05-26 13:54:12.035 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:54:12.515 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:55:40.766 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:55:40.786 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:55:41.411 [http-nio-8080-exec-4] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-26 13:55:42.118 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:55:43.380 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:55:43.822 [http-nio-8080-exec-4] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$10$Jf5yL8JUZSRKibtkESpa6.vswX28lQzyLnesKic0hyVKZuULqEBwS","nameUser":"williamsswift","phoneNumberUser":"85343457534","addressUser":"New York, USA","roleUser":"USER","listCreditCards":[],"listCarts":[],"listComments":[]}
+2023-05-26 13:55:43.945 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:55:43.959 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 13:55:43.975 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:55:43.997 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:55:44.156 [http-nio-8080-exec-5] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: williamsswift@gmail.com by williamsswift@gmail.com
+2023-05-26 13:55:44.157 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:55:44.168 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:56:08.858 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:56:08.885 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 13:56:08.943 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:56:08.980 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:56:42.980 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:56:43.003 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:57:29.880 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:57:29.894 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:57:29.974 [http-nio-8080-exec-1] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-26 13:57:29.976 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:57:30.587 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:57:30.767 [http-nio-8080-exec-1] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$10$Jf5yL8JUZSRKibtkESpa6.vswX28lQzyLnesKic0hyVKZuULqEBwS","nameUser":"williamsswift","phoneNumberUser":"85343457534","addressUser":"New York, USA","roleUser":"USER","listCreditCards":[],"listCarts":[],"listComments":[]}
+2023-05-26 13:58:55.645 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 13:58:55.671 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 13:58:55.734 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:58:55.805 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 13:58:55.977 [http-nio-8080-exec-5] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-26 13:58:55.979 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-26 13:58:56.109 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 13:58:56.144 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-26 14:01:50.271 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 14:01:50.306 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 14:01:50.374 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:01:50.476 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 14:01:50.512 [http-nio-8080-exec-8] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-26 14:01:50.512 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-26 14:01:50.524 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:01:50.539 [http-nio-8080-exec-8] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-26 14:02:37.513 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 14:02:37.598 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 14:02:37.674 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:02:37.903 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 14:02:37.984 [http-nio-8080-exec-10] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-26 14:02:37.985 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-26 14:02:38.339 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:02:38.467 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-26 14:04:10.795 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 14:04:10.814 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 14:04:10.865 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:04:10.903 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 14:04:10.919 [http-nio-8080-exec-2] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-26 14:04:10.920 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-26 14:04:10.931 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:04:10.939 [http-nio-8080-exec-2] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-26 14:06:19.792 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-26 14:06:19.811 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-26 14:06:19.845 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:06:19.919 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-26 14:06:19.974 [http-nio-8080-exec-6] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-26 14:06:19.975 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-26 14:06:19.994 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-26 14:06:20.006 [http-nio-8080-exec-6] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-26 14:15:29.266 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 14:15:29.323 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-26 14:15:29.750 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

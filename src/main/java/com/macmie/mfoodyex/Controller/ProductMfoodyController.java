@@ -61,7 +61,7 @@ public class ProductMfoodyController {
     @Autowired
     private FavoriteListProductsMfoodyInterfaceService favoriteListProductsMfoodyInterfaceService;
 
-    @Secured({ ROLE_ADMIN_SECURITY })
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY  })
     @GetMapping(URL_COUNT_TOTAL)
     public ResponseEntity<?> countTotalNumberOfProductMfoodys(Principal principal) {
         log.info("Count Total Number of ProductMfoodys by " + principal.getName());
@@ -76,10 +76,10 @@ public class ProductMfoodyController {
         }
     }
 
-    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+    // @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_ALL)
-    public ResponseEntity<?> getAllProductMfoodys(Principal principal) {
-        log.info("Get List of ProductMfoodys by " + principal.getName());
+    public ResponseEntity<?> getAllProductMfoodys() {
+        log.info("Get List of ProductMfoodys");
         List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
 
         // if (!productMfoodyList.isEmpty()) {
@@ -87,6 +87,14 @@ public class ProductMfoodyController {
         // }
         return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
+
+    // @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+    // @GetMapping(URL_GET_ALL)
+    // public ResponseEntity<?> getAllProductMfoodys(Principal principal) {
+    //     log.info("Get List of ProductMfoodys by " + principal.getName());
+    //     List<ProductMfoody> productMfoodyList = productMfoodyInterfaceService.getListProductMfoodys();
+    //     return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
+    // }
 
     @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_ALL_UPDATE)
@@ -100,7 +108,7 @@ public class ProductMfoodyController {
         return new ResponseEntity<>(productMfoodyList, HttpStatus.OK);
     }
 
-    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+    // @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @GetMapping(URL_GET_BY_ID)
     public ResponseEntity<?> getProductMfoodyByID(@PathVariable("ID") int ID, Principal principal) {
         log.info("Get ProductMfoody with ID: {} by {}", ID, principal.getName());

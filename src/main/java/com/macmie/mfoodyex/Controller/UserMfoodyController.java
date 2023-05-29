@@ -214,7 +214,7 @@ public class UserMfoodyController {
             // Encode passwordUser
             newUserMfoodyPOJO.setPasswordUser(passwordEncoder.encode(newUserMfoodyPOJO.getPasswordUser()));
 
-            UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoody();
+            UserMfoody newUserMfoody = newUserMfoodyPOJO.renderUserMfoodyWithoutIdUser();
 
             // Check duplicate by emailUser/phoneNumber
             UserMfoody existingEmailUser = userMfoodyInterfaceService
