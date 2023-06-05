@@ -388,6 +388,86 @@ public class DetailProductCartMfoodyController {
     }
 
     @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+        @PostMapping(URL_ADD_ARRAY_OBJECTS)
+        public ResponseEntity<?> addNewArrayDetailProductCartMfoody(
+                        @RequestBody String detailProductCartPOJOJsonObject,
+                        Principal principal) {
+                try {
+                        // Convert JsonObject to array of DetailProductCartPOJO objects
+                        Gson gson = new Gson();
+                        DetailProductCartMfoodyPOJO[] detailProductCartMfoodyPOJOs = gson.fromJson(
+                                        detailProductCartPOJOJsonObject, DetailProductCartMfoodyPOJO[].class);
+
+                        for (DetailProductCartMfoodyPOJO newDetailProductCartMfoodyPOJO : detailProductCartMfoodyPOJOs) {
+                                DetailProductCartMfoody newDetailProductCartMfoody = newDetailProductCartMfoodyPOJO
+                                                .renderDetailProductCartMfoody();
+
+                                // Check valid idCart and idProduct
+                                DetailProductCartMfoody checkNewDetailProductCartMfoody = detailProductCartMfoodyInterfaceService
+                                                .getDetailProductCartMfoodyByICartAndIdProduct(
+                                                                newDetailProductCartMfoodyPOJO.getIdCart(),
+                                                                newDetailProductCartMfoodyPOJO.getIdProduct());
+                                ProductMfoody productMfoody = productMfoodyInterfaceService
+                                                .getProductMfoodyByID(newDetailProductCartMfoodyPOJO.getIdProduct());
+                                if (productMfoodyInterfaceService.getProductMfoodyByID(
+                                                newDetailProductCartMfoodyPOJO.getIdProduct()) == null) {
+                                        return new ResponseEntity<>(
+                                                        "NOT_FOUND ProductMfoody with ID: "
+                                                                        + newDetailProductCartMfoodyPOJO
+                                                                                        .getIdProduct(),
+                                                        HttpStatus.NOT_FOUND);
+                                }
+                                if (cartMfoodyInterfaceService.getCartMfoodyByID(
+                                                newDetailProductCartMfoodyPOJO.getIdCart()) == null) {
+                                        return new ResponseEntity<>(
+                                                        "NOT_FOUND CartMfoody with ID: "
+                                                                        + newDetailProductCartMfoodyPOJO.getIdCart(),
+                                                        HttpStatus.NOT_FOUND);
+                                }
+
+                                // If the DetailProductCartMfoodys is already in the DB, update it and update
+                                // associated CartMfoody
+                                if (checkNewDetailProductCartMfoody != null) {
+                                        checkNewDetailProductCartMfoody.setQuantityDetailProductCart(
+                                                        checkNewDetailProductCartMfoody.getQuantityDetailProductCart()
+                                                                        + newDetailProductCartMfoodyPOJO
+                                                                                        .getQuantityDetailProductCart());
+                                        detailProductCartMfoodyInterfaceService.saveDetailProductCartMfoody(
+                                                        checkNewDetailProductCartMfoody);
+                                        processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
+                                } else {
+                                        // If the DetailProductCartMfoodys is completely new, add new
+                                        newDetailProductCartMfoody.setIdDetailProductCartMfoody(
+                                                        new DetailProductCartMfoodyId(
+                                                                        newDetailProductCartMfoodyPOJO.getIdCart(),
+                                                                        newDetailProductCartMfoodyPOJO
+                                                                                        .getIdProduct()));
+                                        newDetailProductCartMfoody.setProduct(productMfoody);
+                                        newDetailProductCartMfoody.setFullPriceDetailProductCart(
+                                                        productMfoody.getFullPriceProduct());
+                                        newDetailProductCartMfoody.setSalePriceDetailProductCart(
+                                                        productMfoody.getSalePriceProduct());
+                                        newDetailProductCartMfoody.setCart(cartMfoodyInterfaceService
+                                                        .getCartMfoodyByID(
+                                                                        newDetailProductCartMfoodyPOJO.getIdCart()));
+
+                                        // Save to DB and Update associated CartMfoody
+                                        detailProductCartMfoodyInterfaceService
+                                                        .saveDetailProductCartMfoody(newDetailProductCartMfoody);
+                                        log.info("New ArrayDetailProductCartMfoody is created by " + principal.getName());
+                                        processCartMfoody(newDetailProductCartMfoodyPOJO.getIdCart());
+                                }
+                        }
+
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                } catch (Exception e) {
+                        log.error("An error occurred while adding ArrayDetailProductCartMfoody");
+                        log.error("Detail Error: " + e);
+                        return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
+                }
+        }
+
+    @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
     @PostMapping(URL_UPDATE_PRODUCT_INFORMATION_IN_CART)
     public ResponseEntity<?> saveListDetailProductCartMfoodyToCart(@RequestBody String cartJson, Principal principal) {
         log.info("Update List of DetailProductCartMfoodys by {}", principal.getName());

@@ -1,0 +1,1278 @@
+2023-05-31 03:32:17.313 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Starting MFoodyExApplication using Java 17 on Macs-MacBook-Air.local with PID 91324 (/Users/macmie/Desktop/WEB/INTELIIJI_VS2/target/classes started by macmie in /Users/macmie/Desktop/WEB/INTELIIJI_VS2)
+2023-05-31 03:32:17.399 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-31 03:32:18.357 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-31 03:32:18.362 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-31 03:32:40.801 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-31 03:32:43.434 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2561 ms. Found 12 JPA repository interfaces.
+2023-05-31 03:32:54.579 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-05-31 03:32:54.734 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-31 03:32:54.736 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-31 03:32:54.737 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2023-05-31 03:32:56.177 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-31 03:32:56.183 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 37817 ms
+2023-05-31 03:32:57.718 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-31 03:32:59.139 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-31 03:33:04.237 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-31 03:33:05.402 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-31 03:33:05.902 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.5.Final
+2023-05-31 03:33:08.111 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-31 03:33:09.631 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-05-31 03:33:15.065 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-31 03:33:15.076 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-31 03:33:15.078 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-31 03:33:15.078 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-31 03:33:15.083 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-31 03:33:15.083 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-31 03:33:25.166 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-31 03:33:25.354 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-31 03:33:59.736 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2023-05-31 03:34:01.952 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-05-31 03:34:04.718 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-05-31 03:34:04.801 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-31 03:34:20.445 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Started MFoodyExApplication in 127.701 seconds (JVM running for 136.194)
+2023-05-31 03:34:22.837 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-31 03:34:22.838 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-31 03:34:22.872 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 34 ms
+2023-05-31 03:34:23.198 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:34:23.292 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:34:23.954 [http-nio-8080-exec-2] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by robinsonhank@gmail.com
+2023-05-31 03:34:24.995 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:34:29.379 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:34:30.023 [http-nio-8080-exec-2] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215231,"emailUser":"robinsonhank@gmail.com","passwordUser":"$2a$12$iXPkaN0Ey.LFhPLbDdg0Suo07MCyDk9F4AaBMCYsEYTUw6HDetQDm","nameUser":"Robinson Hank","phoneNumberUser":"89341183005","addressUser":"Texas, USA","roleUser":"ADMIN","listCreditCards":[{"idCard":430711,"nameUserCard":"Robinson Hank","numberCard":"6589652343548896","expirationCard":"01/01/23","securityCodeCard":"714"}],"listCarts":[{"idCart":350060,"quantityAllProductsInCart":1,"totalSalePriceCart":50.0,"totalFullPriceCart":50.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350060,"idProduct":530022},"quantityDetailProductCart":1,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":50.0}]}],"listComments":[{"idComment":608751,"ratingComment":4,"contentComment":"The products is OKAY"},{"idComment":608754,"ratingComment":3,"contentComment":"The product is okay, but I expected better quality for the price."},{"idComment":608802,"ratingComment":5,"contentComment":"I'm impressed with the variety of vegan options available. The quality is top-notch."},{"idComment":608926,"ratingComment":3,"contentComment":"The goods are satisfactory. They meet my basic needs."},{"idComment":609041,"ratingComment":4,"contentComment":"I love these items. They exceeded my expectations."},{"idComment":609176,"ratingComment":5,"contentComment":"Amazing products! I'm extremely satisfied."},{"idComment":609182,"ratingComment":3,"contentComment":"The items are average. They meet my expectations."}]}
+2023-05-31 03:34:30.196 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:34:30.255 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:34:30.280 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:34:30.306 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:34:30.516 [http-nio-8080-exec-4] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: robinsonhank@gmail.com by robinsonhank@gmail.com
+2023-05-31 03:34:30.517 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:34:30.528 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:39:41.088 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:39:41.111 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:39:41.206 [http-nio-8080-exec-7] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by robinsonhank@gmail.com
+2023-05-31 03:39:41.209 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:39:43.224 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:39:43.638 [http-nio-8080-exec-7] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215231,"emailUser":"robinsonhank@gmail.com","passwordUser":"$2a$12$iXPkaN0Ey.LFhPLbDdg0Suo07MCyDk9F4AaBMCYsEYTUw6HDetQDm","nameUser":"Robinson Hank","phoneNumberUser":"89341183005","addressUser":"Texas, USA","roleUser":"ADMIN","listCreditCards":[{"idCard":430711,"nameUserCard":"Robinson Hank","numberCard":"6589652343548896","expirationCard":"01/01/23","securityCodeCard":"714"}],"listCarts":[{"idCart":350060,"quantityAllProductsInCart":1,"totalSalePriceCart":50.0,"totalFullPriceCart":50.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350060,"idProduct":530022},"quantityDetailProductCart":1,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":50.0}]}],"listComments":[{"idComment":608751,"ratingComment":4,"contentComment":"The products is OKAY"},{"idComment":608754,"ratingComment":3,"contentComment":"The product is okay, but I expected better quality for the price."},{"idComment":608802,"ratingComment":5,"contentComment":"I'm impressed with the variety of vegan options available. The quality is top-notch."},{"idComment":608926,"ratingComment":3,"contentComment":"The goods are satisfactory. They meet my basic needs."},{"idComment":609041,"ratingComment":4,"contentComment":"I love these items. They exceeded my expectations."},{"idComment":609176,"ratingComment":5,"contentComment":"Amazing products! I'm extremely satisfied."},{"idComment":609182,"ratingComment":3,"contentComment":"The items are average. They meet my expectations."}]}
+2023-05-31 03:39:43.892 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:39:43.931 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:39:43.944 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:39:43.966 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:39:43.985 [http-nio-8080-exec-7] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: robinsonhank@gmail.com by robinsonhank@gmail.com
+2023-05-31 03:39:43.985 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:39:43.994 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 03:40:04.876 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:04.890 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:04.937 [http-nio-8080-exec-9] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-31 03:40:04.940 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:07.002 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:07.161 [http-nio-8080-exec-9] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$12$S1BjZ6IWaNvpiioknCu4xe2Kj0mAZWg/eOorRc1u4gjJA66b3Nub6","nameUser":"Williams Swift","phoneNumberUser":"89005453428","addressUser":"Arizona, USA","roleUser":"USER","listCreditCards":[{"idCard":430712,"nameUserCard":"Williams Swift","numberCard":"5968751527350500","expirationCard":"06/12/24","securityCodeCard":"272"},{"idCard":430713,"nameUserCard":"Williams Swift","numberCard":"5238759847350934","expirationCard":"07/02/25","securityCodeCard":"566"},{"idCard":430714,"nameUserCard":"Williams Swift","numberCard":"6355789847714900","expirationCard":"06/10/26","securityCodeCard":"715"}],"listCarts":[{"idCart":350062,"quantityAllProductsInCart":3,"totalSalePriceCart":150.0,"totalFullPriceCart":240.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350062,"idProduct":530020},"quantityDetailProductCart":3,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":80.0}]}],"listComments":[{"idComment":608752,"ratingComment":3,"contentComment":"The products is TERRIBLE"},{"idComment":608755,"ratingComment":4,"contentComment":"I'm satisfied with the product. It meets my needs."},{"idComment":608803,"ratingComment":3,"contentComment":"The plant-based products are average. Some could use more flavor."},{"idComment":608927,"ratingComment":4,"contentComment":"The products are commendable. They offer good value for the price."},{"idComment":609042,"ratingComment":3,"contentComment":"The goods are decent. They serve their purpose."},{"idComment":609177,"ratingComment":3,"contentComment":"The items are average. They met my expectations."},{"idComment":609183,"ratingComment":5,"contentComment":"Outstanding products! I'm extremely satisfied."}]}
+2023-05-31 03:40:07.357 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:07.370 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:40:07.382 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:07.404 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:07.428 [http-nio-8080-exec-10] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: williamsswift@gmail.com by williamsswift@gmail.com
+2023-05-31 03:40:07.429 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:07.439 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:08.735 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:08.738 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:08.837 [http-nio-8080-exec-1] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 03:40:08.855 [http-nio-8080-exec-1] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 03:40:26.533 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:26.608 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:40:26.643 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:26.842 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:27.281 [http-nio-8080-exec-3] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 03:40:27.285 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 03:40:27.856 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:28.095 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-31 03:40:28.416 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:28.451 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:40:28.470 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:28.491 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:28.528 [http-nio-8080-exec-5] INFO  c.m.m.C.OrderMfoodyController - Get List of OrderMfoodys with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 03:40:28.528 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 03:40:28.553 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:28.586 [http-nio-8080-exec-5] INFO  c.m.m.S.I.OrderMfoodyImplementService - Fetching all OrderMfoodys with idUser: 215232
+2023-05-31 03:40:28.903 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:28.910 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:40:28.920 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:28.931 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:28.955 [http-nio-8080-exec-7] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 03:40:28.956 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 03:40:28.962 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:28.973 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 03:40:29.038 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 03:40:29.042 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 03:40:29.058 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:29.069 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 03:40:29.087 [http-nio-8080-exec-9] INFO  c.m.m.C.CommentMfoodyController - Get List of CommentMfoodys with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 03:40:29.088 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 03:40:29.097 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 03:40:29.115 [http-nio-8080-exec-9] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idUser: 215232
+2023-05-31 04:11:23.287 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:11:23.447 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:11:23.597 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:11:23.728 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:11:23.952 [http-nio-8080-exec-2] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:11:23.953 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:11:23.976 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:11:23.988 [http-nio-8080-exec-2] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:12:21.654 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:12:21.703 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:12:21.817 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:21.992 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:12:22.042 [http-nio-8080-exec-4] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:12:22.043 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:12:22.192 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:22.202 [http-nio-8080-exec-4] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:12:29.936 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:12:29.976 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:12:30.014 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:30.064 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:12:30.080 [http-nio-8080-exec-7] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:12:30.080 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:12:30.088 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:30.096 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:12:38.697 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:12:38.714 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:12:38.757 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:38.797 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:12:38.811 [http-nio-8080-exec-9] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:12:38.812 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:12:38.826 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:38.834 [http-nio-8080-exec-9] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:12:42.764 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:12:42.800 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:12:42.858 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:42.886 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:12:42.917 [http-nio-8080-exec-10] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:12:42.918 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:12:42.928 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:12:42.936 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:13:26.705 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:13:26.764 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:13:26.828 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:13:26.870 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:13:26.887 [http-nio-8080-exec-2] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:13:26.887 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:13:26.897 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:13:26.904 [http-nio-8080-exec-2] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:15:28.248 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:15:28.299 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:15:28.332 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:15:28.355 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:15:28.486 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: Good Product!
+2023-05-31 04:15:28.594 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:15:28.601 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:15:28.605 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:15:28.626 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:15:29.323 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:15:29.340 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:15:29.619 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:15:29.660 [http-nio-8080-exec-5] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:15:31.731 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:15:31.765 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:15:31.782 [http-nio-8080-exec-6] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:15:31.783 [http-nio-8080-exec-6] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:15:53.309 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:15:53.335 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:15:53.396 [http-nio-8080-exec-7] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:15:53.397 [http-nio-8080-exec-7] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:17:12.092 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:17:12.161 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:17:12.215 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:17:12.294 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:17:12.387 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: i don't like it
+2023-05-31 04:17:12.403 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:17:12.412 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:17:12.416 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:17:12.430 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:17:12.460 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:17:12.470 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:17:12.500 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:17:12.501 [http-nio-8080-exec-10] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:17:14.170 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:17:14.174 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:17:14.182 [http-nio-8080-exec-1] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:17:14.182 [http-nio-8080-exec-1] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:17:27.876 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:17:27.901 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:17:27.933 [http-nio-8080-exec-2] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:17:27.933 [http-nio-8080-exec-2] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:20:49.728 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:20:49.798 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:20:49.883 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:20:50.017 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:20:50.052 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: Decent Product!
+2023-05-31 04:20:50.070 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:20:50.084 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:20:50.088 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:20:50.109 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:20:50.128 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:20:50.129 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:20:50.150 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:20:50.153 [http-nio-8080-exec-5] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:20:51.959 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:20:51.962 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:20:51.969 [http-nio-8080-exec-6] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:20:51.970 [http-nio-8080-exec-6] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:22:56.208 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:22:56.276 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:22:56.357 [http-nio-8080-exec-8] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:22:56.358 [http-nio-8080-exec-8] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:23:18.437 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:23:18.480 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:23:18.523 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:23:18.560 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:23:18.604 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: i like it!
+2023-05-31 04:23:18.619 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:23:18.626 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:23:18.630 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:23:18.642 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:23:18.663 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:23:18.663 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:23:18.682 [http-nio-8080-exec-10] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:23:18.684 [http-nio-8080-exec-10] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:23:20.154 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:23:20.156 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:23:20.165 [http-nio-8080-exec-1] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:23:20.166 [http-nio-8080-exec-1] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:24:23.106 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:24:23.174 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:24:23.224 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:24:23.288 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:24:23.324 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: mlem mlem
+2023-05-31 04:24:23.339 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:24:23.346 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:24:23.350 [http-nio-8080-exec-3] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:24:23.361 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:24:23.396 [http-nio-8080-exec-3] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:24:23.397 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:24:23.418 [http-nio-8080-exec-3] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:24:23.423 [http-nio-8080-exec-3] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:24:24.836 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:24:24.841 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:24:24.851 [http-nio-8080-exec-4] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:24:24.851 [http-nio-8080-exec-4] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:26:56.140 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:26:56.221 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:26:56.283 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:26:56.345 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:26:56.385 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: Cool Product!
+2023-05-31 04:26:56.404 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:26:56.413 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:26:56.419 [http-nio-8080-exec-7] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:26:56.450 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:26:56.574 [http-nio-8080-exec-7] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:26:56.575 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:26:56.612 [http-nio-8080-exec-7] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:26:56.615 [http-nio-8080-exec-7] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:26:58.377 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:26:58.379 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:26:58.387 [http-nio-8080-exec-8] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:26:58.388 [http-nio-8080-exec-8] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:28:05.333 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:28:05.350 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:28:05.383 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:28:05.424 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:28:05.440 [http-nio-8080-exec-1] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: terible one
+2023-05-31 04:28:05.455 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:28:05.462 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:28:05.464 [http-nio-8080-exec-1] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:28:05.472 [http-nio-8080-exec-1] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:28:05.487 [http-nio-8080-exec-1] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:28:05.489 [http-nio-8080-exec-1] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:28:05.510 [http-nio-8080-exec-1] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:28:05.511 [http-nio-8080-exec-1] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:28:06.872 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:28:06.875 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:28:06.886 [http-nio-8080-exec-2] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:28:06.887 [http-nio-8080-exec-2] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:29:10.521 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:29:10.553 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:29:10.587 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:29:10.618 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:29:10.634 [http-nio-8080-exec-4] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching CommentMfoody with contentComment: just fine product!
+2023-05-31 04:29:10.650 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:29:10.656 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:29:10.658 [http-nio-8080-exec-4] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:29:10.666 [http-nio-8080-exec-4] INFO  c.m.m.S.I.CommentMfoodyImplementService - Saving CommentMfoody with ID: 0
+2023-05-31 04:29:10.707 [http-nio-8080-exec-4] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching ProductMfoody with ID: 530091
+2023-05-31 04:29:10.709 [http-nio-8080-exec-4] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idProduct: 530091
+2023-05-31 04:29:10.726 [http-nio-8080-exec-4] INFO  c.m.m.S.I.ProductMfoodyImplementService - Saving ProductMfoody with ID: 530091
+2023-05-31 04:29:10.729 [http-nio-8080-exec-4] INFO  c.m.m.C.CommentMfoodyController - A new CommentMfoody is created by williamsswift@gmail.com
+2023-05-31 04:29:12.353 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:29:12.358 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:29:12.367 [http-nio-8080-exec-5] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:29:12.367 [http-nio-8080-exec-5] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:32:05.009 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:32:05.045 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:32:05.066 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:32:05.110 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:32:05.132 [http-nio-8080-exec-8] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:32:05.133 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:32:05.141 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:32:05.147 [http-nio-8080-exec-8] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:32:20.535 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:32:20.561 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:32:20.578 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:32:20.593 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:32:20.607 [http-nio-8080-exec-10] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:32:20.607 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:32:20.613 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:32:20.624 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:39:21.237 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:21.335 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:39:21.393 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:39:21.510 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:21.555 [http-nio-8080-exec-3] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:39:21.556 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:39:21.588 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:39:21.596 [http-nio-8080-exec-3] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:39:36.031 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:36.041 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:36.341 [http-nio-8080-exec-6] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by jennysmith@gmail.com
+2023-05-31 04:39:36.344 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:38.848 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:39.334 [http-nio-8080-exec-6] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215239,"emailUser":"jennysmith@gmail.com","passwordUser":"$2a$12$1as9gKZySe8yTPLW7pBtdOBSN3tsCcKINDTwhUZfii6i5D8ZcGrEO","nameUser":"Jenny Smith","phoneNumberUser":"89113453354","addressUser":"Boston, USA","roleUser":"USER","listCreditCards":[],"listCarts":[{"idCart":350069,"quantityAllProductsInCart":1,"totalSalePriceCart":349.0,"totalFullPriceCart":349.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350069,"idProduct":530159},"quantityDetailProductCart":1,"salePriceDetailProductCart":349.0,"fullPriceDetailProductCart":349.0}]}],"listComments":[{"idComment":608753,"ratingComment":3,"contentComment":"The products is NOT GOOD"},{"idComment":608762,"ratingComment":5,"contentComment":"This is the best product I have ever used. Highly recommended!"},{"idComment":608810,"ratingComment":5,"contentComment":"The plant-based protein options are outstanding! They exceed my expectations."},{"idComment":608924,"ratingComment":5,"contentComment":"The items are remarkable. I can't imagine my life without them."},{"idComment":608934,"ratingComment":2,"contentComment":"The items are below average. They do not meet my standards."},{"idComment":609049,"ratingComment":4,"contentComment":"The products are great. They meet my expectations."},{"idComment":609190,"ratingComment":4,"contentComment":"The products are reliable. I'm happy with my purchase."}]}
+2023-05-31 04:39:39.575 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:39.583 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:39:39.601 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:39.614 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:39.639 [http-nio-8080-exec-7] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: jennysmith@gmail.com by jennysmith@gmail.com
+2023-05-31 04:39:39.640 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:39.645 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:40.692 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:40.701 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:40.720 [http-nio-8080-exec-8] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:39:40.721 [http-nio-8080-exec-8] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:39:51.471 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:51.527 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:39:51.556 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:51.624 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:51.639 [http-nio-8080-exec-10] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215239 by jennysmith@gmail.com
+2023-05-31 04:39:51.640 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215239
+2023-05-31 04:39:51.654 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:51.663 [http-nio-8080-exec-10] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215239
+2023-05-31 04:39:51.810 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:51.818 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:39:51.833 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:51.904 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:51.911 [http-nio-8080-exec-2] INFO  c.m.m.C.OrderMfoodyController - Get List of OrderMfoodys with idUser: 215239 by jennysmith@gmail.com
+2023-05-31 04:39:51.912 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215239
+2023-05-31 04:39:51.917 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:51.924 [http-nio-8080-exec-2] INFO  c.m.m.S.I.OrderMfoodyImplementService - Fetching all OrderMfoodys with idUser: 215239
+2023-05-31 04:39:52.041 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:52.046 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:39:52.053 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:52.065 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:52.070 [http-nio-8080-exec-4] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215239 by jennysmith@gmail.com
+2023-05-31 04:39:52.070 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215239
+2023-05-31 04:39:52.075 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:52.081 [http-nio-8080-exec-4] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215239
+2023-05-31 04:39:52.118 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:39:52.122 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:39:52.133 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:52.144 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:39:52.154 [http-nio-8080-exec-6] INFO  c.m.m.C.CommentMfoodyController - Get List of CommentMfoodys with idUser: 215239 by jennysmith@gmail.com
+2023-05-31 04:39:52.155 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215239
+2023-05-31 04:39:52.162 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:39:52.169 [http-nio-8080-exec-6] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idUser: 215239
+2023-05-31 04:40:10.698 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:10.720 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:40:10.787 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:40:10.818 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:10.833 [http-nio-8080-exec-8] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215239 by jennysmith@gmail.com
+2023-05-31 04:40:10.834 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215239
+2023-05-31 04:40:10.843 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: jennysmith@gmail.com
+2023-05-31 04:40:10.853 [http-nio-8080-exec-8] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215239
+2023-05-31 04:40:20.851 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:20.871 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:20.902 [http-nio-8080-exec-1] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by robinsonhank@gmail.com
+2023-05-31 04:40:20.903 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 04:40:23.032 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 04:40:23.232 [http-nio-8080-exec-1] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215231,"emailUser":"robinsonhank@gmail.com","passwordUser":"$2a$12$iXPkaN0Ey.LFhPLbDdg0Suo07MCyDk9F4AaBMCYsEYTUw6HDetQDm","nameUser":"Robinson Hank","phoneNumberUser":"89341183005","addressUser":"Texas, USA","roleUser":"ADMIN","listCreditCards":[{"idCard":430711,"nameUserCard":"Robinson Hank","numberCard":"6589652343548896","expirationCard":"01/01/23","securityCodeCard":"714"}],"listCarts":[{"idCart":350060,"quantityAllProductsInCart":1,"totalSalePriceCart":50.0,"totalFullPriceCart":50.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350060,"idProduct":530022},"quantityDetailProductCart":1,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":50.0}]}],"listComments":[{"idComment":608751,"ratingComment":4,"contentComment":"The products is OKAY"},{"idComment":608754,"ratingComment":3,"contentComment":"The product is okay, but I expected better quality for the price."},{"idComment":608802,"ratingComment":5,"contentComment":"I'm impressed with the variety of vegan options available. The quality is top-notch."},{"idComment":608926,"ratingComment":3,"contentComment":"The goods are satisfactory. They meet my basic needs."},{"idComment":609041,"ratingComment":4,"contentComment":"I love these items. They exceeded my expectations."},{"idComment":609176,"ratingComment":5,"contentComment":"Amazing products! I'm extremely satisfied."},{"idComment":609182,"ratingComment":3,"contentComment":"The items are average. They meet my expectations."}]}
+2023-05-31 04:40:23.292 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:23.300 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:40:23.313 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 04:40:23.324 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:23.330 [http-nio-8080-exec-3] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: robinsonhank@gmail.com by robinsonhank@gmail.com
+2023-05-31 04:40:23.330 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 04:40:23.336 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 04:40:34.036 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:34.049 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:34.074 [http-nio-8080-exec-5] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by robinsonhank@gmail.com
+2023-05-31 04:40:34.075 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: robinsonhank@gmail.com
+2023-05-31 04:40:36.415 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.macmie.mfoodyex.Controller.ApplicationMfoodyController$UnauthorizedException: 401 UNAUTHORIZED Something wrong when Logging in to the System]
+2023-05-31 04:40:48.482 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:48.492 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:48.521 [http-nio-8080-exec-7] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-31 04:40:48.522 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:40:50.576 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:40:50.720 [http-nio-8080-exec-7] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$12$S1BjZ6IWaNvpiioknCu4xe2Kj0mAZWg/eOorRc1u4gjJA66b3Nub6","nameUser":"Williams Swift","phoneNumberUser":"89005453428","addressUser":"Arizona, USA","roleUser":"USER","listCreditCards":[{"idCard":430712,"nameUserCard":"Williams Swift","numberCard":"5968751527350500","expirationCard":"06/12/24","securityCodeCard":"272"},{"idCard":430713,"nameUserCard":"Williams Swift","numberCard":"5238759847350934","expirationCard":"07/02/25","securityCodeCard":"566"},{"idCard":430714,"nameUserCard":"Williams Swift","numberCard":"6355789847714900","expirationCard":"06/10/26","securityCodeCard":"715"}],"listCarts":[{"idCart":350062,"quantityAllProductsInCart":3,"totalSalePriceCart":150.0,"totalFullPriceCart":240.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350062,"idProduct":530020},"quantityDetailProductCart":3,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":80.0}]}],"listComments":[{"idComment":608752,"ratingComment":3,"contentComment":"The products is TERRIBLE"},{"idComment":608755,"ratingComment":4,"contentComment":"I'm satisfied with the product. It meets my needs."},{"idComment":608803,"ratingComment":3,"contentComment":"The plant-based products are average. Some could use more flavor."},{"idComment":608927,"ratingComment":4,"contentComment":"The products are commendable. They offer good value for the price."},{"idComment":609042,"ratingComment":3,"contentComment":"The goods are decent. They serve their purpose."},{"idComment":609177,"ratingComment":3,"contentComment":"The items are average. They met my expectations."},{"idComment":609183,"ratingComment":5,"contentComment":"Outstanding products! I'm extremely satisfied."},{"idComment":609332,"ratingComment":4,"contentComment":"Good Product!"},{"idComment":609333,"ratingComment":2,"contentComment":"i don't like it"},{"idComment":609334,"ratingComment":3,"contentComment":"Decent Product!"},{"idComment":609335,"ratingComment":5,"contentComment":"i like it!"},{"idComment":609336,"ratingComment":4,"contentComment":"mlem mlem"},{"idComment":609337,"ratingComment":5,"contentComment":"Cool Product!"},{"idComment":609338,"ratingComment":1,"contentComment":"terible one"},{"idComment":609339,"ratingComment":4,"contentComment":"just fine product!"}]}
+2023-05-31 04:40:50.831 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:50.839 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:40:50.852 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:40:50.862 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:50.869 [http-nio-8080-exec-8] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: williamsswift@gmail.com by williamsswift@gmail.com
+2023-05-31 04:40:50.870 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:40:50.876 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:40:51.929 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:40:51.931 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:40:51.938 [http-nio-8080-exec-9] INFO  c.m.m.C.ProductMfoodyController - Get List of ProductMfoodys
+2023-05-31 04:40:51.939 [http-nio-8080-exec-9] INFO  c.m.m.S.I.ProductMfoodyImplementService - Fetching all ProductMfoodys 
+2023-05-31 04:41:05.601 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:41:05.622 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:41:05.670 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:05.703 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:41:05.749 [http-nio-8080-exec-1] INFO  c.m.m.C.CreditCardMfoodyController - Get List CreditCards with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:41:05.750 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:41:05.759 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:05.767 [http-nio-8080-exec-1] INFO  c.m.m.S.I.CreditCardMfoodyImplementService - Fetching all CreditCardMfoodys by idUser: 215232
+2023-05-31 04:41:05.882 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:41:05.884 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:41:05.890 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:05.900 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:41:05.907 [http-nio-8080-exec-3] INFO  c.m.m.C.OrderMfoodyController - Get List of OrderMfoodys with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:41:05.907 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:41:05.912 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:05.919 [http-nio-8080-exec-3] INFO  c.m.m.S.I.OrderMfoodyImplementService - Fetching all OrderMfoodys with idUser: 215232
+2023-05-31 04:41:05.993 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:41:05.996 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:41:06.023 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:06.034 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:41:06.043 [http-nio-8080-exec-5] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:41:06.044 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:41:06.053 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:06.061 [http-nio-8080-exec-5] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:41:06.110 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:41:06.116 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:41:06.126 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:06.137 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:41:06.147 [http-nio-8080-exec-7] INFO  c.m.m.C.CommentMfoodyController - Get List of CommentMfoodys with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:41:06.148 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:41:06.152 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:06.158 [http-nio-8080-exec-7] INFO  c.m.m.S.I.CommentMfoodyImplementService - Fetching all CommentMfoodys by idUser: 215232
+2023-05-31 04:41:45.638 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 04:41:45.657 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 04:41:45.713 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:45.739 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 04:41:45.750 [http-nio-8080-exec-9] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 04:41:45.751 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 04:41:45.761 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 04:41:45.768 [http-nio-8080-exec-9] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 04:43:54.906 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-31 04:43:54.938 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-31 04:43:55.028 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-05-31 13:06:58.027 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Starting MFoodyExApplication using Java 17 on Macs-MacBook-Air.local with PID 6831 (/Users/macmie/Desktop/WEB/INTELIIJI_VS2/target/classes started by macmie in /Users/macmie/Desktop/WEB/INTELIIJI_VS2)
+2023-05-31 13:06:58.042 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-31 13:06:58.384 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-31 13:06:58.385 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-31 13:07:03.517 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-31 13:07:03.918 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 373 ms. Found 12 JPA repository interfaces.
+2023-05-31 13:07:07.259 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-05-31 13:07:07.277 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-31 13:07:07.278 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-31 13:07:07.278 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.58]
+2023-05-31 13:07:07.500 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-31 13:07:07.500 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 9114 ms
+2023-05-31 13:07:07.998 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-31 13:07:08.679 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-31 13:07:09.774 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-31 13:07:09.992 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-31 13:07:10.077 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.5.Final
+2023-05-31 13:07:10.480 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-31 13:07:10.682 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-05-31 13:07:11.421 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-31 13:07:11.421 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductOrderMfoodyId
+2023-05-31 13:07:11.423 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-31 13:07:11.423 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.FavoriteProductMfoodyId
+2023-05-31 13:07:11.424 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000038: Composite-id class does not override equals(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-31 13:07:11.424 [restartedMain] WARN  org.hibernate.mapping.RootClass - HHH000039: Composite-id class does not override hashCode(): com.macmie.mfoodyex.Model.DetailProductCartMfoodyId
+2023-05-31 13:07:13.675 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-31 13:07:13.732 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-31 13:07:22.324 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2023-05-31 13:07:22.533 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-05-31 13:07:22.823 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-05-31 13:07:22.841 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-31 13:07:24.227 [restartedMain] INFO  c.m.mfoodyex.MFoodyExApplication - Started MFoodyExApplication in 28.139 seconds (JVM running for 29.991)
+2023-05-31 13:08:52.256 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-31 13:08:52.258 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-31 13:08:52.277 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 19 ms
+2023-05-31 13:08:52.360 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:08:52.454 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:11:39.316 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:11:39.357 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:12:06.985 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:12:07.001 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:12:22.054 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:12:22.076 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:12:23.019 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:12:23.027 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:13:31.249 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:13:31.269 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:14:20.430 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:14:20.465 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:14:29.912 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:14:29.951 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:14:46.710 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:14:46.727 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:15:01.750 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:15:01.763 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:29:56.549 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:29:56.573 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:54:49.144 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:54:49.222 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:54:49.318 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:54:49.326 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:55:19.368 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:55:19.384 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:55:20.064 [http-nio-8080-exec-5] INFO  c.m.m.C.ApplicationMfoodyController - Login to ApplicationMfoody by williamsswift@gmail.com
+2023-05-31 13:55:20.407 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:22.063 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:22.363 [http-nio-8080-exec-5] INFO  c.m.mfoodyex.JWTHelper.JWTProvider - jsonObjectUserMfoody by jackSon: {"idUser":215232,"emailUser":"williamsswift@gmail.com","passwordUser":"$2a$12$S1BjZ6IWaNvpiioknCu4xe2Kj0mAZWg/eOorRc1u4gjJA66b3Nub6","nameUser":"Williams Swift","phoneNumberUser":"89005453428","addressUser":"Arizona, USA","roleUser":"USER","listCreditCards":[{"idCard":430712,"nameUserCard":"Williams Swift","numberCard":"5968751527350500","expirationCard":"06/12/24","securityCodeCard":"272"},{"idCard":430713,"nameUserCard":"Williams Swift","numberCard":"5238759847350934","expirationCard":"07/02/25","securityCodeCard":"566"},{"idCard":430714,"nameUserCard":"Williams Swift","numberCard":"6355789847714900","expirationCard":"06/10/26","securityCodeCard":"715"}],"listCarts":[{"idCart":350062,"quantityAllProductsInCart":3,"totalSalePriceCart":150.0,"totalFullPriceCart":240.0,"listDetailProductCarts":[{"idDetailProductCartMFoody":{"idCart":350062,"idProduct":530020},"quantityDetailProductCart":3,"salePriceDetailProductCart":50.0,"fullPriceDetailProductCart":80.0}]}],"listComments":[{"idComment":608752,"ratingComment":3,"contentComment":"The products is TERRIBLE"},{"idComment":608755,"ratingComment":4,"contentComment":"I'm satisfied with the product. It meets my needs."},{"idComment":608803,"ratingComment":3,"contentComment":"The plant-based products are average. Some could use more flavor."},{"idComment":608927,"ratingComment":4,"contentComment":"The products are commendable. They offer good value for the price."},{"idComment":609042,"ratingComment":3,"contentComment":"The goods are decent. They serve their purpose."},{"idComment":609177,"ratingComment":3,"contentComment":"The items are average. They met my expectations."},{"idComment":609183,"ratingComment":5,"contentComment":"Outstanding products! I'm extremely satisfied."},{"idComment":609332,"ratingComment":4,"contentComment":"Good Product!"},{"idComment":609333,"ratingComment":2,"contentComment":"i don't like it"},{"idComment":609334,"ratingComment":3,"contentComment":"Decent Product!"},{"idComment":609335,"ratingComment":5,"contentComment":"i like it!"},{"idComment":609336,"ratingComment":4,"contentComment":"mlem mlem"},{"idComment":609337,"ratingComment":5,"contentComment":"Cool Product!"},{"idComment":609338,"ratingComment":1,"contentComment":"terible one"},{"idComment":609339,"ratingComment":4,"contentComment":"just fine product!"}]}
+2023-05-31 13:55:22.613 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:55:22.619 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:55:22.636 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:22.649 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:55:22.749 [http-nio-8080-exec-9] INFO  c.m.m.C.UserMfoodyController - Get UserMfoody with Email: williamsswift@gmail.com by williamsswift@gmail.com
+2023-05-31 13:55:22.750 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:22.761 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:29.724 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:55:29.760 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:55:29.814 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:29.899 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:55:29.977 [http-nio-8080-exec-1] INFO  c.m.m.C.CartMfoodyController - Get CartMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:55:29.978 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:55:30.031 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:30.047 [http-nio-8080-exec-1] INFO  c.m.m.S.I.CartMfoodyImplementService - Fetching CartMfoody with idUser: 215232
+2023-05-31 13:55:32.625 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:55:32.632 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:55:32.654 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:32.697 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:55:32.774 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:55:32.774 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:55:32.783 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:55:32.817 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:56:27.436 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:56:27.497 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:56:27.592 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:56:27.641 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:56:27.656 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:56:27.656 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:56:27.666 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:56:27.677 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:56:28.007 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:56:28.023 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:56:28.049 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:56:28.070 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:56:28.093 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:56:28.094 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:56:28.111 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:56:28.122 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:57:02.214 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:57:02.238 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:57:02.298 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:02.336 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:57:02.368 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:57:02.369 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:57:02.379 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:02.389 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:57:02.630 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:57:02.638 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:57:02.657 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:02.682 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:57:02.715 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:57:02.715 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:57:02.727 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:02.738 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:57:21.131 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:57:21.185 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:57:21.253 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:21.314 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:57:21.328 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:57:21.329 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:57:21.338 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:21.346 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:57:21.629 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:57:21.648 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:57:21.670 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:21.699 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:57:21.713 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:57:21.714 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:57:21.724 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:57:21.740 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:58:12.527 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:58:12.575 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:58:12.615 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:12.660 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:58:12.675 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:58:12.675 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:58:12.685 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:12.701 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:58:12.963 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:58:12.976 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:58:13.023 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:13.047 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:58:13.054 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:58:13.054 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:58:13.063 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:13.073 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:58:25.116 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:58:25.151 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:58:25.206 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:25.246 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:58:25.273 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:58:25.273 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:58:25.291 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:25.299 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 13:58:25.702 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 13:58:25.705 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 13:58:25.718 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:25.740 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 13:58:25.750 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 13:58:25.751 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 13:58:25.759 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 13:58:25.768 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:06:29.250 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:06:29.272 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:06:29.336 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:06:29.475 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:06:29.576 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:06:29.577 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:06:29.602 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:06:29.610 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:06:29.688 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:06:29.692 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:06:29.704 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:06:29.720 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:06:29.733 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:06:29.733 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:06:29.742 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:06:29.750 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:08:15.364 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:08:15.386 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:08:15.457 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:08:15.526 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:08:15.560 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:08:15.561 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:08:15.576 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:08:15.600 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:08:15.866 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:08:15.872 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:08:15.879 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:08:15.897 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:08:15.902 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:08:15.902 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:08:15.913 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:08:15.922 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:09:00.897 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:09:00.944 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:09:01.018 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:09:01.054 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:09:01.069 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:09:01.072 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:09:01.081 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:09:01.091 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:09:01.363 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:09:01.370 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:09:01.383 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:09:01.399 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:09:01.408 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:09:01.408 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:09:01.419 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:09:01.428 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:10:17.222 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:10:17.252 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:10:17.292 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:10:17.333 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:10:17.369 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:10:17.385 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:10:17.406 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:10:17.469 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:10:17.828 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:10:17.832 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:10:17.841 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:10:17.855 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:10:17.863 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:10:17.864 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:10:17.876 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:10:17.885 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:13:15.965 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:13:16.010 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:13:16.055 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:13:16.111 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:13:16.135 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:13:16.136 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:13:16.156 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:13:16.176 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:13:16.395 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:13:16.399 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:13:16.412 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:13:16.432 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:13:16.441 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:13:16.443 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:13:16.454 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:13:16.468 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:14:51.684 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:14:51.701 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:14:51.756 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:14:51.793 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:14:51.823 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:14:51.825 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:14:51.840 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:14:51.850 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:14:52.201 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:14:52.212 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:14:52.221 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:14:52.242 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:14:52.269 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:14:52.269 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:14:52.289 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:14:52.298 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:23:11.808 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:23:11.838 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:23:11.929 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:12.010 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:23:12.026 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:23:12.027 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:23:12.074 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:12.087 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:23:12.204 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:23:12.212 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:23:12.223 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:12.250 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:23:12.260 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:23:12.260 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:23:12.272 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:12.285 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:23:36.355 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:23:36.368 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:23:36.399 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:36.456 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:23:36.466 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:23:36.466 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:23:36.478 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:36.500 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:23:36.827 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:23:36.831 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:23:36.840 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:36.861 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:23:36.868 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:23:36.869 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:23:36.876 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:23:36.886 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:24:14.353 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:24:14.373 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:24:14.465 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:24:14.500 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:24:14.517 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:24:14.517 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:24:14.536 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:24:14.556 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:24:15.115 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:24:15.125 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:24:15.133 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:24:15.161 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:24:15.175 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:24:15.176 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:24:15.207 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:24:15.269 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:25:02.791 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:25:02.844 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:25:02.875 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:25:02.945 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:25:02.956 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:25:02.956 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:25:02.979 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:25:02.996 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:25:03.535 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:25:03.543 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:25:03.554 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:25:03.569 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:25:03.587 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:25:03.587 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:25:03.595 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:25:03.602 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:26:06.082 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:26:06.117 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:26:06.152 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:26:06.203 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:26:06.213 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:26:06.214 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:26:06.225 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:26:06.232 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:26:06.395 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:26:06.400 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:26:06.407 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:26:06.423 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:26:06.430 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:26:06.430 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:26:06.439 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:26:06.448 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:27:22.987 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:27:22.999 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:27:23.069 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:27:23.106 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:27:23.138 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:27:23.139 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:27:23.149 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:27:23.159 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:27:23.795 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:27:23.797 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:27:23.811 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:27:23.825 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:27:23.832 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:27:23.833 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:27:23.840 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:27:23.855 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:27:59.629 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:27:59.648 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:27:59.699 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:27:59.735 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:27:59.769 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:27:59.769 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:27:59.782 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:27:59.862 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:28:00.032 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:28:00.035 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:28:00.047 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:00.067 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:28:00.072 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:28:00.072 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:28:00.081 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:00.088 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:28:13.759 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:28:13.779 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:28:13.840 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:13.876 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:28:13.908 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:28:13.909 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:28:13.924 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:13.948 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:28:14.054 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:28:14.061 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:28:14.067 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:14.083 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:28:14.089 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:28:14.089 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:28:14.100 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:14.109 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:28:55.467 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:28:55.488 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:28:55.535 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:55.575 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:28:55.585 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:28:55.586 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:28:55.594 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:28:55.604 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:34:45.632 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:34:45.671 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:34:45.722 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:34:45.784 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:34:45.797 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:34:45.798 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:34:45.809 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:34:45.826 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:34:45.939 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:34:45.948 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:34:45.965 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:34:45.993 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:34:45.999 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:34:45.999 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:34:46.052 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:34:46.071 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:39:20.168 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:39:20.251 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:39:20.467 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:39:20.606 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:39:20.667 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:39:20.668 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:39:20.686 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:39:20.696 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:39:21.115 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:39:21.118 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:39:21.123 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:39:21.137 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:39:21.148 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:39:21.148 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:39:21.156 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:39:21.166 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:40:17.786 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:40:17.812 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:40:17.863 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:40:17.891 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:40:17.921 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:40:17.921 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:40:17.937 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:40:17.946 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:40:18.320 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:40:18.322 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:40:18.329 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:40:18.341 [http-nio-8080-exec-3] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:40:18.348 [http-nio-8080-exec-3] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:40:18.348 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:40:18.356 [http-nio-8080-exec-3] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:40:18.368 [http-nio-8080-exec-3] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:43:53.968 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:43:53.980 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:43:54.010 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:54.058 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:43:54.079 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:43:54.079 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:43:54.089 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:54.097 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:43:54.163 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:43:54.167 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:43:54.175 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:54.189 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:43:54.195 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:43:54.195 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:43:54.204 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:54.212 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:43:58.320 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:43:58.419 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:43:58.511 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:58.623 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:43:58.700 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:43:58.701 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:43:58.718 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:58.729 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:43:58.862 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:43:58.865 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:43:58.872 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:58.890 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:43:58.897 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:43:58.897 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:43:58.904 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:43:58.910 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:47:25.762 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:47:25.790 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:47:25.882 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:26.042 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:47:26.081 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:47:26.082 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:47:26.201 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:26.213 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:47:26.283 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:47:26.289 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:47:26.298 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:26.317 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:47:26.330 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:47:26.331 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:47:26.340 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:26.350 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:47:48.761 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:47:48.773 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:47:48.806 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:48.852 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:47:48.866 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:47:48.866 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:47:48.874 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:48.882 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:47:49.016 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:47:49.020 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:47:49.030 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:49.058 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:47:49.070 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:47:49.070 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:47:49.080 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:49.106 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:47:58.036 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:47:58.055 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:47:58.108 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:58.137 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:47:58.152 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:47:58.153 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:47:58.161 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:58.171 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:47:58.391 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:47:58.398 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:47:58.415 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:58.431 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:47:58.437 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:47:58.437 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:47:58.443 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:47:58.450 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:49:18.412 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:49:18.436 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:49:18.533 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:49:18.592 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:49:18.606 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:49:18.606 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:49:18.618 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:49:18.627 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:49:18.880 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:49:18.919 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:49:18.938 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:49:18.980 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:49:18.991 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:49:18.992 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:49:18.998 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:49:19.004 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:50:16.266 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:50:16.283 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:50:16.336 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:16.399 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:50:16.418 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:50:16.418 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:50:16.426 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:16.434 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:50:17.041 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:50:17.046 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:50:17.057 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:17.070 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:50:17.094 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:50:17.094 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:50:17.111 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:17.119 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:50:30.283 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:50:30.302 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:50:30.357 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:30.437 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:50:30.452 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:50:30.453 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:50:30.465 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:30.474 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:50:30.941 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:50:30.954 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:50:30.963 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:30.984 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:50:30.990 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:50:30.991 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:50:31.002 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:50:31.032 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:51:57.382 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:51:57.393 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:51:57.441 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:51:57.495 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:51:57.507 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:51:57.510 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:51:57.523 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:51:57.530 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:51:58.054 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:51:58.061 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:51:58.071 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:51:58.089 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:51:58.093 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:51:58.093 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:51:58.101 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:51:58.111 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:52:20.519 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:52:20.545 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:52:20.584 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:52:20.644 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:52:20.703 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:52:20.704 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:52:20.713 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:52:20.734 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:52:21.312 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:52:21.326 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:52:21.337 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:52:21.357 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:52:21.362 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:52:21.364 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:52:21.372 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:52:21.385 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:55:47.664 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:55:47.687 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:55:47.735 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:47.900 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:55:47.922 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:55:47.922 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:55:47.932 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:47.939 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:55:48.455 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:55:48.459 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:55:48.468 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:48.485 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:55:48.514 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:55:48.514 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:55:48.521 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:48.529 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:55:58.420 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:55:58.431 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:55:58.479 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:58.526 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:55:58.537 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:55:58.537 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:55:58.553 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:58.565 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:55:58.682 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:55:58.684 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:55:58.703 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:58.740 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:55:58.761 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:55:58.790 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:55:58.831 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:55:58.901 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:57:16.456 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:57:16.476 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:57:16.556 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:16.585 [http-nio-8080-exec-5] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:57:16.595 [http-nio-8080-exec-5] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:57:16.595 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:57:16.615 [http-nio-8080-exec-5] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:16.636 [http-nio-8080-exec-5] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:57:17.302 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:57:17.307 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:57:17.323 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:17.350 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:57:17.365 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:57:17.366 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:57:17.382 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:17.396 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:57:26.747 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:57:26.758 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:57:26.885 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:26.954 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:57:26.972 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:57:26.972 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:57:27.075 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:27.090 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:57:27.156 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:57:27.159 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:57:27.165 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:27.199 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:57:27.204 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:57:27.292 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:57:27.348 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:57:27.364 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:59:23.605 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:59:23.646 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:59:23.691 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:59:23.748 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:59:23.841 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:59:23.849 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:59:23.868 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:59:23.877 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 14:59:24.025 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 14:59:24.029 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 14:59:24.039 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:59:24.055 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 14:59:24.064 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 14:59:24.064 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 14:59:24.086 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 14:59:24.097 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:11:45.531 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:11:45.570 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:11:45.633 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:11:45.731 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:11:45.784 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:11:45.787 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:11:45.808 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:11:45.817 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:11:46.216 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:11:46.218 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:11:46.234 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:11:46.248 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:11:46.253 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:11:46.254 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:11:46.260 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:11:46.267 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:12:03.574 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:12:03.690 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:12:03.766 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:12:03.884 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:12:03.921 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:12:03.922 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:12:03.937 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:12:03.945 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:12:04.163 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:12:04.173 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:12:04.185 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:12:04.205 [http-nio-8080-exec-7] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:12:04.216 [http-nio-8080-exec-7] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:12:04.216 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:12:04.224 [http-nio-8080-exec-7] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:12:04.232 [http-nio-8080-exec-7] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:13:12.577 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:13:12.599 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:13:12.702 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:13:12.774 [http-nio-8080-exec-10] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:13:12.786 [http-nio-8080-exec-10] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:13:12.787 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:13:12.797 [http-nio-8080-exec-10] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:13:12.806 [http-nio-8080-exec-10] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:13:13.038 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:13:13.042 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:13:13.067 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:13:13.085 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:13:13.090 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:13:13.091 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:13:13.098 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:13:13.106 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:24:40.753 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:24:40.771 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:24:40.805 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:24:40.833 [http-nio-8080-exec-4] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:24:40.846 [http-nio-8080-exec-4] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:24:40.846 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:24:40.856 [http-nio-8080-exec-4] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:24:40.863 [http-nio-8080-exec-4] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:25:32.943 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:25:32.974 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:25:33.059 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:25:33.112 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:25:33.333 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:25:33.342 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:25:33.363 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:25:33.472 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:25:33.567 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:25:33.571 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:25:33.591 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:25:33.605 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:25:33.610 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:25:33.611 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:25:33.617 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:25:33.629 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:27:50.322 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:27:50.334 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:27:50.376 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:27:50.413 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:27:50.426 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:27:50.427 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:27:50.441 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:27:50.452 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:27:50.527 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:27:50.537 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:27:50.544 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:27:50.557 [http-nio-8080-exec-6] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:27:50.567 [http-nio-8080-exec-6] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:27:50.567 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:27:50.574 [http-nio-8080-exec-6] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:27:50.581 [http-nio-8080-exec-6] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:29:27.215 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:29:27.284 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:29:27.342 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:29:27.581 [http-nio-8080-exec-2] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:29:27.626 [http-nio-8080-exec-2] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:29:27.627 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:29:27.645 [http-nio-8080-exec-2] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:29:27.670 [http-nio-8080-exec-2] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:29:28.737 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:29:28.755 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:29:28.818 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:29:28.847 [http-nio-8080-exec-8] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:29:28.860 [http-nio-8080-exec-8] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:29:28.860 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:29:28.867 [http-nio-8080-exec-8] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:29:28.878 [http-nio-8080-exec-8] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:32:25.479 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:32:25.508 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:32:25.549 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:32:25.603 [http-nio-8080-exec-9] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:32:25.627 [http-nio-8080-exec-9] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:32:25.627 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:32:25.642 [http-nio-8080-exec-9] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:32:25.650 [http-nio-8080-exec-9] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 15:32:26.301 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Start
+2023-05-31 15:32:26.309 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: Check Token
+2023-05-31 15:32:26.323 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:32:26.335 [http-nio-8080-exec-1] INFO  c.m.m.J.JWTAuthenticationFilter - JWTAuthenticationFilter: End
+2023-05-31 15:32:26.342 [http-nio-8080-exec-1] INFO  c.m.m.C.FavoriteListProductsMfoodyController - Get FavoriteListProductsMfoody with idUser: 215232 by williamsswift@gmail.com
+2023-05-31 15:32:26.342 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with ID: 215232
+2023-05-31 15:32:26.348 [http-nio-8080-exec-1] INFO  c.m.m.S.I.UserMfoodyImplementService - Fetching UserMfoody with emailUserMfoody: williamsswift@gmail.com
+2023-05-31 15:32:26.358 [http-nio-8080-exec-1] INFO  c.m.m.S.I.FavoriteListProductsMfoodyImplementService - Fetching FavoriteListProductsMfoody with idUser: 215232
+2023-05-31 16:22:17.955 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-31 16:22:18.001 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-31 16:22:18.087 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

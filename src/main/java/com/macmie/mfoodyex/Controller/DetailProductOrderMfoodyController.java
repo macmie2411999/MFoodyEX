@@ -82,7 +82,7 @@ public class DetailProductOrderMfoodyController {
 
                 List<DetailProductOrderMfoody> detailProductOrderMfoodyList = detailProductOrderMfoodyInterfaceService
                                 .getListDetailProductOrderMfoodysByIdOrder(ID);
-                                
+
                 if (detailProductOrderMfoodyList == null) {
                         return new ResponseEntity<>("NOT_FOUNDList of DetailProductOrderMfoodys with idOrder: " + ID,
                                         HttpStatus.NOT_FOUND);
@@ -410,6 +410,95 @@ public class DetailProductOrderMfoodyController {
                         return new ResponseEntity<>(HttpStatus.CREATED);
                 } catch (Exception e) {
                         log.error("An error occurred while adding DetailProductOrderMfoody");
+                        log.error("Detail Error: " + e);
+                        return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
+                }
+        }
+
+        /*
+         * 1. idOrder and idProduct in Json must be accurate, salePrice/fullPrice in
+         * Json are ignored
+         * 2. salePrice/fullPrice of DetailProductOrderMfoody are fetched from
+         * ProductMfoody
+         * 3. The threat is any UserMfoodys can create DetailProductOrderMfoodys using
+         * different idCart and idProduct
+         * (There is no double check)
+         */
+        @Secured({ ROLE_ADMIN_SECURITY, ROLE_USER_SECURITY })
+        @PostMapping(URL_ADD_ARRAY_OBJECTS)
+        public ResponseEntity<?> addNewArrayDetailProductOrderMfoody(
+                        @RequestBody String detailProductOrderPOJOJsonObject,
+                        Principal principal) {
+                try {
+                        // Convert JsonObject to array of DetailProductOrderPOJO objects
+                        Gson gson = new Gson();
+                        DetailProductOrderMfoodyPOJO[] detailProductOrderMfoodyPOJOs = gson.fromJson(
+                                        detailProductOrderPOJOJsonObject, DetailProductOrderMfoodyPOJO[].class);
+
+                        for (DetailProductOrderMfoodyPOJO newDetailProductOrderMfoodyPOJO : detailProductOrderMfoodyPOJOs) {
+                                DetailProductOrderMfoody newDetailProductOrderMfoody = newDetailProductOrderMfoodyPOJO
+                                                .renderDetailProductOrderMfoody();
+
+                                // Check valid idOrder and idProduct
+                                DetailProductOrderMfoody checkNewDetailProductOrderMfoody = detailProductOrderMfoodyInterfaceService
+                                                .getDetailProductOrderMfoodyByIOrderAndIdProduct(
+                                                                newDetailProductOrderMfoodyPOJO.getIdOrder(),
+                                                                newDetailProductOrderMfoodyPOJO.getIdProduct());
+                                ProductMfoody productMfoody = productMfoodyInterfaceService
+                                                .getProductMfoodyByID(newDetailProductOrderMfoodyPOJO.getIdProduct());
+                                if (productMfoodyInterfaceService.getProductMfoodyByID(
+                                                newDetailProductOrderMfoodyPOJO.getIdProduct()) == null) {
+                                        return new ResponseEntity<>(
+                                                        "NOT_FOUND ProductMfoody with ID: "
+                                                                        + newDetailProductOrderMfoodyPOJO
+                                                                                        .getIdProduct(),
+                                                        HttpStatus.NOT_FOUND);
+                                }
+                                if (orderMfoodyInterfaceService.getOrderMfoodyByID(
+                                                newDetailProductOrderMfoodyPOJO.getIdOrder()) == null) {
+                                        return new ResponseEntity<>(
+                                                        "NOT_FOUND OrderMfoody with ID: "
+                                                                        + newDetailProductOrderMfoodyPOJO.getIdOrder(),
+                                                        HttpStatus.NOT_FOUND);
+                                }
+
+                                // If the DetailProductOrderMfoodys is already in the DB, update it and update
+                                // associated OrderMfoody
+                                if (checkNewDetailProductOrderMfoody != null) {
+                                        checkNewDetailProductOrderMfoody.setQuantityDetailProductOrder(
+                                                        checkNewDetailProductOrderMfoody.getQuantityDetailProductOrder()
+                                                                        + newDetailProductOrderMfoodyPOJO
+                                                                                        .getQuantityDetailProductOrder());
+                                        detailProductOrderMfoodyInterfaceService.saveDetailProductOrderMfoody(
+                                                        checkNewDetailProductOrderMfoody);
+                                        processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
+                                } else {
+                                        // If the DetailProductOrderMfoodys is completely new, add new
+                                        newDetailProductOrderMfoody.setIdDetailProductOrderMfoody(
+                                                        new DetailProductOrderMfoodyId(
+                                                                        newDetailProductOrderMfoodyPOJO.getIdOrder(),
+                                                                        newDetailProductOrderMfoodyPOJO
+                                                                                        .getIdProduct()));
+                                        newDetailProductOrderMfoody.setProduct(productMfoody);
+                                        newDetailProductOrderMfoody.setFullPriceDetailProductOrder(
+                                                        productMfoody.getFullPriceProduct());
+                                        newDetailProductOrderMfoody.setSalePriceDetailProductOrder(
+                                                        productMfoody.getSalePriceProduct());
+                                        newDetailProductOrderMfoody.setOrder(orderMfoodyInterfaceService
+                                                        .getOrderMfoodyByID(
+                                                                        newDetailProductOrderMfoodyPOJO.getIdOrder()));
+
+                                        // Save to DB and Update associated OrderMfoody
+                                        detailProductOrderMfoodyInterfaceService
+                                                        .saveDetailProductOrderMfoody(newDetailProductOrderMfoody);
+                                        log.info("New ArrayDetailProductOrderMfoody is created by " + principal.getName());
+                                        processOrderMfoody(newDetailProductOrderMfoodyPOJO.getIdOrder());
+                                }
+                        }
+
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                } catch (Exception e) {
+                        log.error("An error occurred while adding ArrayDetailProductOrderMfoody");
                         log.error("Detail Error: " + e);
                         return new ResponseEntity<>("BAD_REQUEST Something Wrong!", HttpStatus.BAD_REQUEST);
                 }

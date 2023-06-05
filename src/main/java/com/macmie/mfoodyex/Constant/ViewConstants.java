@@ -48,6 +48,7 @@ public class ViewConstants {
     public static final String URL_DELETE_BY_ID_ORDER_AND_ID_PRODUCT = "/delete/idOrder/{IdOrder}/idProduct/{IdProduct}";
     public static final String URL_DELETE_BY_ID_FAVORITE_LIST_PRODUCTS_AND_ID_PRODUCT = "/delete/idFavoriteListProducts/{IdFavoriteListProducts}/idProduct/{IdProduct}";
     public static final String URL_ADD = "/add";
+    public static final String URL_ADD_ARRAY_OBJECTS = "/addArrayObjects";
     public static final String URL_EDIT = "/edit";
     public static final String URL_UPDATE_PRODUCT_INFORMATION_IN_CART = "/updateListToCart";
     public static final String URL_UPDATE_PRODUCT_INFORMATION_IN_FAVORITE_LIST_PRODUCTS = "/updateListToFavoriteListProducts";

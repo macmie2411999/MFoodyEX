@@ -246,7 +246,7 @@ public class OrderMfoodyController {
             // Convert JsonObject to OrderPOJO object and Add new UserMfoody to OrderMfoody
             Gson gson = new Gson();
             OrderMfoodyPOJO newOrderPOJO = gson.fromJson(orderPOJOJsonObject, OrderMfoodyPOJO.class);
-            OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoody();
+            OrderMfoody newOrderMfoody = newOrderPOJO.renderOrderMfoodyWithoutIdOrder();
             newOrderMfoody.setQuantityAllProductsInOrder(0);
             newOrderMfoody.setTotalFullPriceOrder(0);
             newOrderMfoody.setTotalSalePriceOrder(0);
@@ -265,9 +265,11 @@ public class OrderMfoodyController {
 
             // Save to DB and return (Updated Cart in DB could have ID differs from user's
             // request)
-            orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);
+            OrderMfoody savedOrderMfoody = orderMfoodyInterfaceService.saveOrderMfoody(newOrderMfoody);
+            int orderId = savedOrderMfoody.getIdOrder();
+
             log.info("A new OrderMfoody is created by " + principal.getName());
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(orderId, HttpStatus.CREATED);
         } catch (Exception e) {
             log.error("An error occurred while adding OrderMfoody");
             log.error("Detail Error: " + e);
